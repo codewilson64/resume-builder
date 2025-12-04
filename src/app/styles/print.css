@@ -23,4 +23,8 @@
   body {
     background: white !important;
   }
+
+  * {
+    box-shadow: none !important;
+  }
 }
