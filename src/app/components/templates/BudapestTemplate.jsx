@@ -71,7 +71,7 @@ export default function BudapestTemplate() {
         </aside>
 
         {/* ---------- RIGHT MAIN CONTENT ---------- */}
-        <main className="bg-[#c2c1c1] py-8 px-5 space-y-10">
+        <main className="bg-[#dddcdc] py-8 px-5 space-y-10">
 
           {/* NAME + TITLE */}
           <header className="flex flex-row items-start justify-between gap-6">

@@ -33,7 +33,7 @@ export default function PreviewPage() {
   };
 
   return (
-    <div className=" bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gray-50 min-h-screen">
       {/* HEADER */}
       <div className="relative flex items-center justify-center mb-5 no-print">
         <button
