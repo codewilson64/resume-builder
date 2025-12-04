@@ -4,9 +4,7 @@
     display: none !important;
   }
   .resume-scale {
-    margin: 0 !important;
-    padding: 0 !important;
-    transform: translateX(-8px);
+    transform: none !important;
     width: 794px !important;
   }
 
