@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input {
+  @apply w-full border border-gray-200 rounded-lg p-3 mt-1 text-gray-900
+  placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition;
+}
+
+.textarea {
+  @apply w-full rounded-lg mt-1 text-gray-900
+  placeholder-gray-400 focus:outline-none transition;
+}
+
+/* A4 preview scaling like CVToolsPro */
+#resume-canvas {
+  transform-origin: top center;
+}
+
+/* Desktop: full size */
+@media (min-width: 900px) {
+  #resume-canvas {
+    transform: scale(1);
+  }
+}
+
+/* Below 900px: shrink proportionally to fit viewport */
+@media (max-width: 899px) {
+  #resume-canvas {
+    /* 840 here = 794px page + padding/margins */
+    transform: scale(calc(100vw / 840));
+  }
+}
+
+
+
+
+
+
+
