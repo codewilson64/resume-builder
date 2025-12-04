@@ -35,7 +35,7 @@ export default function PreviewPage() {
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       {/* HEADER */}
-      <div className="relative flex items-center justify-center mb-5">
+      <div className="relative flex items-center justify-center mb-5 no-print">
         <button
           onClick={() => router.back()}
           className="absolute left-0 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition"
@@ -57,7 +57,7 @@ export default function PreviewPage() {
       </div>
 
       {/* ✅ PRINTABLE AREA – ref MUST be set here */}
-      <div ref={printRef} className="">
+      <div ref={printRef} className="resume-scale">
         {renderTemplate()}
       </div>
     </div>
