@@ -92,7 +92,7 @@ export default function FinalPage() {
         </section>
 
         {/* Export or Continue */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gray-50 px-5 py-4">
+        <div className="fixed bottom-0 left-0 right-0 bg-gray-50 px-5 py-4">
         <button
           onClick={() => router.push("/resume/preview")}
           className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium transition"

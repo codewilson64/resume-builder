@@ -30,6 +30,7 @@ export const ResumeProvider = ({ children }) => {
             about: "",
             hobbies: "",
             template: "Budapest",
+            accentColor: "#2D2D2D", // Dark Gray
             personalDetails: []
           }
     );
@@ -41,8 +42,6 @@ export const ResumeProvider = ({ children }) => {
       localStorage.setItem("resumeData", JSON.stringify(resumeData));
     }
   }, [resumeData]);
-
-  console.log(resumeData)
 
 
   if (resumeData === null) return null; // prevent SSR mismatch while loading

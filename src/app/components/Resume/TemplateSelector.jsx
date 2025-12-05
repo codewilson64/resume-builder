@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useResume } from "../../context/ResumeContext";
 import { ChevronDown } from "lucide-react";
+import AccentSelector from "./AccentSelector";
 
 const templates = [
   "Budapest",
@@ -39,7 +40,7 @@ export default function TemplateDropdown() {
   };
 
   return (
-    <div ref={rootRef} className="relative w-full mb-6">
+    <div ref={rootRef} className="relative w-full mb-6 space-y-6">
       <label className="font-medium text-gray-700 text-sm block mb-1">
         Template
       </label>
@@ -53,6 +54,11 @@ export default function TemplateDropdown() {
         </span>
         <ChevronDown size={18} />
       </button>
+
+      <AccentSelector
+        value={resumeData.accentColor}
+        onChange={(color) => setResumeData((prev) => ({ ...prev, accentColor: color }))}
+      />
 
       {open && (
         <ul

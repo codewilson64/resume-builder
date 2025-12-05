@@ -56,7 +56,9 @@ export default function EducationForm() {
           {/* Header */}
           <div className="flex justify-between items-center">
             <p className="font-semibold text-gray-800">
-              {edu.degree?.trim() || 'Not Specified'}
+              {edu?.degree?.trim() && edu?.school?.trim()
+              ? `${edu.degree.trim()} at ${edu.school.trim()}`
+              : edu?.degree?.trim() || edu?.school?.trim() || "Not Specified"}
             </p>
 
             <div className="flex items-center gap-3">

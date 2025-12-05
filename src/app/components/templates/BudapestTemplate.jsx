@@ -10,6 +10,12 @@ function formatDate(dateStr) {
   });
 }
 
+const proficiencyWidths = {
+  Beginner: "30%",
+  Intermediate: "50%",
+  Advanced: "75%",
+  Expert: "100%",
+};
 
 export default function BudapestTemplate({ data, onBack, onPrint }) {
   return (
@@ -39,7 +45,10 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
         style={{ width: "794px", minHeight: "1123px" }}
       >
         {/* ================= LEFT SIDEBAR ================= */}
-        <aside className="bg-[#3e3e3e] text-white p-6 space-y-8">
+        <aside 
+          className="text-white p-6 space-y-8"
+          style={{ backgroundColor: data.accentColor }}
+        >
 
           {/* ABOUT */}
           {data?.about && (
@@ -85,33 +94,36 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
           )}
 
           {/* PERSONAL DETAILS */}
-          <section>
-            <h2 className="text-sm font-semibold uppercase tracking-widest mb-3">
-              Personal Details
-            </h2>
-            <div className="text-xs text-gray-200 space-y-3">
-              {data?.dateOfBirth && (
-                <p>
-                  <span className="font-semibold block">Date of Birth</span>
-                  <span>{data.dateOfBirth}</span>
-                </p>
-              )}
+          {(data?.dateOfBirth || data?.nationality || data?.maritalStatus) && (
+            <section>
+              <h2 className="text-sm font-semibold uppercase tracking-widest mb-3">
+                Personal Details
+              </h2>
 
-              {data?.nationality && (
-                <p>
-                  <span className="font-semibold block">Nationality</span>
-                  <span>{data.nationality}</span>
-                </p>
-              )}
+              <div className="text-xs text-gray-200 space-y-3">
+                {data?.dateOfBirth && (
+                  <p>
+                    <span className="font-semibold block">Date of Birth</span>
+                    <span>{data.dateOfBirth}</span>
+                  </p>
+                )}
 
-              {data?.maritalStatus && (
-                <p>
-                  <span className="font-semibold block">Marital Status</span>
-                  <span>{data.maritalStatus}</span>
-                </p>
-              )}
-            </div>
-          </section>
+                {data?.nationality && (
+                  <p>
+                    <span className="font-semibold block">Nationality</span>
+                    <span>{data.nationality}</span>
+                  </p>
+                )}
+
+                {data?.maritalStatus && (
+                  <p>
+                    <span className="font-semibold block">Marital Status</span>
+                    <span>{data.maritalStatus}</span>
+                  </p>
+                )}
+              </div>
+            </section>
+          )}
         </aside>
 
         {/* ================= RIGHT MAIN CONTENT ================= */}
@@ -120,7 +132,10 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
           {/* NAME + JOB TITLE */}
           <header className="flex flex-row items-start justify-between gap-6">
             <div>
-              <h1 className="text-3xl font-extrabold tracking-wide text-gray-900 uppercase leading-tight">
+              <h1 
+                className="text-3xl font-extrabold tracking-wide uppercase leading-tight"
+                style={{ color: data.accentColor }}
+              >
                 <span className="block">{data?.firstName}</span>
                 <span className="block">{data?.lastName}</span>
               </h1>
@@ -133,10 +148,8 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
             {/* CONTACT */}
             <div className="flex flex-col gap-1 text-gray-600 text-xs">
               {(data?.address || data?.city || data?.postalCode) && (
-                <div className="flex items-center gap-3">
-                  <div className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center shrink-0">
-                    <MapPin size={13} />
-                  </div>
+                <div className="flex items-center gap-3">                 
+                  <MapPin size={13} color={data.accentColor} />                 
                   <span className="leading-snug">
                     {data.address}, {data.city}, {data.postalCode}
                   </span>
@@ -144,19 +157,15 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
               )}
 
               {data?.phone && (
-                <div className="flex items-center gap-3">
-                  <div className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center shrink-0">
-                    <Phone size={13} />
-                  </div>
+                <div className="flex items-center gap-3">                 
+                  <Phone size={13} color={data.accentColor} />
                   <span>{data.phone}</span>
                 </div>
               )}
 
               {data?.email && (
-                <div className="flex items-center gap-3">
-                  <div className="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center shrink-0">
-                    <Mail size={13} />
-                  </div>
+                <div className="flex items-center gap-3">                  
+                  <Mail size={13} color={data.accentColor} />
                   <span>{data.email}</span>
                 </div>
               )}
@@ -166,7 +175,10 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
           {/* ================= WORK EXPERIENCE ================= */}
           {data?.experience?.length > 0 && (
             <section>
-              <h2 className="text-sm font-semibold uppercase tracking-widest text-gray-700 border-b pb-2">
+              <h2 
+                className="text-sm font-semibold uppercase tracking-widest border-b pb-2"
+                style={{ color: data.accentColor }}
+              >
                 Work Experience
               </h2>
 
@@ -175,35 +187,67 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
                 <div className="absolute left-[170px] top-0 bottom-0 w-[1px] bg-gray-300" />
 
                 <div className="space-y-5">
-                  {data.experience.map((exp, index) => (
-                    <div
-                      key={exp.id}
-                      className="grid grid-cols-[140px_30px_1fr] gap-4 relative"
-                    >
-                      {/* LEFT */}
-                      <div>
-                        <p className="font-semibold text-sm uppercase">{exp.company}</p>
-                        <p className="text-xs text-gray-500">{exp.city}</p>
-                        <p className="text-[11px] text-gray-400">
-                          {formatDate(exp.startDate)} -{" "}
-                          {exp.current ? "Present" : formatDate(exp.endDate)}
-                        </p>
-                      </div>
+                  {data.experience
+                    // ✅ ONLY KEEP ROWS WHERE jobTitle OR company EXISTS
+                    .filter(
+                      (experience) =>
+                        experience?.jobTitle?.trim() || experience?.company?.trim()
+                    )
+                    .map((experience) => {
+                      const hasJobTitle = !!experience?.jobTitle?.trim();
+                      const hasCompany = !!experience?.company?.trim();
 
-                      {/* ✅ DOT ONLY (NO SHORT LINE PER ITEM) */}
-                      <div className="relative flex justify-center">
-                        <span className="w-2.5 h-2.5 bg-gray-700 rounded-full absolute top-0.2 z-10" />
-                      </div>
+                      return (
+                        <div
+                          key={experience.id}
+                          className="grid grid-cols-[140px_30px_1fr] gap-4 relative"
+                        >
+                          {/* ✅ LEFT — COMPANY + CITY + DATE (ONLY IF TITLE OR COMPANY EXISTS) */}
+                          <div>
+                            {hasCompany && (
+                              <p className="font-semibold text-sm uppercase">
+                                {experience.company}
+                              </p>
+                            )}
 
-                      {/* RIGHT */}
-                      <div>
-                        <p className="font-semibold text-sm top-2">{exp.jobTitle}</p>
-                        <p className="text-xs text-gray-600 mt-1 leading-relaxed">
-                          {exp.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                            {(hasJobTitle || hasCompany) && experience?.city && (
+                              <p className="text-xs text-gray-500">
+                                {experience.city}
+                              </p>
+                            )}
+
+                            {(hasJobTitle || hasCompany) && experience?.startDate && (
+                              <p className="text-[11px] text-gray-400">
+                                {formatDate(experience.startDate)} -{" "}
+                                {experience.current
+                                  ? "Present"
+                                  : formatDate(experience.endDate)}
+                              </p>
+                            )}
+                          </div>
+
+                          {/* ✅ DOT */}
+                          <div className="relative flex justify-center">
+                            <span className="w-2.5 h-2.5 bg-gray-700 rounded-full absolute z-10" />
+                          </div>
+
+                          {/* ✅ RIGHT — JOB TITLE + DESCRIPTION */}
+                          <div>
+                            {hasJobTitle && (
+                              <p className="font-semibold text-sm">
+                                {experience.jobTitle}
+                              </p>
+                            )}
+
+                            {experience?.description && (
+                              <p className="text-xs text-gray-600 mt-1 leading-relaxed">
+                                {experience.description}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </section>
@@ -213,65 +257,102 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
           {/* ================= EDUCATION ================= */}
           {data?.education?.length > 0 && (
             <section>
-              <h2 className="text-sm font-semibold uppercase tracking-widest text-gray-700 border-b pb-2">
+              <h2 
+                className="text-sm font-semibold uppercase tracking-widest border-b pb-2"
+                style={{ color: data.accentColor }}
+              >
                 Education
               </h2>
 
               <div className="mt-6 relative">
-                {/* ✅ FULL CONNECTING VERTICAL LINE */}
+                {/* FULL CONNECTING VERTICAL LINE */}
                 <div className="absolute left-[170px] top-0 bottom-0 w-[1px] bg-gray-300" />
 
                 <div className="space-y-8">
-                  {data.education.map((edu) => (
-                    <div
-                      key={edu.id}
-                      className="grid grid-cols-[140px_30px_1fr] gap-4"
-                    >
-                      {/* LEFT */}
-                      <div>
-                        <p className="font-semibold text-sm uppercase">{edu.school}</p>
-                        <p className="text-xs text-gray-500">{edu.city}</p>
-                        <p className="text-[11px] text-gray-400">
-                          {formatDate(edu.graduationDate)}
-                        </p>
-                      </div>
+                  {data.education
+                    // ✅ Only allow rows where degree OR school exists
+                    .filter((edu) => edu?.degree?.trim() || edu?.school?.trim())
+                    .map((edu) => {
+                      const hasDegree = !!edu?.degree?.trim();
+                      const hasSchool = !!edu?.school?.trim();
 
-                      {/* ✅ DOT ONLY */}
-                      <div className="relative flex justify-center">
-                        <span className="w-2.5 h-2.5 bg-gray-700 rounded-full absolute z-10" />
-                      </div>
+                      return (
+                        <div
+                          key={edu.id}
+                          className="grid grid-cols-[140px_30px_1fr] gap-4"
+                        >
+                          {/* ✅ LEFT — SCHOOL + CITY + DATE (ONLY IF DEGREE OR SCHOOL EXISTS) */}
+                          <div>
+                            {hasSchool && (
+                              <p className="font-semibold text-sm uppercase">
+                                {edu.school}
+                              </p>
+                            )}
 
-                      {/* RIGHT */}
-                      <div>
-                        <p className="font-semibold text-sm">{edu.degree}</p>
-                        <p className="text-xs text-gray-600 mt-1">
-                          {edu.fieldOfStudy}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                            {(hasDegree || hasSchool) && edu?.city && (
+                              <p className="text-xs text-gray-500">
+                                {edu.city}
+                              </p>
+                            )}
+
+                            {(hasDegree || hasSchool) && edu?.graduationDate && (
+                              <p className="text-[11px] text-gray-400">
+                                {formatDate(edu.graduationDate)}
+                              </p>
+                            )}
+                          </div>
+
+                          {/* ✅ DOT */}
+                          <div className="relative flex justify-center">
+                            <span className="w-2.5 h-2.5 bg-gray-700 rounded-full absolute z-10" />
+                          </div>
+
+                          {/* ✅ RIGHT — DEGREE */}
+                          <div>
+                            {hasDegree && (
+                              <p className="font-semibold text-sm">
+                                {edu.degree}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </section>
           )}
 
-
           {/* ================= SKILLS ================= */}
           {data?.skills?.length > 0 && (
             <section>
-              <h2 className="text-sm font-semibold uppercase tracking-widest text-gray-700 border-b pb-2">
+              <h2 
+                className="text-sm font-semibold uppercase tracking-widest border-b pb-2"
+                style={{ color: data.accentColor }}
+              >
                 Skills
               </h2>
 
               <div className="mt-5 grid grid-cols-2 gap-x-8 gap-y-5 text-xs uppercase text-gray-700">
-                {data.skills.map((skill) => (
-                  <div key={skill.id}>
-                    <span className="block mb-1">{skill.skillName}</span>
-                    <div className="w-full h-1.5 bg-gray-200">
-                      <div className="h-1.5 bg-gray-700 w-[80%]" />
+                {data.skills.map((skill) => {
+                  const width = proficiencyWidths[skill.level] || "40%"
+
+                  return (
+                    <div key={skill.id}>
+                      <span className="block mb-1">{skill.skillName}</span>
+
+                      <div className="w-full h-1.5 bg-gray-200">
+                        <div
+                          className="h-1.5 transition-all"
+                          style={{
+                            width,
+                            backgroundColor: data.accentColor,
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </section>
           )}
@@ -279,7 +360,10 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
           {/* ================= HOBBIES ================= */}
           {data?.hobbies && (
             <section>
-              <h2 className="text-sm font-semibold uppercase tracking-widest text-gray-700 border-b pb-2">
+              <h2 
+                className="text-sm font-semibold uppercase tracking-widest border-b pb-2"
+                style={{ color: data.accentColor }}
+              >
                 Hobbies
               </h2>
 

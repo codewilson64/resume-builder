@@ -61,7 +61,9 @@ export default function ExperienceForm() {
           {/* Header */}
           <div className="flex justify-between items-center">
             <p className="font-semibold text-gray-800">
-              {experience.jobTitle?.trim() || 'Not Specified'}
+              {experience?.jobTitle?.trim() && experience?.company?.trim()
+               ? `${experience.jobTitle.trim()} from ${experience.company.trim()}`
+               : experience?.jobTitle?.trim() || experience?.company?.trim() || "Not Specified"}
             </p>
 
             <div className="flex items-center gap-3">
