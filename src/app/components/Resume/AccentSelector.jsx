@@ -4,15 +4,15 @@ export default function AccentSelector({ value, onChange }) {
   const colors = [
     { name: "Gray", color: "#2D2D2D" },
     { name: "Blue", color: "#14213D" },
-    { name: "Red", color: "#DC2626" },
-    { name: "Green", color: "#16A34A" },
-    { name: "Purple", color: "#7C3AED" },
-    { name: "Orange", color: "#EA580C" },
+    { name: "Red", color: "#991B1B" },
+    { name: "Green", color: "#166534" },
+    { name: "Purple", color: "#4C1D95" },
+    { name: "Orange", color: "#9A3412" },
   ];
 
   return (
     <div className="w-full mb-6">
-      <label className="font-medium text-gray-700 text-sm block mb-2">
+      <label className="font-medium text-gray-700 text-sm block mb-1">
         Accent Color
       </label>
 

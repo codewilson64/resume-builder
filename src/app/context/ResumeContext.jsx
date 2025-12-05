@@ -31,6 +31,7 @@ export const ResumeProvider = ({ children }) => {
             hobbies: "",
             template: "Budapest",
             accentColor: "#2D2D2D", // Dark Gray
+            fontFamily: "Poppins",
             personalDetails: []
           }
     );

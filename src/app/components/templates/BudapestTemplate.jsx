@@ -1,4 +1,6 @@
 "use client";
+import { fontMap } from "@/app/config/fontConfig";
+import { useResume } from "@/app/context/ResumeContext";
 import { Mail, Phone, MapPin, ArrowLeft, Download } from "lucide-react";
 
 function formatDate(dateStr) {
@@ -18,8 +20,10 @@ const proficiencyWidths = {
 };
 
 export default function BudapestTemplate({ data, onBack, onPrint }) {
+  const { resumeData } = useResume();
+
   return (
-    <div className="relative">
+    <div className={`${fontMap[resumeData.fontFamily] || fontMap["Poppins"]} relative`}>
       {/* ✅ FLOATING BUTTONS */}
       <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-4 no-print z-50">
         <button
@@ -133,7 +137,7 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
           <header className="flex flex-row items-start justify-between gap-6">
             <div>
               <h1 
-                className="text-3xl font-extrabold tracking-wide uppercase leading-tight"
+                className="text-3xl font-bold tracking-wide uppercase leading-none"
                 style={{ color: data.accentColor }}
               >
                 <span className="block">{data?.firstName}</span>

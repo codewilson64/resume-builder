@@ -13,9 +13,11 @@ import PersonalDetailsForm from "@/app/components/Resume/PersonalDetailsForm";
 import HobbiesForm from "@/app/components/Resume/HobbiesForm";
 import LanguagesForm from "@/app/components/Resume/LanguagesForm";
 import SocialLinksForm from "@/app/components/Resume/SocialLinksForm";
+import AccentSelector from "@/app/components/Resume/AccentSelector";
+import FontSelector from "@/app/components/Resume/FontSelector";
 
 export default function FinalPage() {
-  const { resumeData } = useResume();
+  const { resumeData, setResumeData } = useResume();
   const router = useRouter();
 
   return (
@@ -43,6 +45,11 @@ export default function FinalPage() {
         <section className="">
           <h2 className="font-semibold text-xl mb-4">Resume Format</h2>
           <TemplateSelector />
+          <FontSelector />
+          <AccentSelector
+            value={resumeData.accentColor}
+            onChange={(color) => setResumeData((prev) => ({ ...prev, accentColor: color }))}
+          />
         </section>
 
         {/* Mount all forms fully editable */}
