@@ -4,7 +4,11 @@ import { usePathname } from "next/navigation";
 import Navbar from "../components/Home/Navbar";
 import { ResumeProvider } from "../context/ResumeContext";
 
-const RootLayout = ({ children }) => {
+const RootLayout = ({ 
+  children 
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
   const pathname = usePathname();
 
   // Hide navbar on resume builder pages

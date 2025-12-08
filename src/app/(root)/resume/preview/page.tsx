@@ -2,9 +2,10 @@
 
 import { useRef } from "react";
 import { useResume } from "../../../context/ResumeContext";
-import BudapestTemplate from "../../../components/templates/BudapestTemplate";
 import { useRouter } from "next/navigation";
 import { useReactToPrint } from "react-to-print";
+import BudapestTemplate from "../../../components/templates/BudapestTemplate";
+import ChicagoTemplate from "@/app/components/templates/ChicagoTemplate";
 
 export default function PreviewPage() {
   const { resumeData } = useResume();
@@ -24,8 +25,8 @@ export default function PreviewPage() {
     switch (template) {
       case "Budapest":
         return <BudapestTemplate data={resumeData} onBack={() => router.back()} onPrint={handlePrint}/>;
-      case "Vienna":
-        return <div>Vienna Template Here</div>;
+      case "Chicago":
+        return <ChicagoTemplate data={resumeData} onBack={() => router.back()} onPrint={handlePrint}/>;
       default:
         return <BudapestTemplate data={resumeData} />;
     }

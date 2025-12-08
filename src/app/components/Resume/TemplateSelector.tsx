@@ -3,11 +3,10 @@
 import { useState, useRef, useEffect } from "react";
 import { useResume } from "../../context/ResumeContext";
 import { ChevronDown } from "lucide-react";
-import AccentSelector from "./AccentSelector";
-import FontSelector from "./FontSelector";
 
 const templates = [
   "Budapest",
+  "Chicago",
   "Vienna",
   "Berlin",
   "Oslo",
