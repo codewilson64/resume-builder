@@ -1,9 +1,16 @@
 "use client";
 
-import { fontMap } from "@/app/config/fontConfig";
 import { ArrowLeft, Download, Mail, Phone, MapPin } from "lucide-react";
+import { fontMap } from "@/app/config/fontConfig";
+import type { ResumeData } from "@/app/types/resume";
 
-function formatDate(dateStr) {
+interface ChicagoTemplateProps {
+  data: ResumeData;
+  onBack: () => void;
+  onPrint: () => void;
+}
+
+function formatDate(dateStr: string | undefined): string {
   if (!dateStr) return "";
   const date = new Date(dateStr + "-01");
   return date.toLocaleString("en-US", {
@@ -12,14 +19,22 @@ function formatDate(dateStr) {
   });
 }
 
-const proficiencyWidths = {
+const skillWidths: Record<string, string> = {
   Beginner: "30%",
   Intermediate: "50%",
   Advanced: "75%",
   Expert: "100%",
 };
 
-export default function ChicagoTemplate({ data, onBack, onPrint }) {
+const languageWidths: Record<string, string> = {
+  Beginner: "25%",
+  Intermediate: "50%",
+  Advanced: "70%",
+  Fluent: "85%",
+  Native: "100%",
+};
+
+export default function ChicagoTemplate({ data, onBack, onPrint }: ChicagoTemplateProps) {
   const fullName = `${data?.firstName || ""} ${data?.lastName || ""}`.trim();
 
   const initials = [
@@ -50,7 +65,7 @@ export default function ChicagoTemplate({ data, onBack, onPrint }) {
       {/* PAGE */}
       <div
         className="bg-white shadow-md"
-        style={{ width: "794px", minHeight: "1123px" }}
+        style={{ width: "794px", minHeight: "1300px" }}
       >
 
         {/* HEADER */}
@@ -162,30 +177,38 @@ export default function ChicagoTemplate({ data, onBack, onPrint }) {
 
             {/* LANGUAGES (WITH METER BARS) */}
             {data?.languages?.length > 0 && (
-              <section>
-                <h2 className="text-xl font-bold tracking-widest mb-3">LANGUAGES</h2>
+            <section className="border-b border-black pb-6">
+              <h2 className="text-xl font-bold uppercase tracking-widest mb-3">
+                Languages
+              </h2>
 
-                <div className="space-y-3 border-b border-black pb-6">
-                  {data.languages.map((lang) => {
-                    const width = proficiencyWidths[lang.level] || "40%";
+              <div className="space-y-3">
+                {data.languages
+                  .filter((lang) => lang.name?.trim())  // Only show if language exists
+                  .map((lang) => {
+                    const width = languageWidths[lang.level] || "40%";
+
                     return (
                       <div key={lang.id}>
-                        <p className="text-sm font-semibold">{lang.name}</p>
+                        {/* Language Name */}
+                        <p className="text-sm font-medium">{lang.name}</p>
+
+                        {/* Meter Bar */}
                         <div className="w-full h-1.5 bg-gray-300 mt-1">
                           <div
-                            className="h-1.5"
+                            className="h-1.5 transition-all"
                             style={{
                               width,
                               backgroundColor: data.accentColor || "#000",
                             }}
-                          ></div>
+                          />
                         </div>
                       </div>
                     );
                   })}
-                </div>
-              </section>
-            )}
+              </div>
+            </section>
+          )}
 
             {/* PERSONAL DETAILS */}
           {(data?.dateOfBirth || data?.nationality || data?.maritalStatus) && (
@@ -245,26 +268,32 @@ export default function ChicagoTemplate({ data, onBack, onPrint }) {
                 <div className="mt-4 space-y-6 border-b border-black pb-6">
                   {data.experience
                     .filter(exp => exp.jobTitle?.trim() || exp.company?.trim())
-                    .map((exp) => (
-                      <div key={exp.id}>
-                        {exp.company && (
-                          <p className="font-semibold">{exp.company}</p>
-                        )}
+                    .map((exp) => {
+                      const line = [
+                        exp.jobTitle?.trim(),
+                        exp.company?.trim(),
+                        exp.city?.trim()
+                      ]
+                        .filter(Boolean)
+                        .join(", ");
 
-                        {(exp.startDate || exp.endDate) && (
-                          <p className="text-xs text-gray-500">
-                            {formatDate(exp.startDate)} -{" "}
-                                {exp.current
-                                  ? "Present"
-                                  : formatDate(exp.endDate)}
-                          </p>
-                        )}
+                      return (
+                        <div key={exp.id}>
+                          {line && <p className="font-semibold">{line}</p>}
 
-                        {exp.description && (
-                          <p className="text-sm mt-1">{exp.description}</p>
-                        )}
-                      </div>
-                    ))}
+                          {(exp.startDate || exp.endDate) && (
+                            <p className="text-xs text-gray-500">
+                              {formatDate(exp.startDate)} -{" "}
+                              {exp.current ? "Present" : formatDate(exp.endDate)}
+                            </p>
+                          )}
+
+                          {exp.description && (
+                            <p className="text-sm mt-1">{exp.description}</p>
+                          )}
+                        </div>
+                      );
+                    })}
                 </div>
               </section>
             )}
@@ -281,24 +310,33 @@ export default function ChicagoTemplate({ data, onBack, onPrint }) {
                 <div className="mt-4 space-y-6 border-b border-black pb-6">
                   {data.education
                     .filter(edu => edu.degree?.trim() || edu.school?.trim())
-                    .map((edu) => (
-                      <div key={edu.id}>
-                        {edu.school && (
-                          <p className="font-semibold">{edu.school}</p>
-                        )}
+                    .map((edu) => {
+                      const line = [
+                        edu.degree?.trim(),
+                        edu.school?.trim(),
+                        edu.city?.trim()
+                      ]
+                        .filter(Boolean)
+                        .join(", ");
 
-                        {edu.graduationDate && (
-                          <p className="text-xs text-gray-500">{edu.graduationDate}</p>
-                        )}
+                      return (
+                        <div key={edu.id}>
+                          {line && <p className="font-semibold">{line}</p>}
 
-                        {edu.description && (
-                          <p className="text-sm mt-1">{edu.description}</p>
-                        )}
-                      </div>
-                    ))}
+                          {edu.graduationDate && (
+                            <p className="text-xs text-gray-500">{edu.graduationDate}</p>
+                          )}
+
+                          {edu.description && (
+                            <p className="text-sm mt-1">{edu.description}</p>
+                          )}
+                        </div>
+                      );
+                    })}
                 </div>
               </section>
             )}
+
 
             {/* SKILLS (WITH METER BARS) */}
             {data?.skills?.length > 0 && (
@@ -308,27 +346,31 @@ export default function ChicagoTemplate({ data, onBack, onPrint }) {
                 </h2>
 
                 <div className="grid grid-cols-2 gap-4 mt-4 border-b border-black pb-6">
-                  {data.skills.map((skill) => {
-                    const width = proficiencyWidths[skill.level] || "40%";
-                    return (
-                      <div key={skill.id}>
-                        <p className="text-sm font-medium">{skill.skillName}</p>
+                  {data.skills
+                    .filter((skill) => skill.skillName?.trim())
+                    .map((skill) => {
+                      const width = skillWidths[skill.level] || "40%";
 
-                        <div className="w-full h-1.5 bg-gray-300 mt-1">
-                          <div
-                            className="h-1.5"
-                            style={{
-                              width,
-                              backgroundColor: data.accentColor || "#000",
-                            }}
-                          ></div>
+                      return (
+                        <div key={skill.id}>
+                          <p className="text-sm font-medium">{skill.skillName}</p>
+
+                          <div className="w-full h-1.5 bg-gray-300 mt-1">
+                            <div
+                              className="h-1.5"
+                              style={{
+                                width,
+                                backgroundColor: data.accentColor || "#000",
+                              }}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
                 </div>
               </section>
             )}
+
 
             {/* HOBBIES */}
             {data?.hobbies && (

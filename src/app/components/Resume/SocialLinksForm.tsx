@@ -1,34 +1,39 @@
 "use client";
 import { ChevronDown, ChevronUp, Trash } from "lucide-react";
 import { useResume } from "../../context/ResumeContext";
+import { SocialLinkItem } from "@/app/types/resume";
 
 export default function SocialLinksForm() {
   const { resumeData, setResumeData } = useResume();
-  const socialLinks = resumeData.socialLinks || [];
+  const socialLinks: SocialLinkItem[] = resumeData.socialLinks || [];
 
-  const updateField = (id, field, value) => {
-    setResumeData({
-      ...resumeData,
-      socialLinks: socialLinks.map((link) =>
+  const updateField = (
+    id: number,
+    field: keyof SocialLinkItem,
+    value: string | boolean | number
+  ) => {
+    setResumeData((prev) => ({
+      ...prev!,
+      socialLinks: prev!.socialLinks.map((link) =>
         link.id === id ? { ...link, [field]: value } : link
       ),
-    });
+    }));
   };
 
-  const toggleCollapse = (id) => {
-    setResumeData({
-      ...resumeData,
-      socialLinks: socialLinks.map((link) =>
+  const toggleCollapse = (id: number) => {
+    setResumeData((prev) => ({
+      ...prev!,
+      socialLinks: prev!.socialLinks.map((link) =>
         link.id === id ? { ...link, collapsed: !link.collapsed } : link
       ),
-    });
+    }));
   };
 
-  const deleteLink = (id) => {
-    setResumeData({
-      ...resumeData,
-      socialLinks: socialLinks.filter((link) => link.id !== id),
-    });
+  const deleteLink = (id: number) => {
+    setResumeData((prev) => ({
+      ...prev!,
+      socialLinks: prev!.socialLinks.filter((link) => link.id !== id),
+    }));
   };
 
   const addLink = () => {

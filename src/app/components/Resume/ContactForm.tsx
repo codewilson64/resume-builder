@@ -10,7 +10,7 @@ export default function ContactForm() {
 
   const isFinishingPage = pathname === "/resume/finishing";
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setResumeData({ ...resumeData, [e.target.name]: e.target.value });
   };
 

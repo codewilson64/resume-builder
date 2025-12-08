@@ -3,28 +3,31 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { useResume } from "../../context/ResumeContext";
-import { fontMap, fontPreviewMap } from "../../config/fontConfig";
+import { fontMap, FontName } from "../../config/fontConfig";
 
 export default function FontSelector() {
   const { resumeData, setResumeData } = useResume();
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef(null);
+  const [open, setOpen] = useState<boolean>(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
 
-  const fonts = Object.keys(fontMap); // ["Poppins","Roboto",...]
+  const fonts: FontName[] = Object.keys(fontMap) as Array<keyof typeof fontMap>;
 
   // Close dropdown on outside click
   useEffect(() => {
-    const onDocClick = (e) => {
+    const onDocClick = (e: MouseEvent) => {
       if (!rootRef.current) return;
-      if (!rootRef.current.contains(e.target)) setOpen(false);
+      if (!rootRef.current.contains(e.target as Node)) setOpen(false);
     };
     document.addEventListener("mousedown", onDocClick);
     return () => document.removeEventListener("mousedown", onDocClick);
   }, []);
 
   // Handle selection
-  const handleSelect = (fontName) => {
-    setResumeData((prev) => ({ ...prev, fontFamily: fontName }));
+  const handleSelect = (fontName: keyof typeof fontMap) => {
+    setResumeData((prev) => ({
+      ...prev!,
+      fontFamily: fontName,
+    }));
     setOpen(false);
   };
 

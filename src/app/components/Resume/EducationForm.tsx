@@ -1,21 +1,27 @@
 "use client";
+
 import { ChevronDown, ChevronUp, Trash } from "lucide-react";
 import { useResume } from "../../context/ResumeContext";
+import { EducationItem } from "@/app/types/resume";
 
 export default function EducationForm() {
   const { resumeData, setResumeData } = useResume();
-  const education = resumeData.education || [];
+  const education: EducationItem[] = resumeData.education || [];
 
-  const updateField = (id, field, value) => {
-    setResumeData({
-      ...resumeData,
-      education: education.map((edu) =>
+  const updateField = (
+    id: number,
+    field: keyof EducationItem,
+    value: string | boolean | number
+  ) => {
+    setResumeData((prev) => ({
+      ...prev!,
+      education: prev!.education.map((edu) =>
         edu.id === id ? { ...edu, [field]: value } : edu
       ),
-    });
+    }));
   };
 
-  const toggleCollapse = (id) => {
+  const toggleCollapse = (id: number) => {
     setResumeData({
       ...resumeData,
       education: education.map((edu) =>
@@ -24,7 +30,7 @@ export default function EducationForm() {
     });
   };
 
-  const deleteEducation = (id) => {
+  const deleteEducation = (id: number) => {
     setResumeData({
       ...resumeData,
       education: education.filter((edu) => edu.id !== id),
@@ -128,6 +134,22 @@ export default function EducationForm() {
                   value={edu.city}
                   onChange={(e) => updateField(edu.id, "city", e.target.value)}
                 />
+              </div>
+
+              {/* Description */}
+              <div>
+                <label className="text-sm font-medium text-gray-700">
+                  Description 
+                </label>
+                <textarea
+                  rows={4}
+                  className="input resize-none"
+                  placeholder="Key coursework, projects, or academic achievements..."
+                  value={edu.description}
+                  onChange={(e) =>
+                    updateField(edu.id, "description", e.target.value)
+                  }
+                ></textarea>
               </div>
             </div>
           )}

@@ -3,40 +3,30 @@
 import { useState, useRef, useEffect } from "react";
 import { useResume } from "../../context/ResumeContext";
 import { ChevronDown } from "lucide-react";
-
-const templates = [
-  "Budapest",
-  "Chicago",
-  "Vienna",
-  "Berlin",
-  "Oslo",
-  "Tokyo",
-  "New York",
-  "London",
-  "Madrid",
-  "Paris",
-  "Jakarta",
-];
+import { TemplateName, templates } from "@/app/config/templateConfig";
 
 export default function TemplateDropdown() {
   const { resumeData, setResumeData } = useResume();
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef(null);
+  const [open, setOpen] = useState<boolean>(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
 
   // close on outside click
   useEffect(() => {
-    const onDocClick = (e) => {
+    const onDocClick = (e: MouseEvent) => {
       if (!rootRef.current) return;
-      if (!rootRef.current.contains(e.target)) setOpen(false);
+      if (!rootRef.current.contains(e.target as Node)) setOpen(false);
     };
     document.addEventListener("mousedown", onDocClick);
     return () => document.removeEventListener("mousedown", onDocClick);
   }, []);
 
   // Handle select
-  const handleSelect = (value) => {
-    setResumeData((prev) => ({ ...prev, template: value }));
-    setOpen(false); 
+  const handleSelect = (value: TemplateName) => {
+    setResumeData((prev) => ({
+      ...prev!,
+      template: value,
+    }));
+    setOpen(false);
   };
 
   return (

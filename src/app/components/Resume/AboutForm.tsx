@@ -5,12 +5,13 @@ import { useResume } from "../../context/ResumeContext";
 export default function AboutForm() {
   const { resumeData, setResumeData } = useResume();
 
-  const updateField = (value) => {
-    setResumeData({
-      ...resumeData,
-      about: value,
+  const updateField = (value: string) => {
+    setResumeData((prev) => {
+      if (!prev) return prev 
+      return { ...prev, about: value }
     });
   };
+
 
   return (
     <div className="bg-white shadow-md rounded-lg p-5 space-y-4">

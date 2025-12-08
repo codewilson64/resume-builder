@@ -2,41 +2,41 @@
 import { ChevronDown, ChevronUp, Trash } from "lucide-react";
 import { useResume } from "../../context/ResumeContext";
 import { useState, useRef, useEffect } from "react";
+import { SkillItem } from "@/app/types/resume";
 
-const proficiencyLevels = [
-  "Beginner",
-  "Intermediate",
-  "Advanced",
-  "Expert",
-];
+const proficiencyLevels = ["Beginner", "Intermediate", "Advanced", "Expert"] as const;
 
 export default function SkillsForm() {
   const { resumeData, setResumeData } = useResume();
-  const skills = resumeData.skills || [];
+  const skills: SkillItem[] = resumeData.skills || [];
 
-  const updateField = (id, field, value) => {
-    setResumeData({
-      ...resumeData,
-      skills: skills.map((skill) =>
+  const updateField = (
+    id: number,
+    field: keyof SkillItem,
+    value: string | number | boolean
+  ) => {
+    setResumeData((prev) => ({
+      ...prev!,
+      skills: prev!.skills.map((skill) =>
         skill.id === id ? { ...skill, [field]: value } : skill
       ),
-    });
+    }));
   };
 
-  const toggleCollapse = (id) => {
-    setResumeData({
-      ...resumeData,
-      skills: skills.map((skill) =>
+  const toggleCollapse = (id: number) => {
+    setResumeData((prev) => ({
+      ...prev!,
+      skills: prev!.skills.map((skill) =>
         skill.id === id ? { ...skill, collapsed: !skill.collapsed } : skill
       ),
-    });
+    }));
   };
 
-  const deleteSkill = (id) => {
-    setResumeData({
-      ...resumeData,
-      skills: skills.filter((skill) => skill.id !== id),
-    });
+  const deleteSkill = (id: number) => {
+    setResumeData((prev) => ({
+      ...prev!,
+      skills: prev!.skills.filter((skill) => skill.id !== id),
+    }));
   };
 
   const addSkill = () => {
@@ -56,11 +56,10 @@ export default function SkillsForm() {
 
   return (
     <>
-      {skills.map((skill, idx) => (
+      {skills.map((skill) => (
         <SkillCard
           key={skill.id}
           skill={skill}
-          idx={idx}
           updateField={updateField}
           toggleCollapse={toggleCollapse}
           deleteSkill={deleteSkill}
@@ -78,18 +77,26 @@ export default function SkillsForm() {
   );
 }
 
-/* ================================
-   INDIVIDUAL SKILL CARD
-================================ */
-function SkillCard({ skill, idx, updateField, toggleCollapse, deleteSkill }) {
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef(null);
+interface SkillCardProps {
+    skill: SkillItem;
+    updateField: (
+      id: number,
+      field: keyof SkillItem,
+      value: string | number | boolean
+    ) => void;
+    toggleCollapse: (id: number) => void;
+    deleteSkill: (id: number) => void;
+  }
+
+function SkillCard({ skill, updateField, toggleCollapse, deleteSkill }: SkillCardProps) {
+  const [open, setOpen] = useState<boolean>(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
 
   // Close on outside click (same logic as TemplateDropdown)
   useEffect(() => {
-    const onDocClick = (e) => {
+    const onDocClick = (e: MouseEvent) => {
       if (!rootRef.current) return;
-      if (!rootRef.current.contains(e.target)) setOpen(false);
+      if (!rootRef.current.contains(e.target as Node)) setOpen(false);
     };
     document.addEventListener("mousedown", onDocClick);
     return () => document.removeEventListener("mousedown", onDocClick);

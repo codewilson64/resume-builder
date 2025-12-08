@@ -5,8 +5,15 @@ import { useResume } from "../../context/ResumeContext";
 export default function PersonalDetailsForm() {
   const { resumeData, setResumeData } = useResume();
 
-  const handleChange = (e) => {
-    setResumeData({ ...resumeData, [e.target.name]: e.target.value });
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setResumeData((prev) => ({
+      ...prev!,
+      [name]: value,
+    }));
   };
 
   return (

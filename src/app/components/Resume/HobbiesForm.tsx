@@ -5,7 +5,7 @@ import { useResume } from "../../context/ResumeContext";
 export default function HobbiesForm() {
   const { resumeData, setResumeData } = useResume();
 
-  const updateField = (value) => {
+  const updateField = (value: string) => {
     setResumeData({
       ...resumeData,
       hobbies: value,

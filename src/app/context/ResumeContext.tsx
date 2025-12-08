@@ -1,11 +1,17 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, Dispatch, SetStateAction, ReactNode, } from "react";
+import { ResumeData } from "../types/resume";
 
-const ResumeContext = createContext(null);
+interface ResumeContextType {
+  resumeData: ResumeData;
+  setResumeData: Dispatch<SetStateAction<ResumeData | null>>;
+}
 
-export const ResumeProvider = ({ children }) => {
-  const [resumeData, setResumeData] = useState(null); // start with null to avoid SSR mismatch
+const ResumeContext = createContext<ResumeContextType | null>(null);
+
+export const ResumeProvider = ({ children }: { children: ReactNode }) => {
+  const [resumeData, setResumeData] = useState<ResumeData | null>(null); 
 
   // Load from localStorage ONLY on client
   useEffect(() => {
@@ -54,4 +60,10 @@ export const ResumeProvider = ({ children }) => {
   );
 };
 
-export const useResume = () => useContext(ResumeContext);
+export const useResume = () => {
+  const context = useContext(ResumeContext);
+  if (!context) {
+    throw new Error("useResume must be used inside ResumeProvider");
+  }
+  return context;
+};

@@ -50,4 +50,7 @@ export const fontMap = {
   Raleway: raleway.className,
   Ubuntu: ubuntu.className,
   "Work Sans": workSans.className,
-};
+} as const;
+
+// Export type for font names
+export type FontName = keyof typeof fontMap;

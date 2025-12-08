@@ -1,6 +1,11 @@
 "use client";
 
-export default function AccentSelector({ value, onChange }) {
+interface AccentSelectorProps {
+  value: string;                    
+  onChange: (color: string) => void; 
+}
+
+export default function AccentSelector({ value, onChange }: AccentSelectorProps) {
   const colors = [
     { name: "Gray", color: "#2D2D2D" },
     { name: "Blue", color: "#14213D" },

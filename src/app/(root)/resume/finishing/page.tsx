@@ -48,7 +48,12 @@ export default function FinalPage() {
           <FontSelector />
           <AccentSelector
             value={resumeData.accentColor}
-            onChange={(color) => setResumeData((prev) => ({ ...prev, accentColor: color }))}
+            onChange={(color) =>
+              setResumeData((prev) => ({
+                ...prev!,
+                accentColor: color,
+              }))
+            }
           />
         </section>
 

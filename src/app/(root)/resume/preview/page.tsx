@@ -28,7 +28,7 @@ export default function PreviewPage() {
       case "Chicago":
         return <ChicagoTemplate data={resumeData} onBack={() => router.back()} onPrint={handlePrint}/>;
       default:
-        return <BudapestTemplate data={resumeData} />;
+        return <BudapestTemplate data={resumeData} onBack={() => router.back()} onPrint={handlePrint}/>;
     }
   };
 

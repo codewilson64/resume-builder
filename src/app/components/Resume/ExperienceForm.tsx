@@ -1,21 +1,26 @@
 "use client";
 import { ChevronDown, ChevronUp, Trash } from "lucide-react";
 import { useResume } from "../../context/ResumeContext";
+import { ExperienceItem } from "@/app/types/resume";
 
 export default function ExperienceForm() {
   const { resumeData, setResumeData } = useResume();
-  const experiences = resumeData.experience || [];
+  const experiences: ExperienceItem[] = resumeData.experience || [];
 
-  const updateField = (id, field, value) => {
-    setResumeData({
-      ...resumeData,
-      experience: experiences.map((exp) =>
+  const updateField = (
+    id: number,
+    field: keyof ExperienceItem,
+    value: string | boolean | number
+  ) => {
+    setResumeData((prev) => ({
+      ...prev!,
+      experience: prev!.experience.map((exp) =>
         exp.id === id ? { ...exp, [field]: value } : exp
       ),
-    });
+    }));
   };
 
-  const toggleCollapse = (id) => {
+  const toggleCollapse = (id: number) => {
     setResumeData({
       ...resumeData,
       experience: experiences.map((exp) =>
@@ -24,7 +29,7 @@ export default function ExperienceForm() {
     });
   };
 
-  const deleteExperience = (id) => {
+  const deleteExperience = (id: number) => {
     setResumeData({
       ...resumeData,
       experience: experiences.filter((exp) => exp.id !== id),

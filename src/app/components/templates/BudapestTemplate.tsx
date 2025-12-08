@@ -2,8 +2,15 @@
 import { fontMap } from "@/app/config/fontConfig";
 import { useResume } from "@/app/context/ResumeContext";
 import { Mail, Phone, MapPin, ArrowLeft, Download } from "lucide-react";
+import type { ResumeData } from "@/app/types/resume";
 
-function formatDate(dateStr) {
+interface BudapestTemplateProps {
+  data: ResumeData;
+  onBack: () => void;
+  onPrint: () => void;
+}
+
+function formatDate(dateStr: string | undefined): string {
   if (!dateStr) return "";
   const date = new Date(dateStr + "-01");
   return date.toLocaleString("en-US", {
@@ -12,14 +19,22 @@ function formatDate(dateStr) {
   });
 }
 
-const proficiencyWidths = {
+const skillWidths: Record<string, string> = {
   Beginner: "30%",
   Intermediate: "50%",
   Advanced: "75%",
   Expert: "100%",
 };
 
-export default function BudapestTemplate({ data, onBack, onPrint }) {
+const languageWidths: Record<string, string> = {
+  Beginner: "25%",
+  Intermediate: "50%",
+  Advanced: "70%",
+  Fluent: "85%",
+  Native: "100%",
+};
+
+export default function BudapestTemplate({ data, onBack, onPrint }: BudapestTemplateProps) {
   const { resumeData } = useResume();
 
   return (
@@ -46,7 +61,7 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
       {/* ✅ RESUME */}
       <div
         className="bg-white shadow-xl grid grid-cols-[220px_1fr]"
-        style={{ width: "794px", minHeight: "1123px" }}
+        style={{ width: "794px" }}
       >
         {/* ================= LEFT SIDEBAR ================= */}
         <aside 
@@ -89,13 +104,36 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
               <h2 className="text-sm font-semibold uppercase tracking-widest mb-3">
                 Languages
               </h2>
-              <ul className="text-xs text-gray-200 space-y-2">
-                {data.languages.map((lang) => (
-                  <li key={lang.id}>{lang.name}</li>
-                ))}
-              </ul>
+
+              <div className="space-y-3">
+                {data.languages
+                  .filter((lang) => lang.name?.trim())  // Only show if language exists
+                  .map((lang) => {
+                    const width = languageWidths[lang.level] || "40%";
+
+                    return (
+                      <div key={lang.id}>
+                        {/* Language Name */}
+                        <p className="text-xs text-gray-200">{lang.name}</p>
+
+                        {/* Meter Bar */}
+                        <div className="w-full h-1.5 bg-white/30 mt-1">
+                          <div
+                            className="h-1.5 transition-all"
+                            style={{
+                              width,
+                              backgroundColor: "white",
+                              opacity: 0.9,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
             </section>
           )}
+
 
           {/* PERSONAL DETAILS */}
           {(data?.dateOfBirth || data?.nationality || data?.maritalStatus) && (
@@ -318,6 +356,12 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
                                 {edu.degree}
                               </p>
                             )}
+
+                            {edu?.description && (
+                              <p className="text-xs text-gray-600 mt-1 leading-relaxed">
+                                {edu.description}
+                              </p>
+                            )}
                           </div>
                         </div>
                       );
@@ -338,25 +382,27 @@ export default function BudapestTemplate({ data, onBack, onPrint }) {
               </h2>
 
               <div className="mt-5 grid grid-cols-2 gap-x-8 gap-y-5 text-xs uppercase text-gray-700">
-                {data.skills.map((skill) => {
-                  const width = proficiencyWidths[skill.level] || "40%"
+                {data.skills
+                  .filter((skill) => skill.skillName?.trim()) // ✅ Only show if name exists
+                  .map((skill) => {
+                    const width = skillWidths[skill.level] || "40%";
 
-                  return (
-                    <div key={skill.id}>
-                      <span className="block mb-1">{skill.skillName}</span>
+                    return (
+                      <div key={skill.id}>
+                        <span className="block mb-1">{skill.skillName}</span>
 
-                      <div className="w-full h-1.5 bg-gray-200">
-                        <div
-                          className="h-1.5 transition-all"
-                          style={{
-                            width,
-                            backgroundColor: data.accentColor,
-                          }}
-                        />
+                        <div className="w-full h-1.5 bg-gray-200">
+                          <div
+                            className="h-1.5 transition-all"
+                            style={{
+                              width,
+                              backgroundColor: data.accentColor,
+                            }}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
             </section>
           )}

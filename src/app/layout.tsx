@@ -17,7 +17,11 @@ export const metadata = {
   description: "Resume Builder",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ 
+  children 
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
