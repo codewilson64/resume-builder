@@ -1,12 +1,14 @@
-import { prisma } from "@/app/lib/prisma";
+import { prisma } from "@/lib/prisma";
+
 
 
 async function main() {
   // Create a simple user
   const user = await prisma.user.create({
     data: {
-      email: "test2@example.com",
-      name: "Second User"
+      email: "test5@example.com",
+      name: "Second User",
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     },
   });
 
