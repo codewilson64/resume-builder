@@ -1,12 +1,33 @@
 "use client";
 
+import { useState } from "react";
 import { Mail, Lock, User } from "lucide-react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { signUp } from "@/lib/actions/auth-action";
 
 export default function Signup() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const router = useRouter()
+
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      const response = await signUp(name, email, password)
+
+      if(response.user) {
+        router.push('/dashboard')
+      }
+    } catch (error) {
+      console.log("Error", error)
+    }
+  }
+
   return (
-    <section className="min-h-screen flex items-center justify-center px-6">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
+    <section className="w-[900px] min-h-screen flex items-center justify-center px-6">
+      <div className="w-full max-w-xl bg-white rounded-2xl shadow-lg p-8">
 
         {/* Title */}
         <h2 className="text-3xl font-bold text-center">Create an Account</h2>
@@ -15,7 +36,7 @@ export default function Signup() {
         </p>
 
         {/* Form */}
-        <form className="mt-8 space-y-5">
+        <form onSubmit={handleSignup} className="mt-8 space-y-5">
 
           {/* Name */}
           <div className="flex items-center gap-3 border rounded-lg px-4 py-3 bg-gray-50 focus-within:bg-white focus-within:ring-2 ring-orange-500 transition">
@@ -23,6 +44,8 @@ export default function Signup() {
             <input
               type="text"
               placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="w-full bg-transparent outline-none"
             />
           </div>
@@ -33,6 +56,8 @@ export default function Signup() {
             <input
               type="email"
               placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full bg-transparent outline-none"
             />
           </div>
@@ -43,6 +68,8 @@ export default function Signup() {
             <input
               type="password"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-transparent outline-none"
             />
           </div>

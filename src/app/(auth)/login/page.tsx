@@ -1,14 +1,30 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signIn } from "@/lib/actions/auth-action";
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const router = useRouter()
+
+  const handleSignIn = async (e: React.FormEvent) => {
+    e.preventDefault()
+      try {
+        const response = await signIn(email, password)
+        if(response.user) {
+          router.push('/dashboard')
+        }
+      } catch (error) {
+        console.log("Error", error)
+      }
+  }
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-6">
+    <section className="w-[900px] min-h-screen flex items-center justify-center px-6">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
         
         {/* Title */}
@@ -19,6 +35,8 @@ export default function Login() {
           Log in to continue building your resume.
         </p>
 
+      {/* Form */}
+      <form onSubmit={handleSignIn} className="mt-8 space-y-5">
         {/* Email Input */}
         <div className="mb-5">
           <label className="text-gray-700 font-semibold text-sm">Email</label>
@@ -27,6 +45,8 @@ export default function Login() {
             <input
               type="email"
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full outline-none text-gray-700"
               required
             />
@@ -39,18 +59,13 @@ export default function Login() {
           <div className="flex items-center gap-2 border rounded-lg px-3 py-3 mt-1">
             <Lock size={18} className="text-gray-400" />
             <input
-              type={showPassword ? "text" : "password"}
+              type="password"
               placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full outline-none text-gray-700"
               required
             />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="text-gray-400 hover:text-gray-600"
-            >
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
           </div>
         </div>
 
@@ -61,6 +76,7 @@ export default function Login() {
         >
           Login
         </button>
+      </form>
 
         {/* Switch Auth */}
         <p className="text-center text-gray-500 mt-6 text-sm">

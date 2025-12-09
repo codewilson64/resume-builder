@@ -1,25 +1,21 @@
-"use client";
+
 import React from "react";
-import { usePathname } from "next/navigation";
 import Navbar from "../components/Home/Navbar";
 import { ResumeProvider } from "../context/ResumeContext";
+import { getCurrentUser } from "@/lib/actions/auth-action";
 
-const RootLayout = ({ 
+export default async function RootLayout({ 
   children 
 }: Readonly<{
   children: React.ReactNode;
-}>) => {
-  const pathname = usePathname();
-
-  // Hide navbar on resume builder pages
-  const hideNavbar = pathname.startsWith("/resume");
+}>) {
+  const user = await getCurrentUser()
 
   return (
     <ResumeProvider>
-      {!hideNavbar && <Navbar />}
+      <Navbar user={user}/>
       {children}
     </ResumeProvider>
   );
 };
 
-export default RootLayout;

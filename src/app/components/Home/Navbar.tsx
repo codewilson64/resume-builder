@@ -1,13 +1,24 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
+import { signOut } from "@/lib/actions/auth-action";
+import { User } from "@/app/types/user";
 
-const Navbar = () => {
+const Navbar = ({ user }: {user: User}) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  // Pages where login button should be hidden
+  // Pages where navbar buttons should be hidden
   const hideButton = pathname === "/login" || pathname === "/signup";
+  const hideNavbar = pathname.startsWith("/resume");
+
+  if (hideNavbar) return null;
+
+  const handleLogout = async () => {
+    await signOut()
+    router.push('/')
+    router.refresh()
+  };
 
   return (
     <nav className="w-full absolute top-0 left-0 z-20">
@@ -21,14 +32,25 @@ const Navbar = () => {
           ResumeBuilder
         </h1>
 
-        {/* Login Button (Hidden on login/signup pages) */}
+        {/* Hide buttons on login/signup routes */}
         {!hideButton && (
-          <button
-            onClick={() => router.push("/login")}
-            className="text-sm px-4 py-2 border rounded-lg hover:bg-gray-100 transition"
-          >
-            Login
-          </button>
+          <>
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="text-sm px-6 py-3 text-white bg-orange-500 rounded-full"
+              >
+                Logout
+              </button>
+            ) : (
+              <button
+                onClick={() => router.push("/login")}
+                className="text-sm text-white bg-orange-500 rounded-full px-6 py-3"
+              >
+                Login
+              </button>
+            )}
+          </>
         )}
       </div>
     </nav>
