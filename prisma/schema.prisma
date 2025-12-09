@@ -13,20 +13,18 @@ datasource db {
   provider = "postgresql"
 }
 
-// Guest Users (Anonymous)
 model Guest {
   id           String    @id @default(uuid()) @db.Uuid
-  sessionToken String?   @unique
+  sessionToken String    @unique
   createdAt    DateTime  @default(now())
-  expiresAt    DateTime?
+  expiresAt    DateTime
   resumes      Resume[]
 }
 
-// Authenticated Users (NextAuth)
 model User {
   id           String    @id @default(uuid()) @db.Uuid
   createdAt    DateTime  @default(now())
-  expiresAt    DateTime?
+  expiresAt    DateTime
   email        String?   @unique
   name         String?
   image        String?
@@ -47,8 +45,8 @@ model Resume {
   user          User?          @relation(fields: [userId], references: [id])
 
   // Personal Information
-  firstName     String
-  lastName      String
+  firstName     String?
+  lastName      String?
   email         String?
   phone         String?
   address       String?
@@ -62,8 +60,8 @@ model Resume {
 
   // Resume Settings
   template      String
-  accentColor   String?
-  fontFamily    String?
+  accentColor   String
+  fontFamily    String
   hobbies       String?
 
   // Relations (lists)
@@ -100,12 +98,13 @@ model Education {
 }
 
 model Skill {
-  id        String   @id @default(uuid()) @db.Uuid
-  resumeId  String   @db.Uuid
-  resume    Resume   @relation(fields: [resumeId], references: [id])
+  id              String   @id @default(uuid()) @db.Uuid
+  resumeId        String   @db.Uuid
+  resume          Resume   @relation(fields: [resumeId], references: [id])
 
-  skillName String?
-  level     String?
+  skillName       String?
+  level           String?
+  description     String?
 }
 
 model Language {
