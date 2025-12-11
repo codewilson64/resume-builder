@@ -9975,6 +9975,7 @@ export namespace Prisma {
     degree: string | null
     graduationDate: string | null
     city: string | null
+    description: string | null
   }
 
   export type EducationMaxAggregateOutputType = {
@@ -9984,6 +9985,7 @@ export namespace Prisma {
     degree: string | null
     graduationDate: string | null
     city: string | null
+    description: string | null
   }
 
   export type EducationCountAggregateOutputType = {
@@ -9993,6 +9995,7 @@ export namespace Prisma {
     degree: number
     graduationDate: number
     city: number
+    description: number
     _all: number
   }
 
@@ -10004,6 +10007,7 @@ export namespace Prisma {
     degree?: true
     graduationDate?: true
     city?: true
+    description?: true
   }
 
   export type EducationMaxAggregateInputType = {
@@ -10013,6 +10017,7 @@ export namespace Prisma {
     degree?: true
     graduationDate?: true
     city?: true
+    description?: true
   }
 
   export type EducationCountAggregateInputType = {
@@ -10022,6 +10027,7 @@ export namespace Prisma {
     degree?: true
     graduationDate?: true
     city?: true
+    description?: true
     _all?: true
   }
 
@@ -10104,6 +10110,7 @@ export namespace Prisma {
     degree: string | null
     graduationDate: string | null
     city: string | null
+    description: string | null
     _count: EducationCountAggregateOutputType | null
     _min: EducationMinAggregateOutputType | null
     _max: EducationMaxAggregateOutputType | null
@@ -10130,6 +10137,7 @@ export namespace Prisma {
     degree?: boolean
     graduationDate?: boolean
     city?: boolean
+    description?: boolean
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["education"]>
 
@@ -10140,6 +10148,7 @@ export namespace Prisma {
     degree?: boolean
     graduationDate?: boolean
     city?: boolean
+    description?: boolean
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["education"]>
 
@@ -10150,6 +10159,7 @@ export namespace Prisma {
     degree?: boolean
     graduationDate?: boolean
     city?: boolean
+    description?: boolean
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["education"]>
 
@@ -10160,9 +10170,10 @@ export namespace Prisma {
     degree?: boolean
     graduationDate?: boolean
     city?: boolean
+    description?: boolean
   }
 
-  export type EducationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "resumeId" | "school" | "degree" | "graduationDate" | "city", ExtArgs["result"]["education"]>
+  export type EducationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "resumeId" | "school" | "degree" | "graduationDate" | "city" | "description", ExtArgs["result"]["education"]>
   export type EducationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
   }
@@ -10185,6 +10196,7 @@ export namespace Prisma {
       degree: string | null
       graduationDate: string | null
       city: string | null
+      description: string | null
     }, ExtArgs["result"]["education"]>
     composites: {}
   }
@@ -10615,6 +10627,7 @@ export namespace Prisma {
     readonly degree: FieldRef<"Education", 'String'>
     readonly graduationDate: FieldRef<"Education", 'String'>
     readonly city: FieldRef<"Education", 'String'>
+    readonly description: FieldRef<"Education", 'String'>
   }
     
 
@@ -14307,7 +14320,8 @@ export namespace Prisma {
     school: 'school',
     degree: 'degree',
     graduationDate: 'graduationDate',
-    city: 'city'
+    city: 'city',
+    description: 'description'
   };
 
   export type EducationScalarFieldEnum = (typeof EducationScalarFieldEnum)[keyof typeof EducationScalarFieldEnum]
@@ -15006,6 +15020,7 @@ export namespace Prisma {
     degree?: StringNullableFilter<"Education"> | string | null
     graduationDate?: StringNullableFilter<"Education"> | string | null
     city?: StringNullableFilter<"Education"> | string | null
+    description?: StringNullableFilter<"Education"> | string | null
     resume?: XOR<ResumeScalarRelationFilter, ResumeWhereInput>
   }
 
@@ -15016,6 +15031,7 @@ export namespace Prisma {
     degree?: SortOrderInput | SortOrder
     graduationDate?: SortOrderInput | SortOrder
     city?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
     resume?: ResumeOrderByWithRelationInput
   }
 
@@ -15029,6 +15045,7 @@ export namespace Prisma {
     degree?: StringNullableFilter<"Education"> | string | null
     graduationDate?: StringNullableFilter<"Education"> | string | null
     city?: StringNullableFilter<"Education"> | string | null
+    description?: StringNullableFilter<"Education"> | string | null
     resume?: XOR<ResumeScalarRelationFilter, ResumeWhereInput>
   }, "id">
 
@@ -15039,6 +15056,7 @@ export namespace Prisma {
     degree?: SortOrderInput | SortOrder
     graduationDate?: SortOrderInput | SortOrder
     city?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
     _count?: EducationCountOrderByAggregateInput
     _max?: EducationMaxOrderByAggregateInput
     _min?: EducationMinOrderByAggregateInput
@@ -15054,6 +15072,7 @@ export namespace Prisma {
     degree?: StringNullableWithAggregatesFilter<"Education"> | string | null
     graduationDate?: StringNullableWithAggregatesFilter<"Education"> | string | null
     city?: StringNullableWithAggregatesFilter<"Education"> | string | null
+    description?: StringNullableWithAggregatesFilter<"Education"> | string | null
   }
 
   export type SkillWhereInput = {
@@ -15871,6 +15890,7 @@ export namespace Prisma {
     degree?: string | null
     graduationDate?: string | null
     city?: string | null
+    description?: string | null
     resume: ResumeCreateNestedOneWithoutEducationsInput
   }
 
@@ -15881,6 +15901,7 @@ export namespace Prisma {
     degree?: string | null
     graduationDate?: string | null
     city?: string | null
+    description?: string | null
   }
 
   export type EducationUpdateInput = {
@@ -15889,6 +15910,7 @@ export namespace Prisma {
     degree?: NullableStringFieldUpdateOperationsInput | string | null
     graduationDate?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     resume?: ResumeUpdateOneRequiredWithoutEducationsNestedInput
   }
 
@@ -15899,6 +15921,7 @@ export namespace Prisma {
     degree?: NullableStringFieldUpdateOperationsInput | string | null
     graduationDate?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EducationCreateManyInput = {
@@ -15908,6 +15931,7 @@ export namespace Prisma {
     degree?: string | null
     graduationDate?: string | null
     city?: string | null
+    description?: string | null
   }
 
   export type EducationUpdateManyMutationInput = {
@@ -15916,6 +15940,7 @@ export namespace Prisma {
     degree?: NullableStringFieldUpdateOperationsInput | string | null
     graduationDate?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EducationUncheckedUpdateManyInput = {
@@ -15925,6 +15950,7 @@ export namespace Prisma {
     degree?: NullableStringFieldUpdateOperationsInput | string | null
     graduationDate?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SkillCreateInput = {
@@ -16640,6 +16666,7 @@ export namespace Prisma {
     degree?: SortOrder
     graduationDate?: SortOrder
     city?: SortOrder
+    description?: SortOrder
   }
 
   export type EducationMaxOrderByAggregateInput = {
@@ -16649,6 +16676,7 @@ export namespace Prisma {
     degree?: SortOrder
     graduationDate?: SortOrder
     city?: SortOrder
+    description?: SortOrder
   }
 
   export type EducationMinOrderByAggregateInput = {
@@ -16658,6 +16686,7 @@ export namespace Prisma {
     degree?: SortOrder
     graduationDate?: SortOrder
     city?: SortOrder
+    description?: SortOrder
   }
 
   export type SkillCountOrderByAggregateInput = {
@@ -17991,6 +18020,7 @@ export namespace Prisma {
     degree?: string | null
     graduationDate?: string | null
     city?: string | null
+    description?: string | null
   }
 
   export type EducationUncheckedCreateWithoutResumeInput = {
@@ -17999,6 +18029,7 @@ export namespace Prisma {
     degree?: string | null
     graduationDate?: string | null
     city?: string | null
+    description?: string | null
   }
 
   export type EducationCreateOrConnectWithoutResumeInput = {
@@ -18196,6 +18227,7 @@ export namespace Prisma {
     degree?: StringNullableFilter<"Education"> | string | null
     graduationDate?: StringNullableFilter<"Education"> | string | null
     city?: StringNullableFilter<"Education"> | string | null
+    description?: StringNullableFilter<"Education"> | string | null
   }
 
   export type SkillUpsertWithWhereUniqueWithoutResumeInput = {
@@ -19238,6 +19270,7 @@ export namespace Prisma {
     degree?: string | null
     graduationDate?: string | null
     city?: string | null
+    description?: string | null
   }
 
   export type SkillCreateManyResumeInput = {
@@ -19298,6 +19331,7 @@ export namespace Prisma {
     degree?: NullableStringFieldUpdateOperationsInput | string | null
     graduationDate?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EducationUncheckedUpdateWithoutResumeInput = {
@@ -19306,6 +19340,7 @@ export namespace Prisma {
     degree?: NullableStringFieldUpdateOperationsInput | string | null
     graduationDate?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EducationUncheckedUpdateManyWithoutResumeInput = {
@@ -19314,6 +19349,7 @@ export namespace Prisma {
     degree?: NullableStringFieldUpdateOperationsInput | string | null
     graduationDate?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SkillUpdateWithoutResumeInput = {

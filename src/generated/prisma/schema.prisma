@@ -13,6 +13,7 @@ datasource db {
   provider = "postgresql"
 }
 
+// Auth Schema
 model Guest {
   id           String   @id @default(uuid()) @db.Uuid
   sessionToken String   @unique
@@ -82,6 +83,7 @@ model Verification {
   @@map("verification")
 }
 
+// Resume Schema
 model Resume {
   id        String   @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now())
@@ -125,7 +127,7 @@ model Resume {
 model Experience {
   id       String @id @default(uuid()) @db.Uuid
   resumeId String @db.Uuid
-  resume   Resume @relation(fields: [resumeId], references: [id])
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 
   jobTitle    String?
   company     String?
@@ -139,18 +141,19 @@ model Experience {
 model Education {
   id       String @id @default(uuid()) @db.Uuid
   resumeId String @db.Uuid
-  resume   Resume @relation(fields: [resumeId], references: [id])
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 
   school         String?
   degree         String?
   graduationDate String?
   city           String?
+  description    String?
 }
 
 model Skill {
   id       String @id @default(uuid()) @db.Uuid
   resumeId String @db.Uuid
-  resume   Resume @relation(fields: [resumeId], references: [id])
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 
   skillName   String?
   level       String?
@@ -160,7 +163,7 @@ model Skill {
 model Language {
   id       String @id @default(uuid()) @db.Uuid
   resumeId String @db.Uuid
-  resume   Resume @relation(fields: [resumeId], references: [id])
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 
   name  String?
   level String?
@@ -169,7 +172,7 @@ model Language {
 model SocialLink {
   id       String @id @default(uuid()) @db.Uuid
   resumeId String @db.Uuid
-  resume   Resume @relation(fields: [resumeId], references: [id])
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 
   label String?
   url   String?

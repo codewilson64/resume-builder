@@ -1,11 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Mail, Lock, User } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { signUp } from "@/lib/actions/auth-action";
 import { useResume } from "@/app/context/ResumeContext";
+import { hasResumeData } from "@/utils/hasResumeData";
 
 export default function Signup() {
   const [name, setName] = useState('')
@@ -26,8 +27,12 @@ export default function Signup() {
     try {
       const response = await signUp(name, email, password)
 
-      if(response.user) {
-        router.push('/dashboard')
+      if (response.user) {
+        if (hasResumeData(resumeData)) {
+          router.push("/resume/preview");
+        } else {
+          router.push("/dashboard");
+        }
       }
     } catch (error) {
       console.log("Error", error)

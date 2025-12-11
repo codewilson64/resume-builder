@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import SkillsForm from "../../../components/Resume/SkillsForm";
+import SkillsForm from "../../../components/resume/SkillsForm";
 
 export default function SkillsPage() {
   const router = useRouter();

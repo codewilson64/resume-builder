@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/Home/Navbar";
+import Navbar from "../components/home/Navbar";
 import { getCurrentUser } from "@/lib/actions/auth-action";
 
 export default async function RootLayout({ 

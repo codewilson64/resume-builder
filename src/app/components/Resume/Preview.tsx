@@ -8,11 +8,13 @@ import { useReactToPrint } from "react-to-print";
 import ChicagoTemplate from "@/app/components/templates/ChicagoTemplate";
 import BudapestTemplate from "../templates/BudapestTemplate";
 
+import { createResume, updateResume } from "@/lib/actions/resume-action";
+
 export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
-  const { resumeData } = useResume();
+  const { resumeData, setResumeId } = useResume();
   const router = useRouter();
   const printRef = useRef(null);
-
+  
   const { template } = resumeData;
 
   const handlePrintBase = useReactToPrint({
@@ -20,11 +22,21 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
     documentTitle: `${resumeData?.firstName || "resume"}`,
   });
 
-  const handlePrint = () => {
+  const handlePrint = async () => {
     if (!isLoggedIn) {
       router.push("/signup");
       return;
     }
+
+    if (resumeData.resumeId) {
+    // Already saved once → update
+    await updateResume(resumeData.resumeId, resumeData);
+  } else {
+    // First time → create
+    const saved = await createResume(resumeData);
+    setResumeId(saved.id);
+  }
+
     handlePrintBase();
   };
 

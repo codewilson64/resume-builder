@@ -215,7 +215,8 @@ exports.Prisma.EducationScalarFieldEnum = {
   school: 'school',
   degree: 'degree',
   graduationDate: 'graduationDate',
-  city: 'city'
+  city: 'city',
+  description: 'description'
 };
 
 exports.Prisma.SkillScalarFieldEnum = {

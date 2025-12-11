@@ -1,60 +1,74 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, Dispatch, SetStateAction, ReactNode, } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+  ReactNode,
+} from "react";
 import { ResumeData } from "../types/resume";
 
 interface ResumeContextType {
   resumeData: ResumeData;
-  setResumeData: Dispatch<SetStateAction<ResumeData | null>>;
+  setResumeData: Dispatch<SetStateAction<ResumeData>>;
+  setResumeId: (id: string | null) => void;
 }
 
 const ResumeContext = createContext<ResumeContextType | null>(null);
 
 export const ResumeProvider = ({ children }: { children: ReactNode }) => {
-  const [resumeData, setResumeData] = useState<ResumeData | null>(null); 
+  const [resumeData, setResumeData] = useState<ResumeData>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+    city: "",
+    postalCode: "",
+    phone: "",
+    jobTitle: "",
+    experience: [],
+    education: [],
+    skills: [],
+    languages: [],
+    socialLinks: [],
+    about: "",
+    hobbies: "",
+    template: "Budapest",
+    accentColor: "#2D2D2D",
+    fontFamily: "Poppins",
+    resumeId: null
+  });
 
-  // Load from localStorage ONLY on client
+  // Load from localStorage on first client render
   useEffect(() => {
     const stored = localStorage.getItem("resumeData");
-    setResumeData(
-      stored
-        ? JSON.parse(stored)
-        : {
-            firstName: "",
-            lastName: "",
-            email: "",
-            address: "",
-            city: "",
-            postalCode: "",
-            phone: "",
-            jobTitle: "",
-            experience: [],
-            education: [],
-            skills: [],
-            languages: [],
-            socialLinks: [],
-            about: "",
-            hobbies: "",
-            template: "Budapest",
-            accentColor: "#2D2D2D", // Dark Gray
-            fontFamily: "Poppins",
-            personalDetails: []
-          }
-    );
+    if (stored) {
+      try {
+        setResumeData(JSON.parse(stored));
+      } catch (err) {
+        console.error("Failed to parse stored resume:", err);
+      }
+    }
   }, []);
 
-  // Save to localStorage when state changes (only after loaded)
+  // Save changes to localStorage
   useEffect(() => {
-    if (resumeData !== null) {
-      localStorage.setItem("resumeData", JSON.stringify(resumeData));
-    }
+    localStorage.setItem("resumeData", JSON.stringify(resumeData));
   }, [resumeData]);
 
-
-  if (resumeData === null) return null; // prevent SSR mismatch while loading
+  // Setter for resumeId so we prevent duplicates
+  const setResumeId = (id: string | null) => {
+    setResumeData((prev) => ({
+      ...prev,
+      resumeId: id,
+    }));
+  };
 
   return (
-    <ResumeContext.Provider value={{ resumeData, setResumeData }}>
+    <ResumeContext.Provider value={{ resumeData, setResumeData, setResumeId }}>
       {children}
     </ResumeContext.Provider>
   );

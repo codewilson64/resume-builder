@@ -1,4 +1,4 @@
-import PreviewPage from "@/app/components/Resume/Preview";
+import PreviewPage from "@/app/components/resume/Preview";
 import { getCurrentUser } from "@/lib/actions/auth-action";
 
 export default async function Preview() {
