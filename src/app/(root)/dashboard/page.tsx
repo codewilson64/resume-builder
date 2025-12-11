@@ -1,3 +1,4 @@
+import ResumeList from "@/app/components/dashboard/ResumeList";
 import { getCurrentUser } from "@/lib/actions/auth-action";
 
 export default async function DashboardPage() {
@@ -12,9 +13,18 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">Welcome, {session.name}</h1>
-      <p>Your Dashboard Content</p>
+    <div className="min-h-screen flex justify-center py-12 bg-gray-50">
+      <div className="w-full max-w-3xl py-12 px-5 space-y-6">
+
+        {/* Header */}
+        <h1 className="text-2xl font-bold text-gray-900">
+          Welcome, {session?.name}
+        </h1>
+
+        {/* Resume Card */}
+        <ResumeList />
+
+      </div>
     </div>
   );
 }

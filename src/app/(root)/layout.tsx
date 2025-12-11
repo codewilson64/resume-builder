@@ -1,7 +1,5 @@
-
 import React from "react";
 import Navbar from "../components/Home/Navbar";
-import { ResumeProvider } from "../context/ResumeContext";
 import { getCurrentUser } from "@/lib/actions/auth-action";
 
 export default async function RootLayout({ 
@@ -12,10 +10,10 @@ export default async function RootLayout({
   const user = await getCurrentUser()
 
   return (
-    <ResumeProvider>
+    <div>
       <Navbar user={user}/>
       {children}
-    </ResumeProvider>
+    </div>
   );
 };
 

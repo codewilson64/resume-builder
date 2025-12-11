@@ -1,15 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Mail, Lock } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { signIn } from "@/lib/actions/auth-action";
+import { useResume } from "@/app/context/ResumeContext";
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter()
+  const { resumeData } = useResume()
+
+  useEffect(() => {
+    if (resumeData?.email) setEmail(resumeData.email);
+  }, [resumeData?.email])
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()

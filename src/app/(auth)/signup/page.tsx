@@ -1,17 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Mail, Lock, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { signUp } from "@/lib/actions/auth-action";
+import { useResume } from "@/app/context/ResumeContext";
 
 export default function Signup() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter()
+  const { resumeData } = useResume()
 
+  useEffect(() => {
+    const combined = `${resumeData?.firstName || ""} ${resumeData?.lastName || ""}`.trim();
+    if (combined) setName(combined);
+    if (resumeData?.email) setEmail(resumeData.email);  
+  }, [resumeData?.firstName, resumeData?.lastName, resumeData?.email]);
+
+  // handle sign up
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
