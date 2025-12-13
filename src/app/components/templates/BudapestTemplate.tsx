@@ -61,7 +61,7 @@ export default function BudapestTemplate({ data, onBack, onPrint }: BudapestTemp
       {/* ✅ RESUME */}
       <div
         className="bg-white shadow-xl grid grid-cols-[220px_1fr]"
-        style={{ width: "794px", minHeight: "1300px" }}
+        style={{ width: "794px", minHeight: "1123px" }}
       >
         {/* ================= LEFT SIDEBAR ================= */}
         <aside 

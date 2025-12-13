@@ -9,6 +9,7 @@ import ChicagoTemplate from "@/app/components/templates/ChicagoTemplate";
 import BudapestTemplate from "../templates/BudapestTemplate";
 
 import { createResume, updateResume } from "@/lib/actions/resume-action";
+import useDimensions from "@/app/hooks/useDimensions";
 
 export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   const { resumeData, setResumeId } = useResume();
@@ -17,11 +18,15 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   
   const { template } = resumeData;
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { width } = useDimensions(containerRef);
+
   const handlePrintBase = useReactToPrint({
     contentRef: printRef,
     documentTitle: `${resumeData?.firstName || "resume"}`,
   });
 
+  // handle print
   const handlePrint = async () => {
     if (!isLoggedIn) {
       router.push("/signup");
@@ -56,10 +61,23 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
       {/* HEADER */}
       
 
-      {/* ✅ PRINTABLE AREA – ref MUST be set here */}
-      <div ref={printRef} className="resume-scale relative">
-        {renderTemplate()}
+      <div
+        ref={containerRef}
+        className="w-full max-w-[900px] mx-auto aspect-[210/297] bg-gray-100 flex justify-center"
+      >
+        <div
+          className="resume-print bg-white"
+          style={{
+            width: "794px",
+            zoom: width ? width / 794 : 1,
+          }}
+        >
+          <div ref={printRef} className="resume-print">
+            {renderTemplate()}
+          </div>
+        </div>
       </div>
+
     </div>
   );
 }

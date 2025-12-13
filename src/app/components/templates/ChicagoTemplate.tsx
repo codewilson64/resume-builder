@@ -65,7 +65,7 @@ export default function ChicagoTemplate({ data, onBack, onPrint }: ChicagoTempla
       {/* PAGE */}
       <div
         className="bg-white shadow-md"
-        style={{ width: "794px", minHeight: "1300px" }}
+        style={{ width: "794px", minHeight: "1123px" }}
       >
 
         {/* HEADER */}
