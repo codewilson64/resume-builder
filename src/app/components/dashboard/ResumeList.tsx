@@ -1,22 +1,17 @@
-'use client'
+'use client';
 
-import { FilePlus } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import CreateResumeCard from "@/app/components/dashboard/CreateResumeCard";
+import ResumeCard from "@/app/components/dashboard/ResumeCard";
+import type { ResumeData } from "@/app/types/resume";
 
-const ResumeList = () => {
-  const router = useRouter()
-
+export default function ResumeList({ resumes }: { resumes: ResumeData[] }) {
   return (
-    <div 
-      className="border rounded-sm bg-white p-8 w-56 h-80 flex flex-col items-center justify-center shadow-lg hover:shadow-xl transition duration-200 cursor-pointer"
-      onClick={() => router.push('/resume/contact')}
-    >
-      <FilePlus size={40} className="text-blue-600 mb-4" />
-      <h2 className="text-lg font-semibold text-gray-300 text-center">
-        Create new
-      </h2>
-    </div>
-  )
-}
+    <div className="flex flex-wrap gap-8">
+      {resumes.map((resume) => (
+        <ResumeCard key={resume.resumeId} resume={resume} />
+      ))}
 
-export default ResumeList
+      <CreateResumeCard />
+    </div>
+  );
+}

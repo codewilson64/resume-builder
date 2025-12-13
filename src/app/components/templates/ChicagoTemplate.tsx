@@ -1,13 +1,12 @@
 "use client";
 
-import { ArrowLeft, Download, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { fontMap } from "@/app/config/fontConfig";
 import type { ResumeData } from "@/app/types/resume";
 
 interface ChicagoTemplateProps {
   data: ResumeData;
-  onBack: () => void;
-  onPrint: () => void;
+  variant?: "preview" | "thumbnail";
 }
 
 function formatDate(dateStr: string | undefined): string {
@@ -34,8 +33,9 @@ const languageWidths: Record<string, string> = {
   Native: "100%",
 };
 
-export default function ChicagoTemplate({ data, onBack, onPrint }: ChicagoTemplateProps) {
+export default function ChicagoTemplate({ data, variant }: ChicagoTemplateProps) {
   const fullName = `${data?.firstName || ""} ${data?.lastName || ""}`.trim();
+  const isThumbnail = variant === "thumbnail";
 
   const initials = [
     data?.firstName?.charAt(0) || "",
@@ -48,7 +48,11 @@ export default function ChicagoTemplate({ data, onBack, onPrint }: ChicagoTempla
       {/* PAGE */}
       <div
         className="bg-white shadow-md"
-        style={{ width: "794px", minHeight: "1123px" }}
+        style={{
+          width: isThumbnail ? 280 : 794,
+          transform: isThumbnail ? "scale(0.32)" : undefined,
+          transformOrigin: "top left",
+        }}
       >
 
         {/* HEADER */}

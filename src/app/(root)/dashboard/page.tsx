@@ -22,7 +22,7 @@ export default async function DashboardPage() {
         </h1>
 
         {/* Resume Card */}
-        <ResumeList />
+        <ResumeList resumes={resumes}/>
 
       </div>
     </div>

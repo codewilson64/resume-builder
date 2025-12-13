@@ -1,13 +1,12 @@
 "use client";
 import { fontMap } from "@/app/config/fontConfig";
 import { useResume } from "@/app/context/ResumeContext";
-import { Mail, Phone, MapPin, ArrowLeft, Download } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import type { ResumeData } from "@/app/types/resume";
 
 interface BudapestTemplateProps {
   data: ResumeData;
-  onBack: () => void;
-  onPrint: () => void;
+  variant?: "preview" | "thumbnail";
 }
 
 function formatDate(dateStr: string | undefined): string {
@@ -34,8 +33,10 @@ const languageWidths: Record<string, string> = {
   Native: "100%",
 };
 
-export default function BudapestTemplate({ data, onBack, onPrint }: BudapestTemplateProps) {
+
+export default function BudapestTemplate({ data, variant }: BudapestTemplateProps) {
   const { resumeData } = useResume();
+  const isThumbnail = variant === "thumbnail";
 
   return (
     <div className={`${fontMap[resumeData.fontFamily] || fontMap["Poppins"]} relative`}>
@@ -43,7 +44,11 @@ export default function BudapestTemplate({ data, onBack, onPrint }: BudapestTemp
       {/* ✅ RESUME */}
       <div
         className="bg-white shadow-xl grid grid-cols-[220px_1fr]"
-        style={{ width: "794px", minHeight: "1123px" }}
+        style={{
+          width: isThumbnail ? 280 : 794,
+          transform: isThumbnail ? "scale(0.32)" : undefined,
+          transformOrigin: "top left",
+        }}
       >
         {/* ================= LEFT SIDEBAR ================= */}
         <aside 
