@@ -45,23 +45,6 @@ export default function ChicagoTemplate({ data, onBack, onPrint }: ChicagoTempla
   return (
     <div className={`${fontMap[data.fontFamily] || fontMap["Poppins"]} relative`}>
 
-      {/* FLOATING BUTTONS */}
-      <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 flex gap-4 no-print z-50">
-        <button
-          onClick={onBack}
-          className="flex items-center gap-2 px-5 py-2 bg-gray-200 rounded-md hover:bg-gray-300 text-gray-800"
-        >
-          <ArrowLeft size={18} /> Back
-        </button>
-
-        <button
-          onClick={onPrint}
-          className="flex items-center gap-2 px-5 py-2 bg-gray-900 rounded-md hover:bg-gray-800 text-white"
-        >
-          <Download size={18} /> Save PDF
-        </button>
-      </div>
-
       {/* PAGE */}
       <div
         className="bg-white shadow-md"

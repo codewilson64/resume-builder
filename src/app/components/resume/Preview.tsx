@@ -10,6 +10,7 @@ import BudapestTemplate from "../templates/BudapestTemplate";
 
 import { createResume, updateResume } from "@/lib/actions/resume-action";
 import useDimensions from "@/app/hooks/useDimensions";
+import PreviewTopBar from "./PreviewTopBar";
 
 export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   const { resumeData, setResumeId } = useResume();
@@ -57,10 +58,15 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      {/* HEADER */}
-      
-
+    <div className="bg-gray-50 min-h-screen py-12 px-5">
+      <PreviewTopBar
+        onSettings={() => {
+          console.log("Open settings");
+        }}
+        onDownload={handlePrint}
+        onCancel={() => router.back()}
+      />
+      <div className="h-12" />
       <div
         ref={containerRef}
         className="w-full max-w-[900px] mx-auto aspect-[210/297] bg-gray-100 flex justify-center"

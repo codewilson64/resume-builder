@@ -39,24 +39,6 @@ export default function BudapestTemplate({ data, onBack, onPrint }: BudapestTemp
 
   return (
     <div className={`${fontMap[resumeData.fontFamily] || fontMap["Poppins"]} relative`}>
-      {/* ✅ FLOATING BUTTONS */}
-      <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-4 no-print z-50">
-        <button
-          onClick={onBack}
-          className="flex items-center gap-2 px-5 py-2 rounded-md bg-gray-200 text-gray-800 hover:bg-gray-300 transition"
-        >
-          <ArrowLeft size={18} />
-          Back
-        </button>
-
-        <button
-          onClick={onPrint}
-          className="flex items-center gap-2 px-5 py-2 rounded-md bg-gray-900 text-white hover:bg-gray-800 transition"
-        >
-          <Download size={18} />
-          Save PDF
-        </button>
-      </div>
 
       {/* ✅ RESUME */}
       <div
