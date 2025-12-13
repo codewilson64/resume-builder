@@ -12,6 +12,7 @@ import EducationForm from "@/app/components/resume/EducationForm";
 import SkillsForm from "@/app/components/resume/SkillsForm";
 import FontSelector from "@/app/components/resume/FontSelector";
 import AccentSelector from "@/app/components/resume/AccentSelector";
+
 import PersonalDetailsForm from "@/app/components/resume/PersonalDetailsForm";
 import HobbiesForm from "@/app/components/resume/HobbiesForm";
 import LanguagesForm from "@/app/components/resume/LanguagesForm";
