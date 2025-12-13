@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
-import ExperienceForm from "../../../components/resume/ExperienceForm";
 import { ArrowLeft } from "lucide-react";
+import ExperienceForm from "@/app/components/resume/ExperienceForm";
 
 export default function ExperiencePage() {
   const router = useRouter();

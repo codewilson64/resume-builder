@@ -5,7 +5,7 @@ import { useResume } from "../../context/ResumeContext";
 import { ChevronDown } from "lucide-react";
 import { TemplateName, templates } from "@/app/config/templateConfig";
 
-export default function TemplateDropdown() {
+export default function TemplateSelector() {
   const { resumeData, setResumeData } = useResume();
   const [open, setOpen] = useState<boolean>(false);
   const rootRef = useRef<HTMLDivElement | null>(null);

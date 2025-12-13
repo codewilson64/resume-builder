@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import AboutForm from "../../../components/resume/AboutForm";
+import AboutForm from "@/app/components/resume/AboutForm";
 
 export default function AboutPage() {
   const router = useRouter();

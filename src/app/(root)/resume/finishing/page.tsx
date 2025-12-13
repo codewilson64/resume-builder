@@ -1,20 +1,22 @@
 "use client";
 
-import { useResume } from "../../../context/ResumeContext";
+
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import ContactForm from "../../../components/resume/ContactForm";
-import SkillsForm from "../../../components/resume/SkillsForm";
-import ExperienceForm from "../../../components/resume/ExperienceForm";
-import EducationForm from "../../../components/resume/EducationForm";
-import AboutForm from "../../../components/resume/AboutForm";
-import TemplateSelector from "@/app/components/resume/TemplateSelector";
+import { useResume } from "@/app/context/ResumeContext";
+
+import ContactForm from "@/app/components/resume/ContactForm";
+import AboutForm from "@/app/components/resume/AboutForm";
+import ExperienceForm from "@/app/components/resume/ExperienceForm";
+import EducationForm from "@/app/components/resume/EducationForm";
+import SkillsForm from "@/app/components/resume/SkillsForm";
+import FontSelector from "@/app/components/resume/FontSelector";
+import AccentSelector from "@/app/components/resume/AccentSelector";
 import PersonalDetailsForm from "@/app/components/resume/PersonalDetailsForm";
 import HobbiesForm from "@/app/components/resume/HobbiesForm";
 import LanguagesForm from "@/app/components/resume/LanguagesForm";
 import SocialLinksForm from "@/app/components/resume/SocialLinksForm";
-import AccentSelector from "@/app/components/resume/AccentSelector";
-import FontSelector from "@/app/components/resume/FontSelector";
+import TemplateSelector from "@/app/components/resume/TemplateSelector";
 
 export default function FinalPage() {
   const { resumeData, setResumeData } = useResume();
