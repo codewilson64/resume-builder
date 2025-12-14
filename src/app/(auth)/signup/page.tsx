@@ -31,7 +31,7 @@ export default function Signup() {
         if (hasResumeData(resumeData)) {
           router.push("/resume/preview");
         } else {
-          router.push("/dashboard");
+          router.push("/profile");
         }
       }
     } catch (error) {

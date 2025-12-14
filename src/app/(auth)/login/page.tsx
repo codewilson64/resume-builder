@@ -22,7 +22,7 @@ export default function Login() {
       try {
         const response = await signIn(email, password)
         if(response.user) {
-          router.push('/dashboard')
+          router.push('/profile')
         }
       } catch (error) {
         console.log("Error", error)

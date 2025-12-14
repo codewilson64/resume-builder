@@ -1,24 +1,20 @@
 import ResumeList from "@/app/components/dashboard/ResumeList";
 import { getCurrentUser } from "@/lib/actions/auth-action";
 import { getUserResumes } from "@/lib/actions/resume-action";
+import { redirect } from "next/navigation";
 
-export default async function DashboardPage() {
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
+export default async function ProfilePage() {
   const session = await getCurrentUser();
+  if (!session) redirect('/login')
+
   const resumes = await getUserResumes()
-
-  console.log(resumes)
-
-  if (!session) {
-    return (
-      <div>
-        <meta httpEquiv="refresh" content="0; url=/login" />
-      </div>
-    );
-  }
-
+  
   return (
-    <div className="min-h-screen flex justify-center py-12 bg-gray-50">
-      <div className="w-full max-w-3xl py-12 px-5 space-y-6">
+    <div className="min-h-screen flex justify-center py-12">
+      <div className="w-full py-12 px-5 space-y-6">
 
         {/* Header */}
         <h1 className="text-2xl font-bold text-gray-900">
