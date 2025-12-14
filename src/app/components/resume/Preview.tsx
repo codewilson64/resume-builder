@@ -52,8 +52,8 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
           onDownload={handlePrint}
           onCancel={() => router.back()}
         />
-
         <div className="h-10" />
+      </div>
         
         <div
           ref={containerRef}
@@ -71,7 +71,6 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
             </div>
           </div>
         </div>
-      </div>
 
     </div>
   );
