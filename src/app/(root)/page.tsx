@@ -1,9 +1,15 @@
+import { getCurrentUser } from "@/lib/actions/auth-action";
 import AdvantagesHero from "../components/home/AdvantagesHero";
 import CTA from "../components/home/CTAHero";
 import Hero from "../components/home/Hero";
 import MarketingHero from "../components/home/MarketingHero";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  const user = await getCurrentUser()
+
+  if(user) redirect('/profile')
+
   return (
     <main>
       <Hero />
