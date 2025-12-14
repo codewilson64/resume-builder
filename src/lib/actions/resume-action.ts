@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/actions/auth-action";
 import { ResumeData } from "@/app/types/resume";
+import { mapPrismaResumeToResumeData } from "../mappers/resumeMapper";
 
 export async function createResume(data: ResumeData) {
   const user = await getCurrentUser();
@@ -171,3 +172,20 @@ export async function updateResume(resumeId: string, data: ResumeData) {
   return resume;
 }
 
+export async function getUserResumes(): Promise<ResumeData[]> {
+  const user = await getCurrentUser()
+  if (!user?.id) throw new Error("User not authenticated")
+
+  const resumes = await prisma.resume.findMany({
+    where: { userId: user.id },
+    orderBy: { updatedAt: "desc" },
+    include: {
+      experiences: true,
+      educations: true,
+      skills: true,
+      languages: true,
+      socialLinks: true,
+    },
+  });
+  return resumes.map(mapPrismaResumeToResumeData)
+}

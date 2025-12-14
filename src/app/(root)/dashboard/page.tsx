@@ -1,8 +1,12 @@
 import ResumeList from "@/app/components/dashboard/ResumeList";
 import { getCurrentUser } from "@/lib/actions/auth-action";
+import { getUserResumes } from "@/lib/actions/resume-action";
 
 export default async function DashboardPage() {
   const session = await getCurrentUser();
+  const resumes = await getUserResumes()
+
+  console.log(resumes)
 
   if (!session) {
     return (

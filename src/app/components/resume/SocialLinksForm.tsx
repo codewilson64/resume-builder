@@ -8,7 +8,7 @@ export default function SocialLinksForm() {
   const socialLinks: SocialLinkItem[] = resumeData.socialLinks || [];
 
   const updateField = (
-    id: number,
+    id: string,
     field: keyof SocialLinkItem,
     value: string | boolean | number
   ) => {
@@ -20,7 +20,7 @@ export default function SocialLinksForm() {
     }));
   };
 
-  const toggleCollapse = (id: number) => {
+  const toggleCollapse = (id: string) => {
     setResumeData((prev) => ({
       ...prev!,
       socialLinks: prev!.socialLinks.map((link) =>
@@ -29,7 +29,7 @@ export default function SocialLinksForm() {
     }));
   };
 
-  const deleteLink = (id: number) => {
+  const deleteLink = (id: string) => {
     setResumeData((prev) => ({
       ...prev!,
       socialLinks: prev!.socialLinks.filter((link) => link.id !== id),
@@ -42,7 +42,7 @@ export default function SocialLinksForm() {
       socialLinks: [
         ...socialLinks,
         {
-          id: Date.now(),
+          id: crypto.randomUUID(),
           collapsed: false,
           label: "",
           url: "",

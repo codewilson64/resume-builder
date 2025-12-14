@@ -11,7 +11,7 @@ export default function SkillsForm() {
   const skills: SkillItem[] = resumeData.skills || [];
 
   const updateField = (
-    id: number,
+    id: string,
     field: keyof SkillItem,
     value: string | number | boolean
   ) => {
@@ -23,7 +23,7 @@ export default function SkillsForm() {
     }));
   };
 
-  const toggleCollapse = (id: number) => {
+  const toggleCollapse = (id: string) => {
     setResumeData((prev) => ({
       ...prev!,
       skills: prev!.skills.map((skill) =>
@@ -32,7 +32,7 @@ export default function SkillsForm() {
     }));
   };
 
-  const deleteSkill = (id: number) => {
+  const deleteSkill = (id: string) => {
     setResumeData((prev) => ({
       ...prev!,
       skills: prev!.skills.filter((skill) => skill.id !== id),
@@ -45,7 +45,7 @@ export default function SkillsForm() {
       skills: [
         ...skills,
         {
-          id: Date.now(),
+          id: crypto.randomUUID(),
           collapsed: false,
           skillName: "",
           level: "",
@@ -80,12 +80,12 @@ export default function SkillsForm() {
 interface SkillCardProps {
     skill: SkillItem;
     updateField: (
-      id: number,
+      id: string,
       field: keyof SkillItem,
       value: string | number | boolean
     ) => void;
-    toggleCollapse: (id: number) => void;
-    deleteSkill: (id: number) => void;
+    toggleCollapse: (id: string) => void;
+    deleteSkill: (id: string) => void;
   }
 
 function SkillCard({ skill, updateField, toggleCollapse, deleteSkill }: SkillCardProps) {

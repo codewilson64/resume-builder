@@ -1,8 +1,9 @@
+import { Prisma } from "@/generated/prisma";
 import { FontName } from "../config/fontConfig";
 import { TemplateName } from "../config/templateConfig";
 
 export interface ExperienceItem {
-  id: number;
+  id: string;
   collapsed: boolean;
   company?: string;
   jobTitle?: string;
@@ -14,7 +15,7 @@ export interface ExperienceItem {
 }
 
 export interface EducationItem {
-  id: number;
+  id: string;
   collapsed: boolean;
   school?: string;
   degree?: string;
@@ -24,21 +25,21 @@ export interface EducationItem {
 }
 
 export interface SkillItem {
-  id: number;
+  id: string;
   collapsed: boolean;
   skillName?: string;
   level: string; 
 }
 
 export interface SocialLinkItem {
-  id: number;
+  id: string;
   collapsed: boolean;
   label?: string;
   url?: string;
 }
 
 export interface LanguageItem {
-  id: number;
+  id: string;
   collapsed: boolean;
   name?: string;
   level: string; 
@@ -72,5 +73,15 @@ export interface ResumeData {
   dateOfBirth?: string;
   maritalStatus?: string;
 }
+
+export type ResumeWithRelations = Prisma.ResumeGetPayload<{
+  include: {
+    experiences: true;
+    educations: true;
+    skills: true;
+    languages: true;
+    socialLinks: true;
+  };
+}>;
 
 

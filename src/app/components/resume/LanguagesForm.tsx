@@ -11,7 +11,7 @@ export default function LanguagesForm() {
   const languages: LanguageItem[] = resumeData.languages || [];
 
   const updateField = (
-    id: number,
+    id: string,
     field: keyof LanguageItem,
     value: string | boolean | number
   ) => {
@@ -23,7 +23,7 @@ export default function LanguagesForm() {
     }));
   };
 
-  const toggleCollapse = (id: number) => {
+  const toggleCollapse = (id: string) => {
     setResumeData((prev) => ({
       ...prev!,
       languages: prev!.languages.map((lang) =>
@@ -32,7 +32,7 @@ export default function LanguagesForm() {
     }));
   };
 
-  const deleteLanguage = (id: number) => {
+  const deleteLanguage = (id: string) => {
     setResumeData((prev) => ({
       ...prev!,
       languages: prev!.languages.filter((lang) => lang.id !== id),
@@ -45,7 +45,7 @@ export default function LanguagesForm() {
       languages: [
         ...(prev?.languages || []),
         {
-          id: Date.now(),
+          id: crypto.randomUUID(),
           collapsed: false,
           name: "",
           level: "",
@@ -83,9 +83,9 @@ export default function LanguagesForm() {
 
 interface LanguageCardProps {
   language: LanguageItem;
-  updateField: (id: number, field: keyof LanguageItem, value: any) => void;
-  toggleCollapse: (id: number) => void;
-  deleteLanguage: (id: number) => void;
+  updateField: (id: string, field: keyof LanguageItem, value: string | number | boolean) => void;
+  toggleCollapse: (id: string) => void;
+  deleteLanguage: (id: string) => void;
 }
 
 function LanguageCard({

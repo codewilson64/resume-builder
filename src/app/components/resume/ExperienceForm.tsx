@@ -8,7 +8,7 @@ export default function ExperienceForm() {
   const experiences: ExperienceItem[] = resumeData.experience || [];
 
   const updateField = (
-    id: number,
+    id: string,
     field: keyof ExperienceItem,
     value: string | boolean | number
   ) => {
@@ -20,7 +20,7 @@ export default function ExperienceForm() {
     }));
   };
 
-  const toggleCollapse = (id: number) => {
+  const toggleCollapse = (id: string) => {
     setResumeData({
       ...resumeData,
       experience: experiences.map((exp) =>
@@ -29,7 +29,7 @@ export default function ExperienceForm() {
     });
   };
 
-  const deleteExperience = (id: number) => {
+  const deleteExperience = (id: string) => {
     setResumeData({
       ...resumeData,
       experience: experiences.filter((exp) => exp.id !== id),
@@ -42,7 +42,7 @@ export default function ExperienceForm() {
       experience: [
         ...experiences,
         {
-          id: Date.now(),
+          id: crypto.randomUUID(),
           collapsed: false,
           jobTitle: "",
           company: "",

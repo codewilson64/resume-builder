@@ -9,7 +9,7 @@ export default function EducationForm() {
   const education: EducationItem[] = resumeData.education || [];
 
   const updateField = (
-    id: number,
+    id: string,
     field: keyof EducationItem,
     value: string | boolean | number
   ) => {
@@ -21,7 +21,7 @@ export default function EducationForm() {
     }));
   };
 
-  const toggleCollapse = (id: number) => {
+  const toggleCollapse = (id: string) => {
     setResumeData({
       ...resumeData,
       education: education.map((edu) =>
@@ -30,7 +30,7 @@ export default function EducationForm() {
     });
   };
 
-  const deleteEducation = (id: number) => {
+  const deleteEducation = (id: string) => {
     setResumeData({
       ...resumeData,
       education: education.filter((edu) => edu.id !== id),
@@ -43,7 +43,7 @@ export default function EducationForm() {
       education: [
         ...education,
         {
-          id: Date.now(),
+          id: crypto.randomUUID(),
           collapsed: false,
           school: "",
           degree: "",
