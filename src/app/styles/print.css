@@ -4,10 +4,14 @@
 }
 
 @media print {
+  /* ✅ Hide all UI */
+  .no-print {
+    display: none !important;
+  }
+
   .resume-print {
     zoom: 1 !important;
     transform: none !important;
-    display: none !important; /* Hide all UI */
   }
 
   /* ✅ Force background colors to appear */
