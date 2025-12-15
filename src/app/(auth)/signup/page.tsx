@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { signUp } from "@/lib/actions/auth-action";
 import { useResume } from "@/app/context/ResumeContext";
 import { hasResumeData } from "@/utils/hasResumeData";
+import { migrateGuestToUser } from "@/lib/actions/guest-action";
 
 export default function Signup() {
   const [name, setName] = useState('')
@@ -28,6 +29,8 @@ export default function Signup() {
       const response = await signUp(name, email, password)
 
       if (response.user) {
+        await migrateGuestToUser()
+        
         if (hasResumeData(resumeData)) {
           router.push("/resume/preview");
         } else {

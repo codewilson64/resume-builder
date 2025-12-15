@@ -1,6 +1,9 @@
+'use server'
+
 import { randomUUID } from "crypto";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
+import { getCurrentUser } from "./auth-action";
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
@@ -11,7 +14,7 @@ const COOKIE_OPTIONS = {
 };
 
 // Create guest session
-export const createGuestSession = async () => {
+export async function createGuestSession() {
   const cookieStore = await cookies();
   const token = cookieStore.get("guest_session")?.value;
   const now = new Date();
@@ -45,4 +48,34 @@ export const createGuestSession = async () => {
   cookieStore.set("guest_session", sessionToken, COOKIE_OPTIONS)
 
   return guest
+}
+
+export async function migrateGuestToUser() {
+  const user = await getCurrentUser();
+  if (!user?.id) return;
+
+  const cookieStore = await cookies();
+  const token = cookieStore.get("guest_session")?.value;
+  if (!token) return;
+
+  const guest = await prisma.guest.findUnique({
+    where: { sessionToken: token },
+  });
+  if (!guest) return;
+
+  // Move all guest resumes to the user
+  await prisma.resume.updateMany({
+    where: { guestId: guest.id },
+    data: {
+      userId: user.id,
+      guestId: null,
+    },
+  });
+
+  // Optional cleanup
+  await prisma.guest.delete({
+    where: { id: guest.id },
+  });
+
+  cookieStore.delete("guest_session");
 }

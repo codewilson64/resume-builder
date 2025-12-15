@@ -6,6 +6,7 @@ import { Mail, Lock } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { signIn } from "@/lib/actions/auth-action";
 import { useResume } from "@/app/context/ResumeContext";
+import { migrateGuestToUser } from "@/lib/actions/guest-action";
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -22,6 +23,7 @@ export default function Login() {
       try {
         const response = await signIn(email, password)
         if(response.user) {
+          await migrateGuestToUser()
           router.push('/profile')
         }
       } catch (error) {

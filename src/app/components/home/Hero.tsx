@@ -1,14 +1,17 @@
 'use client'
 
+import { useResume } from '@/app/context/ResumeContext';
 import { createResumeForGuest } from '@/lib/actions/resume-action';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from "next/navigation";
 
 const Hero = () => {
+  const { setResumeId } = useResume();
   const router = useRouter()
 
   const handleBuildResume = async () => {
     const resumeId = await createResumeForGuest();
+    setResumeId(resumeId)
     router.push(`/resume/contact?id=${resumeId}`);
   };
 

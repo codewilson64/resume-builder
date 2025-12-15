@@ -5,13 +5,13 @@ import { useResume } from "@/app/context/ResumeContext";
 import { useRouter } from "next/navigation";
 import { useReactToPrint } from "react-to-print";
 
-import { createResume, updateResume } from "@/lib/actions/resume-action";
+import { updateResume } from "@/lib/actions/resume-action";
 import useDimensions from "@/app/hooks/useDimensions";
 import PreviewTopBar from "./PreviewTopBar";
 import TemplateRenderer from "../TemplateRenderer";
 
 export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
-  const { resumeData, setResumeId } = useResume();
+  const { resumeData } = useResume();
   const router = useRouter();
   const printRef = useRef(null);
 
@@ -30,17 +30,13 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
       return;
     }
 
-    if (resumeData.resumeId) {
-    // Already saved once → update
+    if (!resumeData.resumeId) return;
+
     await updateResume(resumeData.resumeId, resumeData);
-  } else {
-    // First time → create
-    const saved = await createResume(resumeData);
-    setResumeId(saved.id);
-  }
 
     handlePrintBase();
   };
+
 
   return (
     <div className="bg-gray-200 min-h-screen py-12 px-5">
