@@ -21,6 +21,7 @@ const ResumeContext = createContext<ResumeContextType | null>(null);
 
 export const ResumeProvider = ({ children }: { children: ReactNode }) => {
   const [resumeData, setResumeData] = useState<ResumeData>({
+    title: "",
     firstName: "",
     lastName: "",
     email: "",

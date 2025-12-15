@@ -6,9 +6,9 @@ import { ResumeData } from "@/app/types/resume";
 import { mapPrismaResumeToResumeData } from "../mappers/resumeMapper";
 import { createGuestSession } from "./guest-action";
 
-let guestId: string | null = null;
-
 export async function createResumeForGuest() {
+  let guestId: string | null = null;
+  
   const guest = await createGuestSession();
   guestId = guest.id;
 
