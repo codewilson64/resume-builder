@@ -15,11 +15,13 @@ datasource db {
 
 // Auth Schema
 model Guest {
-  id           String   @id @default(uuid()) @db.Uuid
-  sessionToken String   @unique
-  createdAt    DateTime @default(now())
-  expiresAt    DateTime
-  resumes      Resume[]
+  id           String @id @default(uuid()) @db.Uuid
+  sessionToken String @unique
+
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  resumes Resume[]
 }
 
 model User {
@@ -97,6 +99,7 @@ model Resume {
   user   User?   @relation(fields: [userId], references: [id])
 
   // Personal Information
+  title         String?
   firstName     String?
   lastName      String?
   email         String?

@@ -43,7 +43,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-12 px-5">
+    <div className="bg-gray-200 min-h-screen py-12 px-5">
       <div className="no-print">
         <PreviewTopBar
           onSettings={() => {
@@ -57,7 +57,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
         
         <div
           ref={containerRef}
-          className="w-full max-w-[900px] mx-auto aspect-[210/297] bg-gray-100 flex justify-center"
+          className="w-full max-w-[900px] mx-auto aspect-[210/297] flex justify-center"
         >
           <div
             className="resume-print bg-white"

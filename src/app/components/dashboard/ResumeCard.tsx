@@ -8,10 +8,10 @@ export default function ResumeCard({ resume }: { resume: ResumeData }) {
   const router = useRouter();
 
   return (
-    <div className="w-56">
+    <div className="">
       {/* Preview */}
       <div
-        className="border rounded-md bg-white shadow hover:shadow-lg transition cursor-pointer overflow-hidden"
+        className="w-64 h-[360px] border rounded-md bg-gray-200 shadow-lg hover:shadow-xl transition cursor-pointer overflow-y-hidden"
         onClick={() => router.push(`/resume/preview?id=${resume.resumeId}`)}
       >
         <TemplateRenderer resume={resume} variant="thumbnail" />

@@ -179,6 +179,7 @@ exports.Prisma.ResumeScalarFieldEnum = {
   updatedAt: 'updatedAt',
   guestId: 'guestId',
   userId: 'userId',
+  title: 'title',
   firstName: 'firstName',
   lastName: 'lastName',
   email: 'email',

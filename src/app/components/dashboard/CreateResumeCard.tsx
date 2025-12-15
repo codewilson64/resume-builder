@@ -8,7 +8,7 @@ export default function CreateResumeCard() {
 
   return (
     <div
-      className="border rounded-md bg-white p-8 w-56 h-80 flex flex-col items-center justify-center shadow-lg hover:shadow-xl transition cursor-pointer"
+      className="border rounded-md bg-white p-8 w-64 h-[360px] flex flex-col items-center justify-center shadow-lg hover:shadow-xl transition cursor-pointer"
       onClick={() => router.push("/resume/contact")}
     >
       <FilePlus size={40} className="text-blue-600 mb-4" />

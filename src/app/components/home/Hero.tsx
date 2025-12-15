@@ -1,10 +1,16 @@
 'use client'
 
+import { createResumeForGuest } from '@/lib/actions/resume-action';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from "next/navigation";
 
 const Hero = () => {
   const router = useRouter()
+
+  const handleBuildResume = async () => {
+    const resumeId = await createResumeForGuest();
+    router.push(`/resume/contact?id=${resumeId}`);
+  };
 
   return (
     <section className="relative overflow-hidden pt-40 pb-40 px-6 bg-gradient-to-br from-orange-100 via-white to-blue-50">
@@ -25,7 +31,7 @@ const Hero = () => {
         </p>
 
         <button 
-          onClick={() => router.push('/resume-options')}
+          onClick={handleBuildResume}
           className="mt-10 px-10 py-4 text-lg font-semibold text-white bg-orange-500 rounded-full shadow-lg hover:shadow-xl hover:opacity-90 transition-all duration-300 hover:-translate-y-1 flex items-center gap-2"
         >
           Build My Resume

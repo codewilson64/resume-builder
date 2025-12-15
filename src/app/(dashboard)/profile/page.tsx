@@ -23,7 +23,6 @@ export default async function ProfilePage() {
 
         {/* Resume Card */}
         <ResumeList resumes={resumes}/>
-
       </div>
     </div>
   );

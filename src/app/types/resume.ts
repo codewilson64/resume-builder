@@ -46,6 +46,7 @@ export interface LanguageItem {
 }
 
 export interface ResumeData {
+  title: string | null;
   resumeId: string | null;
   firstName?: string;
   lastName?: string;

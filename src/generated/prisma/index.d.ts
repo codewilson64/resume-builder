@@ -7410,6 +7410,7 @@ export namespace Prisma {
     updatedAt: Date | null
     guestId: string | null
     userId: string | null
+    title: string | null
     firstName: string | null
     lastName: string | null
     email: string | null
@@ -7434,6 +7435,7 @@ export namespace Prisma {
     updatedAt: Date | null
     guestId: string | null
     userId: string | null
+    title: string | null
     firstName: string | null
     lastName: string | null
     email: string | null
@@ -7458,6 +7460,7 @@ export namespace Prisma {
     updatedAt: number
     guestId: number
     userId: number
+    title: number
     firstName: number
     lastName: number
     email: number
@@ -7484,6 +7487,7 @@ export namespace Prisma {
     updatedAt?: true
     guestId?: true
     userId?: true
+    title?: true
     firstName?: true
     lastName?: true
     email?: true
@@ -7508,6 +7512,7 @@ export namespace Prisma {
     updatedAt?: true
     guestId?: true
     userId?: true
+    title?: true
     firstName?: true
     lastName?: true
     email?: true
@@ -7532,6 +7537,7 @@ export namespace Prisma {
     updatedAt?: true
     guestId?: true
     userId?: true
+    title?: true
     firstName?: true
     lastName?: true
     email?: true
@@ -7629,6 +7635,7 @@ export namespace Prisma {
     updatedAt: Date
     guestId: string | null
     userId: string | null
+    title: string | null
     firstName: string | null
     lastName: string | null
     email: string | null
@@ -7670,6 +7677,7 @@ export namespace Prisma {
     updatedAt?: boolean
     guestId?: boolean
     userId?: boolean
+    title?: boolean
     firstName?: boolean
     lastName?: boolean
     email?: boolean
@@ -7702,6 +7710,7 @@ export namespace Prisma {
     updatedAt?: boolean
     guestId?: boolean
     userId?: boolean
+    title?: boolean
     firstName?: boolean
     lastName?: boolean
     email?: boolean
@@ -7728,6 +7737,7 @@ export namespace Prisma {
     updatedAt?: boolean
     guestId?: boolean
     userId?: boolean
+    title?: boolean
     firstName?: boolean
     lastName?: boolean
     email?: boolean
@@ -7754,6 +7764,7 @@ export namespace Prisma {
     updatedAt?: boolean
     guestId?: boolean
     userId?: boolean
+    title?: boolean
     firstName?: boolean
     lastName?: boolean
     email?: boolean
@@ -7772,7 +7783,7 @@ export namespace Prisma {
     hobbies?: boolean
   }
 
-  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "guestId" | "userId" | "firstName" | "lastName" | "email" | "phone" | "address" | "city" | "postalCode" | "dateOfBirth" | "nationality" | "maritalStatus" | "about" | "jobTitle" | "template" | "accentColor" | "fontFamily" | "hobbies", ExtArgs["result"]["resume"]>
+  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "guestId" | "userId" | "title" | "firstName" | "lastName" | "email" | "phone" | "address" | "city" | "postalCode" | "dateOfBirth" | "nationality" | "maritalStatus" | "about" | "jobTitle" | "template" | "accentColor" | "fontFamily" | "hobbies", ExtArgs["result"]["resume"]>
   export type ResumeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     guest?: boolean | Resume$guestArgs<ExtArgs>
     user?: boolean | Resume$userArgs<ExtArgs>
@@ -7809,6 +7820,7 @@ export namespace Prisma {
       updatedAt: Date
       guestId: string | null
       userId: string | null
+      title: string | null
       firstName: string | null
       lastName: string | null
       email: string | null
@@ -8260,6 +8272,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"Resume", 'DateTime'>
     readonly guestId: FieldRef<"Resume", 'String'>
     readonly userId: FieldRef<"Resume", 'String'>
+    readonly title: FieldRef<"Resume", 'String'>
     readonly firstName: FieldRef<"Resume", 'String'>
     readonly lastName: FieldRef<"Resume", 'String'>
     readonly email: FieldRef<"Resume", 'String'>
@@ -14278,6 +14291,7 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     guestId: 'guestId',
     userId: 'userId',
+    title: 'title',
     firstName: 'firstName',
     lastName: 'lastName',
     email: 'email',
@@ -14791,6 +14805,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
     guestId?: UuidNullableFilter<"Resume"> | string | null
     userId?: UuidNullableFilter<"Resume"> | string | null
+    title?: StringNullableFilter<"Resume"> | string | null
     firstName?: StringNullableFilter<"Resume"> | string | null
     lastName?: StringNullableFilter<"Resume"> | string | null
     email?: StringNullableFilter<"Resume"> | string | null
@@ -14822,6 +14837,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     guestId?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
     firstName?: SortOrderInput | SortOrder
     lastName?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
@@ -14856,6 +14872,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
     guestId?: UuidNullableFilter<"Resume"> | string | null
     userId?: UuidNullableFilter<"Resume"> | string | null
+    title?: StringNullableFilter<"Resume"> | string | null
     firstName?: StringNullableFilter<"Resume"> | string | null
     lastName?: StringNullableFilter<"Resume"> | string | null
     email?: StringNullableFilter<"Resume"> | string | null
@@ -14887,6 +14904,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     guestId?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
     firstName?: SortOrderInput | SortOrder
     lastName?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
@@ -14917,6 +14935,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Resume"> | Date | string
     guestId?: UuidNullableWithAggregatesFilter<"Resume"> | string | null
     userId?: UuidNullableWithAggregatesFilter<"Resume"> | string | null
+    title?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     firstName?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     lastName?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     email?: StringNullableWithAggregatesFilter<"Resume"> | string | null
@@ -15619,6 +15638,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -15650,6 +15670,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     guestId?: string | null
     userId?: string | null
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -15677,6 +15698,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15708,6 +15730,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guestId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15737,6 +15760,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     guestId?: string | null
     userId?: string | null
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -15759,6 +15783,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15783,6 +15808,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guestId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16537,6 +16563,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     guestId?: SortOrder
     userId?: SortOrder
+    title?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     email?: SortOrder
@@ -16561,6 +16588,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     guestId?: SortOrder
     userId?: SortOrder
+    title?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     email?: SortOrder
@@ -16585,6 +16613,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     guestId?: SortOrder
     userId?: SortOrder
+    title?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     email?: SortOrder
@@ -17484,6 +17513,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -17513,6 +17543,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -17571,6 +17602,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
     guestId?: UuidNullableFilter<"Resume"> | string | null
     userId?: UuidNullableFilter<"Resume"> | string | null
+    title?: StringNullableFilter<"Resume"> | string | null
     firstName?: StringNullableFilter<"Resume"> | string | null
     lastName?: StringNullableFilter<"Resume"> | string | null
     email?: StringNullableFilter<"Resume"> | string | null
@@ -17663,6 +17695,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -17692,6 +17725,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     guestId?: string | null
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -18313,6 +18347,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -18343,6 +18378,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     guestId?: string | null
     userId?: string | null
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -18385,6 +18421,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18415,6 +18452,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guestId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18441,6 +18479,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -18471,6 +18510,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     guestId?: string | null
     userId?: string | null
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -18513,6 +18553,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18543,6 +18584,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guestId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18569,6 +18611,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -18599,6 +18642,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     guestId?: string | null
     userId?: string | null
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -18641,6 +18685,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18671,6 +18716,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guestId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18697,6 +18743,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -18727,6 +18774,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     guestId?: string | null
     userId?: string | null
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -18769,6 +18817,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18799,6 +18848,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guestId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18825,6 +18875,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -18855,6 +18906,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     guestId?: string | null
     userId?: string | null
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -18897,6 +18949,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18927,6 +18980,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guestId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18954,6 +19008,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -18976,6 +19031,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19005,6 +19061,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19033,6 +19090,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19081,6 +19139,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     guestId?: string | null
+    title?: string | null
     firstName?: string | null
     lastName?: string | null
     email?: string | null
@@ -19178,6 +19237,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19207,6 +19267,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guestId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19235,6 +19296,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guestId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null

@@ -4,12 +4,30 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/actions/auth-action";
 import { ResumeData } from "@/app/types/resume";
 import { mapPrismaResumeToResumeData } from "../mappers/resumeMapper";
+import { createGuestSession } from "./guest-action";
+
+let guestId: string | null = null;
+
+export async function createResumeForGuest() {
+  const guest = await createGuestSession();
+  guestId = guest.id;
+
+  const resume = await prisma.resume.create({
+    data: {
+      guestId,
+      title: "Untitled",
+      template: "Budapest",
+      accentColor: "#2D2D2D",
+      fontFamily: "Poppins",
+    },
+  });
+
+  return resume.id;
+}
 
 export async function createResume(data: ResumeData) {
   const user = await getCurrentUser();
-  if (!user?.id) {
-    throw new Error("User not authenticated");
-  }
+  if (!user?.id) throw new Error("User not authenticated");
 
   // Create Resume + Nested Relations
   const resume = await prisma.resume.create({
