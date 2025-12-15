@@ -14,13 +14,23 @@ const COOKIE_OPTIONS = {
 export const createGuestSession = async () => {
   const cookieStore = await cookies();
   const token = cookieStore.get("guest_session")?.value;
+  const now = new Date();
 
   if (token) {
-    const existing = await prisma.guest.findUnique({
+    const guest = await prisma.guest.findUnique({
       where: { sessionToken: token },
     });
 
-    if (existing) return existing;
+    if (guest && guest.expiresAt > now) {
+      return guest; 
+    }
+
+    // expired → cleanup
+    if (guest) {
+      await prisma.guest.delete({
+        where: { sessionToken: token },
+      });
+    }
   }
 
   // Create new guest
