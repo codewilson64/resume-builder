@@ -8,7 +8,7 @@ import { createGuestSession } from "./guest-action";
 
 export async function createResumeForGuest() {
   let guestId: string | null = null;
-  
+
   const guest = await createGuestSession();
   guestId = guest.id;
 
@@ -35,6 +35,7 @@ export async function createResume(data: ResumeData) {
       userId: user.id,
 
       // PERSONAL INFO
+      title: data.title,
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
@@ -114,6 +115,7 @@ export async function updateResume(resumeId: string, data: ResumeData) {
     where: { id: resumeId },
     data: {
       // PERSONAL INFO
+      title: data.title,
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,

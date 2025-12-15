@@ -15,6 +15,7 @@ export function mapPrismaResumeToResumeData(resume: ResumeWithRelations): Resume
   return {
     resumeId: resume.id,
 
+    title: resume.title ?? undefined,
     firstName: resume.firstName ?? undefined,
     lastName: resume.lastName ?? undefined,
     email: resume.email ?? undefined,
