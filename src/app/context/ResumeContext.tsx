@@ -10,11 +10,14 @@ import {
   ReactNode,
 } from "react";
 import { ResumeData } from "../types/resume";
+import { createEmptyResume } from "@/utils/resumeDefaults";
+
 
 interface ResumeContextType {
   resumeData: ResumeData;
   setResumeData: Dispatch<SetStateAction<ResumeData>>;
   setResumeId: (id: string | null) => void;
+  resetResume: () => void;
 }
 
 const ResumeContext = createContext<ResumeContextType | null>(null);
@@ -68,8 +71,16 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
     }));
   };
 
+  // Reset local storage
+  const resetResume = () => {
+    const empty = createEmptyResume();
+    setResumeData(empty);
+    localStorage.setItem("resumeData", JSON.stringify(empty));
+  };
+
+
   return (
-    <ResumeContext.Provider value={{ resumeData, setResumeData, setResumeId }}>
+    <ResumeContext.Provider value={{ resumeData, setResumeData, setResumeId, resetResume }}>
       {children}
     </ResumeContext.Provider>
   );
