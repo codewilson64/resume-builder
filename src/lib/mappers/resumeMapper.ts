@@ -24,6 +24,7 @@ export function mapPrismaResumeToResumeData(resume: ResumeWithRelations): Resume
     postalCode: resume.postalCode ?? undefined,
     phone: resume.phone ?? undefined,
     jobTitle: resume.jobTitle ?? undefined,
+    updatedAt: resume.updatedAt.toISOString(),
 
     about: resume.about ?? undefined,
     hobbies: resume.hobbies ?? undefined,

@@ -18,6 +18,7 @@ import HobbiesForm from "@/app/components/resume/HobbiesForm";
 import LanguagesForm from "@/app/components/resume/LanguagesForm";
 import SocialLinksForm from "@/app/components/resume/SocialLinksForm";
 import TemplateSelector from "@/app/components/resume/TemplateSelector";
+import TitleInput from "@/app/components/resume/TitleInput";
 
 export default function FinalPage() {
   const { resumeData, setResumeData } = useResume();
@@ -45,8 +46,10 @@ export default function FinalPage() {
           Review and update your details before exporting
         </p>
 
+
         <section className="">
-          <h2 className="font-semibold text-xl mb-4">Resume Format</h2>
+          <TitleInput />
+          <h2 className="font-semibold text-xl mb-4 mt-4">Resume Format</h2>
           <TemplateSelector />
           <FontSelector />
           <AccentSelector

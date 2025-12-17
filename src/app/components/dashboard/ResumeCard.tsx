@@ -30,10 +30,10 @@ export default function ResumeCard({ resume }: { resume: ResumeData }) {
         {/* Meta */}
         <div>
           <p className="font-medium text-sm truncate">
-            Untitled
+            {resume.title || "Untitled"}
           </p>
           <p className="text-xs text-gray-500">
-            Updated at 2 Feb 2018
+            Updated {new Date(resume.updatedAt!).toLocaleDateString()}
           </p>
         </div>
 

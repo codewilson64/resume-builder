@@ -73,6 +73,8 @@ export interface ResumeData {
   nationality?: string;
   dateOfBirth?: string;
   maritalStatus?: string;
+
+  updatedAt?: Date | string
 }
 
 export type ResumeWithRelations = Prisma.ResumeGetPayload<{

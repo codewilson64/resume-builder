@@ -5,51 +5,24 @@ import { useResume } from "@/app/context/ResumeContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useReactToPrint } from "react-to-print";
 
-import { createResume, updateResume } from "@/lib/actions/resume-action";
+import { updateResume } from "@/lib/actions/resume-action";
 import useDimensions from "@/app/hooks/useDimensions";
 import PreviewTopBar from "./PreviewTopBar";
 import TemplateRenderer from "../TemplateRenderer";
-import { ResumeData } from "@/app/types/resume";
+import { useResumeSource } from "@/app/hooks/useResumeSource";
 
 export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const resumeIdFromUrl = searchParams.get("id");
 
-  const { resumeData: draftResume } = useResume();
-  const [resumeData, setResumeData] = useState<ResumeData | null>(null);
+  const { resumeData: draftResume} = useResume();
 
   const printRef = useRef(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const { width } = useDimensions(containerRef);
 
-   // 🔁 Decide source of truth
-  useEffect(() => {
-    const loadResume = async () => {
-      console.log("checking source of truth...");
-
-      if (resumeIdFromUrl) {
-        console.log(`source comes from url...fetching api...`);
-
-        try {
-          const res = await fetch(`/api/resume/${resumeIdFromUrl}`);
-          const data = await res.json();
-
-          console.log("Fetched resume data:", data); 
-          setResumeData(data);
-        } catch (error) {
-          console.error("Failed to fetch resume:", error);
-        }
-      } else {
-        console.log("no id in url...fetching from context...");
-        console.log("Draft resume data:", draftResume); 
-        setResumeData(draftResume);
-      }
-    };
-
-    loadResume();
-  }, [resumeIdFromUrl, draftResume]);
-
+  const { resumeData, loading } = useResumeSource({ resumeIdFromUrl, draftResume });
 
   // handle print
   const handlePrintBase = useReactToPrint({
