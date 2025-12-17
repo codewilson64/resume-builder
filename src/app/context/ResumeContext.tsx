@@ -17,7 +17,7 @@ interface ResumeContextType {
   resumeData: ResumeData;
   setResumeData: Dispatch<SetStateAction<ResumeData>>;
   setResumeId: (id: string | null) => void;
-  resetResume: () => void;
+  resetResumeContext: () => void;
 }
 
 const ResumeContext = createContext<ResumeContextType | null>(null);
@@ -72,7 +72,7 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Reset local storage
-  const resetResume = () => {
+  const resetResumeContext = () => {
     const empty = createEmptyResume();
     setResumeData(empty);
     localStorage.setItem("resumeData", JSON.stringify(empty));
@@ -80,7 +80,7 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
 
 
   return (
-    <ResumeContext.Provider value={{ resumeData, setResumeData, setResumeId, resetResume }}>
+    <ResumeContext.Provider value={{ resumeData, setResumeData, setResumeId, resetResumeContext }}>
       {children}
     </ResumeContext.Provider>
   );

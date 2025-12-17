@@ -1,42 +1,75 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useResume } from "@/app/context/ResumeContext";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useReactToPrint } from "react-to-print";
 
-import { updateResume } from "@/lib/actions/resume-action";
+import { createResume, updateResume } from "@/lib/actions/resume-action";
 import useDimensions from "@/app/hooks/useDimensions";
 import PreviewTopBar from "./PreviewTopBar";
 import TemplateRenderer from "../TemplateRenderer";
+import { ResumeData } from "@/app/types/resume";
 
 export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
-  const { resumeData } = useResume();
   const router = useRouter();
-  const printRef = useRef(null);
+  const searchParams = useSearchParams();
+  const resumeIdFromUrl = searchParams.get("id");
 
+  const { resumeData: draftResume } = useResume();
+  const [resumeData, setResumeData] = useState<ResumeData | null>(null);
+
+  const printRef = useRef(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const { width } = useDimensions(containerRef);
 
+   // 🔁 Decide source of truth
+  useEffect(() => {
+    const loadResume = async () => {
+      console.log("checking source of truth...");
+
+      if (resumeIdFromUrl) {
+        console.log(`source comes from url...fetching api...`);
+
+        try {
+          const res = await fetch(`/api/resume/${resumeIdFromUrl}`);
+          const data = await res.json();
+
+          console.log("Fetched resume data:", data); 
+          setResumeData(data);
+        } catch (error) {
+          console.error("Failed to fetch resume:", error);
+        }
+      } else {
+        console.log("no id in url...fetching from context...");
+        console.log("Draft resume data:", draftResume); 
+        setResumeData(draftResume);
+      }
+    };
+
+    loadResume();
+  }, [resumeIdFromUrl, draftResume]);
+
+
+  // handle print
   const handlePrintBase = useReactToPrint({
     contentRef: printRef,
     documentTitle: `${resumeData?.firstName || "resume"}`,
   });
 
-  // handle print
   const handlePrint = async () => {
     if (!isLoggedIn) {
       router.push("/signup");
       return;
     }
 
-    if (!resumeData.resumeId) return;
+    if (!resumeData?.resumeId) return;
 
     await updateResume(resumeData.resumeId, resumeData);
-
     handlePrintBase();
   };
 
+  if (!resumeData) return <p>Loading…</p>;
 
   return (
     <div className="bg-gray-200 min-h-screen py-12 px-5">

@@ -1,16 +1,21 @@
 'use client';
 
 import { useResume } from "@/app/context/ResumeContext";
+import { createResumeForUser } from "@/lib/actions/resume-action";
 import { FilePlus } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function CreateResumeCard() {
   const router = useRouter();
-  const { resetResume } = useResume();
+  const { setResumeId, resetResumeContext } = useResume();
 
-  const handleCreateNew = () => {
-    resetResume();             
-    router.push("/resume/contact");
+  const handleCreateNew = async () => {
+    resetResumeContext();    
+
+    const resumeId = await createResumeForUser();
+    setResumeId(resumeId);     
+
+    router.push(`/resume/contact?id=${resumeId}`);
   };
 
   return (

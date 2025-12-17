@@ -5,6 +5,7 @@ import { getCurrentUser } from "@/lib/actions/auth-action";
 import { ResumeData } from "@/app/types/resume";
 import { mapPrismaResumeToResumeData } from "../mappers/resumeMapper";
 import { createGuestSession } from "./guest-action";
+import { revalidatePath } from "next/cache";
 
 export async function createResumeForGuest() {
   let guestId: string | null = null;
@@ -15,6 +16,23 @@ export async function createResumeForGuest() {
   const resume = await prisma.resume.create({
     data: {
       guestId,
+      title: "Untitled",
+      template: "Budapest",
+      accentColor: "#2D2D2D",
+      fontFamily: "Poppins",
+    },
+  });
+
+  return resume.id;
+}
+
+export async function createResumeForUser() {
+  const user = await getCurrentUser();
+  if (!user?.id) throw new Error("Not authenticated");
+
+  const resume = await prisma.resume.create({
+    data: {
+      userId: user.id,
       title: "Untitled",
       template: "Budapest",
       accentColor: "#2D2D2D",
@@ -208,4 +226,54 @@ export async function getUserResumes(): Promise<ResumeData[]> {
     },
   });
   return resumes.map(mapPrismaResumeToResumeData)
+}
+
+export async function getResumeById(
+  resumeId: string
+): Promise<ResumeData | null> {
+  const user = await getCurrentUser();
+
+  if (!user?.id) throw new Error("User not authenticated");
+
+  const resume = await prisma.resume.findUnique({
+    where: {
+      id: resumeId,
+      userId: user.id,
+    },
+    include: {
+      experiences: true,
+      educations: true,
+      skills: true,
+      languages: true,
+      socialLinks: true,
+    },
+  });
+
+  if (!resume) return null;
+
+  return mapPrismaResumeToResumeData(resume);
+}
+
+export async function deleteResumeById(resumeId: string): Promise<void> {
+  const user = await getCurrentUser();
+
+  if (!user?.id) throw new Error("User not authenticated");
+
+  const resume = await prisma.resume.findFirst({
+    where: {
+      id: resumeId,
+      userId: user.id,
+    },
+    select: { id: true },
+  });
+
+  if (!resume) throw new Error("Resume not found or access denied")
+
+  await prisma.resume.delete({
+    where: {
+      id: resumeId,
+    },
+  });
+
+  revalidatePath('/profile')
 }
