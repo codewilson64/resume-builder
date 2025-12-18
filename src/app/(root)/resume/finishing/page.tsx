@@ -20,20 +20,31 @@ import SocialLinksForm from "@/app/components/resume/SocialLinksForm";
 import TemplateSelector from "@/app/components/resume/TemplateSelector";
 import TitleInput from "@/app/components/resume/TitleInput";
 import { useResumeSource } from "@/app/hooks/useResumeSource";
+import { useEffect, useRef } from "react";
 
 export default function FinalPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const resumeIdFromUrl = searchParams.get("id");
 
-  const { resumeData: draftResume} = useResume();
+  const { resumeData: draftResume, setResumeData} = useResume();
 
   const url = resumeIdFromUrl
     ? `/api/resume/${resumeIdFromUrl}`
     : null;
    
-  const { resumeData, setResumeData, loading } = useResumeSource({ url, draftResume });
-  console.log(resumeData)
+  const { resumeData } = useResumeSource({ url, draftResume });
+  
+  const hasHydrated = useRef(false);
+
+  useEffect(() => {
+    if (!resumeData) return;
+    if (hasHydrated.current) return;
+
+    setResumeData(resumeData);
+    hasHydrated.current = true;
+  }, [resumeData, setResumeData]);
+
 
   if (!resumeData) {
     return <p className="text-center text-gray-500">Loading…</p>;
@@ -68,7 +79,7 @@ export default function FinalPage() {
           <TemplateSelector />
           <FontSelector />
           <AccentSelector
-            value={resumeData.accentColor}
+            value={draftResume.accentColor}
             onChange={(color) =>
               setResumeData((prev) => ({
                 ...prev!,
@@ -81,7 +92,7 @@ export default function FinalPage() {
         {/* Mount all forms fully editable */}
         <section className="">
           <h2 className="font-semibold text-xl mb-4">Contact Info</h2>
-          <ContactForm resume={resumeData} />
+          <ContactForm />
         </section>
 
         <section className="">

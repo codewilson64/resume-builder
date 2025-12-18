@@ -29,7 +29,7 @@ export default function ResumeCard({ resume }: { resume: ResumeData }) {
       <div className="flex flex-col justify-between gap-5">
         {/* Meta */}
         <div>
-          <p className="font-medium text-sm truncate">
+          <p className="font-medium text-sm break-words sm:truncate sm:whitespace-nowrap">
             {resume.title || "Untitled"}
           </p>
           <p className="text-xs text-gray-500">

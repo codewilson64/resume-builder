@@ -1,13 +1,15 @@
 "use client";
 
-import { ResumeData } from "@/app/types/resume";
 import { useResume } from "../../context/ResumeContext";
 
 export default function JobTitleForm() {
   const { resumeData, setResumeData } = useResume();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setResumeData({ ...resumeData, [e.target.name]: e.target.value });
+    setResumeData((prev) => ({
+      ...prev!,
+      [e.target.name]: e.target.value,
+  }));
   };
 
   return (

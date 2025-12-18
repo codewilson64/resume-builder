@@ -13,7 +13,7 @@ export default async function ProfilePage() {
   const resumes = await getUserResumes()
   
   return (
-    <div className="min-h-screen flex justify-center py-12">
+    <div className="w-full min-h-screen flex justify-center py-12">
       <div className="w-full py-12 px-5 space-y-6">
 
         {/* Header */}

@@ -2,16 +2,11 @@
 
 import { usePathname } from "next/navigation";
 import JobTitleForm from "./JobTitleForm";
-import { ResumeData } from "@/app/types/resume";
 import { useResume } from "@/app/context/ResumeContext";
 
-interface ContactFormProps {
-  resume: ResumeData,
-}
-
-export default function ContactForm({ resume }: ContactFormProps) {
+export default function ContactForm() {
   const pathname = usePathname();
-  const { setResumeData } = useResume()
+  const { resumeData, setResumeData } = useResume()
 
   const isFinishingPage = pathname === "/resume/finishing";
 
@@ -35,7 +30,7 @@ export default function ContactForm({ resume }: ContactFormProps) {
             type="text"
             name="firstName"
             className="input"
-            value={resume.firstName || ""}
+            value={resumeData.firstName || ""}
             onChange={handleChange}
             placeholder="John"
           />
@@ -47,7 +42,7 @@ export default function ContactForm({ resume }: ContactFormProps) {
             type="text"
             name="lastName"
             className="input"
-            value={resume.lastName || ""}
+            value={resumeData.lastName || ""}
             onChange={handleChange}
             placeholder="Doe"
           />
@@ -61,7 +56,7 @@ export default function ContactForm({ resume }: ContactFormProps) {
           type="email"
           name="email"
           className="input"
-          value={resume.email || ""}
+          value={resumeData.email || ""}
           onChange={handleChange}
           placeholder="you@example.com"
         />
@@ -74,7 +69,7 @@ export default function ContactForm({ resume }: ContactFormProps) {
           type="text"
           name="address"
           className="input"
-          value={resume.address || ""}
+          value={resumeData.address || ""}
           onChange={handleChange}
           placeholder="Enter a location"
         />
@@ -87,7 +82,7 @@ export default function ContactForm({ resume }: ContactFormProps) {
           type="text"
           name="phone"
           className="input"
-          value={resume.phone || ""}
+          value={resumeData.phone || ""}
           onChange={handleChange}
           placeholder="+62 812 3456 7890"
         />
@@ -101,7 +96,7 @@ export default function ContactForm({ resume }: ContactFormProps) {
             type="text"
             name="city"
             className="input"
-            value={resume.city || ""}
+            value={resumeData.city || ""}
             onChange={handleChange}
             placeholder="Jakarta"
           />
@@ -113,7 +108,7 @@ export default function ContactForm({ resume }: ContactFormProps) {
             type="text"
             name="postalCode"
             className="input"
-            value={resume.postalCode || ""}
+            value={resumeData.postalCode || ""}
             onChange={handleChange}
             placeholder="10210"
           />
