@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ResumeData } from "../types/resume";
 
 interface UseResumeSourceParams {
@@ -11,6 +11,8 @@ interface UseResumeSourceParams {
 export function useResumeSource({ url, draftResume }: UseResumeSourceParams) {
   const [resumeData, setResumeData] = useState<ResumeData | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const draftSnapshot = useRef<ResumeData | null>(draftResume);
 
   useEffect(() => {
     const loadResume = async () => {
@@ -25,7 +27,7 @@ export function useResumeSource({ url, draftResume }: UseResumeSourceParams) {
           setResumeData(data);
         } else {
           console.log("fetching from context...")
-          setResumeData(draftResume);
+          setResumeData(draftSnapshot.current);
         }
       } catch (err) {
         console.error("Failed to load resume", err);
@@ -36,7 +38,7 @@ export function useResumeSource({ url, draftResume }: UseResumeSourceParams) {
     };
 
     loadResume();
-  }, [url, draftResume]);
+  }, [url]);
 
-  return { resumeData, loading, setResumeData };
+  return { resumeData, loading };
 }
