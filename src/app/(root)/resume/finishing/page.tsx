@@ -1,7 +1,7 @@
 "use client";
 
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { useResume } from "@/app/context/ResumeContext";
 
@@ -19,10 +19,25 @@ import LanguagesForm from "@/app/components/resume/LanguagesForm";
 import SocialLinksForm from "@/app/components/resume/SocialLinksForm";
 import TemplateSelector from "@/app/components/resume/TemplateSelector";
 import TitleInput from "@/app/components/resume/TitleInput";
+import { useResumeSource } from "@/app/hooks/useResumeSource";
 
 export default function FinalPage() {
-  const { resumeData, setResumeData } = useResume();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const resumeIdFromUrl = searchParams.get("id");
+
+  const { resumeData: draftResume} = useResume();
+
+  const url = resumeIdFromUrl
+    ? `/api/resume/${resumeIdFromUrl}`
+    : null;
+   
+  const { resumeData, setResumeData, loading } = useResumeSource({ url, draftResume });
+  console.log(resumeData)
+
+  if (!resumeData) {
+    return <p className="text-center text-gray-500">Loading…</p>;
+  }
 
   return (
     <div className="min-h-screen px-5 sm:px-0 py-12 flex justify-center bg-gray-50 relative">
@@ -66,7 +81,7 @@ export default function FinalPage() {
         {/* Mount all forms fully editable */}
         <section className="">
           <h2 className="font-semibold text-xl mb-4">Contact Info</h2>
-          <ContactForm />
+          <ContactForm resume={resumeData} />
         </section>
 
         <section className="">

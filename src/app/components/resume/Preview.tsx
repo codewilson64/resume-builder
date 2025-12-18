@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useResume } from "@/app/context/ResumeContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useReactToPrint } from "react-to-print";
@@ -22,7 +22,11 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { width } = useDimensions(containerRef);
 
-  const { resumeData, loading } = useResumeSource({ resumeIdFromUrl, draftResume });
+  const url = resumeIdFromUrl
+   ? `/api/resume/${resumeIdFromUrl}`
+   : null;
+
+  const { resumeData, loading } = useResumeSource({ url, draftResume });
 
   // handle print
   const handlePrintBase = useReactToPrint({

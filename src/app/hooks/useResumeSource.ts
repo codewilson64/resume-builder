@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { ResumeData } from "../types/resume";
 
 interface UseResumeSourceParams {
-  resumeIdFromUrl: string | null;
+  url: string | null;
   draftResume: ResumeData | null;
 }
 
-export function useResumeSource({ resumeIdFromUrl, draftResume }: UseResumeSourceParams) {
+export function useResumeSource({ url, draftResume }: UseResumeSourceParams) {
   const [resumeData, setResumeData] = useState<ResumeData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -18,8 +18,8 @@ export function useResumeSource({ resumeIdFromUrl, draftResume }: UseResumeSourc
 
       try {
         console.log("checking source...")
-        if (resumeIdFromUrl) {
-          const res = await fetch(`/api/resume/${resumeIdFromUrl}`);
+        if (url) {
+          const res = await fetch(url);
           const data = await res.json();
           console.log("fetching from db...")
           setResumeData(data);
@@ -36,7 +36,7 @@ export function useResumeSource({ resumeIdFromUrl, draftResume }: UseResumeSourc
     };
 
     loadResume();
-  }, [resumeIdFromUrl, draftResume]);
+  }, [url, draftResume]);
 
-  return { resumeData, loading };
+  return { resumeData, loading, setResumeData };
 }

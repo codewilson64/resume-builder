@@ -1,5 +1,6 @@
 "use client";
 
+import { ResumeData } from "@/app/types/resume";
 import { useResume } from "../../context/ResumeContext";
 
 export default function JobTitleForm() {

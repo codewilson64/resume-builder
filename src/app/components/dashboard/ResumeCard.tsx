@@ -41,7 +41,7 @@ export default function ResumeCard({ resume }: { resume: ResumeData }) {
         <div className="flex flex-col gap-2">
           {/* Edit */}
           <button
-            onClick={() => router.push(`/resume/edit?id=${resume.resumeId}`)}
+            onClick={() => router.push(`/resume/finishing?id=${resume.resumeId}`)}
             className="flex items-center gap-2 text-sm hover:text-orange-500"
             aria-label="Edit resume"
           >
