@@ -6,7 +6,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useReactToPrint } from "react-to-print";
 
 import { updateResume } from "@/lib/actions/resume-action";
-import useDimensions from "@/app/hooks/useDimensions";
 import PreviewTopBar from "./PreviewTopBar";
 import TemplateRenderer from "../TemplateRenderer";
 import { useResumeSource } from "@/app/hooks/useResumeSource";
@@ -19,14 +18,12 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   const { resumeData: draftResume} = useResume();
 
   const printRef = useRef(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { width } = useDimensions(containerRef);
 
   const url = resumeIdFromUrl
    ? `/api/resume/${resumeIdFromUrl}`
    : null;
 
-  const { resumeData, loading } = useResumeSource({ url, draftResume });
+  const { resumeData } = useResumeSource({ url, draftResume });
 
   // handle print
   const handlePrintBase = useReactToPrint({
@@ -58,21 +55,20 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
           onDownload={handlePrint}
           onCancel={() => router.back()}
         />
-        <div className="h-10" />
+        <div className="h-8" />
       </div>
         
         <div
-          ref={containerRef}
-          className="w-full max-w-[900px] mx-auto aspect-[210/297] flex justify-center"
+          className='w-full h-screen md:h-full max-w-[900px] mx-auto flex justify-center'
         >
           <div
-            className="resume-print bg-white"
+            className="resume-print bg-white scale-50 scale-small-mobile scale-desktop origin-top"
             style={{
               width: "794px",
-              zoom: width ? width / 794 : 1,
+              height: "1123px"
             }}
           >
-            <div ref={printRef} className="resume-print">
+            <div ref={printRef} className="resume-print w-full">
               <TemplateRenderer resume={resumeData} />
             </div>
           </div>
