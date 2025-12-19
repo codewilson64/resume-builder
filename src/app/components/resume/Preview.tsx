@@ -46,7 +46,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   if (!resumeData) return <p>Loading…</p>;
 
   return (
-    <div className="bg-gray-200 min-h-screen pb-20 px-5 no-padding">
+    <div className="bg-gray-200 min-h-screen pb-20 px-5">
       <div className="no-print">
         <PreviewTopBar
           onSettings={() => {
@@ -55,7 +55,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
           onDownload={handlePrint}
           onCancel={() => router.back()}
         />
-        <div className="" />
+        <div className="h-20" />
       </div>
         
         <div
