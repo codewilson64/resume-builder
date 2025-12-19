@@ -68,7 +68,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
               height: "1123px"
             }}
           >
-            <div ref={printRef} className="resume-print w-full">
+            <div ref={printRef} className="w-full">
               <TemplateRenderer resume={resumeData} />
             </div>
           </div>
