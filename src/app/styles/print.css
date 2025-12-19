@@ -8,13 +8,13 @@
   /* ✅ Hide all UI and layout padding */
   .no-print {
     display: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
   }
 
   .resume-print {
     zoom: 1 !important;
     transform: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   /* ✅ Force background colors to appear */
@@ -23,7 +23,7 @@
     print-color-adjust: exact !important;
   }
 
-  body {
+  html, body {
     margin: 0 !important;
     padding: 0 !important;
     background: white !important;
