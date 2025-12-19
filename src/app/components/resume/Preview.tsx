@@ -46,7 +46,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   if (!resumeData) return <p>Loading…</p>;
 
   return (
-    <div className="bg-gray-200 min-h-screen py-20 px-5">
+    <div className="bg-gray-200 min-h-screen py-20 px-5 no-padding">
       <div className="no-print">
         <PreviewTopBar
           onSettings={() => {
@@ -68,7 +68,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
               height: "1123px"
             }}
           >
-            <div ref={printRef} className="w-full">
+            <div ref={printRef} className="resume-print w-full">
               <TemplateRenderer resume={resumeData} />
             </div>
           </div>

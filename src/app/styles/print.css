@@ -15,6 +15,11 @@
     transform: none !important;
   }
 
+  .no-padding {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
   /* ✅ Force background colors to appear */
   * {
     -webkit-print-color-adjust: exact !important;
@@ -29,8 +34,6 @@
 
   * {
     box-shadow: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
   }
 }
 
