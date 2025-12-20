@@ -32,12 +32,16 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   });
 
   const handlePrint = async () => {
+    console.log("checking auth...")
     if (!isLoggedIn) {
       router.push("/signup");
       return;
     }
 
-    if (!resumeData?.resumeId) return;
+    if (!resumeData?.resumeId) {
+      console.log("resume id does not exist!")
+      return;
+    }
 
     await updateResume(resumeData.resumeId, resumeData);
     handlePrintBase();
@@ -68,7 +72,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
               height: "1123px"
             }}
           >
-            <div ref={printRef} className="resume-print w-full">
+            <div ref={printRef} className="resume-print">
               <TemplateRenderer resume={resumeData} />
             </div>
           </div>

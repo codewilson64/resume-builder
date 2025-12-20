@@ -58,6 +58,8 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
+  console.log(resumeData)
+
   // Save changes to localStorage
   useEffect(() => {
     localStorage.setItem("resumeData", JSON.stringify(resumeData));

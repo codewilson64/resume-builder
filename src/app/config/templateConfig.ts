@@ -1,7 +1,7 @@
 export const templates = [
   "Budapest",
   "Chicago",
-  "Vienna",
+  "Nordic",
   "Berlin",
   "Oslo",
   "Tokyo",

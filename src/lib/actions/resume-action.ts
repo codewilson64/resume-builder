@@ -175,6 +175,7 @@ export async function updateResume(resumeId: string, data: ResumeData) {
           degree: edu.degree,
           graduationDate: edu.graduationDate,
           city: edu.city,
+          description: edu.description,
         })),
       },
 
