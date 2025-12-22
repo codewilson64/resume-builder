@@ -49,10 +49,8 @@ export default function ChicagoTemplate({ data, variant }: ChicagoTemplateProps)
       <div
         className="bg-white shadow-xl"
         style={{
-          width: isThumbnail ? 794 : 794,
-          height: 1123,
-          transform: isThumbnail ? "scale(0.32)" : undefined,
-          transformOrigin: "top left",
+          height: isThumbnail ? 1123 : "auto",
+          minHeight: !isThumbnail ? 1123 : undefined,
         }}
       >
 

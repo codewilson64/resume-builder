@@ -4,6 +4,7 @@
   padding: 0;
 }
 
+
 @media print {
   /* ✅ Hide all UI and layout padding */
   .no-print {
@@ -19,6 +20,13 @@
     margin: 0 !important;
     padding: 0 !important;
   }
+
+  section,
+  .resume-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
 
   /* ✅ Force background colors to appear */
   * {

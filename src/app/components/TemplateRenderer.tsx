@@ -2,6 +2,8 @@ import BudapestTemplate from "@/app/components/templates/BudapestTemplate";
 import ChicagoTemplate from "@/app/components/templates/ChicagoTemplate";
 import type { ResumeData } from "@/app/types/resume";
 import NordicTemplate from "./templates/NordicTemplate";
+import AuroraTemplate from "./templates/AuroraTemplate";
+import ResumePage from "./ResumePage";
 
 interface TemplateRendererProps {
   resume: ResumeData;
@@ -12,17 +14,32 @@ export default function TemplateRenderer({
   resume,
   variant = "preview",
 }: TemplateRendererProps) {
+  let Template;
+
   switch (resume.template) {
     case "Budapest":
-      return <BudapestTemplate data={resume} variant={variant} />;
+      Template = BudapestTemplate;
+      break;
 
     case "Chicago":
-      return <ChicagoTemplate data={resume} variant={variant} />;
-    
+      Template = ChicagoTemplate;
+      break;
+
     case "Nordic":
-      return <NordicTemplate data={resume} variant={variant} />;
+      Template = NordicTemplate;
+      break;
+
+    case "Aurora":
+      Template = AuroraTemplate;
+      break;
 
     default:
-      return <BudapestTemplate data={resume} variant={variant} />;
+      Template = BudapestTemplate;
   }
+
+  return (
+    <ResumePage variant={variant}>
+      <Template data={resume} variant={variant} />
+    </ResumePage>
+  );
 }

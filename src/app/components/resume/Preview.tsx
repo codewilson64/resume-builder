@@ -50,7 +50,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   if (!resumeData) return <p>Loading…</p>;
 
   return (
-    <div className="bg-gray-200 min-h-screen pb-20 px-5">
+    <div className="bg-gray-200 min-h-screen pb-40 md:pb-[470px] px-5">
       <div className="no-print">
         <PreviewTopBar
           onSettings={() => {

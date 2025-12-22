@@ -45,10 +45,8 @@ export default function NordicSlateTemplate({
       <div
         className="bg-white shadow-xl"
         style={{
-          width: 794,
-          height: 1123,
-          transform: isThumbnail ? "scale(0.32)" : undefined,
-          transformOrigin: "top left",
+          height: isThumbnail ? 1123 : "auto",
+          minHeight: !isThumbnail ? 1123 : undefined,
         }}
       >
         {/* ================= HEADER ================= */}
@@ -94,10 +92,11 @@ export default function NordicSlateTemplate({
         </header>
 
         {/* ================= BODY ================= */}
-        <section className="px-9 py-9 grid grid-cols-[30%_70%] gap-8">
+        <div className="px-9 py-9 grid grid-cols-[220px_1fr] gap-8">
           {/* ===== LEFT COLUMN ===== */}
           <aside className="space-y-9">
             {/* PROFILE */}
+            <section className="">
             {data.about && (
               <Block title="Profile" color={data.accentColor}>
                 <p className="text-xs text-gray-700 leading-relaxed">
@@ -105,8 +104,10 @@ export default function NordicSlateTemplate({
                 </p>
               </Block>
             )}
+            </section>
 
             {/* SKILLS */}
+            <section className="">
             {data.skills?.length > 0 && (
             <Block title="Skills" color={data.accentColor}>
               <div className="space-y-3 text-xs">
@@ -138,8 +139,10 @@ export default function NordicSlateTemplate({
               </div>
             </Block>
             )}
+            </section>
 
             {/* LANGUAGES */}
+            <section className="">
             {data.languages?.length > 0 && (
               <Block title="Languages" color={data.accentColor}>
                 <div className="space-y-3 text-xs">
@@ -171,8 +174,10 @@ export default function NordicSlateTemplate({
               </div>
               </Block>
             )}
+            </section>
 
             {/* SOCIAL LINKS */}
+            <section className="">
             {data.socialLinks?.length > 0 && (
               <Block title="Social Links" color={data.accentColor}>
                 <ul className="text-xs space-y-3">
@@ -195,6 +200,7 @@ export default function NordicSlateTemplate({
                 </ul>
               </Block>
             )}
+            </section>
           </aside>
 
           {/* ===== RIGHT COLUMN ===== */}
@@ -272,7 +278,7 @@ export default function NordicSlateTemplate({
               </Block>
             )}
           </main>
-        </section>
+        </div>
       </div>
     </div>
   );
@@ -290,7 +296,7 @@ function Block({
   color: string;
 }) {
   return (
-    <section>
+    <section className="">
       <div className="flex items-center gap-2 mb-4">
         <span className="h-4 w-1" style={{ backgroundColor: color }} />
         <h2 className="text-sm font-semibold uppercase tracking-widest">

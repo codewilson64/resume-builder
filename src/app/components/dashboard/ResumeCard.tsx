@@ -16,17 +16,17 @@ export default function ResumeCard({ resume }: { resume: ResumeData }) {
   };
 
   return (
-    <div className="flex items-start gap-3">
+    <div className="flex flex-col sm:flex-row items-start gap-3">
       {/* Preview */}
       <div
-        className="w-64 h-[360px] border rounded-md bg-gray-200 shadow-lg hover:shadow-xl transition cursor-pointer overflow-y-hidden"
+        className="w-64 h-[360px] border rounded-md bg-gray-200 shadow-lg hover:shadow-xl transition cursor-pointer overflow-hidden"
         onClick={() => router.push(`/resume/preview?id=${resume.resumeId}`)}
       >
         <TemplateRenderer resume={resume} variant="thumbnail" />
       </div>
 
     {/* Meta + Actions */}
-      <div className="flex flex-col justify-between gap-5">
+      <div className="flex flex-row sm:flex-col justify-between gap-3">
         {/* Meta */}
         <div>
           <p className="font-medium text-sm break-words sm:truncate sm:whitespace-nowrap">
@@ -38,7 +38,7 @@ export default function ResumeCard({ resume }: { resume: ResumeData }) {
         </div>
 
         {/* Actions */}
-        <div className="flex flex-col gap-2">
+        <div className="flex sm:flex-col gap-2">
           {/* Edit */}
           <button
             onClick={() => router.push(`/resume/finishing?id=${resume.resumeId}`)}

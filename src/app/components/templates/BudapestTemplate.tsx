@@ -45,10 +45,8 @@ export default function BudapestTemplate({ data, variant }: BudapestTemplateProp
       <div
         className="bg-white shadow-xl grid grid-cols-[220px_1fr]"
         style={{
-          width: isThumbnail ? 794 : 794,
-          height: 1123,
-          transform: isThumbnail ? "scale(0.32)" : undefined,
-          transformOrigin: "top left",
+          height: isThumbnail ? 1123 : "auto",
+          minHeight: !isThumbnail ? 1123 : undefined,
         }}
       >
         {/* ================= LEFT SIDEBAR ================= */}
