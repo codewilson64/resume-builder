@@ -3,6 +3,7 @@ import ChicagoTemplate from "@/app/components/templates/ChicagoTemplate";
 import type { ResumeData } from "@/app/types/resume";
 import NordicTemplate from "./templates/NordicTemplate";
 import AuroraTemplate from "./templates/AuroraTemplate";
+import AtlasTemplate from "./templates/AtlasTemplate";
 import ResumePage from "./ResumePage";
 
 interface TemplateRendererProps {
@@ -31,6 +32,10 @@ export default function TemplateRenderer({
 
     case "Aurora":
       Template = AuroraTemplate;
+      break;
+    
+    case "Atlas":
+      Template = AtlasTemplate;
       break;
 
     default:

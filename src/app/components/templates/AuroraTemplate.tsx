@@ -217,6 +217,32 @@ export default function AuroraTemplate({
             </Block>
           )}
 
+          {/* ================= PERSONAL DETAILS ================= */}
+          {(data.dateOfBirth || data.nationality || data.maritalStatus) && (
+            <Block title="Personal Details">
+              <ul className="text-sm space-y-2 text-gray-700">
+                {data.dateOfBirth && (
+                  <li>
+                    <span className="font-semibold">Date of Birth:</span>{" "}
+                    {data.dateOfBirth}
+                  </li>
+                )}
+                {data.nationality && (
+                  <li>
+                    <span className="font-semibold">Nationality:</span>{" "}
+                    {data.nationality}
+                  </li>
+                )}
+                {data.maritalStatus && (
+                  <li>
+                    <span className="font-semibold">Marital Status:</span>{" "}
+                    {data.maritalStatus}
+                  </li>
+                )}
+              </ul>
+            </Block>
+          )}
+
           {/* ================= SOCIAL LINKS ================= */}
           {data.socialLinks?.length > 0 && (
             <Block title="Social Links">

@@ -88,7 +88,7 @@ export default function NordicSlateTemplate({
                   <span>{data.email}</span>
                 </div>
               )}
-            </div>
+          </div>
         </header>
 
         {/* ================= BODY ================= */}
@@ -200,6 +200,36 @@ export default function NordicSlateTemplate({
                 </ul>
               </Block>
             )}
+            </section>
+
+            {/* PERSONAL DETAILS  */}
+            <section>
+            {(data.dateOfBirth || data.nationality || data.maritalStatus) && (
+                <section>
+                  <Block title="Personal Details" color={data.accentColor}>
+                    <ul className="text-xs space-y-2 text-gray-700">
+                      {data.dateOfBirth && (
+                        <li>
+                          <span className="font-semibold">Date of Birth:</span>{" "}
+                          {data.dateOfBirth}
+                        </li>
+                      )}
+                      {data.nationality && (
+                        <li>
+                          <span className="font-semibold">Nationality:</span>{" "}
+                          {data.nationality}
+                        </li>
+                      )}
+                      {data.maritalStatus && (
+                        <li>
+                          <span className="font-semibold">Marital Status:</span>{" "}
+                          {data.maritalStatus}
+                        </li>
+                      )}
+                    </ul>
+                  </Block>
+                </section>
+              )}
             </section>
           </aside>
 
