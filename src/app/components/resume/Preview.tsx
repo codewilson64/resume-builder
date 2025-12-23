@@ -9,6 +9,7 @@ import { updateResume } from "@/lib/actions/resume-action";
 import PreviewTopBar from "./PreviewTopBar";
 import TemplateRenderer from "../TemplateRenderer";
 import { useResumeSource } from "@/app/hooks/useResumeSource";
+import ResumeSkeleton from "../ResumeSkeleton";
 
 export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   const router = useRouter();
@@ -47,8 +48,6 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
     handlePrintBase();
   };
 
-  if (!resumeData) return <p>Loading…</p>;
-
   return (
     <div className="bg-gray-200 min-h-screen pb-40 md:pb-[470px] px-5">
       <div className="no-print">
@@ -73,7 +72,11 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
             }}
           >
             <div ref={printRef} className="resume-print">
+            {resumeData ? (
               <TemplateRenderer resume={resumeData} />
+            ) : (
+              <ResumeSkeleton />
+            )}
             </div>
           </div>
         </div>
