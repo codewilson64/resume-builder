@@ -17,7 +17,7 @@ export const createEmptyResume = (): ResumeData => ({
   socialLinks: [],
   about: "",
   hobbies: "",
-  template: "Budapest",
+  template: "Orion",
   accentColor: "#2D2D2D",
   fontFamily: "Poppins",
   resumeId: null,
