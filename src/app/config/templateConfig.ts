@@ -1,15 +1,11 @@
 export const templates = [
-  "Budapest",
-  "Chicago",
+  "Orion",
+  "Nova",
   "Nordic",
   "Aurora",
   "Atlas",
-  "Tokyo",
-  "New York",
-  "London",
-  "Madrid",
-  "Paris",
-  "Jakarta",
+  "Astra",
+  "Zenith",
 ] as const;
 
 export type TemplateName = (typeof templates)[number];

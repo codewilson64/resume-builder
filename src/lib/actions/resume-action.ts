@@ -5,7 +5,8 @@ import { getCurrentUser } from "@/lib/actions/auth-action";
 import { ResumeData } from "@/app/types/resume";
 import { mapPrismaResumeToResumeData } from "../mappers/resumeMapper";
 import { createGuestSession } from "./guest-action";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag, unstable_cache } from "next/cache";
+
 
 export async function createResumeForGuest() {
   let guestId: string | null = null;
@@ -126,6 +127,8 @@ export async function createResume(data: ResumeData) {
 }
 
 export async function updateResume(resumeId: string, data: ResumeData) {
+  const start = performance.now()
+
   const user = await getCurrentUser();
   if (!user?.id) throw new Error("User not authenticated");
 
@@ -207,7 +210,10 @@ export async function updateResume(resumeId: string, data: ResumeData) {
       },
     },
   });
-
+  const end = performance.now()
+  console.log(`Update query duration: ${end - start}ms`)
+  
+  revalidateTag("resume", "default");
   return resume;
 }
 
@@ -229,31 +235,43 @@ export async function getUserResumes(): Promise<ResumeData[]> {
   return resumes.map(mapPrismaResumeToResumeData)
 }
 
+const getResumeByIdCached = unstable_cache(
+  async (resumeId: string, userId: string) => {
+    const resume = await prisma.resume.findUnique({
+      where: {
+        id: resumeId,
+        userId,
+      },
+      include: {
+        experiences: true,
+        educations: true,
+        skills: true,
+        languages: true,
+        socialLinks: true,
+      },
+    });
+
+    if (!resume) return null;
+
+    return mapPrismaResumeToResumeData(resume);
+  },
+  // cache key factory
+  ["resume-by-id"],
+  { revalidate: 60, tags: ["resume"] },
+);
+
 export async function getResumeById(
   resumeId: string
 ): Promise<ResumeData | null> {
-  const user = await getCurrentUser();
 
+  const user = await getCurrentUser();
   if (!user?.id) throw new Error("User not authenticated");
 
-  const resume = await prisma.resume.findUnique({
-    where: {
-      id: resumeId,
-      userId: user.id,
-    },
-    include: {
-      experiences: true,
-      educations: true,
-      skills: true,
-      languages: true,
-      socialLinks: true,
-    },
-  });
-
-  if (!resume) return null;
-
-  return mapPrismaResumeToResumeData(resume);
+  const result = await getResumeByIdCached(resumeId, user.id);
+  
+  return result;
 }
+
 
 export async function deleteResumeById(resumeId: string): Promise<void> {
   const user = await getCurrentUser();

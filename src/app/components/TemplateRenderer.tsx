@@ -1,10 +1,12 @@
-import BudapestTemplate from "@/app/components/templates/BudapestTemplate";
-import ChicagoTemplate from "@/app/components/templates/ChicagoTemplate";
-import type { ResumeData } from "@/app/types/resume";
+import OrionTemplate from "@/app/components/templates/OrionTemplate";
+import NovaTemplate from "@/app/components/templates/NovaTemplate";
 import NordicTemplate from "./templates/NordicTemplate";
 import AuroraTemplate from "./templates/AuroraTemplate";
 import AtlasTemplate from "./templates/AtlasTemplate";
+import AstraTemplate from "./templates/AstraTemplate";
 import ResumePage from "./ResumePage";
+import ZenithTemplate from "./templates/ZenithTemplate";
+import type { ResumeData } from "@/app/types/resume";
 
 interface TemplateRendererProps {
   resume: ResumeData;
@@ -18,12 +20,12 @@ export default function TemplateRenderer({
   let Template;
 
   switch (resume.template) {
-    case "Budapest":
-      Template = BudapestTemplate;
+    case "Orion":
+      Template = OrionTemplate;
       break;
 
-    case "Chicago":
-      Template = ChicagoTemplate;
+    case "Nova":
+      Template = NovaTemplate;
       break;
 
     case "Nordic":
@@ -37,9 +39,17 @@ export default function TemplateRenderer({
     case "Atlas":
       Template = AtlasTemplate;
       break;
+    
+    case "Astra":
+      Template = AstraTemplate;
+      break;
+
+    case "Zenith":
+      Template = ZenithTemplate;
+      break;
 
     default:
-      Template = BudapestTemplate;
+      Template = OrionTemplate;
   }
 
   return (

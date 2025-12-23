@@ -29,7 +29,7 @@ export function mapPrismaResumeToResumeData(resume: ResumeWithRelations): Resume
     about: resume.about ?? undefined,
     hobbies: resume.hobbies ?? undefined,
 
-    template: isTemplateName(resume.template) ? resume.template : "Budapest",
+    template: isTemplateName(resume.template) ? resume.template : "Orion",
     accentColor: resume.accentColor,
     fontFamily: isFontName(resume.fontFamily) ? resume.fontFamily : "Poppins",
 

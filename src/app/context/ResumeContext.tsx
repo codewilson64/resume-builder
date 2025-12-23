@@ -40,7 +40,7 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
     socialLinks: [],
     about: "",
     hobbies: "",
-    template: "Budapest",
+    template: "Orion",
     accentColor: "#2D2D2D",
     fontFamily: "Poppins",
     resumeId: null
@@ -57,8 +57,6 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
       }
     }
   }, []);
-
-  console.log(resumeData)
 
   // Save changes to localStorage
   useEffect(() => {

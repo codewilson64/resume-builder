@@ -11,6 +11,7 @@ export default async function ProfilePage() {
   if (!session) redirect('/login')
 
   const resumes = await getUserResumes()
+  console.log(resumes)
   
   return (
     <div className="w-full min-h-screen flex justify-center py-12">

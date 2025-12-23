@@ -141,7 +141,7 @@ export default function AtlasTemplate({
             {(data.email || data.phone || data.address || data.city) && (
               <section>
                 <h2 className="text-sm font-bold mb-3">
-                  Details
+                  Contact
                 </h2>
 
                 {data.email && <p className="text-xs">{data.email}</p>}
