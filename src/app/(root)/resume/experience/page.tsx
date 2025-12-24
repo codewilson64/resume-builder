@@ -7,7 +7,7 @@ export default function ExperiencePage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen flex justify-center px-5 lg:px-0 py-12 bg-gray-50 relative">
+    <div className="min-h-screen flex justify-center px-5 lg:px-0 py-12 bg-slate-50 relative">
       <div className="w-full max-w-2xl space-y-6 pb-28">
        
       {/* Header */}

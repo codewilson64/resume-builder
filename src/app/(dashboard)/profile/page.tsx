@@ -16,10 +16,10 @@ export default async function ProfilePage() {
   
   return (
     <div className="w-full min-h-screen flex justify-center py-12">
-      <div className="w-full py-12 px-5 space-y-6">
-
+      <div className="w-full py-10 px-5 ">
+        <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between py-6">
           <h1 className="text-2xl font-bold text-gray-900">
             Your documents
           </h1>
@@ -29,6 +29,7 @@ export default async function ProfilePage() {
 
         {/* Resume Card */}
         <ResumeList resumes={resumes}/>
+      </div>
       </div>
     </div>
   );
