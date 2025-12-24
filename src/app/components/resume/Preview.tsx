@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useResume } from "@/app/context/ResumeContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useReactToPrint } from "react-to-print";
@@ -15,6 +15,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const resumeIdFromUrl = searchParams.get("id");
+  const [loading, setLoading] = useState(false)
 
   const { resumeData: draftResume} = useResume();
 
@@ -33,7 +34,9 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   });
 
   const handlePrint = async () => {
-    console.log("checking auth...")
+    if (loading) return;
+    setLoading(true)
+
     if (!isLoggedIn) {
       router.push("/signup");
       return;
@@ -44,8 +47,14 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
       return;
     }
 
-    await updateResume(resumeData.resumeId, resumeData);
-    handlePrintBase();
+    try {
+      await updateResume(resumeData.resumeId, resumeData);
+      handlePrintBase();
+    } catch (error) {
+      console.log("Download failed")
+    } finally {
+      setLoading(false)
+    }
   };
 
   return (
@@ -57,6 +66,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
           }}
           onDownload={handlePrint}
           onCancel={() => router.back()}
+          loading={loading}
         />
         <div className="h-20" />
       </div>

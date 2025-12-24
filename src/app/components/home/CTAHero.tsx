@@ -1,8 +1,20 @@
 'use client'
 
+import { useResume } from '@/app/context/ResumeContext';
+import { createResumeForGuest } from '@/lib/actions/resume-action';
 import { ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const CTA = () => {
+  const { setResumeId } = useResume();
+  const router = useRouter()
+
+  const handleBuildResume = async () => {
+    const resumeId = await createResumeForGuest();
+    setResumeId(resumeId)
+    router.push(`/resume/contact?id=${resumeId}`);
+  };
+
   return (
     <section className="relative overflow-hidden py-40 px-6 bg-gradient-to-br from-cyan-100 via-white to-blue-100">
       <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -19,7 +31,10 @@ const CTA = () => {
         </p>
 
         {/* Button */}
-        <button className="mt-10 px-10 py-4 text-lg font-semibold text-white bg-cyan-400 rounded-full shadow-lg hover:shadow-xl hover:opacity-90 transition-all duration-300 hover:-translate-y-1 mx-auto inline-flex items-center gap-2">
+        <button 
+          onClick={handleBuildResume}
+          className="mt-10 px-10 py-4 text-lg font-semibold text-white bg-cyan-400 rounded-full shadow-lg hover:shadow-xl hover:opacity-90 transition-all duration-300 hover:-translate-y-1 mx-auto inline-flex items-center gap-2"
+        >
           Build My Resume
           <ArrowRight size={22} />
         </button>

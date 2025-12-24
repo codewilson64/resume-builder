@@ -3,8 +3,20 @@
 import Image from "next/image";
 import marketingImage_1 from "../../../assets/MarketingImg_1.jpg";
 import marketingImage_2 from "../../../assets/MarketingImg_2.jpg";
+import { createResumeForGuest } from "@/lib/actions/resume-action";
+import { useResume } from "@/app/context/ResumeContext";
+import { useRouter } from "next/navigation";
 
 const MarketingHero = () => {
+  const { setResumeId } = useResume();
+  const router = useRouter()
+
+  const handleBuildResume = async () => {
+    const resumeId = await createResumeForGuest();
+    setResumeId(resumeId)
+    router.push(`/resume/contact?id=${resumeId}`);
+  };
+
   return (
     <>
       {/* Section 1 */}
@@ -37,7 +49,10 @@ const MarketingHero = () => {
             even if you're not a designer.
           </p>
 
-          <button className="mt-8 bg-cyan-400 text-white text-lg px-8 py-4 rounded-full shadow-md hover:opacity-85 transition">
+          <button 
+            onClick={handleBuildResume}
+            className="mt-8 bg-cyan-400 text-white text-lg px-8 py-4 rounded-full shadow-md hover:opacity-85 transition"
+          >
             Create My Resume
           </button>
         </div>

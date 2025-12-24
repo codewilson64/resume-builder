@@ -6,12 +6,14 @@ interface PreviewTopBarProps {
   onSettings: () => void;
   onDownload: () => void;
   onCancel: () => void;
+  loading: boolean;
 }
 
 export default function PreviewTopBar({
   onSettings,
   onDownload,
   onCancel,
+  loading
 }: PreviewTopBarProps) {
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-gray-900 text-white">
@@ -27,14 +29,16 @@ export default function PreviewTopBar({
         {/* Center: Download */}
         <button
           onClick={onDownload}
+          disabled={loading}
           className="px-5 py-2 rounded-md bg-blue-600 hover:bg-blue-700 transition font-semibold text-sm"
         >
-          Download
+          {loading ? "Downloading..." : "Download"}
         </button>
 
         {/* Right: Cancel */}
         <button
           onClick={onCancel}
+          disabled={loading}
           className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition"
         >
           <X size={18} />

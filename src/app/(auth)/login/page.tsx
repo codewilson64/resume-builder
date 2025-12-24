@@ -22,6 +22,8 @@ export default function Login() {
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if(loading) return
     setLoading(true)
     setError(null)
     
@@ -37,8 +39,6 @@ export default function Login() {
       await migrateGuestToUser();
       router.push("/profile");
     }
-  
-    setLoading(false);
   }
 
   return (

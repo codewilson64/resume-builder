@@ -27,8 +27,11 @@ export default function Signup() {
   // handle sign up
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if(loading) return
     setLoading(true)
     setError(null)
+    
     try {
       const response = await signUp(name, email, password)
 
@@ -40,14 +43,15 @@ export default function Signup() {
         } else {
           router.push("/profile");
         }
+        
+        return
       }
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
+        setLoading(false)
       }
-    } finally {
-      setLoading(false)
-    }
+    } 
   }
 
   return (
