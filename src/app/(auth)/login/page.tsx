@@ -11,6 +11,8 @@ import { migrateGuestToUser } from "@/lib/actions/guest-action";
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const router = useRouter()
   const { resumeData } = useResume()
 
@@ -20,15 +22,23 @@ export default function Login() {
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
-      try {
-        const response = await signIn(email, password)
-        if(response.user) {
-          await migrateGuestToUser()
-          router.push('/profile')
-        }
-      } catch (error) {
-        console.log("Error", error)
-      }
+    setLoading(true)
+    setError(null)
+    
+    const result = await signIn(email, password);
+
+    if (!result.success) {
+      setError(result.message ?? null);
+      setLoading(false);
+      return;
+    }
+  
+    if (result.user) {
+      await migrateGuestToUser();
+      router.push("/profile");
+    }
+  
+    setLoading(false);
   }
 
   return (
@@ -44,14 +54,14 @@ export default function Login() {
         </p>
 
       {/* Form */}
-      <form onSubmit={handleSignIn} className="mt-8 space-y-5">
+      <form onSubmit={handleSignIn} className="mt-8 space-y-5" noValidate>
         {/* Email Input */}
         <div className="mb-5">
           <label className="text-gray-700 font-semibold text-sm">Email</label>
           <div className="flex items-center gap-2 border rounded-lg px-3 py-3 mt-1">
             <Mail size={18} className="text-gray-400" />
             <input
-              type="email"
+              type="text"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -80,16 +90,19 @@ export default function Login() {
         {/* Login Button */}
         <button
           type="submit"
-          className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold text-lg shadow-md hover:opacity-90 transition"
+          disabled={loading}
+          className="w-full bg-cyan-400 text-white py-3 rounded-lg font-semibold text-lg shadow-md hover:opacity-90 transition"
         >
-          Login
+          {loading ? "Logging in..." : "Log in"}
         </button>
       </form>
+
+      {error && <p className="text-red-500 text-sm text-center mt-5">{error}</p>}
 
         {/* Switch Auth */}
         <p className="text-center text-gray-500 mt-6 text-sm">
           Don't have an account?{" "}
-          <Link href="/signup" className="text-orange-500 font-semibold hover:underline">
+          <Link href="/signup" className="text-cyan-400 font-semibold hover:underline">
             Sign Up
           </Link>
         </p>

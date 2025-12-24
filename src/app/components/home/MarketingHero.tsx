@@ -16,17 +16,16 @@ const MarketingHero = () => {
             src={marketingImage_1}
             alt="Person working on resume"
             className="rounded-2xl shadow-lg object-cover"
-            width={450}
-            height={350}
+            width={550}
+            height={420}
           />
         </div>
 
         {/* Text */}
         <div className="order-1 md:order-2">
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight md:leading-snug">
             Stand Out in Your Career{" "}
-            <br className="hidden md:block" />
-            <span className="text-orange-500">
+            <span className="block text-cyan-400">
               With a Resume That Impresses.
             </span>
           </h1>
@@ -38,7 +37,7 @@ const MarketingHero = () => {
             even if you're not a designer.
           </p>
 
-          <button className="mt-8 bg-orange-500 text-white text-lg px-8 py-4 rounded-full shadow-md hover:opacity-85 transition">
+          <button className="mt-8 bg-cyan-400 text-white text-lg px-8 py-4 rounded-full shadow-md hover:opacity-85 transition">
             Create My Resume
           </button>
         </div>
@@ -50,10 +49,9 @@ const MarketingHero = () => {
 
         {/* Text */}
         <div className="order-2 md:order-1">
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+          <h2 className="text-4xl md:text-5xl font-bold leading-tight md:leading-snug">
             Create a professional CV{" "}
-            <br className="hidden md:block" />
-            <span className="text-orange-500">
+            <span className="block text-cyan-400">
               in minutes and get hired faster.
             </span>
           </h2>

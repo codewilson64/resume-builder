@@ -8,9 +8,11 @@ const AdvantagesHero = () => {
       <div className="max-w-7xl mx-auto text-center">
         
         {/* Heading */}
-        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
-          Everything You Need to <br className="hidden md:block" />
-          <span className="text-orange-500">Build a Winning Resume</span>
+        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight md:leading-snug">
+          Everything You Need to
+          <span className="block text-cyan-400">
+            Build a Winning Resume
+          </span>
         </h2>
 
         <p className="text-gray-600 max-w-2xl mx-auto mt-4 text-lg">
@@ -23,7 +25,7 @@ const AdvantagesHero = () => {
           {/* Feature 1 */}
           <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition">
             <div className="flex items-center justify-center mb-5">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 text-2xl">
+              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-cyan-100 text-cyan-400 text-2xl">
                 <Clock />
               </div>
             </div>
@@ -38,7 +40,7 @@ const AdvantagesHero = () => {
           {/* Feature 2 */}
           <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition">
             <div className="flex items-center justify-center mb-5">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 text-2xl">
+              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-cyan-100 text-cyan-400 text-2xl">
                 <Upload />
               </div>
             </div>
@@ -53,7 +55,7 @@ const AdvantagesHero = () => {
           {/* Feature 3 */}
           <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition">
             <div className="flex items-center justify-center mb-5">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 text-2xl">
+              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-cyan-100 text-cyan-400 text-2xl">
                 <Search />
               </div>
             </div>
@@ -68,7 +70,7 @@ const AdvantagesHero = () => {
           {/* Feature 4 */}
           <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition">
             <div className="flex items-center justify-center mb-5">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange-100 text-orange-500 text-2xl">
+              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-cyan-100 text-cyan-400 text-2xl">
                 <Palette />
               </div>
             </div>

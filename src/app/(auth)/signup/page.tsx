@@ -8,11 +8,14 @@ import { signUp } from "@/lib/actions/auth-action";
 import { useResume } from "@/app/context/ResumeContext";
 import { hasResumeData } from "@/utils/hasResumeData";
 import { migrateGuestToUser } from "@/lib/actions/guest-action";
+import { SignUpError } from "@/lib/errors";
 
 export default function Signup() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const router = useRouter()
   const { resumeData } = useResume()
 
@@ -25,6 +28,8 @@ export default function Signup() {
   // handle sign up
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLoading(true)
+    setError(null)
     try {
       const response = await signUp(name, email, password)
 
@@ -37,14 +42,18 @@ export default function Signup() {
           router.push("/profile");
         }
       }
-    } catch (error) {
-      console.log("Error", error)
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      }
+    } finally {
+      setLoading(false)
     }
   }
 
   return (
     <section className="w-[900px] min-h-screen flex items-center justify-center px-6">
-      <div className="w-full max-w-xl bg-white rounded-2xl shadow-lg p-8">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
 
         {/* Title */}
         <h2 className="text-3xl font-bold text-center">Create an Account</h2>
@@ -71,7 +80,7 @@ export default function Signup() {
           <div className="flex items-center gap-3 border rounded-lg px-4 py-3 bg-gray-50 focus-within:bg-white focus-within:ring-2 ring-orange-500 transition">
             <Mail className="text-gray-400" size={20} />
             <input
-              type="email"
+              type="text"
               placeholder="Email Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -94,18 +103,21 @@ export default function Signup() {
           {/* Button */}
           <button
             type="submit"
-            className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition shadow-sm hover:shadow-lg"
+            disabled={loading}
+            className="w-full bg-cyan-400 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition shadow-sm hover:shadow-lg"
           >
-            Sign Up
+            {loading ? "Signing up..." : "Sign up"}
           </button>
         </form>
+
+        {error && <p className="text-red-500 text-sm text-center mt-5">{error}</p>}
 
         {/* Footer */}
         <p className="text-gray-500 text-center mt-6 text-sm">
           Already have an account?{" "}
           <Link 
             href="/login"
-            className="text-orange-500 font-semibold hover:underline"
+            className="text-cyan-400 font-semibold hover:underline"
           >
             Log in
           </Link>

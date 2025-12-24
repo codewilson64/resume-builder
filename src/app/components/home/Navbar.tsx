@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import logo from "../../../../public/karierly_logo.png"
 import { usePathname, useRouter } from "next/navigation";
 
 const Navbar = () => {
@@ -17,19 +19,29 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
         
         {/* Logo */}
-        <h1 
-          className="text-xl font-bold cursor-pointer"
+        <div
+          className="flex items-center cursor-pointer"
           onClick={() => router.push("/")}
         >
-          ResumeBuilder
-        </h1>
+          <Image
+            src={logo}
+            alt="Karierly logo"
+            width={55}
+            height={55}
+            priority
+          />
+
+          <h1 className="text-xl font-bold">
+            Karierly
+          </h1>
+        </div>
 
         {/* Hide buttons on login/signup routes */}
         {!hideButton && (
           <>
             <button
               onClick={() => router.push("/login")}
-              className="text-sm text-white bg-orange-500 rounded-full px-6 py-3"
+              className="text-sm text-white bg-cyan-400 rounded-full px-6 py-3"
             >
               Login
             </button>

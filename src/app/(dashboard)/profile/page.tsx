@@ -1,3 +1,4 @@
+import CreateResumeButton from "@/app/components/dashboard/CreateResumeButton";
 import ResumeList from "@/app/components/dashboard/ResumeList";
 import { getCurrentUser } from "@/lib/actions/auth-action";
 import { getUserResumes } from "@/lib/actions/resume-action";
@@ -18,9 +19,13 @@ export default async function ProfilePage() {
       <div className="w-full py-12 px-5 space-y-6">
 
         {/* Header */}
-        <h1 className="text-2xl font-bold text-gray-900">
-          Welcome, {session?.name}
-        </h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-gray-900">
+            Your documents
+          </h1>
+
+          <CreateResumeButton />
+        </div>
 
         {/* Resume Card */}
         <ResumeList resumes={resumes}/>

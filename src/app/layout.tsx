@@ -14,8 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "ResumeKu",
+  title: "Karierly",
   description: "Resume Builder",
+  icons: {
+    icon: "/karierly_logo.svg"
+  }
 };
 
 export default function RootLayout({ 

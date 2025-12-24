@@ -8,8 +8,8 @@ export default function AboutPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen flex justify-center px-5 sm:px-0 py-12 bg-gray-50 relative">
-      <div className="w-full max-w-lg space-y-6 pb-28">
+    <div className="min-h-screen flex justify-center px-5 lg:px-0 py-12 bg-gray-50 relative">
+      <div className="w-full max-w-2xl space-y-6 pb-28">
 
         {/* Header */}
         <div className="relative flex items-center justify-center">
@@ -34,7 +34,7 @@ export default function AboutPage() {
       </div>
 
       {/* Bottom button */}
-      <div className="absolute bottom-0 left-0 right-0 bg-gray-50 px-5 py-5">
+      <div className="max-w-2xl mx-auto absolute bottom-0 left-0 right-0 bg-gray-50 px-5 lg:px-0 py-5">
         <button
           onClick={() => router.push("/resume/finishing")}
           className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium transition"
