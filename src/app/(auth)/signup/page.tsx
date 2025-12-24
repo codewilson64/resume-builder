@@ -8,7 +8,6 @@ import { signUp } from "@/lib/actions/auth-action";
 import { useResume } from "@/app/context/ResumeContext";
 import { hasResumeData } from "@/utils/hasResumeData";
 import { migrateGuestToUser } from "@/lib/actions/guest-action";
-import { SignUpError } from "@/lib/errors";
 
 export default function Signup() {
   const [name, setName] = useState('')
@@ -93,7 +92,7 @@ export default function Signup() {
             <Lock className="text-gray-400" size={20} />
             <input
               type="password"
-              placeholder="Password"
+              placeholder="Password (8+ characters)"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-transparent outline-none"

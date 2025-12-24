@@ -23,7 +23,7 @@ const MarketingHero = () => {
 
         {/* Text */}
         <div className="order-1 md:order-2">
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight md:leading-snug">
+          <h1 className="text-3xl md:text-5xl font-bold leading-tight md:leading-snug">
             Stand Out in Your Career{" "}
             <span className="block text-cyan-400">
               With a Resume That Impresses.
@@ -49,7 +49,7 @@ const MarketingHero = () => {
 
         {/* Text */}
         <div className="order-2 md:order-1">
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight md:leading-snug">
+          <h2 className="text-3xl md:text-5xl font-bold leading-tight md:leading-snug">
             Create a professional CV{" "}
             <span className="block text-cyan-400">
               in minutes and get hired faster.
