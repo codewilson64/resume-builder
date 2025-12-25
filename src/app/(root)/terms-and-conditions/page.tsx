@@ -1,136 +1,177 @@
 export default function TermsAndConditions() {
-    return (
-      <main className="max-w-4xl mx-auto px-6 py-12 text-gray-800 space-y-8">
-        <h1 className="text-3xl font-bold">Syarat dan Ketentuan</h1>
-  
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">1. Ketentuan Penggunaan</h2>
-          <p>
-            Karierly (selanjutnya disebut “Platform”) disediakan kepada Anda
-            sebagai pengguna dengan syarat Anda menerima seluruh syarat,
-            ketentuan, dan pemberitahuan yang tercantum dalam dokumen ini.
-          </p>
-        </section>
-  
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">2. Gambaran Umum</h2>
-          <p>
-            Dengan mengakses dan menggunakan Platform ini, Anda menyetujui untuk
-            terikat oleh Syarat dan Ketentuan ini. Jika Anda tidak menyetujui
-            ketentuan apa pun, Anda diwajibkan untuk menghentikan penggunaan
-            Platform.
-          </p>
-        </section>
-  
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">
-            3. Perubahan Layanan dan Ketentuan
-          </h2>
-          <p>
-            Kami berhak untuk mengubah, memperbarui, atau menghentikan sebagian
-            atau seluruh layanan, fitur, harga, maupun ketentuan ini sewaktu-waktu
-            tanpa pemberitahuan sebelumnya. Penggunaan berkelanjutan atas Platform
-            dianggap sebagai persetujuan atas perubahan tersebut.
-          </p>
-        </section>
-  
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">4. Lisensi Penggunaan</h2>
-          <p>
-            Kami memberikan Anda lisensi terbatas, non-eksklusif, dan tidak dapat
-            dialihkan untuk menggunakan Platform ini hanya untuk keperluan pribadi
-            atau profesional sesuai fungsinya sebagai pembuat resume.
-          </p>
-          <p>
-            Anda dilarang untuk menyalin, memodifikasi, mendistribusikan,
-            mendekompilasi, atau menjual kembali Platform maupun bagian darinya
-            tanpa izin tertulis dari kami.
-          </p>
-        </section>
-  
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">5. Hak Kekayaan Intelektual</h2>
-          <p>
-            Seluruh konten, desain, logo, kode, dan dokumentasi pada Platform ini
-            merupakan milik Karierly atau pihak yang memberikan lisensi, dan
-            dilindungi oleh hukum hak cipta yang berlaku di Indonesia.
-          </p>
-        </section>
-  
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">6. Biaya dan Pembayaran</h2>
-          <p>
-            Beberapa fitur Platform dapat dikenakan biaya. Seluruh pembayaran
-            diproses melalui penyedia pembayaran pihak ketiga (termasuk Midtrans).
-            Biaya yang telah dibayarkan bersifat final kecuali ditentukan lain
-            dalam kebijakan pengembalian.
-          </p>
-        </section>
-  
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">7. Kelayakan Pengguna</h2>
-          <p>
-            Platform ini dapat digunakan oleh individu untuk keperluan pribadi,
-            profesional, maupun bisnis kecil. Penggunaan komersial skala besar
-            dapat memerlukan perjanjian terpisah.
-          </p>
-        </section>
-  
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">8. Dukungan Layanan</h2>
-          <p>
-            Kami menyediakan dukungan layanan melalui email atau kanal resmi yang
-            tersedia di Platform. Waktu respon dapat bervariasi tergantung volume
-            permintaan.
-          </p>
-        </section>
-  
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">9. Penghentian Layanan</h2>
-          <p>
-            Kami berhak untuk menangguhkan atau menghentikan akses Anda ke Platform
-            apabila terjadi pelanggaran terhadap Syarat dan Ketentuan ini atau
-            aktivitas yang dianggap merugikan Platform maupun pengguna lain.
-          </p>
-        </section>
-  
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">10. Kerahasiaan</h2>
-          <p>
-            Data dan informasi pribadi pengguna akan dikelola sesuai dengan
-            Kebijakan Privasi kami. Kami berkomitmen untuk menjaga keamanan dan
-            kerahasiaan data pengguna.
-          </p>
-        </section>
-  
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">
-            11. Penyangkalan & Tanggung Jawab
-          </h2>
-          <p>
-            Platform disediakan “sebagaimana adanya”. Kami tidak menjamin bahwa
-            layanan akan selalu bebas dari gangguan atau kesalahan. Kami tidak
-            bertanggung jawab atas kerugian tidak langsung yang timbul dari
-            penggunaan Platform.
-          </p>
-        </section>
-  
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">12. Hukum yang Berlaku</h2>
-          <p>
-            Syarat dan Ketentuan ini diatur dan ditafsirkan berdasarkan hukum yang
-            berlaku di Republik Indonesia.
-          </p>
-        </section>
-  
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold">13. Kontak</h2>
-          <p>
-            Apabila Anda memiliki pertanyaan terkait Syarat dan Ketentuan ini,
-            silakan hubungi kami melalui email resmi yang tercantum di Platform.
-          </p>
-        </section>
-      </main>
-    );
-  }
-  
+  return (
+    <main className="max-w-4xl mx-auto px-6 py-20 text-gray-800 space-y-8">
+      <h1 className="text-3xl font-bold">Terms and Conditions</h1>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">1. Terms of Use</h2>
+        <p>
+          Karierly (hereinafter referred to as the “Platform”) is provided to you
+          as a user on the condition that you accept all terms, conditions, and
+          notices stated in this document.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">2. Overview</h2>
+        <p>
+          By accessing and using this Platform, you agree to be bound by these
+          Terms and Conditions. If you do not agree with any part of these terms,
+          you must discontinue use of the Platform.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">
+          3. Changes to Services and Terms
+        </h2>
+        <p>
+          We reserve the right to modify, update, or discontinue any part of the
+          services, features, pricing, or these terms at any time without prior
+          notice. Continued use of the Platform constitutes acceptance of such
+          changes.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">4. License to Use</h2>
+        <p>
+          We grant you a limited, non-exclusive, and non-transferable license to
+          use the Platform solely for personal or professional purposes in
+          accordance with its function as a resume-building tool.
+        </p>
+        <p>
+          You are prohibited from copying, modifying, distributing,
+          decompiling, or reselling the Platform or any part of it without our
+          prior written consent.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">
+          5. Intellectual Property Rights
+        </h2>
+        <p>
+          All content, designs, logos, code, and documentation on this Platform
+          are the property of Karierly or its licensors and are protected under
+          applicable intellectual property laws.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">6. Fees and Payments</h2>
+        <p>
+          Certain features of the Platform may require payment. All payments are
+          processed through third-party payment providers. Fees that have been
+          paid are non-refundable unless otherwise stated in the applicable
+          refund policy.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">7. User Eligibility</h2>
+        <p>
+          The Platform may be used by individuals for personal, professional, or
+          small business purposes. Large-scale commercial use may require a
+          separate agreement.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">8. Customer Support</h2>
+        <p>
+          We provide customer support via email or other official channels
+          available on the Platform. Response times may vary depending on the
+          volume of requests.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">9. Service Termination</h2>
+        <p>
+          We reserve the right to suspend or terminate your access to the
+          Platform if you violate these Terms and Conditions or engage in
+          activities that may harm the Platform or other users.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">10. Confidentiality</h2>
+        <p>
+          User data and personal information will be handled in accordance with
+          our Privacy Policy. We are committed to maintaining the security and
+          confidentiality of user data.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">
+          11. Disclaimer and Limitation of Liability
+        </h2>
+        <p>
+          The Platform is provided “as is.” We do not guarantee that the service
+          will be uninterrupted or error-free. We are not responsible for any
+          indirect damages arising from the use of the Platform.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">12. Governing Law</h2>
+        <p>
+          These Terms and Conditions are governed by and interpreted in
+          accordance with the laws of the Republic of Indonesia.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">13. Contact</h2>
+        <p>
+          If you have any questions regarding these Terms and Conditions, please
+          contact us via the official email listed on the Platform.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+  <h2 className="text-xl font-semibold">14. Refund Policy</h2>
+
+  <p>
+    We want you to be satisfied with our services. If you are not satisfied for
+    any reason, you may be eligible for a refund subject to the terms below.
+  </p>
+
+  <p>
+    Refund requests must be submitted within the applicable refund period,
+    calculated from the date of the initial payment:
+  </p>
+
+  <ul className="list-disc pl-6 space-y-2">
+    <li>
+      <strong>Weekly subscription:</strong> Refund requests must be made within
+      7 days of the initial purchase.
+    </li>
+    <li>
+      <strong>Monthly subscription:</strong> Refund requests must be made within
+      30 days of the initial purchase.
+    </li>
+  </ul>
+
+  <p>
+    Refunds apply only to the first billing cycle. Renewal payments made after
+    the refund period are non-refundable.
+  </p>
+
+  <p>
+    To request a refund, you must contact us through our official support
+    channels by sending us an email at <a href="mailto:wilsonnn948@gmail.com" className="text-blue-600 hover:underline">wilsonnn948@gmail.com</a> with your account details and payment information. Approved refunds
+    will be processed back to the original payment method.
+  </p>
+
+  <p>
+    We reserve the right to deny refund requests that involve abuse, fraud, or
+    violations of these Terms and Conditions.
+  </p>
+</section>
+
+    </main>
+  );
+}

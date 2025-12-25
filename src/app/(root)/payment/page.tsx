@@ -1,33 +1,33 @@
 "use client";
 
 import { useState } from "react";
-import { Check } from 'lucide-react';
+import { Check } from "lucide-react";
 
-type Plan = "7day" | "monthly";
+type Plan = "weekly" | "monthly";
 
 const PLAN_CONFIG = {
-  "7day": {
-    label: "Akses Mingguan",
-    priceLabel: "Rp. 59,000",
-    renewalPrice: "Rp. 59,000",
-    renewalPeriod: "minggu",
+  weekly: {
+    label: "Weekly Access",
+    priceLabel: "$2.95",
+    renewalPrice: "$2.95",
+    renewalPeriod: "week",
     refundDays: 7,
     renewalText:
-      "Setelah 7 hari, langganan akan diperpanjang otomatis dan Rp. 59,000 akan ditagih setiap minggu. Anda dapat membatalkan kapan pun.",
+      "After 7 days, your subscription will automatically renew and $2.95 will be charged every week. You can cancel at any time.",
   },
   monthly: {
-    label: "Akses Bulanan",
-    priceLabel: "Rp. 189,000",
-    renewalPrice: "Rp. 189,000",
-    renewalPeriod: "bulan",
+    label: "Monthly Access",
+    priceLabel: "$9.95",
+    renewalPrice: "$9.95",
+    renewalPeriod: "month",
     refundDays: 30,
     renewalText:
-      "Setelah 30 hari, langganan akan diperpanjang otomatis dan Rp. 189,000 akan ditagih setiap bulan. Anda dapat membatalkan kapan pun.",
+      "After 30 days, your subscription will automatically renew and $9.95 will be charged every month. You can cancel at any time.",
   },
 };
 
 export default function PaymentPage() {
-  const [plan, setPlan] = useState<Plan>("7day");
+  const [plan, setPlan] = useState<Plan>("weekly");
   const meta = PLAN_CONFIG[plan];
 
   return (
@@ -37,10 +37,10 @@ export default function PaymentPage() {
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-xl font-semibold text-gray-900">
-            Download resume profesional Anda
+            Download your professional resume
           </h1>
           <p className="text-sm text-gray-500">
-            Pilih paket untuk melanjutkan
+            Choose a plan to continue
           </p>
         </div>
 
@@ -70,9 +70,9 @@ export default function PaymentPage() {
                       {p.label}
                     </h3>
 
-                    {key === "7day" && (
+                    {key === "weekly" && (
                       <span className="text-xs bg-cyan-100 text-cyan-600 px-2 py-0.5 rounded-full">
-                        Paling Populer
+                        Most Popular
                       </span>
                     )}
                   </div>
@@ -92,52 +92,51 @@ export default function PaymentPage() {
         <ul className="space-y-2 text-sm text-gray-700">
           <li className="flex items-start gap-2">
             <Check className="mt-0.5 h-4 w-4 text-green-500 shrink-0" />
-            <span>Pembuatan resume tanpa batas.</span>
-        </li>
+            <span>Unlimited resume creation.</span>
+          </li>
 
-        <li className="flex items-start gap-2">
+          <li className="flex items-start gap-2">
             <Check className="mt-0.5 h-4 w-4 text-green-500 shrink-0" />
-            <span>Pembuatan surat lamaran tanpa batas.</span>
-        </li>
+            <span>Unlimited cover letter creation.</span>
+          </li>
 
-        <li className="flex items-start gap-2">
+          <li className="flex items-start gap-2">
             <Check className="mt-0.5 h-4 w-4 text-green-500 shrink-0" />
-            <span>Manfaatkan dukungan prioritas.</span>
-        </li>
+            <span>Enjoy priority support.</span>
+          </li>
 
-        <li className="flex items-start gap-2">
+          <li className="flex items-start gap-2">
             <Check className="mt-0.5 h-4 w-4 text-green-500 shrink-0" />
             <span>{meta.renewalText}</span>
-        </li>
+          </li>
 
-        <li className="flex items-start gap-2">
+          <li className="flex items-start gap-2">
             <Check className="mt-0.5 h-4 w-4 text-green-500 shrink-0" />
             <span>
-            Jika Anda tidak puas atas alasan apa pun dalam{" "}
-            <span className="font-medium">{meta.refundDays} hari</span>{" "}
-            pertama, hubungi kami dan kami akan mengembalikan uang Anda.
+              If you are not satisfied for any reason within the first{" "}
+              <span className="font-medium">{meta.refundDays} days</span>,{" "}
+              contact us and we will refund your money.
             </span>
-        </li>
+          </li>
         </ul>
-
 
         {/* Agreement */}
         <p className="text-xs text-gray-500 text-center leading-relaxed">
-          Dengan melanjutkan, Anda menyetujui{" "}
-        <a
-          href="/terms-and-conditions"
-          className="text-cyan-600 hover:underline font-medium"
-        >
-          Syarat & Ketentuan
-        </a>{" "}
-          serta{" "}
-        <a
-          href="/privacy-policy"
-          className="text-cyan-600 hover:underline font-medium"
-        >
-          Kebijakan Privasi
-        </a>{" "}
-          kami.
+          By continuing, you agree to our{" "}
+          <a
+            href="/terms-and-conditions"
+            className="text-cyan-600 hover:underline font-medium"
+          >
+            Terms & Conditions
+          </a>{" "}
+          and{" "}
+          <a
+            href="/privacy-policy"
+            className="text-cyan-600 hover:underline font-medium"
+          >
+            Privacy Policy
+          </a>
+          .
         </p>
 
         {/* CTA */}
@@ -145,7 +144,7 @@ export default function PaymentPage() {
           onClick={() => alert(`Selected plan: ${plan}`)}
           className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-medium py-3 rounded-lg transition"
         >
-          Lanjutkan
+          Continue
         </button>
 
       </div>

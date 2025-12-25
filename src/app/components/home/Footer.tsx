@@ -37,6 +37,13 @@ export default function Footer() {
               Privacy Policy
             </Link>
 
+            <Link
+              href="/payment"
+              className="hover:text-gray-900 transition"
+            >
+              Pricing
+            </Link>
+
             <a
               href="mailto:wilsonnn948@gmail.com"
               className="hover:text-gray-900 transition"
