@@ -4,6 +4,7 @@ import CTA from "../components/home/CTAHero";
 import Hero from "../components/home/Hero";
 import MarketingHero from "../components/home/MarketingHero";
 import { redirect } from "next/navigation";
+import Footer from "../components/home/Footer";
 
 export default async function Home() {
   const user = await getCurrentUser()
@@ -16,6 +17,7 @@ export default async function Home() {
       <MarketingHero />
       <AdvantagesHero />
       <CTA />
+      <Footer />
     </main>
   )
 }
