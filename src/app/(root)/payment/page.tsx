@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Check } from 'lucide-react';
 
 type Plan = "7day" | "monthly";
 
@@ -89,16 +90,36 @@ export default function PaymentPage() {
 
         {/* Features */}
         <ul className="space-y-2 text-sm text-gray-700">
-          <li>✔ Pembuatan resume tanpa batas</li>
-          <li>✔ Pembuatan surat lamaran tanpa batas</li>
-          <li>✔ Manfaatkan dukungan prioritas</li>
-          <li>✔ {meta.renewalText}</li>
-          <li>
-            ✔ Jika Anda tidak puas atas alasan apa pun dalam{" "}
+          <li className="flex items-start gap-2">
+            <Check className="mt-0.5 h-4 w-4 text-green-500 shrink-0" />
+            <span>Pembuatan resume tanpa batas.</span>
+        </li>
+
+        <li className="flex items-start gap-2">
+            <Check className="mt-0.5 h-4 w-4 text-green-500 shrink-0" />
+            <span>Pembuatan surat lamaran tanpa batas.</span>
+        </li>
+
+        <li className="flex items-start gap-2">
+            <Check className="mt-0.5 h-4 w-4 text-green-500 shrink-0" />
+            <span>Manfaatkan dukungan prioritas.</span>
+        </li>
+
+        <li className="flex items-start gap-2">
+            <Check className="mt-0.5 h-4 w-4 text-green-500 shrink-0" />
+            <span>{meta.renewalText}</span>
+        </li>
+
+        <li className="flex items-start gap-2">
+            <Check className="mt-0.5 h-4 w-4 text-green-500 shrink-0" />
+            <span>
+            Jika Anda tidak puas atas alasan apa pun dalam{" "}
             <span className="font-medium">{meta.refundDays} hari</span>{" "}
             pertama, hubungi kami dan kami akan mengembalikan uang Anda.
-          </li>
+            </span>
+        </li>
         </ul>
+
 
         {/* Agreement */}
         <p className="text-xs text-gray-500 text-center leading-relaxed">
