@@ -4,7 +4,6 @@ import { signOut } from "@/lib/actions/auth-action";
 import Image from "next/image";
 import logo from "../../../public/karierly_logo.png"
 import { useRouter } from "next/navigation";
-import Footer from "../components/home/Footer";
 
 export default function DashboardLayout({ 
   children 
