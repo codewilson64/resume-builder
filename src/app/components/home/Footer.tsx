@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import logo from '../../../../public/karierly_logo.png'
 
+
 export default function Footer() {
   return (
     <footer className="bg-white">
@@ -37,12 +38,12 @@ export default function Footer() {
               Privacy Policy
             </Link>
 
-            <Link
-              href="/payment"
-              className="hover:text-gray-900 transition"
-            >
-              Pricing
-            </Link>
+              <Link
+                href="/payment"
+                className="hover:text-gray-900 transition"
+              >
+                Pricing
+              </Link>
 
             <a
               href="mailto:wilsonnn948@gmail.com"
