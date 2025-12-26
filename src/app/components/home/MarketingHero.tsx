@@ -44,7 +44,7 @@ const MarketingHero = () => {
 
           <p className="text-gray-600 mt-5 text-lg">
             Want to land more interviews? A polished resume can set you apart 
-            from other applicants. ResumeForge gives you access to modern, 
+            from other applicants. ConfidenCV gives you access to modern, 
             employer-approved templates you can customize in minutes — 
             even if you're not a designer.
           </p>

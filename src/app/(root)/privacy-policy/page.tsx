@@ -15,9 +15,9 @@ export default function PrivacyPolicy() {
         {/* Content */}
         <div className="space-y-10 text-gray-700 leading-relaxed">
           <p>
-            Karierly respects and protects user privacy. This Privacy Policy
+            ConfidenCV respects and protects user privacy. This Privacy Policy
             explains how we collect, use, and safeguard your personal information
-            when you use Karierly’s services.
+            when you use ConfidenCV’s services.
           </p>
 
           <section className="space-y-4">
@@ -40,7 +40,7 @@ export default function PrivacyPolicy() {
             </h2>
             <p>The information we collect is used to:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Provide and manage Karierly services</li>
+              <li>Provide and manage ConfidenCV services</li>
               <li>Improve service quality and features</li>
               <li>Process payment transactions</li>
               <li>Provide customer support and assistance</li>
@@ -63,7 +63,7 @@ export default function PrivacyPolicy() {
               4. Information Sharing
             </h2>
             <p>
-              Karierly does not sell or rent your personal data to third parties.
+              ConfidenCV does not sell or rent your personal data to third parties.
               Information may only be shared with trusted partners for
               operational purposes, such as payment processing or technical
               service providers.
@@ -76,7 +76,7 @@ export default function PrivacyPolicy() {
             </h2>
             <p>
               You have the right to access, update, or delete your personal data
-              through your account settings or by contacting the Karierly team.
+              through your account settings or by contacting the ConfidenCV team.
             </p>
           </section>
 
@@ -86,7 +86,7 @@ export default function PrivacyPolicy() {
             </h2>
             <p>
               This Privacy Policy may be updated from time to time. Any changes
-              will be announced on the Karierly website and will take effect as
+              will be announced on the ConfidenCV website and will take effect as
               of the updated date.
             </p>
           </section>
@@ -97,7 +97,7 @@ export default function PrivacyPolicy() {
             </h2>
             <p>
               If you have any questions regarding this Privacy Policy, please
-              contact us via Karierly’s official email.
+              contact us via ConfidenCV’s official email.
             </p>
           </section>
         </div>

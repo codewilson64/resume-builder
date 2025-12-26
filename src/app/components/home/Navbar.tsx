@@ -25,14 +25,14 @@ const Navbar = () => {
         >
           <Image
             src={logo}
-            alt="Karierly logo"
+            alt="ConfidenCV logo"
             width={55}
             height={55}
             priority
           />
 
           <h1 className="text-xl font-bold">
-            Karierly
+            ConfidenCV
           </h1>
         </div>
 

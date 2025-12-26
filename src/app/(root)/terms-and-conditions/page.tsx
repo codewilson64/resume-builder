@@ -6,7 +6,7 @@ export default function TermsAndConditions() {
       <section className="space-y-4">
         <h2 className="text-xl font-semibold">1. Terms of Use</h2>
         <p>
-          Karierly (hereinafter referred to as the “Platform”) is provided to you
+          ConfidenCV (hereinafter referred to as the “Platform”) is provided to you
           as a user on the condition that you accept all terms, conditions, and
           notices stated in this document.
         </p>
@@ -53,7 +53,7 @@ export default function TermsAndConditions() {
         </h2>
         <p>
           All content, designs, logos, code, and documentation on this Platform
-          are the property of Karierly or its licensors and are protected under
+          are the property of ConfidenCV or its licensors and are protected under
           applicable intellectual property laws.
         </p>
       </section>

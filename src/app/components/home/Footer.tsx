@@ -15,10 +15,10 @@ export default function Footer() {
               src={logo}
               width={50}
               height={50}
-              alt="Karierly logo"
+              alt="ConfidenCV logo"
             />
             <span className="text-lg font-bold text-gray-900">
-              Karierly
+              ConfidenCV
             </span>
           </div>
 
@@ -56,7 +56,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="mt-8 text-xs text-gray-400">
-          © {new Date().getFullYear()} Karierly. All rights reserved.
+          © {new Date().getFullYear()} ConfidenCV. All rights reserved.
         </div>
       </div>
     </footer>
