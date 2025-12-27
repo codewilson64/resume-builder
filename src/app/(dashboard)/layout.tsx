@@ -2,7 +2,7 @@
 
 import { signOut } from "@/lib/actions/auth-action";
 import Image from "next/image";
-import logo from "../../../public/karierly_logo.png"
+import logo from "../../../public/confidencv_logo.png"
 import { useRouter } from "next/navigation";
 
 export default function DashboardLayout({ 
@@ -25,14 +25,14 @@ export default function DashboardLayout({
         <div className="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
           {/* Logo */}
         <div
-          className="flex items-center cursor-pointer"
+          className="flex items-center gap-3 cursor-pointer"
           onClick={() => router.push("/")}
         >
           <Image
             src={logo}
             alt="ConfidenCV logo"
-            width={55}
-            height={55}
+            width={40}
+            height={40}
             priority
           />
 

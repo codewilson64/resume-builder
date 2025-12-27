@@ -1,6 +1,6 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./styles/print.css"
+import { Geist, Geist_Mono } from "next/font/google";
 import { ResumeProvider } from "./context/ResumeContext";
 
 const geistSans = Geist({
@@ -14,10 +14,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Karierly",
+  title: "ConfidenCV",
   description: "Resume Builder",
   icons: {
-    icon: "/karierly_logo.svg"
+    icon: "/confidencv_favicon.svg"
   }
 };
 
