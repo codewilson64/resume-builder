@@ -15,7 +15,6 @@ export default async function Home() {
   return (
     <main>
       <Hero />
-      <ResumeCarousel />
       <MarketingHero />
       <AdvantagesHero />
       <CTA />

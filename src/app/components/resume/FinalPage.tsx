@@ -79,6 +79,7 @@ export default function FinalPage() {
           <FontSelector />
           <AccentSelector
             value={draftResume.accentColor}
+            template={draftResume.template}
             onChange={(color) =>
               setResumeData((prev) => ({
                 ...prev!,
