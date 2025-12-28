@@ -32,6 +32,7 @@ export function mapPrismaResumeToResumeData(resume: ResumeWithRelations): Resume
     template: isTemplateName(resume.template) ? resume.template : "Orion",
     accentColor: resume.accentColor,
     fontFamily: isFontName(resume.fontFamily) ? resume.fontFamily : "Poppins",
+    showSkillMeter: resume.showSkillMeter ?? true,
 
     nationality: resume.nationality ?? undefined,
     dateOfBirth: resume.dateOfBirth ?? undefined,

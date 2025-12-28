@@ -31,6 +31,7 @@ export default function SkillsPage() {
 
         {/* Skills Form */}
         <SkillsForm />
+        
       </div>
 
       <div className="max-w-2xl mx-auto absolute bottom-0 left-0 right-0 bg-gray-50 px-5 lg:px-0 py-4">

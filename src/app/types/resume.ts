@@ -27,8 +27,8 @@ export interface EducationItem {
 export interface SkillItem {
   id: string;
   collapsed: boolean;
-  skillName?: string;
   level: string; 
+  skillName?: string;
 }
 
 export interface SocialLinkItem {
@@ -62,6 +62,7 @@ export interface ResumeData {
   skills: SkillItem[];
   languages: LanguageItem[];
   socialLinks: SocialLinkItem[];
+  showSkillMeter: boolean;
 
   about?: string;
   hobbies?: string;

@@ -20,6 +20,7 @@ import TemplateSelector from "@/app/components/resume/TemplateSelector";
 import TitleInput from "@/app/components/resume/TitleInput";
 import { useResumeSource } from "@/app/hooks/useResumeSource";
 import { useEffect, useRef } from "react";
+import FinalPageSkeleton from "../skeletons/FinalPageSkeleton";
 
 export default function FinalPage() {
   const router = useRouter();
@@ -46,7 +47,7 @@ export default function FinalPage() {
 
 
   if (!resumeData) {
-    return <p className="text-center text-gray-500">Loading…</p>;
+    return <FinalPageSkeleton />;
   }
 
   return (

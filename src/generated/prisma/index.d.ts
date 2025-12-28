@@ -7427,6 +7427,7 @@ export namespace Prisma {
     accentColor: string | null
     fontFamily: string | null
     hobbies: string | null
+    showSkillMeter: boolean | null
   }
 
   export type ResumeMaxAggregateOutputType = {
@@ -7452,6 +7453,7 @@ export namespace Prisma {
     accentColor: string | null
     fontFamily: string | null
     hobbies: string | null
+    showSkillMeter: boolean | null
   }
 
   export type ResumeCountAggregateOutputType = {
@@ -7477,6 +7479,7 @@ export namespace Prisma {
     accentColor: number
     fontFamily: number
     hobbies: number
+    showSkillMeter: number
     _all: number
   }
 
@@ -7504,6 +7507,7 @@ export namespace Prisma {
     accentColor?: true
     fontFamily?: true
     hobbies?: true
+    showSkillMeter?: true
   }
 
   export type ResumeMaxAggregateInputType = {
@@ -7529,6 +7533,7 @@ export namespace Prisma {
     accentColor?: true
     fontFamily?: true
     hobbies?: true
+    showSkillMeter?: true
   }
 
   export type ResumeCountAggregateInputType = {
@@ -7554,6 +7559,7 @@ export namespace Prisma {
     accentColor?: true
     fontFamily?: true
     hobbies?: true
+    showSkillMeter?: true
     _all?: true
   }
 
@@ -7652,6 +7658,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies: string | null
+    showSkillMeter: boolean
     _count: ResumeCountAggregateOutputType | null
     _min: ResumeMinAggregateOutputType | null
     _max: ResumeMaxAggregateOutputType | null
@@ -7694,6 +7701,7 @@ export namespace Prisma {
     accentColor?: boolean
     fontFamily?: boolean
     hobbies?: boolean
+    showSkillMeter?: boolean
     guest?: boolean | Resume$guestArgs<ExtArgs>
     user?: boolean | Resume$userArgs<ExtArgs>
     experiences?: boolean | Resume$experiencesArgs<ExtArgs>
@@ -7727,6 +7735,7 @@ export namespace Prisma {
     accentColor?: boolean
     fontFamily?: boolean
     hobbies?: boolean
+    showSkillMeter?: boolean
     guest?: boolean | Resume$guestArgs<ExtArgs>
     user?: boolean | Resume$userArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
@@ -7754,6 +7763,7 @@ export namespace Prisma {
     accentColor?: boolean
     fontFamily?: boolean
     hobbies?: boolean
+    showSkillMeter?: boolean
     guest?: boolean | Resume$guestArgs<ExtArgs>
     user?: boolean | Resume$userArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
@@ -7781,9 +7791,10 @@ export namespace Prisma {
     accentColor?: boolean
     fontFamily?: boolean
     hobbies?: boolean
+    showSkillMeter?: boolean
   }
 
-  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "guestId" | "userId" | "title" | "firstName" | "lastName" | "email" | "phone" | "address" | "city" | "postalCode" | "dateOfBirth" | "nationality" | "maritalStatus" | "about" | "jobTitle" | "template" | "accentColor" | "fontFamily" | "hobbies", ExtArgs["result"]["resume"]>
+  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "guestId" | "userId" | "title" | "firstName" | "lastName" | "email" | "phone" | "address" | "city" | "postalCode" | "dateOfBirth" | "nationality" | "maritalStatus" | "about" | "jobTitle" | "template" | "accentColor" | "fontFamily" | "hobbies" | "showSkillMeter", ExtArgs["result"]["resume"]>
   export type ResumeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     guest?: boolean | Resume$guestArgs<ExtArgs>
     user?: boolean | Resume$userArgs<ExtArgs>
@@ -7837,6 +7848,7 @@ export namespace Prisma {
       accentColor: string
       fontFamily: string
       hobbies: string | null
+      showSkillMeter: boolean
     }, ExtArgs["result"]["resume"]>
     composites: {}
   }
@@ -8289,6 +8301,7 @@ export namespace Prisma {
     readonly accentColor: FieldRef<"Resume", 'String'>
     readonly fontFamily: FieldRef<"Resume", 'String'>
     readonly hobbies: FieldRef<"Resume", 'String'>
+    readonly showSkillMeter: FieldRef<"Resume", 'Boolean'>
   }
     
 
@@ -14307,7 +14320,8 @@ export namespace Prisma {
     template: 'template',
     accentColor: 'accentColor',
     fontFamily: 'fontFamily',
-    hobbies: 'hobbies'
+    hobbies: 'hobbies',
+    showSkillMeter: 'showSkillMeter'
   };
 
   export type ResumeScalarFieldEnum = (typeof ResumeScalarFieldEnum)[keyof typeof ResumeScalarFieldEnum]
@@ -14822,6 +14836,7 @@ export namespace Prisma {
     accentColor?: StringFilter<"Resume"> | string
     fontFamily?: StringFilter<"Resume"> | string
     hobbies?: StringNullableFilter<"Resume"> | string | null
+    showSkillMeter?: BoolFilter<"Resume"> | boolean
     guest?: XOR<GuestNullableScalarRelationFilter, GuestWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     experiences?: ExperienceListRelationFilter
@@ -14854,6 +14869,7 @@ export namespace Prisma {
     accentColor?: SortOrder
     fontFamily?: SortOrder
     hobbies?: SortOrderInput | SortOrder
+    showSkillMeter?: SortOrder
     guest?: GuestOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     experiences?: ExperienceOrderByRelationAggregateInput
@@ -14889,6 +14905,7 @@ export namespace Prisma {
     accentColor?: StringFilter<"Resume"> | string
     fontFamily?: StringFilter<"Resume"> | string
     hobbies?: StringNullableFilter<"Resume"> | string | null
+    showSkillMeter?: BoolFilter<"Resume"> | boolean
     guest?: XOR<GuestNullableScalarRelationFilter, GuestWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     experiences?: ExperienceListRelationFilter
@@ -14921,6 +14938,7 @@ export namespace Prisma {
     accentColor?: SortOrder
     fontFamily?: SortOrder
     hobbies?: SortOrderInput | SortOrder
+    showSkillMeter?: SortOrder
     _count?: ResumeCountOrderByAggregateInput
     _max?: ResumeMaxOrderByAggregateInput
     _min?: ResumeMinOrderByAggregateInput
@@ -14952,6 +14970,7 @@ export namespace Prisma {
     accentColor?: StringWithAggregatesFilter<"Resume"> | string
     fontFamily?: StringWithAggregatesFilter<"Resume"> | string
     hobbies?: StringNullableWithAggregatesFilter<"Resume"> | string | null
+    showSkillMeter?: BoolWithAggregatesFilter<"Resume"> | boolean
   }
 
   export type ExperienceWhereInput = {
@@ -15655,6 +15674,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
@@ -15687,6 +15707,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
@@ -15715,6 +15736,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
@@ -15747,6 +15769,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
@@ -15777,6 +15800,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
   }
 
   export type ResumeUpdateManyMutationInput = {
@@ -15800,6 +15824,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ResumeUncheckedUpdateManyInput = {
@@ -15825,6 +15850,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ExperienceCreateInput = {
@@ -16580,6 +16606,7 @@ export namespace Prisma {
     accentColor?: SortOrder
     fontFamily?: SortOrder
     hobbies?: SortOrder
+    showSkillMeter?: SortOrder
   }
 
   export type ResumeMaxOrderByAggregateInput = {
@@ -16605,6 +16632,7 @@ export namespace Prisma {
     accentColor?: SortOrder
     fontFamily?: SortOrder
     hobbies?: SortOrder
+    showSkillMeter?: SortOrder
   }
 
   export type ResumeMinOrderByAggregateInput = {
@@ -16630,6 +16658,7 @@ export namespace Prisma {
     accentColor?: SortOrder
     fontFamily?: SortOrder
     hobbies?: SortOrder
+    showSkillMeter?: SortOrder
   }
 
   export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -17530,6 +17559,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
     educations?: EducationCreateNestedManyWithoutResumeInput
@@ -17560,6 +17590,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
@@ -17619,6 +17650,7 @@ export namespace Prisma {
     accentColor?: StringFilter<"Resume"> | string
     fontFamily?: StringFilter<"Resume"> | string
     hobbies?: StringNullableFilter<"Resume"> | string | null
+    showSkillMeter?: BoolFilter<"Resume"> | boolean
   }
 
   export type SessionCreateWithoutUserInput = {
@@ -17712,6 +17744,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
     educations?: EducationCreateNestedManyWithoutResumeInput
@@ -17742,6 +17775,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
@@ -18364,6 +18398,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     educations?: EducationCreateNestedManyWithoutResumeInput
@@ -18395,6 +18430,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
@@ -18438,6 +18474,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     educations?: EducationUpdateManyWithoutResumeNestedInput
@@ -18469,6 +18506,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
@@ -18496,6 +18534,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
@@ -18527,6 +18566,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
@@ -18570,6 +18610,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
@@ -18601,6 +18642,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
@@ -18628,6 +18670,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
@@ -18659,6 +18702,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
@@ -18702,6 +18746,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
@@ -18733,6 +18778,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
@@ -18760,6 +18806,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
@@ -18791,6 +18838,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
@@ -18834,6 +18882,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
@@ -18865,6 +18914,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
@@ -18892,6 +18942,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
@@ -18923,6 +18974,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
@@ -18966,6 +19018,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
@@ -18997,6 +19050,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
@@ -19025,6 +19079,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
   }
 
   export type ResumeUpdateWithoutGuestInput = {
@@ -19048,6 +19103,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
     educations?: EducationUpdateManyWithoutResumeNestedInput
@@ -19078,6 +19134,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
@@ -19107,6 +19164,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SessionCreateManyUserInput = {
@@ -19156,6 +19214,7 @@ export namespace Prisma {
     accentColor: string
     fontFamily: string
     hobbies?: string | null
+    showSkillMeter?: boolean
   }
 
   export type SessionUpdateWithoutUserInput = {
@@ -19254,6 +19313,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
     educations?: EducationUpdateManyWithoutResumeNestedInput
@@ -19284,6 +19344,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
@@ -19313,6 +19374,7 @@ export namespace Prisma {
     accentColor?: StringFieldUpdateOperationsInput | string
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ExperienceCreateManyResumeInput = {

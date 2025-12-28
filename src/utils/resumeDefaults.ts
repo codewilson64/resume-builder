@@ -20,5 +20,6 @@ export const createEmptyResume = (): ResumeData => ({
   template: "Orion",
   accentColor: "#2D2D2D",
   fontFamily: "Poppins",
+  showSkillMeter: true,
   resumeId: null,
 });

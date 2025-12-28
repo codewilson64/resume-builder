@@ -9,7 +9,8 @@ import { updateResume } from "@/lib/actions/resume-action";
 import PreviewTopBar from "./PreviewTopBar";
 import TemplateRenderer from "../TemplateRenderer";
 import { useResumeSource } from "@/app/hooks/useResumeSource";
-import ResumeSkeleton from "../ResumeSkeleton";
+import ResumeSkeleton from "../skeletons/ResumeSkeleton";
+
 
 export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   const router = useRouter();

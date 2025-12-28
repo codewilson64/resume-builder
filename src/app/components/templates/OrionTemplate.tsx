@@ -315,12 +315,14 @@ export default function BudapestTemplate({ data, variant }: BudapestTemplateProp
                   return (
                     <div key={skill.id}>
                       <span className="block mb-1">{skill.skillName}</span>
-                      <div className="w-full h-1.5 bg-gray-200">
-                        <div
-                          className="h-1.5"
-                          style={{ width, backgroundColor: data.accentColor }}
-                        />
-                      </div>
+                        {resumeData.showSkillMeter && (
+                          <div className="w-full h-1.5 bg-gray-200">
+                            <div
+                              className="h-1.5"
+                              style={{ width, backgroundColor: data.accentColor }}
+                            />
+                          </div>
+                        )}
                     </div>
                   );
                 })}

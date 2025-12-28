@@ -73,6 +73,7 @@ export async function createResume(data: ResumeData) {
       template: data.template,
       accentColor: data.accentColor,
       fontFamily: data.fontFamily,
+      showSkillMeter: data.showSkillMeter,
 
       // EXPERIENCES
       experiences: {
@@ -155,6 +156,7 @@ export async function updateResume(resumeId: string, data: ResumeData) {
       template: data.template,
       accentColor: data.accentColor,
       fontFamily: data.fontFamily,
+      showSkillMeter: data.showSkillMeter,
 
       // EXPERIENCES
       experiences: {

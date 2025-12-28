@@ -43,6 +43,7 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
     template: "Orion",
     accentColor: "#2D2D2D",
     fontFamily: "Poppins",
+    showSkillMeter: true,
     resumeId: null
   });
 

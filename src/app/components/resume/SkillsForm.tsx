@@ -73,6 +73,35 @@ export default function SkillsForm() {
       >
         {skills.length === 0 ? "+ Add Skill" : "+ Add Another Skill"}
       </button>
+
+      {/* Global Skill Meter Toggle */}
+      <div className="flex items-center justify-end gap-2 mb-6">
+        <div>
+          <p className="text-sm text-gray-500">Show skill meter</p>
+        </div>
+
+        <button
+          type="button"
+          onClick={() =>
+            setResumeData((prev) => ({
+              ...prev,
+              showSkillMeter: !prev.showSkillMeter,
+            }))
+          }
+          className={`
+            relative inline-flex h-6 w-11 items-center rounded-full transition
+            ${resumeData.showSkillMeter ? "bg-blue-600" : "bg-gray-300"}
+          `}
+          aria-pressed={resumeData.showSkillMeter}
+        >
+          <span
+            className={`
+              inline-block h-4 w-4 transform rounded-full bg-white transition
+              ${resumeData.showSkillMeter ? "translate-x-6" : "translate-x-1"}
+            `}
+          />
+        </button>
+      </div>
     </>
   );
 }
@@ -104,7 +133,6 @@ function SkillCard({ skill, updateField, toggleCollapse, deleteSkill }: SkillCar
 
   return (
     <div className="bg-white shadow-md rounded-lg p-5 space-y-5">
-
       {/* Header */}
       <div className="flex justify-between items-center">
         <p className="font-semibold text-gray-800">
@@ -196,9 +224,11 @@ function SkillCard({ skill, updateField, toggleCollapse, deleteSkill }: SkillCar
               </ul>
             )}
           </div>
-
+          
         </div>
+        
       )}
+      
     </div>
   );
 }
