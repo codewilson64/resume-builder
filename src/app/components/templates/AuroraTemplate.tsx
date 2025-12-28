@@ -1,6 +1,7 @@
 "use client";
 
 import { fontMap } from "@/app/config/fontConfig";
+import { useResume } from "@/app/context/ResumeContext";
 import type { ResumeData } from "@/app/types/resume";
 
 interface AuroraTemplateProps {
@@ -36,6 +37,7 @@ export default function AuroraTemplate({
   data,
   variant,
 }: AuroraTemplateProps) {
+  const { resumeData } = useResume();
   const isThumbnail = variant === "thumbnail";
 
   return (
@@ -154,7 +156,7 @@ export default function AuroraTemplate({
           {/* ================= SKILLS ================= */}
           {data.skills?.length > 0 && (
             <Block title="Skills">
-              <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+              <div className="grid grid-cols-2 gap-y-4">
                 {data.skills
                   .filter(skill => skill.skillName?.trim())
                   .map(skill => {
@@ -168,7 +170,8 @@ export default function AuroraTemplate({
                         </span>
 
                         {/* Skill Meter */}
-                        <div className="w-3/4 h-1 bg-gray-200">
+                        {resumeData.showSkillMeter && (
+                          <div className="w-3/4 h-1 bg-gray-200">
                             <div
                             className="h-1 transition-all"
                             style={{
@@ -176,7 +179,8 @@ export default function AuroraTemplate({
                                 backgroundColor: data.accentColor,
                             }}
                             />
-                        </div>
+                          </div>
+                        )}
                       </div>
                     );
                   })}
@@ -201,7 +205,8 @@ export default function AuroraTemplate({
                         </span>
 
                         {/* Skill Meter */}
-                        <div className="w-3/4 h-1 bg-gray-200">
+                        {resumeData.showLanguageMeter && (
+                          <div className="w-3/4 h-1 bg-gray-200">
                             <div
                             className="h-1 transition-all"
                             style={{
@@ -209,7 +214,8 @@ export default function AuroraTemplate({
                                 backgroundColor: data.accentColor,
                             }}
                             />
-                        </div>
+                          </div>
+                        )}
                       </div>
                     );
                   })}

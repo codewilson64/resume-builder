@@ -25,7 +25,7 @@ export default function PrivacyPolicy() {
               1. Information We Collect
             </h2>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Account information (name, email, password)</li>
+              <li>Login credentials</li>
               <li>Resume/CV data that you enter into the platform</li>
               <li>
                 Payment information processed by third-party providers (such as

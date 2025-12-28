@@ -3,8 +3,9 @@
 import { Mail, Phone, MapPin } from "lucide-react";
 import { fontMap } from "@/app/config/fontConfig";
 import type { ResumeData } from "@/app/types/resume";
+import { useResume } from "@/app/context/ResumeContext";
 
-interface ChicagoTemplateProps {
+interface NovaTemplateProps {
   data: ResumeData;
   variant?: "preview" | "thumbnail";
 }
@@ -33,14 +34,10 @@ const languageWidths: Record<string, string> = {
   Native: "100%",
 };
 
-export default function ChicagoTemplate({ data, variant }: ChicagoTemplateProps) {
+export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
+  const { resumeData } = useResume();
   const fullName = `${data?.firstName || ""} ${data?.lastName || ""}`.trim();
   const isThumbnail = variant === "thumbnail";
-
-  const initials = [
-    data?.firstName?.charAt(0) || "",
-    data?.lastName?.charAt(0) || "",
-  ].join("");
 
   return (
     <div className={`${fontMap[data.fontFamily] || fontMap["Poppins"]} relative`}>
@@ -55,7 +52,7 @@ export default function ChicagoTemplate({ data, variant }: ChicagoTemplateProps)
       >
 
         {/* HEADER */}
-        <header className="flex justify-between items-center p-6">
+        <header className="text-center p-6">
           {/* LEFT — NAME & JOB */}
           <div>
             <h1 className="text-[38px] font-light tracking-wide leading-none">
@@ -67,40 +64,6 @@ export default function ChicagoTemplate({ data, variant }: ChicagoTemplateProps)
                 {data.jobTitle}
               </p>
             )}
-          </div>
-
-          {/* RIGHT — CIRCLE TEXT + INITIALS */}
-          <div className="relative w-28 h-28 flex items-center justify-center">
-            {/* Circular text */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <svg viewBox="0 0 100 100" className="w-full h-full">
-                <defs>
-                  <path
-                    id="circlePath"
-                    d="M50 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
-                  />
-                </defs>
-
-                <text fill="gray" fontSize="6.5" letterSpacing="2.5">
-                  <textPath href="#circlePath">
-                    {fullName} {fullName} {fullName}
-                  </textPath>
-                </text>
-              </svg>
-            </div>
-
-            {/* Initials stacked */}
-            <div className="flex flex-col items-center justify-center gap-[1px] leading-none">
-              <span className="text-xl font-semibold tracking-widest">
-                {initials.charAt(0)}
-              </span>
-
-              <div className="h-[1px] w-7 bg-gray-400"></div>
-
-              <span className="text-xl font-semibold tracking-widest">
-                {initials.charAt(1)}
-              </span>
-            </div>
           </div>
         </header>
 
@@ -150,7 +113,7 @@ export default function ChicagoTemplate({ data, variant }: ChicagoTemplateProps)
                 {data.socialLinks.map((link) => (
                   <li key={link.id}>
                     <span className="font-semibold">{link.label}: </span>
-                    <span className="text-blue-700">{link.url}</span>
+                    <span className="text-gray-600">{link.url}</span>
                   </li>
                 ))}
               </ul>
@@ -169,16 +132,17 @@ export default function ChicagoTemplate({ data, variant }: ChicagoTemplateProps)
                     return (
                       <div key={lang.id}>
                         <p className="text-xs font-medium">{lang.name}</p>
-            
-                        <div className="w-full h-1.5 bg-gray-300 mt-1">
-                          <div
-                            className="h-1.5"
-                            style={{
-                              width,
-                              backgroundColor: data.accentColor || "#000",
-                            }}
-                          />
-                        </div>
+                        {resumeData.showLanguageMeter && (
+                          <div className="w-full h-1.5 bg-gray-300 mt-1">
+                            <div
+                              className="h-1.5"
+                              style={{
+                                width,
+                                backgroundColor: data.accentColor || "#000",
+                              }}
+                            />
+                          </div>
+                        )}
                       </div>
                     );
                   })}
@@ -301,7 +265,7 @@ export default function ChicagoTemplate({ data, variant }: ChicagoTemplateProps)
             {/* SKILLS (WITH METER BARS) */}
             {data?.skills?.length > 0 && (
               <Block title="Skills" color={data.accentColor}>
-              <div className="grid grid-cols-2 gap-4 border-b border-black pb-6">
+              <div className={`grid grid-cols-2 ${resumeData.showSkillMeter ? 'gap-4' : 'gap-2'} border-b border-black pb-6`}>
                 {data.skills
                   .filter(skill => skill.skillName?.trim())
                   .map((skill) => {
@@ -310,16 +274,17 @@ export default function ChicagoTemplate({ data, variant }: ChicagoTemplateProps)
                     return (
                       <div key={skill.id}>
                         <p className="text-xs font-medium">{skill.skillName}</p>
-            
-                        <div className="w-full h-1.5 bg-gray-300 mt-1">
-                          <div
-                            className="h-1.5"
-                            style={{
-                              width,
-                              backgroundColor: data.accentColor || "#000",
-                            }}
-                          />
-                        </div>
+                        {resumeData.showSkillMeter && (
+                          <div className="w-full h-1.5 bg-gray-300 mt-1">
+                            <div
+                              className="h-1.5"
+                              style={{
+                                width,
+                                backgroundColor: data.accentColor || "#000",
+                              }}
+                            />
+                          </div>
+                        )}
                       </div>
                     );
                   })}

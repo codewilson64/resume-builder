@@ -3,6 +3,7 @@
 import { fontMap } from "@/app/config/fontConfig";
 import { Mail, Phone, MapPin } from "lucide-react";
 import type { ResumeData } from "@/app/types/resume";
+import { useResume } from "@/app/context/ResumeContext";
 
 interface NordicSlateTemplateProps {
   data: ResumeData;
@@ -37,6 +38,7 @@ export default function NordicSlateTemplate({
   data,
   variant,
 }: NordicSlateTemplateProps) {
+  const { resumeData } = useResume();
   const isThumbnail = variant === "thumbnail";
 
   return (
@@ -124,15 +126,17 @@ export default function NordicSlateTemplate({
                         </span>
 
                         {/* Skill Meter */}
+                        {resumeData.showSkillMeter && (
                         <div className="w-3/4 h-1 bg-gray-200">
-                            <div
+                          <div
                             className="h-1 transition-all"
                             style={{
-                                width,
-                                backgroundColor: data.accentColor,
+                              width,
+                              backgroundColor: data.accentColor,
                             }}
-                            />
+                          />
                         </div>
+                        )}
                       </div>
                     );
                 })}
@@ -155,19 +159,21 @@ export default function NordicSlateTemplate({
                       <div key={lang.id}>
                         {/* Skill Name */}
                         <span className="block mb-1 text-black">
-                            {lang.name}
+                          {lang.name}
                         </span>
 
                         {/* Skill Meter */}
-                        <div className="w-3/4 h-1 bg-gray-200">
+                        {resumeData.showLanguageMeter && (
+                          <div className="w-3/4 h-1 bg-gray-200">
                             <div
-                            className="h-1 transition-all"
-                            style={{
-                                width,
-                                backgroundColor: data.accentColor,
-                            }}
+                              className="h-1 transition-all"
+                              style={{
+                                  width,
+                                  backgroundColor: data.accentColor,
+                              }}
                             />
-                        </div>
+                          </div>
+                        )}
                       </div>
                     );
                 })}

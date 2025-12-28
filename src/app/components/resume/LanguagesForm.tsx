@@ -73,6 +73,35 @@ export default function LanguagesForm() {
       >
         {languages.length === 0 ? "+ Add Language" : "+ Add Another Language"}
       </button>
+
+      {/* Global Skill Meter Toggle */}
+      <div className="flex items-center justify-end gap-2 mb-6">
+        <div>
+          <p className="text-sm text-gray-500">Show language level</p>
+        </div>
+
+        <button
+          type="button"
+          onClick={() =>
+            setResumeData((prev) => ({
+              ...prev,
+              showLanguageMeter: !prev.showLanguageMeter,
+            }))
+          }
+          className={`
+            relative inline-flex h-6 w-11 items-center rounded-full transition
+            ${resumeData.showLanguageMeter ? "bg-blue-600" : "bg-gray-300"}
+          `}
+          aria-pressed={resumeData.showLanguageMeter}
+        >
+          <span
+            className={`
+              inline-block h-4 w-4 transform rounded-full bg-white transition
+              ${resumeData.showLanguageMeter ? "translate-x-6" : "translate-x-1"}
+            `}
+          />
+        </button>
+      </div>
     </>
   );
 }

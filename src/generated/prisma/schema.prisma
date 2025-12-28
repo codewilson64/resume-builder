@@ -114,11 +114,12 @@ model Resume {
   jobTitle      String?
 
   // Resume Settings
-  template       String
-  accentColor    String
-  fontFamily     String
-  hobbies        String?
-  showSkillMeter Boolean @default(true)
+  template          String
+  accentColor       String
+  fontFamily        String
+  hobbies           String?
+  showSkillMeter    Boolean @default(true)
+  showLanguageMeter Boolean @default(true)
 
   // Relations (lists)
   experiences Experience[]

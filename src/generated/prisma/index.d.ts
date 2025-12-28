@@ -7428,6 +7428,7 @@ export namespace Prisma {
     fontFamily: string | null
     hobbies: string | null
     showSkillMeter: boolean | null
+    showLanguageMeter: boolean | null
   }
 
   export type ResumeMaxAggregateOutputType = {
@@ -7454,6 +7455,7 @@ export namespace Prisma {
     fontFamily: string | null
     hobbies: string | null
     showSkillMeter: boolean | null
+    showLanguageMeter: boolean | null
   }
 
   export type ResumeCountAggregateOutputType = {
@@ -7480,6 +7482,7 @@ export namespace Prisma {
     fontFamily: number
     hobbies: number
     showSkillMeter: number
+    showLanguageMeter: number
     _all: number
   }
 
@@ -7508,6 +7511,7 @@ export namespace Prisma {
     fontFamily?: true
     hobbies?: true
     showSkillMeter?: true
+    showLanguageMeter?: true
   }
 
   export type ResumeMaxAggregateInputType = {
@@ -7534,6 +7538,7 @@ export namespace Prisma {
     fontFamily?: true
     hobbies?: true
     showSkillMeter?: true
+    showLanguageMeter?: true
   }
 
   export type ResumeCountAggregateInputType = {
@@ -7560,6 +7565,7 @@ export namespace Prisma {
     fontFamily?: true
     hobbies?: true
     showSkillMeter?: true
+    showLanguageMeter?: true
     _all?: true
   }
 
@@ -7659,6 +7665,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies: string | null
     showSkillMeter: boolean
+    showLanguageMeter: boolean
     _count: ResumeCountAggregateOutputType | null
     _min: ResumeMinAggregateOutputType | null
     _max: ResumeMaxAggregateOutputType | null
@@ -7702,6 +7709,7 @@ export namespace Prisma {
     fontFamily?: boolean
     hobbies?: boolean
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     guest?: boolean | Resume$guestArgs<ExtArgs>
     user?: boolean | Resume$userArgs<ExtArgs>
     experiences?: boolean | Resume$experiencesArgs<ExtArgs>
@@ -7736,6 +7744,7 @@ export namespace Prisma {
     fontFamily?: boolean
     hobbies?: boolean
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     guest?: boolean | Resume$guestArgs<ExtArgs>
     user?: boolean | Resume$userArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
@@ -7764,6 +7773,7 @@ export namespace Prisma {
     fontFamily?: boolean
     hobbies?: boolean
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     guest?: boolean | Resume$guestArgs<ExtArgs>
     user?: boolean | Resume$userArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
@@ -7792,9 +7802,10 @@ export namespace Prisma {
     fontFamily?: boolean
     hobbies?: boolean
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
   }
 
-  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "guestId" | "userId" | "title" | "firstName" | "lastName" | "email" | "phone" | "address" | "city" | "postalCode" | "dateOfBirth" | "nationality" | "maritalStatus" | "about" | "jobTitle" | "template" | "accentColor" | "fontFamily" | "hobbies" | "showSkillMeter", ExtArgs["result"]["resume"]>
+  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "guestId" | "userId" | "title" | "firstName" | "lastName" | "email" | "phone" | "address" | "city" | "postalCode" | "dateOfBirth" | "nationality" | "maritalStatus" | "about" | "jobTitle" | "template" | "accentColor" | "fontFamily" | "hobbies" | "showSkillMeter" | "showLanguageMeter", ExtArgs["result"]["resume"]>
   export type ResumeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     guest?: boolean | Resume$guestArgs<ExtArgs>
     user?: boolean | Resume$userArgs<ExtArgs>
@@ -7849,6 +7860,7 @@ export namespace Prisma {
       fontFamily: string
       hobbies: string | null
       showSkillMeter: boolean
+      showLanguageMeter: boolean
     }, ExtArgs["result"]["resume"]>
     composites: {}
   }
@@ -8302,6 +8314,7 @@ export namespace Prisma {
     readonly fontFamily: FieldRef<"Resume", 'String'>
     readonly hobbies: FieldRef<"Resume", 'String'>
     readonly showSkillMeter: FieldRef<"Resume", 'Boolean'>
+    readonly showLanguageMeter: FieldRef<"Resume", 'Boolean'>
   }
     
 
@@ -14321,7 +14334,8 @@ export namespace Prisma {
     accentColor: 'accentColor',
     fontFamily: 'fontFamily',
     hobbies: 'hobbies',
-    showSkillMeter: 'showSkillMeter'
+    showSkillMeter: 'showSkillMeter',
+    showLanguageMeter: 'showLanguageMeter'
   };
 
   export type ResumeScalarFieldEnum = (typeof ResumeScalarFieldEnum)[keyof typeof ResumeScalarFieldEnum]
@@ -14837,6 +14851,7 @@ export namespace Prisma {
     fontFamily?: StringFilter<"Resume"> | string
     hobbies?: StringNullableFilter<"Resume"> | string | null
     showSkillMeter?: BoolFilter<"Resume"> | boolean
+    showLanguageMeter?: BoolFilter<"Resume"> | boolean
     guest?: XOR<GuestNullableScalarRelationFilter, GuestWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     experiences?: ExperienceListRelationFilter
@@ -14870,6 +14885,7 @@ export namespace Prisma {
     fontFamily?: SortOrder
     hobbies?: SortOrderInput | SortOrder
     showSkillMeter?: SortOrder
+    showLanguageMeter?: SortOrder
     guest?: GuestOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     experiences?: ExperienceOrderByRelationAggregateInput
@@ -14906,6 +14922,7 @@ export namespace Prisma {
     fontFamily?: StringFilter<"Resume"> | string
     hobbies?: StringNullableFilter<"Resume"> | string | null
     showSkillMeter?: BoolFilter<"Resume"> | boolean
+    showLanguageMeter?: BoolFilter<"Resume"> | boolean
     guest?: XOR<GuestNullableScalarRelationFilter, GuestWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     experiences?: ExperienceListRelationFilter
@@ -14939,6 +14956,7 @@ export namespace Prisma {
     fontFamily?: SortOrder
     hobbies?: SortOrderInput | SortOrder
     showSkillMeter?: SortOrder
+    showLanguageMeter?: SortOrder
     _count?: ResumeCountOrderByAggregateInput
     _max?: ResumeMaxOrderByAggregateInput
     _min?: ResumeMinOrderByAggregateInput
@@ -14971,6 +14989,7 @@ export namespace Prisma {
     fontFamily?: StringWithAggregatesFilter<"Resume"> | string
     hobbies?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     showSkillMeter?: BoolWithAggregatesFilter<"Resume"> | boolean
+    showLanguageMeter?: BoolWithAggregatesFilter<"Resume"> | boolean
   }
 
   export type ExperienceWhereInput = {
@@ -15675,6 +15694,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
@@ -15708,6 +15728,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
@@ -15737,6 +15758,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
@@ -15770,6 +15792,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
@@ -15801,6 +15824,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
   }
 
   export type ResumeUpdateManyMutationInput = {
@@ -15825,6 +15849,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ResumeUncheckedUpdateManyInput = {
@@ -15851,6 +15876,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ExperienceCreateInput = {
@@ -16607,6 +16633,7 @@ export namespace Prisma {
     fontFamily?: SortOrder
     hobbies?: SortOrder
     showSkillMeter?: SortOrder
+    showLanguageMeter?: SortOrder
   }
 
   export type ResumeMaxOrderByAggregateInput = {
@@ -16633,6 +16660,7 @@ export namespace Prisma {
     fontFamily?: SortOrder
     hobbies?: SortOrder
     showSkillMeter?: SortOrder
+    showLanguageMeter?: SortOrder
   }
 
   export type ResumeMinOrderByAggregateInput = {
@@ -16659,6 +16687,7 @@ export namespace Prisma {
     fontFamily?: SortOrder
     hobbies?: SortOrder
     showSkillMeter?: SortOrder
+    showLanguageMeter?: SortOrder
   }
 
   export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -17560,6 +17589,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
     educations?: EducationCreateNestedManyWithoutResumeInput
@@ -17591,6 +17621,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
@@ -17651,6 +17682,7 @@ export namespace Prisma {
     fontFamily?: StringFilter<"Resume"> | string
     hobbies?: StringNullableFilter<"Resume"> | string | null
     showSkillMeter?: BoolFilter<"Resume"> | boolean
+    showLanguageMeter?: BoolFilter<"Resume"> | boolean
   }
 
   export type SessionCreateWithoutUserInput = {
@@ -17745,6 +17777,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
     educations?: EducationCreateNestedManyWithoutResumeInput
@@ -17776,6 +17809,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
@@ -18399,6 +18433,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     educations?: EducationCreateNestedManyWithoutResumeInput
@@ -18431,6 +18466,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
@@ -18475,6 +18511,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     educations?: EducationUpdateManyWithoutResumeNestedInput
@@ -18507,6 +18544,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
@@ -18535,6 +18573,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
@@ -18567,6 +18606,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
@@ -18611,6 +18651,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
@@ -18643,6 +18684,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
@@ -18671,6 +18713,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
@@ -18703,6 +18746,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
@@ -18747,6 +18791,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
@@ -18779,6 +18824,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
@@ -18807,6 +18853,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
@@ -18839,6 +18886,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
@@ -18883,6 +18931,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
@@ -18915,6 +18964,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
@@ -18943,6 +18993,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
@@ -18975,6 +19026,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
@@ -19019,6 +19071,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
@@ -19051,6 +19104,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
@@ -19080,6 +19134,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
   }
 
   export type ResumeUpdateWithoutGuestInput = {
@@ -19104,6 +19159,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
     educations?: EducationUpdateManyWithoutResumeNestedInput
@@ -19135,6 +19191,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
@@ -19165,6 +19222,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SessionCreateManyUserInput = {
@@ -19215,6 +19273,7 @@ export namespace Prisma {
     fontFamily: string
     hobbies?: string | null
     showSkillMeter?: boolean
+    showLanguageMeter?: boolean
   }
 
   export type SessionUpdateWithoutUserInput = {
@@ -19314,6 +19373,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
     educations?: EducationUpdateManyWithoutResumeNestedInput
@@ -19345,6 +19405,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
@@ -19375,6 +19436,7 @@ export namespace Prisma {
     fontFamily?: StringFieldUpdateOperationsInput | string
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ExperienceCreateManyResumeInput = {

@@ -1,6 +1,7 @@
 "use client";
 
 import { fontMap } from "@/app/config/fontConfig";
+import { useResume } from "@/app/context/ResumeContext";
 import type { ResumeData } from "@/app/types/resume";
 
 interface ZenithTemplateProps {
@@ -36,6 +37,7 @@ export default function ZenithTemplate({
   data,
   variant,
 }: ZenithTemplateProps) {
+  const { resumeData } = useResume();
   const isThumbnail = variant === "thumbnail";
 
   return (
@@ -185,24 +187,25 @@ export default function ZenithTemplate({
                     return (
                         <div key={skill.id}>
                         <span className="text-xs block mb-1">
-                            {skill.skillName}
+                          {skill.skillName}
                         </span>
-                        <div className="w-3/4 h-1 bg-gray-200">
+                        {resumeData.showSkillMeter && (
+                          <div className="w-3/4 h-1 bg-gray-200">
                             <div
-                            className="h-1 transition-all"
-                            style={{
+                              className="h-1 transition-all"
+                              style={{
                                 width,
                                 backgroundColor: data.accentColor,
-                            }}
-                            />
-                        </div>
-                        </div>
+                              }}
+                              />
+                          </div>
+                        )}
+                      </div>
                     );
                     })}
                 </div>
             </CenteredBlock>
           )}
-
 
           {/* ================= LANGUAGES ================= */}
             {data.languages?.length > 0 && (
@@ -216,24 +219,25 @@ export default function ZenithTemplate({
                     return (
                         <div key={lang.id}>
                         <span className="text-xs block mb-1">
-                            {lang.name}
+                          {lang.name}
                         </span>
-                        <div className="w-3/4 h-1 bg-gray-200">
+                        {resumeData.showLanguageMeter && (
+                          <div className="w-3/4 h-1 bg-gray-200">
                             <div
-                            className="h-1 transition-all"
-                            style={{
-                                width,
-                                backgroundColor: data.accentColor,
-                            }}
-                            />
-                        </div>
-                        </div>
+                              className="h-1 transition-all"
+                              style={{
+                                  width,
+                                  backgroundColor: data.accentColor,
+                              }}
+                              />
+                          </div>
+                        )}
+                      </div>
                     );
                     })}
                 </div>
             </CenteredBlock>
           )}
-
 
           {/* ================= PERSONAL DETAILS ================= */}
           {(data.nationality || data.dateOfBirth || data.maritalStatus) && (

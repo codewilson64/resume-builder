@@ -4,7 +4,7 @@ import { useResume } from "@/app/context/ResumeContext";
 import { Mail, Phone, MapPin } from "lucide-react";
 import type { ResumeData } from "@/app/types/resume";
 
-interface BudapestTemplateProps {
+interface OrionTemplateProps {
   data: ResumeData;
   variant?: "preview" | "thumbnail";
 }
@@ -34,7 +34,7 @@ const languageWidths: Record<string, string> = {
 };
 
 
-export default function BudapestTemplate({ data, variant }: BudapestTemplateProps) {
+export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
   const { resumeData } = useResume();
   const isThumbnail = variant === "thumbnail";
 
@@ -150,14 +150,15 @@ export default function BudapestTemplate({ data, variant }: BudapestTemplateProp
   
                     return (
                       <div key={lang.id}>
-                        <p className="text-xs text-gray-600">{lang.name}</p>
-  
-                        <div className="w-full h-1.5 bg-white/30 mt-1">
-                          <div
-                            className="h-1.5"
-                            style={{ width, backgroundColor: data.accentColor }}
-                          />
-                        </div>
+                        <p className="text-xs text-gray-600 mb-1">{lang.name}</p> 
+                        {resumeData.showLanguageMeter && (
+                          <div className="w-full h-1.5 bg-gray-200">
+                            <div
+                              className="h-1.5"
+                              style={{ width, backgroundColor: data.accentColor }}
+                            />
+                          </div>
+                        )}
                       </div>
                     );
                   })}
@@ -226,7 +227,7 @@ export default function BudapestTemplate({ data, variant }: BudapestTemplateProp
                         className="grid grid-cols-[140px_30px_1fr] gap-4"
                       >
                         <div>
-                          <p className="font-semibold text-sm uppercase">
+                          <p className="text-gray-700 font-semibold text-sm uppercase">
                             {e.company}
                           </p>
                           <p className="text-xs text-gray-500">{e.city}</p>
@@ -240,7 +241,7 @@ export default function BudapestTemplate({ data, variant }: BudapestTemplateProp
                         </div>
   
                         <div>
-                          <p className="font-semibold text-sm">{e.jobTitle}</p>
+                          <p className="text-gray-700 font-semibold text-sm">{e.jobTitle}</p>
                           <p className="text-xs text-gray-600 mt-1">
                             {e.description}
                           </p>
@@ -272,7 +273,7 @@ export default function BudapestTemplate({ data, variant }: BudapestTemplateProp
                       className="grid grid-cols-[140px_30px_1fr] gap-4"
                     >
                       <div>
-                        <p className="font-semibold text-sm uppercase">
+                        <p className="text-gray-700 font-semibold text-sm uppercase">
                           {edu.school}
                         </p>
                         <p className="text-xs text-gray-500">{edu.city}</p>
@@ -286,7 +287,7 @@ export default function BudapestTemplate({ data, variant }: BudapestTemplateProp
                       </div>
   
                       <div>
-                        <p className="font-semibold text-sm">{edu.degree}</p>
+                        <p className="text-gray-700 font-semibold text-sm">{edu.degree}</p>
                         <p className="text-xs text-gray-600 mt-1">
                           {edu.description}
                         </p>
@@ -308,7 +309,7 @@ export default function BudapestTemplate({ data, variant }: BudapestTemplateProp
                 Skills
               </h2>
   
-              <div className="mt-5 grid grid-cols-2 gap-5 text-xs uppercase text-gray-700">
+              <div className={`mt-5 grid grid-cols-2 ${resumeData.showSkillMeter ? 'gap-5' : 'gap-2'} text-xs uppercase text-gray-700`}>
                 {data.skills.map((skill) => {
                   const width = skillWidths[skill.level] || "40%";
   

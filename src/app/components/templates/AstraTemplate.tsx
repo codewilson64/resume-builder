@@ -1,6 +1,7 @@
 "use client";
 
 import { fontMap } from "@/app/config/fontConfig";
+import { useResume } from "@/app/context/ResumeContext";
 import type { ResumeData } from "@/app/types/resume";
 
 interface AstraTemplateProps {
@@ -36,6 +37,7 @@ export default function AstraTemplate({
     data,
     variant,
   }: AstraTemplateProps) {
+    const { resumeData } = useResume();
     const isThumbnail = variant === "thumbnail";
   
     return (
@@ -119,15 +121,17 @@ export default function AstraTemplate({
                           <span className="text-xs block mb-1">
                             {skill.skillName}
                           </span>
-                          <div className="w-3/4 h-1 bg-gray-200">
-                            <div
-                              className="h-1 transition-all"
-                              style={{
-                                width,
-                                backgroundColor: data.accentColor,
-                              }}
-                            />
-                          </div>
+                          {resumeData.showSkillMeter && (
+                            <div className="w-3/4 h-1 bg-gray-200">
+                              <div
+                                className="h-1 transition-all"
+                                style={{
+                                  width,
+                                  backgroundColor: data.accentColor,
+                                }}
+                              />
+                            </div>
+                          )}
                         </div>
                       );
                     })}
@@ -203,15 +207,17 @@ export default function AstraTemplate({
                           <span className="text-xs block mb-1">
                             {lang.name}
                           </span>
-                          <div className="w-3/4 h-1 bg-gray-200">
-                            <div
-                              className="h-1 transition-all"
-                              style={{
-                                width,
-                                backgroundColor: data.accentColor,
-                              }}
-                            />
-                          </div>
+                          {resumeData.showLanguageMeter && (
+                            <div className="w-3/4 h-1 bg-gray-200">
+                              <div
+                                className="h-1 transition-all"
+                                style={{
+                                  width,
+                                  backgroundColor: data.accentColor,
+                                }}
+                              />
+                            </div>
+                          )}
                         </div>
                       );
                     })}

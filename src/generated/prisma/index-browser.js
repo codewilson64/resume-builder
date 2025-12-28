@@ -196,7 +196,8 @@ exports.Prisma.ResumeScalarFieldEnum = {
   accentColor: 'accentColor',
   fontFamily: 'fontFamily',
   hobbies: 'hobbies',
-  showSkillMeter: 'showSkillMeter'
+  showSkillMeter: 'showSkillMeter',
+  showLanguageMeter: 'showLanguageMeter'
 };
 
 exports.Prisma.ExperienceScalarFieldEnum = {

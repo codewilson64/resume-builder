@@ -1,6 +1,7 @@
 "use client";
 
 import { fontMap } from "@/app/config/fontConfig";
+import { useResume } from "@/app/context/ResumeContext";
 import type { ResumeData } from "@/app/types/resume";
 
 interface AtlasTemplateProps {
@@ -36,6 +37,7 @@ export default function AtlasTemplate({
   data,
   variant,
 }: AtlasTemplateProps) {
+  const { resumeData } = useResume();
   const isThumbnail = variant === "thumbnail";
 
   return (
@@ -196,19 +198,21 @@ export default function AtlasTemplate({
                     const width = skillWidths[skill.level] || "40%";
 
                     return (
-                      <div key={skill.id} className="mb-3">
+                      <div key={skill.id} className={`${resumeData.showSkillMeter ? 'mb-3' : 'mb-1'}`}>
                         <span className="text-xs">
                           {skill.skillName}
                         </span>
-                        <div className="w-full h-1 bg-gray-200 mt-1">
-                          <div
-                            className="h-1 transition-all"
-                            style={{
-                              width,
-                              backgroundColor: data.accentColor,
-                            }}
-                          />
-                        </div>
+                        {resumeData.showSkillMeter && (
+                          <div className="w-full h-1 bg-gray-200 mt-1">
+                            <div
+                              className="h-1 transition-all"
+                              style={{
+                                width,
+                                backgroundColor: data.accentColor,
+                              }}
+                            />
+                          </div>
+                        )}
                       </div>
                     );
                   })}
@@ -228,19 +232,21 @@ export default function AtlasTemplate({
                     const width = languageWidths[lang.level] || "40%";
 
                     return (
-                      <div key={lang.id} className="mb-3">
+                      <div key={lang.id} className={`${resumeData.showLanguageMeter ? 'mb-3' : 'mb-1'}`}>
                         <span className="text-xs">
                           {lang.name}
                         </span>
-                        <div className="w-full h-1 bg-gray-200 mt-1">
-                          <div
-                            className="h-1 transition-all"
-                            style={{
-                              width,
-                              backgroundColor: data.accentColor,
-                            }}
-                          />
-                        </div>
+                        {resumeData.showLanguageMeter && (
+                          <div className="w-full h-1 bg-gray-200 mt-1">
+                            <div
+                              className="h-1 transition-all"
+                              style={{
+                                width,
+                                backgroundColor: data.accentColor,
+                              }}
+                            />
+                          </div>
+                        )}
                       </div>
                     );
                   })}

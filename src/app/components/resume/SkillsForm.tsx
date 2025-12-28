@@ -77,7 +77,7 @@ export default function SkillsForm() {
       {/* Global Skill Meter Toggle */}
       <div className="flex items-center justify-end gap-2 mb-6">
         <div>
-          <p className="text-sm text-gray-500">Show skill meter</p>
+          <p className="text-sm text-gray-500">Show skill level</p>
         </div>
 
         <button

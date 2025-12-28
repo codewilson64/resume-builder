@@ -21,5 +21,6 @@ export const createEmptyResume = (): ResumeData => ({
   accentColor: "#2D2D2D",
   fontFamily: "Poppins",
   showSkillMeter: true,
+  showLanguageMeter: true,
   resumeId: null,
 });

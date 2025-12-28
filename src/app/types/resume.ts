@@ -63,6 +63,7 @@ export interface ResumeData {
   languages: LanguageItem[];
   socialLinks: SocialLinkItem[];
   showSkillMeter: boolean;
+  showLanguageMeter: boolean;
 
   about?: string;
   hobbies?: string;
