@@ -30,7 +30,7 @@ export default function PreviewTopBar({
         <button
           onClick={onDownload}
           disabled={loading}
-          className="px-5 py-2 rounded-md bg-blue-600 hover:bg-blue-700 transition font-semibold text-sm"
+          className="px-5 py-2 rounded-md bg-cyan-400 hover:bg-cyan-500 transition font-semibold text-sm"
         >
           {loading ? "Downloading..." : "Download"}
         </button>

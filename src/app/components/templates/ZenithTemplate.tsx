@@ -278,8 +278,6 @@ export default function ZenithTemplate({
                 </p>
             </CenteredBlock>
           )}
-
-
         </div>
       </div>
     </div>

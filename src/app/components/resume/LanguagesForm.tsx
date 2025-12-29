@@ -69,7 +69,7 @@ export default function LanguagesForm() {
       {/* Add Button */}
       <button
         onClick={addLanguage}
-        className="w-full border border-gray-300 hover:bg-gray-100 py-4 rounded-lg font-medium transition"
+        className="w-fit text-left text-cyan-400 hover:text-cyan-500 font-medium transition"
       >
         {languages.length === 0 ? "+ Add Language" : "+ Add Another Language"}
       </button>
@@ -90,7 +90,7 @@ export default function LanguagesForm() {
           }
           className={`
             relative inline-flex h-6 w-11 items-center rounded-full transition
-            ${resumeData.showLanguageMeter ? "bg-blue-600" : "bg-gray-300"}
+            ${resumeData.showLanguageMeter ? "bg-cyan-400" : "bg-gray-300"}
           `}
           aria-pressed={resumeData.showLanguageMeter}
         >

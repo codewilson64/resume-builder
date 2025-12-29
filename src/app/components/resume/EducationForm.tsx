@@ -159,7 +159,7 @@ export default function EducationForm() {
       {/* Add Button */}
       <button
         onClick={addEducation}
-        className="w-full border border-gray-300 hover:bg-gray-100 py-4 rounded-lg font-medium transition"
+        className="w-fit text-left text-cyan-400 hover:text-cyan-500 font-medium transition"
       >
         {education.length === 0 ? "+ Add Education" : "+ Add Another Education"}
       </button>

@@ -102,17 +102,17 @@ export default function FinalPage() {
         </section>
 
         <section className="space-y-6">
-          <h2 className="font-semibold text-xl mb-4">Experience</h2>
+          <h2 className="font-semibold text-xl">Experience</h2>
           <ExperienceForm />
         </section>
 
         <section className="space-y-6">
-          <h2 className="font-semibold text-xl mb-4">Education</h2>
+          <h2 className="font-semibold text-xl">Education</h2>
           <EducationForm />
         </section>
 
         <section className="space-y-5">
-          <h2 className="font-semibold text-xl mb-4">Skills</h2>
+          <h2 className="font-semibold text-xl">Skills</h2>
           <SkillsForm />
         </section>
 
@@ -122,17 +122,17 @@ export default function FinalPage() {
         </section>
 
         <section className="space-y-5">
-          <h2 className="font-semibold text-xl mb-4">Hobbies</h2>
+          <h2 className="font-semibold text-xl">Hobbies</h2>
           <HobbiesForm />
         </section>
 
         <section className="space-y-5">
-          <h2 className="font-semibold text-xl mb-4">Languages</h2>
+          <h2 className="font-semibold text-xl">Languages</h2>
           <LanguagesForm />
         </section>
 
         <section className="space-y-5">
-          <h2 className="font-semibold text-xl mb-4">Social Links</h2>
+          <h2 className="font-semibold text-xl">Social Links</h2>
           <SocialLinksForm />
         </section>
 
@@ -140,7 +140,7 @@ export default function FinalPage() {
         <div className="max-w-2xl mx-auto fixed bottom-0 left-0 right-0 bg-transparent px-5 lg:px-0 py-4">
         <button
           onClick={() => router.push("/resume/preview")}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-medium transition"
+          className="w-full bg-cyan-400 hover:bg-cyan-500 text-white py-4 rounded-lg font-medium transition"
         >
           Continue to Download →
         </button>

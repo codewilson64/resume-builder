@@ -69,7 +69,7 @@ export default function SkillsForm() {
       {/* Add Button */}
       <button
         onClick={addSkill}
-        className="w-full border border-gray-300 hover:bg-gray-100 py-4 rounded-lg font-medium transition"
+        className="w-fit text-left text-cyan-400 hover:text-cyan-500 font-medium transition"
       >
         {skills.length === 0 ? "+ Add Skill" : "+ Add Another Skill"}
       </button>
@@ -90,7 +90,7 @@ export default function SkillsForm() {
           }
           className={`
             relative inline-flex h-6 w-11 items-center rounded-full transition
-            ${resumeData.showSkillMeter ? "bg-blue-600" : "bg-gray-300"}
+            ${resumeData.showSkillMeter ? "bg-cyan-400" : "bg-gray-300"}
           `}
           aria-pressed={resumeData.showSkillMeter}
         >
