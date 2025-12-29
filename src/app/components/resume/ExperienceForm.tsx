@@ -61,10 +61,13 @@ export default function ExperienceForm() {
       {experiences.map((experience, idx) => (
         <div
           key={experience.id}
-          className="bg-white shadow-md rounded-lg p-5 space-y-5"
+          className="bg-white shadow-md rounded-lg"
         >
           {/* Header */}
-          <div className="flex justify-between items-center">
+          <button
+            className="w-full flex justify-between items-center p-5"
+            onClick={() => toggleCollapse(experience.id)}
+          >
             <p className="font-semibold text-gray-800">
               {experience?.jobTitle?.trim() && experience?.company?.trim()
                ? `${experience.jobTitle.trim()} from ${experience.company.trim()}`
@@ -72,28 +75,28 @@ export default function ExperienceForm() {
             </p>
 
             <div className="flex items-center gap-3">
-              <button
-                onClick={() => toggleCollapse(experience.id)}
-                className="text-gray-600 hover:text-gray-900"
-              >
+              <div className="text-gray-600 hover:text-gray-900" >
                 {experience.collapsed ? <ChevronDown /> : <ChevronUp />}
-              </button>
+              </div>
 
               <button
-                onClick={() => deleteExperience(experience.id)}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  deleteExperience(experience.id)}
+                } 
                 className="text-red-500 hover:text-red-700"
               >
                 <Trash size={18} />
               </button>
             </div>
-          </div>
+          </button>
 
           {/* Fields */}
           {!experience.collapsed && (
-            <div className="space-y-6 border-t pt-5">
+            <div className="spase-y-6 border-t p-5">
 
               {/* Job Title / Company */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
                 <div>
                   <label className="text-sm font-medium text-gray-700">
                     Job Title 
@@ -126,7 +129,7 @@ export default function ExperienceForm() {
               </div>
 
               {/* Dates */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 mb-5">
                 <div>
                   <label className="text-sm font-medium text-gray-700">
                     Start Date 
@@ -158,7 +161,7 @@ export default function ExperienceForm() {
               </div>
 
               {/* Current Checkbox */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mb-5">
                 <input
                   type="checkbox"
                   className="w-4 h-4"
@@ -173,7 +176,7 @@ export default function ExperienceForm() {
               </div>
 
               {/* City */}
-              <div>
+              <div className="mb-5">
                 <label className="text-sm font-medium text-gray-700">
                   City 
                 </label>
@@ -193,15 +196,15 @@ export default function ExperienceForm() {
                 <label className="text-sm font-medium text-gray-700">
                   Job Description 
                 </label>
-                <textarea
-                  rows={4}
-                  className="input resize-none"
-                  placeholder="Describe your role and achievements..."
-                  value={experience.description}
-                  onChange={(e) =>
-                    updateField(experience.id, "description", e.target.value)
-                  }
-                ></textarea>
+                  <textarea
+                    rows={4}
+                    className="input resize-none"
+                    placeholder="Describe your role and achievements..."
+                    value={experience.description}
+                    onChange={(e) =>
+                      updateField(experience.id, "description", e.target.value)
+                    }
+                  ></textarea>
               </div>
             </div>
           )}

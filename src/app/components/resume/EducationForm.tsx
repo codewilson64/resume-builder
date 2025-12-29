@@ -57,10 +57,13 @@ export default function EducationForm() {
   return (
     <>
       {education.map((edu, idx) => (
-        <div key={edu.id} className="bg-white shadow-md rounded-lg p-5 space-y-5">
+        <div key={edu.id} className="bg-white shadow-md rounded-lg">
           
           {/* Header */}
-          <div className="flex justify-between items-center">
+          <button 
+            className="w-full flex justify-between items-center p-5"
+            onClick={() => toggleCollapse(edu.id)}
+          >
             <p className="font-semibold text-gray-800">
               {edu?.degree?.trim() && edu?.school?.trim()
               ? `${edu.degree.trim()} at ${edu.school.trim()}`
@@ -68,28 +71,28 @@ export default function EducationForm() {
             </p>
 
             <div className="flex items-center gap-3">
-              <button
-                onClick={() => toggleCollapse(edu.id)}
-                className="text-gray-600 hover:text-gray-900"
-              >
+              <div className="text-gray-600 hover:text-gray-900" >
                 {edu.collapsed ? <ChevronDown /> : <ChevronUp />}
-              </button>
+              </div>
 
               <button
-                onClick={() => deleteEducation(edu.id)}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  deleteEducation(edu.id)
+                }}
                 className="text-red-500 hover:text-red-700"
               >
                 <Trash size={18} />
               </button>
             </div>
-          </div>
+          </button>
 
           {/* Body */}
           {!edu.collapsed && (
-            <div className="space-y-6 border-t pt-5">
+            <div className="border-t p-5">
 
               {/* School + Degree */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
                 <div>
                   <label className="text-sm font-medium text-gray-700">School</label>
                   <input
@@ -114,7 +117,7 @@ export default function EducationForm() {
               </div>
 
               {/* Graduation Date */}
-              <div>
+              <div className="mb-5">
                 <label className="text-sm font-medium text-gray-700">Graduation Date</label>
                 <input
                   type="month"
@@ -125,7 +128,7 @@ export default function EducationForm() {
               </div>
 
               {/* City */}
-              <div>
+              <div className="mb-5">
                 <label className="text-sm font-medium text-gray-700">City</label>
                 <input
                   type="text"

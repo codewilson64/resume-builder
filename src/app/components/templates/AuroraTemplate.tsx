@@ -51,7 +51,7 @@ export default function AuroraTemplate({
           // backgroundColor: "#E9B9FF",
         }}
       >
-        <div className="p-10 flex flex-col gap-8 text-gray-900">
+        <div className="p-10 flex flex-col text-gray-900">
 
           {/* ================= HEADER ================= */}
           <header className="flex justify-between items-start gap-6">
@@ -156,7 +156,7 @@ export default function AuroraTemplate({
           {/* ================= SKILLS ================= */}
           {data.skills?.length > 0 && (
             <Block title="Skills">
-              <div className="grid grid-cols-2 gap-y-4">
+              <div className={`grid grid-cols-3 ${resumeData.showSkillMeter ? 'gap-y-4' : 'gap-y-2'}`}>
                 {data.skills
                   .filter(skill => skill.skillName?.trim())
                   .map(skill => {
@@ -191,7 +191,7 @@ export default function AuroraTemplate({
           {/* ================= LANGUAGES ================= */}
           {data.languages?.length > 0 && (
             <Block title="Languages">
-              <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+              <div className={`grid grid-cols-3 ${resumeData.showLanguageMeter ? 'gap-y-4' : 'gap-y-2'}`}>
                 {data.languages
                   .filter(lang => lang.name?.trim())
                   .map(lang => {
@@ -300,7 +300,7 @@ function Block({
 }) {
   return (
     <section>
-      <h2 className="text-lg font-bold border-b border-black pb-1 mb-3">
+      <h2 className="text-lg font-bold border-b border-black pb-1 mb-3 pt-8">
         {title}
       </h2>
       {children}

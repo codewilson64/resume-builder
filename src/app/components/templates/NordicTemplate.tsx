@@ -94,11 +94,10 @@ export default function NordicSlateTemplate({
         </header>
 
         {/* ================= BODY ================= */}
-        <div className="px-9 py-9 grid grid-cols-[220px_1fr] gap-8">
+        <div className="grid grid-cols-[220px_1fr] gap-8">
           {/* ===== LEFT COLUMN ===== */}
-          <aside className="space-y-9">
+          <aside className="pl-9 pt-0">
             {/* PROFILE */}
-            <section className="">
             {data.about && (
               <Block title="Profile" color={data.accentColor}>
                 <p className="text-xs text-gray-700 leading-relaxed">
@@ -106,10 +105,8 @@ export default function NordicSlateTemplate({
                 </p>
               </Block>
             )}
-            </section>
 
             {/* SKILLS */}
-            <section className="">
             {data.skills?.length > 0 && (
             <Block title="Skills" color={data.accentColor}>
               <div className="space-y-3 text-xs">
@@ -143,10 +140,8 @@ export default function NordicSlateTemplate({
               </div>
             </Block>
             )}
-            </section>
 
             {/* LANGUAGES */}
-            <section className="">
             {data.languages?.length > 0 && (
               <Block title="Languages" color={data.accentColor}>
                 <div className="space-y-3 text-xs">
@@ -180,10 +175,8 @@ export default function NordicSlateTemplate({
               </div>
               </Block>
             )}
-            </section>
 
             {/* SOCIAL LINKS */}
-            <section className="">
             {data.socialLinks?.length > 0 && (
               <Block title="Social Links" color={data.accentColor}>
                 <ul className="text-xs space-y-3">
@@ -206,10 +199,8 @@ export default function NordicSlateTemplate({
                 </ul>
               </Block>
             )}
-            </section>
 
             {/* PERSONAL DETAILS  */}
-            <section>
             {(data.dateOfBirth || data.nationality || data.maritalStatus) && (
                 <section>
                   <Block title="Personal Details" color={data.accentColor}>
@@ -236,11 +227,10 @@ export default function NordicSlateTemplate({
                   </Block>
                 </section>
               )}
-            </section>
           </aside>
 
           {/* ===== RIGHT COLUMN ===== */}
-          <main className="px-5 space-y-9">
+          <main className="p-9 pt-0">
             {/* EXPERIENCE */}
             {data.experience?.length > 0 && (
               <Block title="Work Experience" color={data.accentColor}>
@@ -333,8 +323,8 @@ function Block({
 }) {
   return (
     <section className="">
-      <div className="flex items-center gap-2 mb-4">
-        <span className="h-4 w-1" style={{ backgroundColor: color }} />
+      <div className="flex items-center gap-2 mb-4 pt-9">
+        <span className="h-4 w-1 bg-[#2D2D2D]" />
         <h2 className="text-sm font-semibold uppercase tracking-widest">
           {title}
         </h2>

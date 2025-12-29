@@ -49,7 +49,7 @@ export default function AstraTemplate({
             minHeight: !isThumbnail ? 1123 : undefined,
           }}
         >
-          <div className="p-12 text-gray-900 space-y-10">
+          <div className="p-12 text-gray-900">
   
             {/* ================= HEADER ================= */}
             <header className="grid grid-cols-2 gap-8 items-start">
@@ -59,7 +59,7 @@ export default function AstraTemplate({
                     {data.jobTitle}
                   </p>
                 )}
-                <h1 className="text-4xl font-bold uppercase tracking-wide">
+                <h1 className="text-3xl font-bold uppercase tracking-wide mb-3">
                   {data.firstName} {data.lastName}
                 </h1>
               </div>
@@ -71,8 +71,8 @@ export default function AstraTemplate({
                     {data.city && `, ${data.city}`}
                   </p>
                 )}
-                {data.phone && <p>{data.phone}</p>}
                 {data.email && <p>{data.email}</p>}
+                {data.phone && <p>{data.phone}</p>}
               </div>
             </header>
   
@@ -110,7 +110,7 @@ export default function AstraTemplate({
             {/* ================= SKILLS ================= */}
             {data.skills?.length > 0 && (
               <Block title="Skills">
-                <div className="grid grid-cols-2 gap-x-12 gap-y-4">
+                <div className={`grid grid-cols-2 ${resumeData.showSkillMeter ? 'gap-y-4' : 'gap-y-2'}`}>
                   {data.skills
                     .filter(s => s.skillName?.trim())
                     .map(skill => {
@@ -196,7 +196,7 @@ export default function AstraTemplate({
             {/* ================= LANGUAGES (BOTTOM) ================= */}
             {data.languages?.length > 0 && (
               <Block title="Languages">
-                <div className="grid grid-cols-2 gap-x-12 gap-y-4">
+                <div className={`grid grid-cols-2 ${resumeData.showLanguageMeter ? 'gap-y-4' : 'gap-y-2'}`}>
                   {data.languages
                     .filter(l => l.name?.trim())
                     .map(lang => {
@@ -285,7 +285,7 @@ function Block({
     children: React.ReactNode;
   }) {
     return (
-      <section className="grid grid-cols-[150px_1fr] gap-8">
+      <section className="grid grid-cols-[150px_1fr] gap-8 pt-10">
         <h2 className="text-sm font-bold uppercase tracking-widest">
           {title}
         </h2>

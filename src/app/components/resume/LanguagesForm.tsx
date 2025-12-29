@@ -67,40 +67,42 @@ export default function LanguagesForm() {
       ))}
 
       {/* Add Button */}
-      <button
-        onClick={addLanguage}
-        className="w-fit text-left text-cyan-400 hover:text-cyan-500 font-medium transition"
-      >
-        {languages.length === 0 ? "+ Add Language" : "+ Add Another Language"}
-      </button>
-
-      {/* Global Skill Meter Toggle */}
-      <div className="flex items-center justify-end gap-2 mb-6">
-        <div>
-          <p className="text-sm text-gray-500">Show language level</p>
-        </div>
-
+      <div className="flex justify-between items-center">
         <button
-          type="button"
-          onClick={() =>
-            setResumeData((prev) => ({
-              ...prev,
-              showLanguageMeter: !prev.showLanguageMeter,
-            }))
-          }
-          className={`
-            relative inline-flex h-6 w-11 items-center rounded-full transition
-            ${resumeData.showLanguageMeter ? "bg-cyan-400" : "bg-gray-300"}
-          `}
-          aria-pressed={resumeData.showLanguageMeter}
+          onClick={addLanguage}
+          className="w-fit text-left text-cyan-400 hover:text-cyan-500 font-medium transition"
         >
-          <span
-            className={`
-              inline-block h-4 w-4 transform rounded-full bg-white transition
-              ${resumeData.showLanguageMeter ? "translate-x-6" : "translate-x-1"}
-            `}
-          />
+          {languages.length === 0 ? "+ Add Language" : "+ Add Another Language"}
         </button>
+
+        {/* Global Skill Meter Toggle */}
+        <div className="flex items-center justify-end gap-2">
+          <div>
+            <p className="text-sm text-gray-500">Show language level</p>
+          </div>
+
+          <button
+            type="button"
+            onClick={() =>
+              setResumeData((prev) => ({
+                ...prev,
+                showLanguageMeter: !prev.showLanguageMeter,
+              }))
+            }
+            className={`
+              relative inline-flex h-6 w-11 items-center rounded-full transition
+              ${resumeData.showLanguageMeter ? "bg-cyan-400" : "bg-gray-300"}
+            `}
+            aria-pressed={resumeData.showLanguageMeter}
+          >
+            <span
+              className={`
+                inline-block h-4 w-4 transform rounded-full bg-white transition
+                ${resumeData.showLanguageMeter ? "translate-x-6" : "translate-x-1"}
+              `}
+            />
+          </button>
+        </div>
       </div>
     </>
   );
@@ -138,37 +140,40 @@ function LanguageCard({
   }, []);
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-5 space-y-5">
+    <div className="bg-white shadow-md rounded-lg">
 
       {/* Header */}
-      <div className="flex justify-between items-center">
+      <button 
+        className="w-full flex justify-between items-center p-5"
+        onClick={() => toggleCollapse(language.id)}
+      >
         <p className="font-semibold text-gray-800">
           {language.name?.trim() || "Not Specified"}
         </p>
 
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => toggleCollapse(language.id)}
-            className="text-gray-600 hover:text-gray-900"
-          >
+          <div className="text-gray-600 hover:text-gray-900" >
             {language.collapsed ? <ChevronDown /> : <ChevronUp />}
-          </button>
+          </div>
 
           <button
-            onClick={() => deleteLanguage(language.id)}
+            onClick={(e) => {
+              e.stopPropagation()
+              deleteLanguage(language.id)
+            }}
             className="text-red-500 hover:text-red-700"
           >
             <Trash size={18} />
           </button>
         </div>
-      </div>
+      </button>
 
       {/* Body */}
       {!language.collapsed && (
-        <div className="space-y-6 border-t pt-5">
+        <div className="border-t p-5">
 
           {/* Language Name */}
-          <div>
+          <div className="mb-5">
             <label className="text-sm font-medium text-gray-700">
               Language
             </label>

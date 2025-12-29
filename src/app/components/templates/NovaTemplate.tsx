@@ -70,11 +70,11 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
         {/* HEADER DIVIDER */}
         <div className="border-b border-black"></div>
 
-        {/* 2-COLUMN GRID */}
+        {/* ===== BODY ===== */}
         <div className="grid grid-cols-[260px_1fr]">
 
-          {/* ================= LEFT SIDEBAR ================= */}
-          <aside className="border-r border-black p-6 space-y-6 text-gray-600">
+          {/* ===== LEFT COLUMN ===== */}
+          <aside className="border-r border-black p-6 pt-0 text-gray-600">
 
             {/* CONTACTS */}
             {(data.phone || data.email || data.address || data.city) && (
@@ -138,7 +138,7 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
                               className="h-1.5"
                               style={{
                                 width,
-                                backgroundColor: data.accentColor || "#000",
+                                backgroundColor: "#2D2D2D",
                               }}
                             />
                           </div>
@@ -179,8 +179,8 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
             )}
           </aside>
 
-          {/* ================= RIGHT MAIN ================= */}
-          <main className="p-6 space-y-6 text-gray-600">
+          {/* ===== RIGHT COLUMN ===== */}
+          <main className="p-6 pt-0 text-gray-600">
 
             {/* ABOUT */}
             {data?.about && (
@@ -280,7 +280,7 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
                               className="h-1.5"
                               style={{
                                 width,
-                                backgroundColor: data.accentColor || "#000",
+                                backgroundColor: "#2D2D2D",
                               }}
                             />
                           </div>
@@ -288,7 +288,7 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
                       </div>
                     );
                   })}
-              </div>
+                </div>
             </Block>            
             )}
 
@@ -323,7 +323,7 @@ function Block({
 }) {
   return (
     <section>
-      <div className="mb-3">
+      <div className="mb-3 pt-6">
         <h2 className="text-sm font-bold uppercase tracking-widest">
           {title}
         </h2>

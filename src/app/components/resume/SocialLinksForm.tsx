@@ -56,37 +56,40 @@ export default function SocialLinksForm() {
       {socialLinks.map((link, idx) => (
         <div
           key={link.id}
-          className="bg-white shadow-md rounded-lg p-5 space-y-5"
+          className="bg-white shadow-md rounded-lg"
         >
           {/* Header */}
-          <div className="flex justify-between items-center">
+          <button 
+            className="w-full flex justify-between items-center p-5"
+            onClick={() => toggleCollapse(link.id)}
+          >
             <p className="font-semibold text-gray-800">
               {link.label?.trim() || 'Not Specified'}
             </p>
 
             <div className="flex items-center gap-3">
-              <button
-                onClick={() => toggleCollapse(link.id)}
-                className="text-gray-600 hover:text-gray-900"
-              >
+              <div className="text-gray-600 hover:text-gray-900" >
                 {link.collapsed ? <ChevronDown /> : <ChevronUp />}
-              </button>
+              </div>
 
               <button
-                onClick={() => deleteLink(link.id)}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  deleteLink(link.id)
+                }}
                 className="text-red-500 hover:text-red-700"
               >
                 <Trash size={18} />
               </button>
             </div>
-          </div>
+          </button>
 
           {/* Fields */}
           {!link.collapsed && (
-            <div className="space-y-6 border-t pt-5">
+            <div className="border-t p-5">
 
               {/* Label */}
-              <div>
+              <div className="mb-5">
                 <label className="text-sm font-medium text-gray-700">
                   Label
                 </label>

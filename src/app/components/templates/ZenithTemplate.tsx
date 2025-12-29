@@ -49,37 +49,40 @@ export default function ZenithTemplate({
           minHeight: !isThumbnail ? 1123 : undefined,
         }}
       >
-        <div className="p-12 text-gray-900 space-y-8">
 
-          {/* ================= HEADER ================= */}
-          <header className="text-center space-y-1">
-            <h1 className="text-2xl font-bold uppercase tracking-wide">
-              {data.firstName} {data.lastName}
-            </h1>
+      {/* ================= HEADER ================= */}
+      <header className="text-center p-12 space-y-5" style={{backgroundColor: resumeData.accentColor}}>
+        <h1 className="text-4xl text-white font-bold uppercase tracking-wide">
+          {data.firstName} {data.lastName}
+        </h1>
 
-            {data.jobTitle && (
-              <p className="text-sm text-gray-600">
-                {data.jobTitle}
-              </p>
-            )}
+        {data.jobTitle && (
+          <p className="text-sm text-gray-300">
+            {data.jobTitle}
+          </p>
+        )}
 
-            {/* CONTACT LINE */}
-            <p className="text-xs text-gray-600">
-              {data.email && <span>{data.email}</span>}
-              {data.email && data.socialLinks?.length ? " • " : ""}
-              {data.socialLinks?.[0]?.url && (
-                <span>{data.socialLinks[0].url}</span>
-              )}
-              {(data.address || data.city) && " • "}
-              {(data.address || data.city) && (
-                <span>
-                  {data.address}
-                  {data.city && `, ${data.city}`}
-                </span>
-              )}
-            </p>
-          </header>
+        {/* CONTACT LINE */}
+        <p className="flex justify-center gap-8 text-xs text-gray-300">
+          {data.email && <span>{data.email}</span>}
 
+          {data.email && data.phone && <span>|</span>}
+
+          {data.phone && <span>{data.phone}</span>}
+
+          {(data.email || data.phone) && (data.address || data.city) && <span>|</span>}
+
+          {(data.address || data.city) && (
+            <span>
+              {data.address}
+              {data.address && data.city && ", "}
+              {data.city}
+            </span>
+          )}
+        </p>
+      </header>
+
+      <div className="p-10 pt-0 text-gray-900">
           {/* ================= SUMMARY ================= */}
           {data.about && (
             <CenteredBlock title="Summary">
@@ -178,7 +181,7 @@ export default function ZenithTemplate({
           {/* ================= SKILLS ================= */}
           {data.skills?.length > 0 && (
             <CenteredBlock title="Skills">
-                <div className="grid grid-cols-2 gap-x-12 gap-y-4">
+                <div className={`grid grid-cols-3 ${resumeData.showSkillMeter ? 'gap-y-4' : 'gap-y-2'}`}>
                 {data.skills
                     .filter(s => s.skillName?.trim())
                     .map(skill => {
@@ -208,9 +211,9 @@ export default function ZenithTemplate({
           )}
 
           {/* ================= LANGUAGES ================= */}
-            {data.languages?.length > 0 && (
+          {data.languages?.length > 0 && (
             <CenteredBlock title="Languages">
-                <div className="grid grid-cols-2 gap-x-12 gap-y-4">
+                <div className={`grid grid-cols-3 ${resumeData.showLanguageMeter ? 'gap-y-4' : 'gap-y-2'}`}>
                 {data.languages
                     .filter(l => l.name?.trim())
                     .map(lang => {
@@ -242,12 +245,12 @@ export default function ZenithTemplate({
           {/* ================= PERSONAL DETAILS ================= */}
           {(data.nationality || data.dateOfBirth || data.maritalStatus) && (
             <CenteredBlock title="Personal Details">
-                <div className="flex justify-between text-xs text-gray-700">
+                <div className="flex justify-center gap-6 text-xs text-gray-700">
                 {data.nationality && (
-                    <span>
+                  <span>
                     <span className="font-semibold">Nationality:</span>{" "}
                     {data.nationality}
-                    </span>
+                  </span>
                 )}
 
                 {data.dateOfBirth && (
@@ -258,19 +261,33 @@ export default function ZenithTemplate({
                 )}
 
                 {data.maritalStatus && (
-                    <span>
+                  <span>
                     <span className="font-semibold">Marital Status:</span>{" "}
                     {data.maritalStatus}
-                    </span>
+                  </span>
                 )}
                 </div>
             </CenteredBlock>
+          )}
+
+          {/* LINKS */}
+          {data?.socialLinks?.length > 0 && (
+              <CenteredBlock title="Links">
+              <div className="flex justify-center gap-6 text-xs text-gray-700">
+                {data.socialLinks.map((link) => (
+                  <div key={link.id}>
+                    <span className="font-semibold">{link.label}: </span>
+                    <span className="text-gray-600">{link.url}</span>
+                  </div>
+                ))}
+              </div>
+            </CenteredBlock>            
             )}
 
           {/* ================= HOBBIES ================= */}
           {data.hobbies && (
             <CenteredBlock title="Hobbies">
-                <p className="text-xs text-gray-700 text-left">
+                <p className="text-xs text-gray-700 text-center">
                 {data.hobbies
                     .split(",")
                     .map(hobby => hobby.trim())
@@ -296,7 +313,7 @@ function CenteredBlock({
   return (
     <section className="space-y-4">
       <div className="text-center">
-        <h2 className="text-lg font-semibold">{title}</h2>
+        <h2 className="text-lg font-semibold pt-8">{title}</h2>
         <div className="mt-2 border-t border-gray-400 w-full mx-auto" />
       </div>
       {children}

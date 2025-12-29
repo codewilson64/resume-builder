@@ -32,19 +32,19 @@ export default function TemplateSelector() {
   return (
     <div ref={rootRef} className="relative w-full mb-6">
       <div>
-      <label className="font-medium text-gray-700 text-sm block mb-1">
-        Template
-      </label>
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="w-full flex justify-between items-center border border-gray-300 rounded-lg p-3 bg-white text-left"
-      >
-        <span className="text-gray-800">
-          {resumeData?.template || "Select a template..."}
-        </span>
-        <ChevronDown size={18} />
-      </button>
+        <label className="font-medium text-gray-700 text-sm block mb-1">
+          Template
+        </label>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="w-full flex justify-between items-center border border-gray-300 rounded-lg p-3 bg-white text-left"
+          >
+            <span className="text-gray-800">
+              {resumeData?.template || "Select a template..."}
+            </span>
+            <ChevronDown size={18} />
+          </button>
       </div>
 
       {open && (

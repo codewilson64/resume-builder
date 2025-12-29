@@ -52,7 +52,7 @@ export default function AtlasTemplate({
       >
         <div className="p-10 flex gap-10 text-gray-900">
           {/* ================= LEFT COLUMN ================= */}
-          <div className="flex-1 flex flex-col gap-8">
+          <div className="flex-1 flex flex-col">
             {/* HEADER */}
             <header>
               <h1 className="text-4xl font-bold leading-tight">
@@ -81,7 +81,7 @@ export default function AtlasTemplate({
                     .map(exp => (
                       <div key={exp.id}>
                         <div className="flex justify-between items-center">
-                          <p className="text-xs font-semibold">
+                          <p className="text-sm font-semibold">
                             {exp.jobTitle}
                             {exp.company && `, ${exp.company}`}
                           </p>
@@ -113,7 +113,7 @@ export default function AtlasTemplate({
                     .map(edu => (
                       <div key={edu.id}>
                         <div className="flex justify-between items-center">
-                          <p className="text-xs font-semibold">
+                          <p className="text-sm font-semibold">
                             {edu.degree}
                             {edu.school && `, ${edu.school}`}
                           </p>
@@ -138,14 +138,10 @@ export default function AtlasTemplate({
           </div>
 
           {/* ================= RIGHT COLUMN ================= */}
-          <aside className="w-64 flex flex-col gap-8">
+          <aside className="w-64 flex flex-col">
             {/* DETAILS */}
             {(data.email || data.phone || data.address || data.city) && (
-              <section>
-                <h2 className="text-sm font-bold mb-3">
-                  Contact
-                </h2>
-
+              <Block title="Contacts">
                 {data.email && <p className="text-xs">{data.email}</p>}
                 {(data.address || data.city) && (
                   <p className="text-xs mt-1">
@@ -158,16 +154,12 @@ export default function AtlasTemplate({
                     {data.phone}
                   </p>
                 )}
-              </section>
+              </Block>
             )}
 
             {/* SOCIAL LINKS */}
             {data.socialLinks?.length > 0 && (
-              <section>
-                <h2 className="text-sm font-bold mb-3">
-                  Websites and Social Links
-                </h2>
-
+              <Block title="Links">
                 <div className="space-y-2 text-xs">
                   {data.socialLinks
                     .filter(s => s.label || s.url)
@@ -182,16 +174,12 @@ export default function AtlasTemplate({
                       </div>
                     ))}
                 </div>
-              </section>
+              </Block>
             )}
 
             {/* SKILLS */}
             {data.skills?.length > 0 && (
-              <section>
-                <h2 className="text-sm font-bold mb-3">
-                  Skills
-                </h2>
-
+              <Block title="Skills">
                 {data.skills
                   .filter(skill => skill.skillName?.trim())
                   .map(skill => {
@@ -216,16 +204,12 @@ export default function AtlasTemplate({
                       </div>
                     );
                   })}
-              </section>
+              </Block>
             )}
 
             {/* LANGUAGES */}
             {data.languages?.length > 0 && (
-              <section>
-                <h2 className="text-sm font-bold mb-3">
-                  Languages
-                </h2>
-
+              <Block title="Languages">
                 {data.languages
                   .filter(lang => lang.name?.trim())
                   .map(lang => {
@@ -250,16 +234,12 @@ export default function AtlasTemplate({
                       </div>
                     );
                   })}
-              </section>
+              </Block>
             )}
 
             {/* PERSONAL DETAILS */}
             {(data.dateOfBirth || data.nationality || data.maritalStatus) && (
-              <section>
-                <h2 className="text-sm font-bold mb-3">
-                  Personal Details
-                </h2>
-
+              <Block title="Personal Details">
                 <ul className="text-xs space-y-2 text-gray-700">
                   {data.dateOfBirth && (
                     <li>
@@ -282,21 +262,18 @@ export default function AtlasTemplate({
                     </li>
                   )}
                 </ul>
-              </section>
+              </Block>
             )}
 
             {/* HOBBIES */}
             {data.hobbies && (
-              <section>
-                <h2 className="text-sm font-bold mb-3">
-                  Hobbies and Interests
-                </h2>
+              <Block title="Hobbies">
                 <ul className="text-xs list-disc list-inside space-y-1">
                   {data.hobbies.split(",").map((hobby, i) => (
                     <li key={i}>{hobby.trim()}</li>
                   ))}
                 </ul>
-              </section>
+              </Block>
             )}
           </aside>
         </div>
@@ -316,7 +293,7 @@ function Block({
 }) {
   return (
     <section>
-      <h2 className="text-sm font-bold border-b border-black pb-1 mb-3">
+      <h2 className="text-lg font-bold border-b border-black pt-6 pb-1 mb-3">
         {title}
       </h2>
       {children}
