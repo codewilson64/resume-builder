@@ -59,7 +59,9 @@ export default function SocialLinksForm() {
           className="bg-white shadow-md rounded-lg"
         >
           {/* Header */}
-          <button 
+          <div 
+            role="button"
+            tabIndex={0}
             className="w-full flex justify-between items-center p-5"
             onClick={() => toggleCollapse(link.id)}
           >
@@ -82,7 +84,7 @@ export default function SocialLinksForm() {
                 <Trash size={18} />
               </button>
             </div>
-          </button>
+          </div>
 
           {/* Fields */}
           {!link.collapsed && (

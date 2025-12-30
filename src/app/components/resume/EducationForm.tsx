@@ -60,11 +60,13 @@ export default function EducationForm() {
         <div key={edu.id} className="bg-white shadow-md rounded-lg">
           
           {/* Header */}
-          <button 
+          <div
+            role="button"
+            tabIndex={0}
             className="w-full flex justify-between items-center p-5"
             onClick={() => toggleCollapse(edu.id)}
           >
-            <p className="font-semibold text-gray-800">
+            <p className="font-semibold text-gray-800 text-left">
               {edu?.degree?.trim() && edu?.school?.trim()
               ? `${edu.degree.trim()} at ${edu.school.trim()}`
               : edu?.degree?.trim() || edu?.school?.trim() || "Not Specified"}
@@ -85,7 +87,7 @@ export default function EducationForm() {
                 <Trash size={18} />
               </button>
             </div>
-          </button>
+          </div>
 
           {/* Body */}
           {!edu.collapsed && (

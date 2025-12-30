@@ -78,7 +78,7 @@ export default function LanguagesForm() {
         {/* Global Skill Meter Toggle */}
         <div className="flex items-center justify-end gap-2">
           <div>
-            <p className="text-sm text-gray-500">Show language level</p>
+            <p className="text-xs text-gray-500">Show language level</p>
           </div>
 
           <button
@@ -143,7 +143,9 @@ function LanguageCard({
     <div className="bg-white shadow-md rounded-lg">
 
       {/* Header */}
-      <button 
+      <div 
+        role="button"
+        tabIndex={0}
         className="w-full flex justify-between items-center p-5"
         onClick={() => toggleCollapse(language.id)}
       >
@@ -166,7 +168,7 @@ function LanguageCard({
             <Trash size={18} />
           </button>
         </div>
-      </button>
+      </div>
 
       {/* Body */}
       {!language.collapsed && (

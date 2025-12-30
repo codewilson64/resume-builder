@@ -18,7 +18,7 @@ export async function createResumeForGuest() {
     data: {
       guestId,
       title: "Untitled",
-      template: "Budapest",
+      template: "Orion",
       accentColor: "#2D2D2D",
       fontFamily: "Poppins",
     },
@@ -35,7 +35,7 @@ export async function createResumeForUser() {
     data: {
       userId: user.id,
       title: "Untitled",
-      template: "Budapest",
+      template: "Orion",
       accentColor: "#2D2D2D",
       fontFamily: "Poppins",
     },

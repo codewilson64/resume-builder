@@ -64,11 +64,13 @@ export default function ExperienceForm() {
           className="bg-white shadow-md rounded-lg"
         >
           {/* Header */}
-          <button
+          <div
+            role="button"
+            tabIndex={0}
             className="w-full flex justify-between items-center p-5"
             onClick={() => toggleCollapse(experience.id)}
           >
-            <p className="font-semibold text-gray-800">
+            <p className="font-semibold text-gray-800 text-left">
               {experience?.jobTitle?.trim() && experience?.company?.trim()
                ? `${experience.jobTitle.trim()} from ${experience.company.trim()}`
                : experience?.jobTitle?.trim() || experience?.company?.trim() || "Not Specified"}
@@ -89,7 +91,7 @@ export default function ExperienceForm() {
                 <Trash size={18} />
               </button>
             </div>
-          </button>
+          </div>
 
           {/* Fields */}
           {!experience.collapsed && (
