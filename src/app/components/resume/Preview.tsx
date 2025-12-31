@@ -6,9 +6,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useReactToPrint } from "react-to-print";
 
 import { updateResume } from "@/lib/actions/resume-action";
+import { useResumeSource } from "@/app/hooks/useResumeSource";
+
 import PreviewTopBar from "./PreviewTopBar";
 import TemplateRenderer from "../TemplateRenderer";
-import { useResumeSource } from "@/app/hooks/useResumeSource";
 import ResumeSkeleton from "../skeletons/ResumeSkeleton";
 
 
@@ -34,21 +35,30 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
     documentTitle: `${resumeData?.firstName || "resume"}`,
   });
 
+  // Download
   const handlePrint = async () => {
     if (loading) return;
     setLoading(true)
-
-    if (!isLoggedIn) {
-      router.push("/signup");
-      return;
-    }
-
-    if (!resumeData?.resumeId) {
-      console.log("resume id does not exist!")
-      return;
-    }
-
+    
     try {
+      if (!isLoggedIn) {
+        router.push("/signup");
+        return;
+      }
+  
+      if (!resumeData?.resumeId) {
+        console.log("resume id does not exist!")
+        return;
+      }
+
+      const res = await fetch("/api/subscription")
+      const { status } = await res.json()
+
+      if (status !== "active") {
+        router.push("/payment")
+        return
+      }
+  
       await updateResume(resumeData.resumeId, resumeData);
       handlePrintBase();
     } catch (error) {

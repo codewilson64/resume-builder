@@ -85,6 +85,18 @@ model Verification {
   @@map("verification")
 }
 
+model Subscription {
+  id               String    @id @default(uuid()) @db.Uuid
+  userId           String    @unique
+  polarCustomerId  String?
+  polarSubId       String?   @unique
+  status           String
+  currentPeriodEnd DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 // Resume Schema
 model Resume {
   id        String   @id @default(uuid()) @db.Uuid

@@ -39,7 +39,7 @@ export default function Signup() {
         await migrateGuestToUser()
         
         if (hasResumeData(resumeData)) {
-          router.push("/resume/preview");
+          router.push("/payment");
         } else {
           router.push("/profile");
         }

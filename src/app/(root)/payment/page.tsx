@@ -30,9 +30,9 @@ const PLAN_CONFIG = {
 };
 
 export default function PaymentPage() {
+  const [loading, setLoading] = useState(false);
   const [plan, setPlan] = useState<Plan>("weekly");
   const meta = PLAN_CONFIG[plan];
-  const [loading, setLoading] = useState(false);
 
   async function handleCheckout() {
     try {

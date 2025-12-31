@@ -2,7 +2,7 @@ import { PrismaClient } from "@/generated/prisma/client";
 import { prismaAdapter } from "better-auth/adapters/prisma"
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Polar } from "@polar-sh/sdk";
-import { checkout, polar } from "@polar-sh/better-auth";
+import { checkout, polar, webhooks } from "@polar-sh/better-auth";
 import { betterAuth } from "better-auth";
 
 import { nextCookies } from 'better-auth/next-js'
@@ -57,6 +57,9 @@ export const auth = betterAuth({
         polar({ 
             client: polarClient, 
             createCustomerOnSignUp: true,
+            // metadata: ({ user }: { user: { id: string } }) => ({
+            //     userId: user.id,
+            //   }),
             use: [ 
                 checkout({ 
                     products: [ 
@@ -74,6 +77,34 @@ export const auth = betterAuth({
                     returnUrl: "http://localhost:3000/payment",
                     theme: "light"
                 }), 
+                webhooks({
+                    secret: process.env.POLAR_WEBHOOK_SECRET as string,
+                    onPayload: async (payload) => {
+                        console.log("POLAR EVENT:", payload.type)
+                      },
+                    onSubscriptionActive: async (payload) => {
+                        const sub = payload.data
+
+                        await prisma.subscription.upsert({
+                            where: { polarSubId: sub.id },
+                            update: {
+                              status: "active",
+                              currentPeriodEnd: sub.current_period_end
+                                ? new Date(sub.current_period_end)
+                                : null,
+                            },
+                            create: {
+                              userId: sub.metadata.userId,
+                              polarSubId: sub.id,
+                              polarCustomerId: sub.customer_id,
+                              status: "active",
+                              currentPeriodEnd: sub.current_period_end
+                                ? new Date(sub.current_period_end)
+                                : null,
+                            },
+                        })
+                    }
+                })
             ], 
         }), 
         nextCookies()

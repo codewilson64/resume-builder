@@ -173,6 +173,17 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  polarCustomerId: 'polarCustomerId',
+  polarSubId: 'polarSubId',
+  status: 'status',
+  currentPeriodEnd: 'currentPeriodEnd',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ResumeScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
@@ -266,6 +277,7 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
+  Subscription: 'Subscription',
   Resume: 'Resume',
   Experience: 'Experience',
   Education: 'Education',
