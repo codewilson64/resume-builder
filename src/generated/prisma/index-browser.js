@@ -180,6 +180,13 @@ exports.Prisma.SubscriptionScalarFieldEnum = {
   polarSubId: 'polarSubId',
   status: 'status',
   currentPeriodEnd: 'currentPeriodEnd',
+  planName: 'planName',
+  interval: 'interval',
+  intervalCount: 'intervalCount',
+  priceAmount: 'priceAmount',
+  currency: 'currency',
+  isTrial: 'isTrial',
+  productId: 'productId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

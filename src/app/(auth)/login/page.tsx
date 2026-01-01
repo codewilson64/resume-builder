@@ -37,7 +37,7 @@ export default function Login() {
   
     if (result.user) {
       await migrateGuestToUser();
-      router.push("/profile");
+      router.replace("/profile");
     }
   }
 

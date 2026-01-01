@@ -29,7 +29,7 @@ export default function SuccessPage() {
         )}
 
         <Link
-          href="/resume/preview"
+          href="/profile"
           className="inline-block w-full bg-cyan-500 hover:bg-cyan-600 text-white font-medium py-3 rounded-lg transition"
         >
           Go back to download your resume

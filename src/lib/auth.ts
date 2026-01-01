@@ -57,19 +57,16 @@ export const auth = betterAuth({
         polar({ 
             client: polarClient, 
             createCustomerOnSignUp: true,
-            // metadata: ({ user }: { user: { id: string } }) => ({
-            //     userId: user.id,
-            //   }),
             use: [ 
                 checkout({ 
                     products: [ 
                         { 
-                            productId: "66ac7322-9315-4e8b-8ce1-020999226132", // ID of Product from Polar Dashboard
-                            slug: "Weekly Access" // Custom slug for easy reference in Checkout URL, e.g. /checkout/pro
+                            productId: "66ac7322-9315-4e8b-8ce1-020999226132",
+                            slug: "Weekly Access"
                         },
                         { 
-                            productId: "53b8125b-9fe8-4b26-8a98-c367c3048bcf", // ID of Product from Polar Dashboard
-                            slug: "Monthly Access" // Custom slug for easy reference in Checkout URL, e.g. /checkout/pro
+                            productId: "53b8125b-9fe8-4b26-8a98-c367c3048bcf", 
+                            slug: "Monthly Access" 
                         },
                     ], 
                     successUrl: "/payment/success?checkout_id={CHECKOUT_ID}", 
@@ -83,24 +80,64 @@ export const auth = betterAuth({
                         console.log("POLAR EVENT:", payload.type)
                       },
                     onSubscriptionActive: async (payload) => {
+                        console.log(
+                            "POLAR subscription.active payload:",
+                            JSON.stringify(payload, null, 2)
+                          )
+
                         const sub = payload.data
+
+                        // Get Polar customer ID from subscription
+                        const polarCustomerId = sub.customerId
+                        if (!polarCustomerId) {
+                            console.error("Missing customerId on subscription", sub.id)
+                            return
+                        }
+
+                        // Find user by Polar customer externalId
+                        const customer = await polarClient.customers.get({
+                            id: polarCustomerId,
+                        })
+
+                        const userId = customer.externalId
+                        if (!userId) {
+                            console.error("Customer has no externalId", polarCustomerId)
+                            return
+                        }
+
+                        const product = sub.product;
+                        const price = sub.prices?.[0];
 
                         await prisma.subscription.upsert({
                             where: { polarSubId: sub.id },
                             update: {
-                              status: "active",
+                              status: sub.status,
                               currentPeriodEnd: sub.current_period_end
                                 ? new Date(sub.current_period_end)
                                 : null,
+                              planName: product?.name ?? "Unknown Plan",
+                              interval: sub.recurringInterval,
+                              intervalCount: sub.recurringIntervalCount,
+                              priceAmount: price?.priceAmount ?? 0,
+                              currency: price?.priceCurrency ?? "usd",
+                              isTrial: sub.status === "trialing",
+                              productId: sub.productId,
                             },
                             create: {
-                              userId: sub.metadata.userId,
+                              userId,
                               polarSubId: sub.id,
                               polarCustomerId: sub.customer_id,
-                              status: "active",
+                              status: sub.status,
                               currentPeriodEnd: sub.current_period_end
                                 ? new Date(sub.current_period_end)
                                 : null,
+                              planName: product?.name ?? "Unknown Plan",
+                              interval: sub.recurringInterval,
+                              intervalCount: sub.recurringIntervalCount,
+                              priceAmount: price?.priceAmount ?? 0,
+                              currency: price?.priceCurrency ?? "usd",
+                              isTrial: sub.status === "trialing",
+                              productId: sub.productId,
                             },
                         })
                     }

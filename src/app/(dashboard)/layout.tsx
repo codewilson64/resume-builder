@@ -4,6 +4,7 @@ import { signOut } from "@/lib/actions/auth-action";
 import Image from "next/image";
 import logo from "../../../public/confidencv_logo.png"
 import { useRouter } from "next/navigation";
+import { User } from "lucide-react";
 
 export default function DashboardLayout({ 
   children 
@@ -41,10 +42,11 @@ export default function DashboardLayout({
           </h1>
         </div>
           <button
-            onClick={handleLogout}
-            className="text-sm px-6 py-3 text-white bg-cyan-400 rounded-full"
+            onClick={() => router.push('/account')}
+            className="flex items-center gap-2 text-sm text-black hover:text-cyan-400"
           >
-            Logout
+            <User className="w-4 h-4" />
+            My Account
           </button>
         </div>
       </div>

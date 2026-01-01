@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { ResumeData } from "@/app/types/resume";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, Download } from "lucide-react";
 import TemplateRenderer from "@/app/components/TemplateRenderer";
 import { deleteResumeById } from "@/lib/actions/resume-action";
 
@@ -49,6 +49,16 @@ export default function ResumeCard({ resume }: { resume: ResumeData }) {
             <span>Edit</span>
           </button>
 
+          {/* Download */}
+          <button
+            onClick={() => router.push(`/resume/preview?id=${resume.resumeId}`)}
+            className="flex items-center gap-2 text-sm hover:text-orange-500"
+            aria-label="Edit resume"
+          >
+            <Download className="w-4 h-4" />
+            <span>Download</span>
+          </button>
+
           {/* Delete */}
           <button
             onClick={() => handleDelete(resume.resumeId)}
@@ -58,6 +68,7 @@ export default function ResumeCard({ resume }: { resume: ResumeData }) {
             <Trash2 className="w-4 h-4" />
             <span>Delete</span>
           </button>
+
         </div>
       </div>
     </div>

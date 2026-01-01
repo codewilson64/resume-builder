@@ -8,6 +8,7 @@ import { signUp } from "@/lib/actions/auth-action";
 import { useResume } from "@/app/context/ResumeContext";
 import { hasResumeData } from "@/utils/hasResumeData";
 import { migrateGuestToUser } from "@/lib/actions/guest-action";
+import { updateResume } from "@/lib/actions/resume-action";
 
 export default function Signup() {
   const [name, setName] = useState('')
@@ -39,9 +40,14 @@ export default function Signup() {
         await migrateGuestToUser()
         
         if (hasResumeData(resumeData)) {
-          router.push("/payment");
+          if (!resumeData?.resumeId) {
+           return;
+          }
+
+          await updateResume(resumeData.resumeId, resumeData);
+          router.replace("/payment");
         } else {
-          router.push("/profile");
+          router.replace("/profile");
         }
         
         return

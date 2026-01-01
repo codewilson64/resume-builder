@@ -90,8 +90,18 @@ model Subscription {
   userId           String   @unique
   polarCustomerId  String?
   polarSubId       String?  @unique
+
   status           String
   currentPeriodEnd DateTime?
+
+  // For UI
+  planName           String
+  interval           String
+  intervalCount      Int
+  priceAmount        Int
+  currency           String
+  isTrial            Boolean
+  productId          String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -110,7 +120,7 @@ model Resume {
   guest         Guest?         @relation(fields: [guestId], references: [id])
 
   userId        String?        @db.Uuid
-  user          User?          @relation(fields: [userId], references: [id])
+  user          User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   // Personal Information
   title         String?

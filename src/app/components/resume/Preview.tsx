@@ -41,24 +41,31 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
     setLoading(true)
     
     try {
+      // check auth
       if (!isLoggedIn) {
-        router.push("/signup");
+        router.replace("/signup");
         return;
       }
-  
+      
+      // check resume id
       if (!resumeData?.resumeId) {
         console.log("resume id does not exist!")
         return;
       }
 
+      // check subscription status
       const res = await fetch("/api/subscription")
       const { status } = await res.json()
 
       if (status !== "active") {
-        router.push("/payment")
+        console.log("User subscription is inactive...")
+        router.replace("/payment")
         return
       }
-  
+
+      console.log("User subscription is active...")
+
+      // update resume and download
       await updateResume(resumeData.resumeId, resumeData);
       handlePrintBase();
     } catch (error) {

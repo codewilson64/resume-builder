@@ -7491,8 +7491,20 @@ export namespace Prisma {
 
   export type AggregateSubscription = {
     _count: SubscriptionCountAggregateOutputType | null
+    _avg: SubscriptionAvgAggregateOutputType | null
+    _sum: SubscriptionSumAggregateOutputType | null
     _min: SubscriptionMinAggregateOutputType | null
     _max: SubscriptionMaxAggregateOutputType | null
+  }
+
+  export type SubscriptionAvgAggregateOutputType = {
+    intervalCount: number | null
+    priceAmount: number | null
+  }
+
+  export type SubscriptionSumAggregateOutputType = {
+    intervalCount: number | null
+    priceAmount: number | null
   }
 
   export type SubscriptionMinAggregateOutputType = {
@@ -7502,6 +7514,13 @@ export namespace Prisma {
     polarSubId: string | null
     status: string | null
     currentPeriodEnd: Date | null
+    planName: string | null
+    interval: string | null
+    intervalCount: number | null
+    priceAmount: number | null
+    currency: string | null
+    isTrial: boolean | null
+    productId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7513,6 +7532,13 @@ export namespace Prisma {
     polarSubId: string | null
     status: string | null
     currentPeriodEnd: Date | null
+    planName: string | null
+    interval: string | null
+    intervalCount: number | null
+    priceAmount: number | null
+    currency: string | null
+    isTrial: boolean | null
+    productId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7524,11 +7550,28 @@ export namespace Prisma {
     polarSubId: number
     status: number
     currentPeriodEnd: number
+    planName: number
+    interval: number
+    intervalCount: number
+    priceAmount: number
+    currency: number
+    isTrial: number
+    productId: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
+
+  export type SubscriptionAvgAggregateInputType = {
+    intervalCount?: true
+    priceAmount?: true
+  }
+
+  export type SubscriptionSumAggregateInputType = {
+    intervalCount?: true
+    priceAmount?: true
+  }
 
   export type SubscriptionMinAggregateInputType = {
     id?: true
@@ -7537,6 +7580,13 @@ export namespace Prisma {
     polarSubId?: true
     status?: true
     currentPeriodEnd?: true
+    planName?: true
+    interval?: true
+    intervalCount?: true
+    priceAmount?: true
+    currency?: true
+    isTrial?: true
+    productId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7548,6 +7598,13 @@ export namespace Prisma {
     polarSubId?: true
     status?: true
     currentPeriodEnd?: true
+    planName?: true
+    interval?: true
+    intervalCount?: true
+    priceAmount?: true
+    currency?: true
+    isTrial?: true
+    productId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7559,6 +7616,13 @@ export namespace Prisma {
     polarSubId?: true
     status?: true
     currentPeriodEnd?: true
+    planName?: true
+    interval?: true
+    intervalCount?: true
+    priceAmount?: true
+    currency?: true
+    isTrial?: true
+    productId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -7602,6 +7666,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: SubscriptionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SubscriptionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: SubscriptionMinAggregateInputType
@@ -7632,6 +7708,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: SubscriptionCountAggregateInputType | true
+    _avg?: SubscriptionAvgAggregateInputType
+    _sum?: SubscriptionSumAggregateInputType
     _min?: SubscriptionMinAggregateInputType
     _max?: SubscriptionMaxAggregateInputType
   }
@@ -7643,9 +7721,18 @@ export namespace Prisma {
     polarSubId: string | null
     status: string
     currentPeriodEnd: Date | null
+    planName: string
+    interval: string
+    intervalCount: number
+    priceAmount: number
+    currency: string
+    isTrial: boolean
+    productId: string
     createdAt: Date
     updatedAt: Date
     _count: SubscriptionCountAggregateOutputType | null
+    _avg: SubscriptionAvgAggregateOutputType | null
+    _sum: SubscriptionSumAggregateOutputType | null
     _min: SubscriptionMinAggregateOutputType | null
     _max: SubscriptionMaxAggregateOutputType | null
   }
@@ -7671,6 +7758,13 @@ export namespace Prisma {
     polarSubId?: boolean
     status?: boolean
     currentPeriodEnd?: boolean
+    planName?: boolean
+    interval?: boolean
+    intervalCount?: boolean
+    priceAmount?: boolean
+    currency?: boolean
+    isTrial?: boolean
+    productId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["subscription"]>
@@ -7682,6 +7776,13 @@ export namespace Prisma {
     polarSubId?: boolean
     status?: boolean
     currentPeriodEnd?: boolean
+    planName?: boolean
+    interval?: boolean
+    intervalCount?: boolean
+    priceAmount?: boolean
+    currency?: boolean
+    isTrial?: boolean
+    productId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["subscription"]>
@@ -7693,6 +7794,13 @@ export namespace Prisma {
     polarSubId?: boolean
     status?: boolean
     currentPeriodEnd?: boolean
+    planName?: boolean
+    interval?: boolean
+    intervalCount?: boolean
+    priceAmount?: boolean
+    currency?: boolean
+    isTrial?: boolean
+    productId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["subscription"]>
@@ -7704,11 +7812,18 @@ export namespace Prisma {
     polarSubId?: boolean
     status?: boolean
     currentPeriodEnd?: boolean
+    planName?: boolean
+    interval?: boolean
+    intervalCount?: boolean
+    priceAmount?: boolean
+    currency?: boolean
+    isTrial?: boolean
+    productId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "polarCustomerId" | "polarSubId" | "status" | "currentPeriodEnd" | "createdAt" | "updatedAt", ExtArgs["result"]["subscription"]>
+  export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "polarCustomerId" | "polarSubId" | "status" | "currentPeriodEnd" | "planName" | "interval" | "intervalCount" | "priceAmount" | "currency" | "isTrial" | "productId" | "createdAt" | "updatedAt", ExtArgs["result"]["subscription"]>
 
   export type $SubscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Subscription"
@@ -7720,6 +7835,13 @@ export namespace Prisma {
       polarSubId: string | null
       status: string
       currentPeriodEnd: Date | null
+      planName: string
+      interval: string
+      intervalCount: number
+      priceAmount: number
+      currency: string
+      isTrial: boolean
+      productId: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["subscription"]>
@@ -8151,6 +8273,13 @@ export namespace Prisma {
     readonly polarSubId: FieldRef<"Subscription", 'String'>
     readonly status: FieldRef<"Subscription", 'String'>
     readonly currentPeriodEnd: FieldRef<"Subscription", 'DateTime'>
+    readonly planName: FieldRef<"Subscription", 'String'>
+    readonly interval: FieldRef<"Subscription", 'String'>
+    readonly intervalCount: FieldRef<"Subscription", 'Int'>
+    readonly priceAmount: FieldRef<"Subscription", 'Int'>
+    readonly currency: FieldRef<"Subscription", 'String'>
+    readonly isTrial: FieldRef<"Subscription", 'Boolean'>
+    readonly productId: FieldRef<"Subscription", 'String'>
     readonly createdAt: FieldRef<"Subscription", 'DateTime'>
     readonly updatedAt: FieldRef<"Subscription", 'DateTime'>
   }
@@ -15443,6 +15572,13 @@ export namespace Prisma {
     polarSubId: 'polarSubId',
     status: 'status',
     currentPeriodEnd: 'currentPeriodEnd',
+    planName: 'planName',
+    interval: 'interval',
+    intervalCount: 'intervalCount',
+    priceAmount: 'priceAmount',
+    currency: 'currency',
+    isTrial: 'isTrial',
+    productId: 'productId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -15614,6 +15750,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -15973,6 +16123,13 @@ export namespace Prisma {
     polarSubId?: StringNullableFilter<"Subscription"> | string | null
     status?: StringFilter<"Subscription"> | string
     currentPeriodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    planName?: StringFilter<"Subscription"> | string
+    interval?: StringFilter<"Subscription"> | string
+    intervalCount?: IntFilter<"Subscription"> | number
+    priceAmount?: IntFilter<"Subscription"> | number
+    currency?: StringFilter<"Subscription"> | string
+    isTrial?: BoolFilter<"Subscription"> | boolean
+    productId?: StringFilter<"Subscription"> | string
     createdAt?: DateTimeFilter<"Subscription"> | Date | string
     updatedAt?: DateTimeFilter<"Subscription"> | Date | string
   }
@@ -15984,6 +16141,13 @@ export namespace Prisma {
     polarSubId?: SortOrderInput | SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrderInput | SortOrder
+    planName?: SortOrder
+    interval?: SortOrder
+    intervalCount?: SortOrder
+    priceAmount?: SortOrder
+    currency?: SortOrder
+    isTrial?: SortOrder
+    productId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -15998,6 +16162,13 @@ export namespace Prisma {
     polarCustomerId?: StringNullableFilter<"Subscription"> | string | null
     status?: StringFilter<"Subscription"> | string
     currentPeriodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    planName?: StringFilter<"Subscription"> | string
+    interval?: StringFilter<"Subscription"> | string
+    intervalCount?: IntFilter<"Subscription"> | number
+    priceAmount?: IntFilter<"Subscription"> | number
+    currency?: StringFilter<"Subscription"> | string
+    isTrial?: BoolFilter<"Subscription"> | boolean
+    productId?: StringFilter<"Subscription"> | string
     createdAt?: DateTimeFilter<"Subscription"> | Date | string
     updatedAt?: DateTimeFilter<"Subscription"> | Date | string
   }, "id" | "userId" | "polarSubId">
@@ -16009,11 +16180,20 @@ export namespace Prisma {
     polarSubId?: SortOrderInput | SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrderInput | SortOrder
+    planName?: SortOrder
+    interval?: SortOrder
+    intervalCount?: SortOrder
+    priceAmount?: SortOrder
+    currency?: SortOrder
+    isTrial?: SortOrder
+    productId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SubscriptionCountOrderByAggregateInput
+    _avg?: SubscriptionAvgOrderByAggregateInput
     _max?: SubscriptionMaxOrderByAggregateInput
     _min?: SubscriptionMinOrderByAggregateInput
+    _sum?: SubscriptionSumOrderByAggregateInput
   }
 
   export type SubscriptionScalarWhereWithAggregatesInput = {
@@ -16026,6 +16206,13 @@ export namespace Prisma {
     polarSubId?: StringNullableWithAggregatesFilter<"Subscription"> | string | null
     status?: StringWithAggregatesFilter<"Subscription"> | string
     currentPeriodEnd?: DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
+    planName?: StringWithAggregatesFilter<"Subscription"> | string
+    interval?: StringWithAggregatesFilter<"Subscription"> | string
+    intervalCount?: IntWithAggregatesFilter<"Subscription"> | number
+    priceAmount?: IntWithAggregatesFilter<"Subscription"> | number
+    currency?: StringWithAggregatesFilter<"Subscription"> | string
+    isTrial?: BoolWithAggregatesFilter<"Subscription"> | boolean
+    productId?: StringWithAggregatesFilter<"Subscription"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
   }
@@ -16885,6 +17072,13 @@ export namespace Prisma {
     polarSubId?: string | null
     status: string
     currentPeriodEnd?: Date | string | null
+    planName: string
+    interval: string
+    intervalCount: number
+    priceAmount: number
+    currency: string
+    isTrial: boolean
+    productId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16896,6 +17090,13 @@ export namespace Prisma {
     polarSubId?: string | null
     status: string
     currentPeriodEnd?: Date | string | null
+    planName: string
+    interval: string
+    intervalCount: number
+    priceAmount: number
+    currency: string
+    isTrial: boolean
+    productId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16907,6 +17108,13 @@ export namespace Prisma {
     polarSubId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    planName?: StringFieldUpdateOperationsInput | string
+    interval?: StringFieldUpdateOperationsInput | string
+    intervalCount?: IntFieldUpdateOperationsInput | number
+    priceAmount?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    isTrial?: BoolFieldUpdateOperationsInput | boolean
+    productId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16918,6 +17126,13 @@ export namespace Prisma {
     polarSubId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    planName?: StringFieldUpdateOperationsInput | string
+    interval?: StringFieldUpdateOperationsInput | string
+    intervalCount?: IntFieldUpdateOperationsInput | number
+    priceAmount?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    isTrial?: BoolFieldUpdateOperationsInput | boolean
+    productId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16929,6 +17144,13 @@ export namespace Prisma {
     polarSubId?: string | null
     status: string
     currentPeriodEnd?: Date | string | null
+    planName: string
+    interval: string
+    intervalCount: number
+    priceAmount: number
+    currency: string
+    isTrial: boolean
+    productId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16940,6 +17162,13 @@ export namespace Prisma {
     polarSubId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    planName?: StringFieldUpdateOperationsInput | string
+    interval?: StringFieldUpdateOperationsInput | string
+    intervalCount?: IntFieldUpdateOperationsInput | number
+    priceAmount?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    isTrial?: BoolFieldUpdateOperationsInput | boolean
+    productId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16951,6 +17180,13 @@ export namespace Prisma {
     polarSubId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    planName?: StringFieldUpdateOperationsInput | string
+    interval?: StringFieldUpdateOperationsInput | string
+    intervalCount?: IntFieldUpdateOperationsInput | number
+    priceAmount?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    isTrial?: BoolFieldUpdateOperationsInput | boolean
+    productId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17820,6 +18056,17 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type SubscriptionCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -17827,8 +18074,20 @@ export namespace Prisma {
     polarSubId?: SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrder
+    planName?: SortOrder
+    interval?: SortOrder
+    intervalCount?: SortOrder
+    priceAmount?: SortOrder
+    currency?: SortOrder
+    isTrial?: SortOrder
+    productId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type SubscriptionAvgOrderByAggregateInput = {
+    intervalCount?: SortOrder
+    priceAmount?: SortOrder
   }
 
   export type SubscriptionMaxOrderByAggregateInput = {
@@ -17838,6 +18097,13 @@ export namespace Prisma {
     polarSubId?: SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrder
+    planName?: SortOrder
+    interval?: SortOrder
+    intervalCount?: SortOrder
+    priceAmount?: SortOrder
+    currency?: SortOrder
+    isTrial?: SortOrder
+    productId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -17849,8 +18115,36 @@ export namespace Prisma {
     polarSubId?: SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrder
+    planName?: SortOrder
+    interval?: SortOrder
+    intervalCount?: SortOrder
+    priceAmount?: SortOrder
+    currency?: SortOrder
+    isTrial?: SortOrder
+    productId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type SubscriptionSumOrderByAggregateInput = {
+    intervalCount?: SortOrder
+    priceAmount?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type UuidNullableFilter<$PrismaModel = never> = {
@@ -18374,6 +18668,14 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAccountsInput, UserUpdateWithoutAccountsInput>, UserUncheckedUpdateWithoutAccountsInput>
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type GuestCreateNestedOneWithoutResumesInput = {
     create?: XOR<GuestCreateWithoutResumesInput, GuestUncheckedCreateWithoutResumesInput>
     connectOrCreate?: GuestCreateOrConnectWithoutResumesInput
@@ -18856,6 +19158,33 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedUuidNullableFilter<$PrismaModel = never> = {
