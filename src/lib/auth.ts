@@ -76,9 +76,6 @@ export const auth = betterAuth({
                 }), 
                 webhooks({
                     secret: process.env.POLAR_WEBHOOK_SECRET as string,
-                    onPayload: async (payload) => {
-                        console.log("POLAR EVENT:", payload.type)
-                    },
                     onSubscriptionActive: async (payload) => {
                         console.log(
                             "POLAR subscription.active payload:",
