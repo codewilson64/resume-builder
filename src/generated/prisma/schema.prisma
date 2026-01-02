@@ -33,9 +33,10 @@ model User {
   name          String?
   image         String?
 
-  sessions Session[]
-  accounts Account[]
-  resumes  Resume[]
+  sessions     Session[]
+  accounts     Account[]
+  resumes      Resume[]
+  subscription Subscription[]
 
   @@map("user")
 }
@@ -85,14 +86,19 @@ model Verification {
   @@map("verification")
 }
 
+// Payment Schema
 model Subscription {
-  id              String  @id @default(uuid()) @db.Uuid
-  userId          String  @unique
+  id String @id @default(uuid()) @db.Uuid
+
+  userId String @unique @db.Uuid
+  user   User?  @relation(fields: [userId], references: [id])
+
   polarCustomerId String?
   polarSubId      String? @unique
 
-  status           String
-  currentPeriodEnd DateTime?
+  status            String
+  currentPeriodEnd  DateTime?
+  cancelAtPeriodEnd DateTime?
 
   // For UI
   planName      String

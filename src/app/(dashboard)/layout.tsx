@@ -1,6 +1,5 @@
 "use client";
 
-import { signOut } from "@/lib/actions/auth-action";
 import Image from "next/image";
 import logo from "../../../public/confidencv_logo.png"
 import { useRouter } from "next/navigation";
@@ -12,12 +11,6 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }>) {
   const router = useRouter();
-
-  const handleLogout = async () => {
-    await signOut()
-    router.push('/')
-    router.refresh()
-  };
 
   return (
     <section className="min-h-screen relative bg-slate-50">

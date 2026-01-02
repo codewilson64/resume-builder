@@ -1,16 +1,73 @@
 "use client";
 
 import { signOut } from "@/lib/actions/auth-action";
+import { cancelCurrentSubscription, getCurrentSubscription } from "@/lib/actions/subscription-action";
 import { useRouter } from "next/navigation";
-import { LogOut } from "lucide-react";
+import { LogOut, LoaderCircle } from "lucide-react";
+import { useEffect, useState } from "react";
+import PlanSkeleton from "@/app/components/skeletons/PlanSkeleton";
+
+type SubscriptionData = Awaited<ReturnType<typeof getCurrentSubscription>>;
 
 export default function AccountPage() {
   const router = useRouter();
+  const [subscription, setSubscription] = useState<SubscriptionData>(null);
+  const [loading, setLoading] = useState(true);
+  const [canceling, setCanceling] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false)
+  const [error, setError] = useState<string | null>(null);
 
-  const handleLogout = async () => {
-    await signOut();
-    router.replace("/"); 
+ useEffect(() => {
+  let mounted = true;
+
+  const loadSubscription = async () => {
+    try {
+      const data = await getCurrentSubscription();
+      if (mounted) setSubscription(data);
+    } catch (err) {
+      console.error(err);
+      if (mounted) setError("Failed to load subscription");
+    } finally {
+      if (mounted) setLoading(false);
+    }
   };
+
+  loadSubscription();
+
+  return () => {
+    mounted = false;
+  };
+}, []);
+
+
+const handleLogout = async () => {
+  setLoggingOut(true)
+  try {
+    await signOut();    
+    router.replace("/");
+  } catch (error) {
+    console.log("Log out failed")
+  } finally {
+    setLoggingOut(false)
+  }
+};
+
+const handleCancelPlan = async () => {
+  setCanceling(true);
+  try {
+    await cancelCurrentSubscription();
+
+    // Reload subscription state
+    const data = await getCurrentSubscription();
+    setSubscription(data);
+  } catch (err) {
+    console.error(err);
+    alert("Failed to cancel subscription");
+  } finally {
+    setCanceling(false)
+  }
+};
+
 
   return (
     <div className="w-full max-w-3xl px-6 py-28">
@@ -22,35 +79,64 @@ export default function AccountPage() {
 
       {/* Plan Card */}
       <div className="bg-white rounded-xl border p-6 mb-6">
-        <div className="flex items-center justify-between">
-        </div>
+        {loading ? (
+          <PlanSkeleton />
+        ): error ? (
+          <p className="text-sm text-red-500">{error}</p>
+        ): !subscription ? (
+          <p className="text-sm text-gray-500">No active plan</p>
+        ) : (
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-base font-medium">
+                {subscription.planName}
+              </p>
 
-        <div className="flex items-center justify-between">
-          <div>
-            {/* 🔒 Hard-coded for now */}
-            <p className="text-base font-medium">7-Day Trial</p>
-            <p className="text-sm text-gray-500">
-              Expires in 6 days
-            </p>
+              <p className="text-sm text-gray-600">
+                {subscription.isTrial
+                  ? "Trial"
+                  : "Active"}{" "}
+                · Expires at{" "}
+                {subscription.expiresAt
+                ? new Intl.DateTimeFormat("en-GB", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                    }).format(new Date(subscription.expiresAt))
+                : "—"}
+              </p>
+            </div>
+
+            <button
+              onClick={handleCancelPlan}
+              disabled={subscription.status === "canceled" || canceling}
+              className="flex items-center gap-2 text-sm font-medium text-red-500 disabled:opacity-50"
+            >
+              {canceling? (
+                <>
+                  <LoaderCircle className="w-4 h-4 animate-spin"/>
+                  Canceling…
+                </>
+            ) : subscription.status === "canceled" ? (
+                "Plan canceled"
+            ) : (
+                "Cancel plan"
+            )}
+            </button>
+
           </div>
-
-          <button
-            onClick={() => router.push("/payment")}
-            className="text-sm font-medium text-cyan-400 hover:text-cyan-500"
-          >
-            Change Plan
-          </button>
-        </div>
+        )}
       </div>
 
       {/* Logout */}
       <div className="bg-white rounded-xl border p-6">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 text-sm text-red-600 hover:text-red-700"
+          disabled={loggingOut}
+          className="flex items-center gap-2 text-sm text-red-600 hover:text-red-700 disabled:opacity-50"
         >
           <LogOut className="w-4 h-4" />
-          Log out
+          {loggingOut ? "Logging out..." : "Log out"}
         </button>
       </div>
     </div>

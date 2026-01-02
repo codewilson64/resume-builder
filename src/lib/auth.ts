@@ -71,14 +71,14 @@ export const auth = betterAuth({
                     ], 
                     successUrl: "/payment/success?checkout_id={CHECKOUT_ID}", 
                     authenticatedUsersOnly: true,
-                    returnUrl: "http://localhost:3000/payment",
+                    // returnUrl: "http://localhost:3000/payment",
                     theme: "light"
                 }), 
                 webhooks({
                     secret: process.env.POLAR_WEBHOOK_SECRET as string,
                     onPayload: async (payload) => {
                         console.log("POLAR EVENT:", payload.type)
-                      },
+                    },
                     onSubscriptionActive: async (payload) => {
                         console.log(
                             "POLAR subscription.active payload:",
@@ -109,38 +109,75 @@ export const auth = betterAuth({
                         const price = sub.prices?.[0];
 
                         await prisma.subscription.upsert({
-                            where: { polarSubId: sub.id },
+                            where: { userId },
                             update: {
                               status: sub.status,
-                              currentPeriodEnd: sub.current_period_end
-                                ? new Date(sub.current_period_end)
+                              polarSubId: sub.id,
+                              currentPeriodEnd: sub.currentPeriodEnd
+                                ? new Date(sub.currentPeriodEnd)
                                 : null,
+                              productId: sub.productId,
                               planName: product?.name ?? "Unknown Plan",
                               interval: sub.recurringInterval,
                               intervalCount: sub.recurringIntervalCount,
                               priceAmount: price?.priceAmount ?? 0,
                               currency: price?.priceCurrency ?? "usd",
                               isTrial: sub.status === "trialing",
-                              productId: sub.productId,
                             },
                             create: {
                               userId,
                               polarSubId: sub.id,
-                              polarCustomerId: sub.customer_id,
+                              polarCustomerId: sub.customerId,
                               status: sub.status,
-                              currentPeriodEnd: sub.current_period_end
-                                ? new Date(sub.current_period_end)
+                              currentPeriodEnd: sub.currentPeriodEnd
+                                ? new Date(sub.currentPeriodEnd)
                                 : null,
+                              productId: sub.productId,
                               planName: product?.name ?? "Unknown Plan",
                               interval: sub.recurringInterval,
                               intervalCount: sub.recurringIntervalCount,
                               priceAmount: price?.priceAmount ?? 0,
                               currency: price?.priceCurrency ?? "usd",
                               isTrial: sub.status === "trialing",
-                              productId: sub.productId,
                             },
                         })
-                    }
+                    },
+                    onSubscriptionCanceled: async (payload) => {
+                        console.log(
+                            "POLAR subscription.canceled payload:",
+                            JSON.stringify(payload, null, 2)
+                          )
+                        
+                        const sub = payload.data
+
+                        // Get Polar customer ID from subscription
+                        const polarCustomerId = sub.customerId
+                        if (!polarCustomerId) {
+                            console.error("Missing customerId on subscription", sub.id)
+                            return
+                        }
+
+                        // Find user by Polar customer externalId
+                        const customer = await polarClient.customers.get({
+                            id: polarCustomerId,
+                        })
+
+                        const userId = customer.externalId
+                        if (!userId) {
+                            console.error("Customer has no externalId", polarCustomerId)
+                            return
+                        }
+
+                        await prisma.subscription.update({
+                            where: { userId },
+                            data: {
+                                status: sub.status,
+                                currentPeriodEnd: sub.currentPeriodEnd
+                                ? new Date(sub.currentPeriodEnd)
+                                : null,
+                            },
+                        });
+                    },
                 })
             ], 
         }), 

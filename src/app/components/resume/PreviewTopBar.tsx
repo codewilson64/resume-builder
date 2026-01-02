@@ -1,6 +1,6 @@
 "use client";
 
-import { X, SlidersHorizontal } from "lucide-react";
+import { X, SlidersHorizontal, LoaderCircle } from "lucide-react";
 
 interface PreviewTopBarProps {
   onSettings: () => void;
@@ -32,7 +32,7 @@ export default function PreviewTopBar({
           disabled={loading}
           className="px-5 py-2 rounded-md bg-cyan-400 hover:bg-cyan-500 transition font-semibold text-sm"
         >
-          {loading ? "Downloading..." : "Download"}
+          {loading ? <LoaderCircle className="w-4 h-4 animate-spin"/> : "Download"}
         </button>
 
         {/* Right: Cancel */}

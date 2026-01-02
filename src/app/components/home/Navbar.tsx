@@ -9,7 +9,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   // Pages where navbar buttons should be hidden
-  const hideButton = pathname === "/login" || pathname === "/signup";
+  const hideButton = pathname === "/login" || pathname === "/signup" || pathname === "/payment";
   const hideNavbar = pathname.startsWith("/resume");
 
   if (hideNavbar) return null;
