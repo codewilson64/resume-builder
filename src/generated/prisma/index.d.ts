@@ -7551,7 +7551,7 @@ export namespace Prisma {
     polarSubId: string | null
     status: string | null
     currentPeriodEnd: Date | null
-    cancelAtPeriodEnd: Date | null
+    cancelAtPeriodEnd: boolean | null
     planName: string | null
     interval: string | null
     intervalCount: number | null
@@ -7570,7 +7570,7 @@ export namespace Prisma {
     polarSubId: string | null
     status: string | null
     currentPeriodEnd: Date | null
-    cancelAtPeriodEnd: Date | null
+    cancelAtPeriodEnd: boolean | null
     planName: string | null
     interval: string | null
     intervalCount: number | null
@@ -7764,7 +7764,7 @@ export namespace Prisma {
     polarSubId: string | null
     status: string
     currentPeriodEnd: Date | null
-    cancelAtPeriodEnd: Date | null
+    cancelAtPeriodEnd: boolean
     planName: string
     interval: string
     intervalCount: number
@@ -7897,7 +7897,7 @@ export namespace Prisma {
       polarSubId: string | null
       status: string
       currentPeriodEnd: Date | null
-      cancelAtPeriodEnd: Date | null
+      cancelAtPeriodEnd: boolean
       planName: string
       interval: string
       intervalCount: number
@@ -8337,7 +8337,7 @@ export namespace Prisma {
     readonly polarSubId: FieldRef<"Subscription", 'String'>
     readonly status: FieldRef<"Subscription", 'String'>
     readonly currentPeriodEnd: FieldRef<"Subscription", 'DateTime'>
-    readonly cancelAtPeriodEnd: FieldRef<"Subscription", 'DateTime'>
+    readonly cancelAtPeriodEnd: FieldRef<"Subscription", 'Boolean'>
     readonly planName: FieldRef<"Subscription", 'String'>
     readonly interval: FieldRef<"Subscription", 'String'>
     readonly intervalCount: FieldRef<"Subscription", 'Int'>
@@ -16259,7 +16259,7 @@ export namespace Prisma {
     polarSubId?: StringNullableFilter<"Subscription"> | string | null
     status?: StringFilter<"Subscription"> | string
     currentPeriodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
-    cancelAtPeriodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolFilter<"Subscription"> | boolean
     planName?: StringFilter<"Subscription"> | string
     interval?: StringFilter<"Subscription"> | string
     intervalCount?: IntFilter<"Subscription"> | number
@@ -16279,7 +16279,7 @@ export namespace Prisma {
     polarSubId?: SortOrderInput | SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrderInput | SortOrder
-    cancelAtPeriodEnd?: SortOrderInput | SortOrder
+    cancelAtPeriodEnd?: SortOrder
     planName?: SortOrder
     interval?: SortOrder
     intervalCount?: SortOrder
@@ -16302,7 +16302,7 @@ export namespace Prisma {
     polarCustomerId?: StringNullableFilter<"Subscription"> | string | null
     status?: StringFilter<"Subscription"> | string
     currentPeriodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
-    cancelAtPeriodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolFilter<"Subscription"> | boolean
     planName?: StringFilter<"Subscription"> | string
     interval?: StringFilter<"Subscription"> | string
     intervalCount?: IntFilter<"Subscription"> | number
@@ -16322,7 +16322,7 @@ export namespace Prisma {
     polarSubId?: SortOrderInput | SortOrder
     status?: SortOrder
     currentPeriodEnd?: SortOrderInput | SortOrder
-    cancelAtPeriodEnd?: SortOrderInput | SortOrder
+    cancelAtPeriodEnd?: SortOrder
     planName?: SortOrder
     interval?: SortOrder
     intervalCount?: SortOrder
@@ -16349,7 +16349,7 @@ export namespace Prisma {
     polarSubId?: StringNullableWithAggregatesFilter<"Subscription"> | string | null
     status?: StringWithAggregatesFilter<"Subscription"> | string
     currentPeriodEnd?: DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
-    cancelAtPeriodEnd?: DateTimeNullableWithAggregatesFilter<"Subscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolWithAggregatesFilter<"Subscription"> | boolean
     planName?: StringWithAggregatesFilter<"Subscription"> | string
     interval?: StringWithAggregatesFilter<"Subscription"> | string
     intervalCount?: IntWithAggregatesFilter<"Subscription"> | number
@@ -17219,7 +17219,7 @@ export namespace Prisma {
     polarSubId?: string | null
     status: string
     currentPeriodEnd?: Date | string | null
-    cancelAtPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd: boolean
     planName: string
     interval: string
     intervalCount: number
@@ -17239,7 +17239,7 @@ export namespace Prisma {
     polarSubId?: string | null
     status: string
     currentPeriodEnd?: Date | string | null
-    cancelAtPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd: boolean
     planName: string
     interval: string
     intervalCount: number
@@ -17257,7 +17257,7 @@ export namespace Prisma {
     polarSubId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cancelAtPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     planName?: StringFieldUpdateOperationsInput | string
     interval?: StringFieldUpdateOperationsInput | string
     intervalCount?: IntFieldUpdateOperationsInput | number
@@ -17277,7 +17277,7 @@ export namespace Prisma {
     polarSubId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cancelAtPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     planName?: StringFieldUpdateOperationsInput | string
     interval?: StringFieldUpdateOperationsInput | string
     intervalCount?: IntFieldUpdateOperationsInput | number
@@ -17296,7 +17296,7 @@ export namespace Prisma {
     polarSubId?: string | null
     status: string
     currentPeriodEnd?: Date | string | null
-    cancelAtPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd: boolean
     planName: string
     interval: string
     intervalCount: number
@@ -17314,7 +17314,7 @@ export namespace Prisma {
     polarSubId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cancelAtPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     planName?: StringFieldUpdateOperationsInput | string
     interval?: StringFieldUpdateOperationsInput | string
     intervalCount?: IntFieldUpdateOperationsInput | number
@@ -17333,7 +17333,7 @@ export namespace Prisma {
     polarSubId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cancelAtPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     planName?: StringFieldUpdateOperationsInput | string
     interval?: StringFieldUpdateOperationsInput | string
     intervalCount?: IntFieldUpdateOperationsInput | number
@@ -19703,7 +19703,7 @@ export namespace Prisma {
     polarSubId?: string | null
     status: string
     currentPeriodEnd?: Date | string | null
-    cancelAtPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd: boolean
     planName: string
     interval: string
     intervalCount: number
@@ -19721,7 +19721,7 @@ export namespace Prisma {
     polarSubId?: string | null
     status: string
     currentPeriodEnd?: Date | string | null
-    cancelAtPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd: boolean
     planName: string
     interval: string
     intervalCount: number
@@ -19850,7 +19850,7 @@ export namespace Prisma {
     polarSubId?: StringNullableFilter<"Subscription"> | string | null
     status?: StringFilter<"Subscription"> | string
     currentPeriodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
-    cancelAtPeriodEnd?: DateTimeNullableFilter<"Subscription"> | Date | string | null
+    cancelAtPeriodEnd?: BoolFilter<"Subscription"> | boolean
     planName?: StringFilter<"Subscription"> | string
     interval?: StringFilter<"Subscription"> | string
     intervalCount?: IntFilter<"Subscription"> | number
@@ -21316,7 +21316,7 @@ export namespace Prisma {
     polarSubId?: string | null
     status: string
     currentPeriodEnd?: Date | string | null
-    cancelAtPeriodEnd?: Date | string | null
+    cancelAtPeriodEnd: boolean
     planName: string
     interval: string
     intervalCount: number
@@ -21497,7 +21497,7 @@ export namespace Prisma {
     polarSubId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cancelAtPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     planName?: StringFieldUpdateOperationsInput | string
     interval?: StringFieldUpdateOperationsInput | string
     intervalCount?: IntFieldUpdateOperationsInput | number
@@ -21515,7 +21515,7 @@ export namespace Prisma {
     polarSubId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cancelAtPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     planName?: StringFieldUpdateOperationsInput | string
     interval?: StringFieldUpdateOperationsInput | string
     intervalCount?: IntFieldUpdateOperationsInput | number
@@ -21533,7 +21533,7 @@ export namespace Prisma {
     polarSubId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     currentPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cancelAtPeriodEnd?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelAtPeriodEnd?: BoolFieldUpdateOperationsInput | boolean
     planName?: StringFieldUpdateOperationsInput | string
     interval?: StringFieldUpdateOperationsInput | string
     intervalCount?: IntFieldUpdateOperationsInput | number

@@ -98,16 +98,14 @@ model Subscription {
 
   status            String
   currentPeriodEnd  DateTime?
-  cancelAtPeriodEnd DateTime?
-
-  // For UI
-  planName      String
-  interval      String
-  intervalCount Int
-  priceAmount   Int
-  currency      String
-  isTrial       Boolean
-  productId     String
+  cancelAtPeriodEnd Boolean
+  planName          String
+  interval          String
+  intervalCount     Int
+  priceAmount       Int
+  currency          String
+  isTrial           Boolean
+  productId         String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

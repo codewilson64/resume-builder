@@ -129,6 +129,7 @@ export const auth = betterAuth({
                               polarSubId: sub.id,
                               polarCustomerId: sub.customerId,
                               status: sub.status,
+                              cancelAtPeriodEnd: sub.cancelAtPeriodEnd,
                               currentPeriodEnd: sub.currentPeriodEnd
                                 ? new Date(sub.currentPeriodEnd)
                                 : null,
@@ -172,6 +173,7 @@ export const auth = betterAuth({
                             where: { userId },
                             data: {
                                 status: sub.status,
+                                cancelAtPeriodEnd: sub.cancelAtPeriodEnd,
                                 currentPeriodEnd: sub.currentPeriodEnd
                                 ? new Date(sub.currentPeriodEnd)
                                 : null,

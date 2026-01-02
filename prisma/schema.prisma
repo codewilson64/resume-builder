@@ -89,19 +89,17 @@ model Verification {
 
 // Payment Schema
 model Subscription {
-  id                String   @id @default(uuid()) @db.Uuid
+  id                 String   @id @default(uuid()) @db.Uuid
 
-  userId            String   @unique @db.Uuid
-  user              User?    @relation(fields: [userId], references: [id])
+  userId             String   @unique @db.Uuid
+  user               User?    @relation(fields: [userId], references: [id])
 
-  polarCustomerId   String?
-  polarSubId        String?  @unique
+  polarCustomerId    String?
+  polarSubId         String?  @unique
 
-  status            String
-  currentPeriodEnd  DateTime?
-  cancelAtPeriodEnd DateTime?
-
-  // For UI
+  status             String
+  currentPeriodEnd   DateTime?
+  cancelAtPeriodEnd  Boolean
   planName           String
   interval           String
   intervalCount      Int
@@ -110,8 +108,8 @@ model Subscription {
   isTrial            Boolean
   productId          String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
 
 
