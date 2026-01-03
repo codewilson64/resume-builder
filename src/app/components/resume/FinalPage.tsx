@@ -27,6 +27,7 @@ export default function FinalPage() {
   const searchParams = useSearchParams();
   const resumeIdFromUrl = searchParams.get("id");
 
+  // Context API
   const { resumeData: draftResume, setResumeData} = useResume();
 
   const url = resumeIdFromUrl

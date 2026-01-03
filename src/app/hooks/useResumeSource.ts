@@ -18,15 +18,22 @@ export function useResumeSource({ url, draftResume }: UseResumeSourceParams) {
     const loadResume = async () => {
       setLoading(true);
 
+      if (
+        draftResume &&
+        draftResume.resumeId &&
+        url?.includes(draftResume.resumeId)
+      ) {
+        setResumeData(draftSnapshot.current);
+        setLoading(false);
+        return;
+      }
+
       try {
-        console.log("checking source...")
         if (url) {
           const res = await fetch(url);
           const data = await res.json();
-          console.log("fetching from db...")
           setResumeData(data);
         } else {
-          console.log("fetching from context...")
           setResumeData(draftSnapshot.current);
         }
       } catch (err) {

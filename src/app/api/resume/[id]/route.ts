@@ -6,9 +6,7 @@ export async function GET(req: Request,{ params }: { params: Promise<{ id: strin
 
     const resume = await getResumeById(id);
 
-    if (!resume) {
-      return new Response("Resume not found", { status: 404 });
-    }
+    if (!resume) return new Response("Resume not found", { status: 404 });
 
     return Response.json(resume);
   } catch (err) {
