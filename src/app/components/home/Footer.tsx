@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from '../../../../public/karierly_logo.png'
-
+import logo from '../../../../public/confidencv_logo.png'
 
 export default function Footer() {
   return (
@@ -10,11 +9,11 @@ export default function Footer() {
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           
           {/* Logo + Brand */}
-          <div className="flex items-center">
+          <div className="flex items-center gap-3">
             <Image
               src={logo}
-              width={50}
-              height={50}
+              width={40}
+              height={40}
               alt="ConfidenCV logo"
             />
             <span className="text-lg font-bold text-gray-900">

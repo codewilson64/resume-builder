@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Check } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { getCurrentUser } from "@/lib/actions/auth-action";
+import { useRouter } from "next/navigation";
 
 type Plan = "weekly" | "monthly";
 
@@ -30,6 +32,7 @@ const PLAN_CONFIG = {
 };
 
 export default function PaymentPage() {
+  const router = useRouter()
   const [loading, setLoading] = useState(false);
   const [plan, setPlan] = useState<Plan>("weekly");
   const meta = PLAN_CONFIG[plan];
@@ -37,6 +40,11 @@ export default function PaymentPage() {
   async function handleCheckout() {
     try {
       setLoading(true);
+
+      const user = await getCurrentUser()
+      if(!user) {
+        router.push('/login')
+      } 
 
       await authClient.checkout({
         // Polar Product IDs
