@@ -133,7 +133,7 @@ const handleCancelPlan = async () => {
       </div>
 
       {showCancelModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-5 bg-black/40">
           <div className="bg-white rounded-xl w-full max-w-md p-6 shadow-xl">
             <h3 className="text-lg font-semibold mb-2">
               Cancel subscription?

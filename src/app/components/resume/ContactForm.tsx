@@ -98,7 +98,7 @@ export default function ContactForm() {
             className="input"
             value={resumeData.city || ""}
             onChange={handleChange}
-            placeholder="Jakarta"
+            placeholder="New York"
           />
         </div>
 

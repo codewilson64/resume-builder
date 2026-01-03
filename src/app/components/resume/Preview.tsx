@@ -49,7 +49,6 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
       
       // check resume id
       if (!resumeData?.resumeId) {
-        console.log("resume id does not exist!")
         return;
       }
 
@@ -58,12 +57,9 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
       const { status } = await res.json()
 
       if (status !== "active") {
-        console.log("User subscription is inactive...")
         router.replace("/payment")
         return
       }
-
-      console.log("User subscription is active...")
 
       // update resume and download
       await updateResume(resumeData.resumeId, resumeData);

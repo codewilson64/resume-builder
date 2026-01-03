@@ -279,7 +279,6 @@ export async function getResumeById(
 
 export async function deleteResumeById(resumeId: string): Promise<void> {
   const user = await getCurrentUser();
-
   if (!user?.id) throw new Error("User not authenticated");
 
   const resume = await prisma.resume.findFirst({

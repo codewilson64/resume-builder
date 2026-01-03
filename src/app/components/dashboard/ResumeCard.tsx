@@ -1,19 +1,33 @@
 'use client';
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ResumeData } from "@/app/types/resume";
 import { Pencil, Trash2, Download } from "lucide-react";
-import TemplateRenderer from "@/app/components/TemplateRenderer";
 import { deleteResumeById } from "@/lib/actions/resume-action";
+import TemplateRenderer from "@/app/components/TemplateRenderer";
 
 export default function ResumeCard({ resume }: { resume: ResumeData }) {
   const router = useRouter();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  
+  // Delete resume
+  const handleDelete = async () => {
+    if (!resume.resumeId) return;
 
-  const handleDelete = async (resumeId: string | null) => {
-    if(!resumeId) return
-    if (!confirm("Delete this resume?")) return;
-    await deleteResumeById(resumeId);
+    setDeleting(true);
+    try {
+      await deleteResumeById(resume.resumeId);
+      setShowDeleteModal(false);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete resume");
+    } finally {
+      setDeleting(false);
+    }
   };
+
 
   return (
     <div className="flex flex-col sm:flex-row items-start gap-3">
@@ -61,16 +75,52 @@ export default function ResumeCard({ resume }: { resume: ResumeData }) {
 
           {/* Delete */}
           <button
-            onClick={() => handleDelete(resume.resumeId)}
-            className="flex items-center gap-2 text-sm hover:text-orange-500"
+            onClick={() => setShowDeleteModal(true)}
+            className="flex items-center gap-2 text-sm hover:text-red-600"
             aria-label="Delete resume"
           >
             <Trash2 className="w-4 h-4" />
             <span>Delete</span>
           </button>
-
         </div>
       </div>
+
+      {showDeleteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-5 bg-black/40">
+          <div className="bg-white rounded-xl w-full max-w-md p-6 shadow-xl">
+            <h3 className="text-lg font-semibold mb-2">
+              Delete resume?
+            </h3>
+
+            <p className="text-sm text-gray-600 mb-6">
+              Are you sure you want to delete{" "}
+              <span className="font-medium">
+                {resume.title || "Untitled"}
+              </span>
+              ? This action cannot be undone.
+            </p>
+
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setShowDeleteModal(false)}
+                disabled={deleting}
+                className="px-4 py-2 text-sm rounded-md border hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+
+              <button
+                onClick={handleDelete}
+                disabled={deleting}
+                className="px-4 py-2 text-sm rounded-md bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
+              >
+                {deleting ? "Deleting..." : "Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
 
   );
