@@ -26,9 +26,9 @@ export default async function ProfilePage() {
           <CreateResumeButton />
         </div>
 
-        {/* Resume Card */}
-        <ResumeList resumes={resumes}/>
-      </div>
+          {/* Resume Card */}
+          <ResumeList resumes={resumes}/>
+        </div>
       </div>
     </div>
   );

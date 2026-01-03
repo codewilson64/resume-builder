@@ -5,7 +5,6 @@ import CTA from "../components/home/CTAHero";
 import Hero from "../components/home/Hero";
 import MarketingHero from "../components/home/MarketingHero";
 import Footer from "../components/home/Footer";
-import { ResumeCarousel } from "../components/home/ResumeCarousel";
 
 export default async function Home() {
   const user = await getCurrentUser()

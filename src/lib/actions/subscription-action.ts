@@ -55,26 +55,18 @@ export async function getCurrentSubscription() {
 
 export async function cancelCurrentSubscription() {
   const user = await getCurrentUser();
-  if (!user?.id) {
-    throw new Error("Unauthenticated");
-  }
+  if (!user?.id) throw new Error("Unauthenticated");
 
   const subscription = await prisma.subscription.findUnique({
     where: { userId: user.id },
     select: { polarSubId: true },
   });
 
-  if (!subscription?.polarSubId) {
-    throw new Error("No active subscription");
-  }
+  if (!subscription?.polarSubId) throw new Error("No active subscription");
 
-  // ⚠️ This does NOT immediately revoke access
   await polarClient.subscriptions.revoke({
     id: subscription.polarSubId,
   });
-
-  // Do NOT update DB here
-  // Webhook subscription.canceled will handle it
 
   return { success: true };
 }

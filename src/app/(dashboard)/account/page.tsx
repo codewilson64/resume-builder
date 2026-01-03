@@ -3,7 +3,7 @@
 import { signOut } from "@/lib/actions/auth-action";
 import { cancelCurrentSubscription, getCurrentSubscription } from "@/lib/actions/subscription-action";
 import { useRouter } from "next/navigation";
-import { LogOut, LoaderCircle } from "lucide-react";
+import { LogOut, LoaderCircle, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 import PlanSkeleton from "@/app/components/skeletons/PlanSkeleton";
 
@@ -118,6 +118,17 @@ const handleCancelPlan = async () => {
 
           </div>
         )}
+      </div>
+
+      {/* Contact us */}
+      <div className="bg-white rounded-xl border p-6 mb-6">
+        <a
+          href="mailto:wilsonnn948@gmail.com"
+          className="w-fit flex items-center gap-2 text-sm text-cyan-600 hover:text-cyan-700 disabled:opacity-50"
+        >
+          <Phone className="w-4 h-4" />
+          Contact us
+        </a>
       </div>
 
       {/* Logout */}

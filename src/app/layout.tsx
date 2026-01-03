@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ResumeProvider>
-        {children}
+          {children}
         </ResumeProvider>
       </body>
     </html>
