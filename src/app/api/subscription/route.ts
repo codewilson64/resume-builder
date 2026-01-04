@@ -9,8 +9,9 @@ export async function GET() {
     return NextResponse.json({ status: "unauthenticated" });
   }
 
-  const subscription = await prisma.subscription.findUnique({
+  const subscription = await prisma.subscription.findFirst({
     where: { userId: user.id },
+    orderBy: { createdAt: "desc" },
     select: {
       status: true,
       cancelAtPeriodEnd: true,

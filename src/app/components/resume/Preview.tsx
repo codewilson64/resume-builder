@@ -56,6 +56,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
       const res = await fetch("/api/subscription")
       const { status } = await res.json()
 
+      console.log(status)
       if (status !== "active") {
         router.replace("/payment")
         return

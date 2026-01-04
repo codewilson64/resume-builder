@@ -7,6 +7,7 @@ import { betterAuth } from "better-auth";
 
 import { nextCookies } from 'better-auth/next-js'
 import { v4 as uuidv4 } from 'uuid'
+import { upsertSubscriptionFromPolar } from "./polar/subscription-service";
 
 const adapter = new PrismaPg({ 
   connectionString: process.env.DATABASE_URL 
@@ -77,96 +78,14 @@ export const auth = betterAuth({
                 webhooks({
                     secret: process.env.POLAR_WEBHOOK_SECRET as string,
                     onSubscriptionActive: async (payload) => {
-                        const sub = payload.data
-
-                        // Get Polar customer ID from subscription
-                        const polarCustomerId = sub.customerId
-                        if (!polarCustomerId) {
-                            console.error("Missing customerId on subscription", sub.id)
-                            return
-                        }
-
-                        // Find user by Polar customer externalId
-                        const customer = await polarClient.customers.get({
-                            id: polarCustomerId,
-                        })
-
-                        const userId = customer.externalId
-                        if (!userId) {
-                            console.error("Customer has no externalId", polarCustomerId)
-                            return
-                        }
-
-                        const product = sub.product;
-                        const price = sub.prices?.[0];
-
-                        await prisma.subscription.upsert({
-                            where: { userId },
-                            update: {
-                              status: sub.status,
-                              polarSubId: sub.id,
-                              currentPeriodEnd: sub.currentPeriodEnd
-                                ? new Date(sub.currentPeriodEnd)
-                                : null,
-                              productId: sub.productId,
-                              planName: product?.name ?? "Unknown Plan",
-                              interval: sub.recurringInterval,
-                              intervalCount: sub.recurringIntervalCount,
-                              priceAmount: price?.priceAmount ?? 0,
-                              currency: price?.priceCurrency ?? "usd",
-                              isTrial: sub.status === "trialing",
-                            },
-                            create: {
-                              userId,
-                              polarSubId: sub.id,
-                              polarCustomerId: sub.customerId,
-                              status: sub.status,
-                              cancelAtPeriodEnd: sub.cancelAtPeriodEnd,
-                              currentPeriodEnd: sub.currentPeriodEnd
-                                ? new Date(sub.currentPeriodEnd)
-                                : null,
-                              productId: sub.productId,
-                              planName: product?.name ?? "Unknown Plan",
-                              interval: sub.recurringInterval,
-                              intervalCount: sub.recurringIntervalCount,
-                              priceAmount: price?.priceAmount ?? 0,
-                              currency: price?.priceCurrency ?? "usd",
-                              isTrial: sub.status === "trialing",
-                            },
-                        })
+                        await upsertSubscriptionFromPolar(payload.data);
                     },
                     onSubscriptionCanceled: async (payload) => {
-                        const sub = payload.data
-
-                        // Get Polar customer ID from subscription
-                        const polarCustomerId = sub.customerId
-                        if (!polarCustomerId) {
-                            console.error("Missing customerId on subscription", sub.id)
-                            return
-                        }
-
-                        // Find user by Polar customer externalId
-                        const customer = await polarClient.customers.get({
-                            id: polarCustomerId,
-                        })
-
-                        const userId = customer.externalId
-                        if (!userId) {
-                            console.error("Customer has no externalId", polarCustomerId)
-                            return
-                        }
-
-                        await prisma.subscription.update({
-                            where: { userId },
-                            data: {
-                                status: sub.status,
-                                cancelAtPeriodEnd: sub.cancelAtPeriodEnd,
-                                currentPeriodEnd: sub.currentPeriodEnd
-                                ? new Date(sub.currentPeriodEnd)
-                                : null,
-                            },
-                        });
+                        await upsertSubscriptionFromPolar(payload.data);
                     },
+                    onSubscriptionUncanceled: async (payload) => {
+                        await upsertSubscriptionFromPolar(payload.data);
+                    }
                 })
             ], 
         }), 

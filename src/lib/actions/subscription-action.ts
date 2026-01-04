@@ -8,13 +8,11 @@ const polar = new Polar()
 
 export async function getCurrentSubscription() {
   const user = await getCurrentUser();
+  if (!user?.id) return null;
 
-  if (!user?.id) {
-    return null;
-  }
-
-  const subscription = await prisma.subscription.findUnique({
+  const subscription = await prisma.subscription.findFirst({
     where: { userId: user.id },
+    orderBy: { createdAt: "desc" },
     select: {
       status: true,
       planName: true,
@@ -27,9 +25,7 @@ export async function getCurrentSubscription() {
     },
   });
 
-  if (!subscription) {
-    return null;
-  }
+  if (!subscription) return null;
 
   const hasAccess =
     subscription.status === "active" ||
