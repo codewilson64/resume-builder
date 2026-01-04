@@ -77,11 +77,6 @@ export const auth = betterAuth({
                 webhooks({
                     secret: process.env.POLAR_WEBHOOK_SECRET as string,
                     onSubscriptionActive: async (payload) => {
-                        console.log(
-                            "POLAR subscription.active payload:",
-                            JSON.stringify(payload, null, 2)
-                          )
-
                         const sub = payload.data
 
                         // Get Polar customer ID from subscription
@@ -141,11 +136,6 @@ export const auth = betterAuth({
                         })
                     },
                     onSubscriptionCanceled: async (payload) => {
-                        console.log(
-                            "POLAR subscription.canceled payload:",
-                            JSON.stringify(payload, null, 2)
-                          )
-                        
                         const sub = payload.data
 
                         // Get Polar customer ID from subscription

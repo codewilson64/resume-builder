@@ -1,8 +1,10 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { useResume } from "@/app/context/ResumeContext";
+import { useResumeSource } from "@/app/hooks/useResumeSource";
 
 import ContactForm from "@/app/components/resume/ContactForm";
 import AboutForm from "@/app/components/resume/AboutForm";
@@ -18,8 +20,6 @@ import LanguagesForm from "@/app/components/resume/LanguagesForm";
 import SocialLinksForm from "@/app/components/resume/SocialLinksForm";
 import TemplateSelector from "@/app/components/resume/TemplateSelector";
 import TitleInput from "@/app/components/resume/TitleInput";
-import { useResumeSource } from "@/app/hooks/useResumeSource";
-import { useEffect, useRef } from "react";
 import FinalPageSkeleton from "../skeletons/FinalPageSkeleton";
 
 export default function FinalPage() {
@@ -74,7 +74,7 @@ export default function FinalPage() {
         </p>
 
 
-        <section className="">
+        <section>
           <TitleInput />
           <h2 className="font-semibold text-xl mb-4 mt-4">Resume Format</h2>
           <TemplateSelector />

@@ -1,7 +1,7 @@
 "use client";
 
 import { signOut } from "@/lib/actions/auth-action";
-import { cancelCurrentSubscription, getCurrentSubscription } from "@/lib/actions/subscription-action";
+import { createCustomerPortalSession, getCurrentSubscription } from "@/lib/actions/subscription-action";
 import { useRouter } from "next/navigation";
 import { LogOut, LoaderCircle, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -16,7 +16,6 @@ export default function AccountPage() {
   const [canceling, setCanceling] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false)
   const [error, setError] = useState<string | null>(null);
-  const [showCancelModal, setShowCancelModal] = useState(false);
 
  useEffect(() => {
   let mounted = true;
@@ -40,35 +39,32 @@ export default function AccountPage() {
   };
 }, []);
 
+  // Log out
+  const handleLogout = async () => {
+    setLoggingOut(true)
+    try {
+      await signOut();    
+      router.replace("/");
+    } catch (error) {
+      console.log("Log out failed")
+    } finally {
+      setLoggingOut(false)
+    }
+  };
 
-const handleLogout = async () => {
-  setLoggingOut(true)
-  try {
-    await signOut();    
-    router.replace("/");
-  } catch (error) {
-    console.log("Log out failed")
-  } finally {
-    setLoggingOut(false)
-  }
-};
-
-const handleCancelPlan = async () => {
-  setCanceling(true);
-  try {
-    await cancelCurrentSubscription();
-
-    // Reload subscription state
-    const data = await getCurrentSubscription();
-    setSubscription(data);
-  } catch (err) {
-    console.error(err);
-    alert("Failed to cancel subscription");
-  } finally {
-    setCanceling(false)
-  }
-};
-
+  // Cancel Plan
+  const handleCancelPlan = async () => {
+    setCanceling(true);
+    try {
+      const polarCustomerPortal = await createCustomerPortalSession();
+      window.location.href = polarCustomerPortal;
+    } catch (err) {
+      console.error(err);
+      alert("Failed to open billing portal");
+    } finally {
+      setCanceling(false);
+    }
+  };
 
   return (
     <div className="w-full max-w-3xl px-6 py-28">
@@ -109,11 +105,11 @@ const handleCancelPlan = async () => {
             </div>
 
             <button
-              onClick={() => setShowCancelModal(true)}
+              onClick={handleCancelPlan}
               disabled={subscription.status === "canceled" || canceling}
               className="flex items-center gap-2 text-sm font-medium text-red-500 disabled:opacity-50"
             >
-              {subscription.status === "canceled" ? "Plan canceled" : "Cancel plan"}
+              {subscription.status === "canceled" ? "Plan canceled" : "Manage subscription"}
             </button>
 
           </div>
@@ -142,42 +138,6 @@ const handleCancelPlan = async () => {
           {loggingOut ? "Logging out..." : "Log out"}
         </button>
       </div>
-
-      {showCancelModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-5 bg-black/40">
-          <div className="bg-white rounded-xl w-full max-w-md p-6 shadow-xl">
-            <h3 className="text-lg font-semibold mb-2">
-              Cancel subscription?
-            </h3>
-
-            <p className="text-sm text-gray-600 mb-6">
-              Your plan will remain active until the end of the current billing
-              period. You won’t be charged again.
-            </p>
-
-            <div className="flex justify-end gap-3">
-              <button
-                onClick={() => setShowCancelModal(false)}
-                disabled={canceling}
-                className="px-4 py-2 text-sm rounded-md border hover:bg-gray-50"
-              >
-                Keep plan
-              </button>
-
-              <button
-                onClick={async () => {
-                  setShowCancelModal(false);
-                  await handleCancelPlan();
-                }}
-                disabled={canceling}
-                className="px-4 py-2 text-sm rounded-md bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
-              >
-                {canceling ? "Canceling…" : "Yes, cancel plan"}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
     </div>
   );

@@ -4,12 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "./auth-action";
 import { Polar } from "@polar-sh/sdk";
 
-const polarClient = new Polar({ 
-    accessToken: process.env.POLAR_ACCESS_TOKEN, 
-    // Use 'sandbox' if you're using the Polar Sandbox environment
-    // Remember that access tokens, products, etc. are completely separated between environments.
-    // Access tokens obtained in Production are for instance not usable in the Sandbox environment.
-}); 
+const polar = new Polar()
 
 export async function getCurrentSubscription() {
   const user = await getCurrentUser();
@@ -53,20 +48,14 @@ export async function getCurrentSubscription() {
   };
 }
 
-export async function cancelCurrentSubscription() {
+export async function createCustomerPortalSession() {
   const user = await getCurrentUser();
   if (!user?.id) throw new Error("Unauthenticated");
 
-  const subscription = await prisma.subscription.findUnique({
-    where: { userId: user.id },
-    select: { polarSubId: true },
+  const session = await polar.customerSessions.create({
+    externalCustomerId: user.id,
+    returnUrl: `${process.env.NEXT_PUBLIC_APP_URL}/account`,
   });
 
-  if (!subscription?.polarSubId) throw new Error("No active subscription");
-
-  await polarClient.subscriptions.revoke({
-    id: subscription.polarSubId,
-  });
-
-  return { success: true };
+  return session.customerPortalUrl;
 }
