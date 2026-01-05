@@ -17,9 +17,7 @@ const prisma = new PrismaClient({ adapter })
 
 const polarClient = new Polar({ 
     accessToken: process.env.POLAR_ACCESS_TOKEN, 
-    // Use 'sandbox' if you're using the Polar Sandbox environment
-    // Remember that access tokens, products, etc. are completely separated between environments.
-    // Access tokens obtained in Production are for instance not usable in the Sandbox environment.
+    // server: 'sandbox'
 }); 
 
 export const auth = betterAuth({
@@ -77,6 +75,9 @@ export const auth = betterAuth({
                 }), 
                 webhooks({
                     secret: process.env.POLAR_WEBHOOK_SECRET as string,
+                    onSubscriptionUpdated: async (payload) => {
+                        await upsertSubscriptionFromPolar(payload.data);
+                    },
                     onSubscriptionActive: async (payload) => {
                         await upsertSubscriptionFromPolar(payload.data);
                     },

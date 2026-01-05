@@ -16,7 +16,7 @@ export default function AccentSelector({ value, onChange, template }: AccentSele
     { name: "Orange", color: "#9A3412" },
   ];
 
-  const isOrion = template === "Orion";
+  const hasAccent = template === "Orion" || template === "Zenith";
 
   return (
     <div className="w-full mb-6">
@@ -27,7 +27,7 @@ export default function AccentSelector({ value, onChange, template }: AccentSele
       <div className="flex flex-wrap gap-3">
         {colors.map((c) => {
           const isGray = c.name === "Gray";
-          const disabled = !isOrion && !isGray;
+          const disabled = !hasAccent && !isGray;
           
           return (
             <button

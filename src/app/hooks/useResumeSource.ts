@@ -25,9 +25,10 @@ export function useResumeSource({ url, draftResume }: UseResumeSourceParams) {
       ) {
         setResumeData(draftSnapshot.current);
         setLoading(false);
+        console.log("No fetching...")
         return;
       }
-
+      console.log("Fetch from db!!")  
       try {
         if (url) {
           const res = await fetch(url);

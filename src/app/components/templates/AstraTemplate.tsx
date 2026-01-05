@@ -78,26 +78,6 @@ export default function AstraTemplate({
   
             <hr className="border-t border-gray-800" />
   
-            {/* ================= SOCIAL LINKS (TOP) ================= */}
-            {data.socialLinks?.length > 0 && (
-              <Block title="Social Links">
-                <div className="space-y-2 text-xs">
-                  {data.socialLinks
-                    .filter(s => s.label || s.url)
-                    .map(link => (
-                      <div key={link.id}>
-                        {link.label && (
-                          <span className="font-semibold">
-                            {link.label}:{" "}
-                          </span>
-                        )}
-                        {link.url && <span>{link.url}</span>}
-                      </div>
-                    ))}
-                </div>
-              </Block>
-            )}
-  
             {/* ================= SUMMARY ================= */}
             {data.about && (
               <Block title="Summary">
@@ -152,7 +132,7 @@ export default function AstraTemplate({
                       </p>
   
                       <p className="text-sm font-semibold">
-                        {exp.jobTitle} | {exp.company}
+                        {exp.jobTitle} | {exp.company}, {exp.city}
                       </p>
   
                       {exp.description && (
@@ -179,7 +159,7 @@ export default function AstraTemplate({
                       )}
   
                       <p className="text-sm font-semibold">
-                        {edu.degree} | {edu.school}
+                        {edu.degree} | {edu.school}, {edu.city}
                       </p>
   
                       {edu.description && (
@@ -225,6 +205,26 @@ export default function AstraTemplate({
               </Block>
             )}
 
+            {/* ================= SOCIAL LINKS (TOP) ================= */}
+            {data.socialLinks?.length > 0 && (
+              <Block title="Social Links">
+                <div className="space-y-2 text-xs">
+                  {data.socialLinks
+                    .filter(s => s.label || s.url)
+                    .map(link => (
+                      <div key={link.id}>
+                        {link.label && (
+                          <span className="font-semibold">
+                            {link.label}:{" "}
+                          </span>
+                        )}
+                        {link.url && <span>{link.url}</span>}
+                      </div>
+                    ))}
+                </div>
+              </Block>
+            )}
+
             {(data.nationality || data.dateOfBirth || data.maritalStatus) && (
             <Block title="Personal Details">
                 <div className="flex flex-col space-y-2 text-xs">
@@ -255,20 +255,11 @@ export default function AstraTemplate({
             {/* ================= HOBBIES (BOTTOM) ================= */}
             {data.hobbies && (
               <Block title="Hobbies">
-              <div className="flex flex-wrap items-center text-xs">
-                {data.hobbies
-                  .split(",")
-                  .map(hobby => hobby.trim())
-                  .filter(Boolean)
-                  .map((hobby, i, arr) => (
-                    <span key={i} className="flex items-center">
-                      <span>{hobby}</span>
-                      {i < arr.length - 1 && (
-                        <span className="mx-2 text-gray-800">•</span>
-                      )}
-                    </span>
+                <ul className="text-xs list-disc list-inside space-y-1">
+                  {data.hobbies.split(",").map((hobby, i) => (
+                    <li key={i}>{hobby.trim()}</li>
                   ))}
-              </div>
+                </ul>
               </Block>
             )}
           </div>

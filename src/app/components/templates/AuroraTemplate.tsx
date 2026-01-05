@@ -97,7 +97,7 @@ export default function AuroraTemplate({
                     <div key={exp.id}>
                       <div className="flex justify-between items-center">
                         {exp.jobTitle && (
-                            <p className="text-sm font-semibold">{exp.jobTitle}, {exp.company}</p>
+                            <p className="text-sm font-semibold">{exp.jobTitle}, {exp.company}, {exp.city}</p>
                           )}
 
                         <p className="text-sm font-semibold">
@@ -129,7 +129,7 @@ export default function AuroraTemplate({
                       <div className="flex justify-between items-center">
                       {edu.degree && (
                         <p className="text-sm font-semibold">
-                          {edu.degree}, {edu.school}
+                          {edu.degree}, {edu.school}, {edu.city}
                         </p>
                       )}
 

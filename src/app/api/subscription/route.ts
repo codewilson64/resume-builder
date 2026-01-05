@@ -25,12 +25,14 @@ export async function GET() {
 
   const now = new Date();
 
+  const hasTimeLeft =
+    subscription.currentPeriodEnd &&
+    subscription.currentPeriodEnd > now;
+
   const hasAccess =
-    subscription.status === "active" ||
-    subscription.status === "trialing" ||
-    (subscription.cancelAtPeriodEnd &&
-      subscription.currentPeriodEnd &&
-      subscription.currentPeriodEnd > now);
+    hasTimeLeft &&
+    (subscription.status === "active" ||
+    subscription.status === "trialing");
 
   return NextResponse.json({
     status: hasAccess ? "active" : "inactive",

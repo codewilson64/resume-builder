@@ -135,6 +135,17 @@ export default function AtlasTemplate({
                 </div>
               </Block>
             )}
+
+            {/* HOBBIES */}
+            {data.hobbies && (
+              <Block title="Hobbies">
+                <ul className="text-xs list-disc list-inside space-y-1">
+                  {data.hobbies.split(",").map((hobby, i) => (
+                    <li key={i}>{hobby.trim()}</li>
+                  ))}
+                </ul>
+              </Block>
+            )}
           </div>
 
           {/* ================= RIGHT COLUMN ================= */}
@@ -261,17 +272,6 @@ export default function AtlasTemplate({
                       {data.maritalStatus}
                     </li>
                   )}
-                </ul>
-              </Block>
-            )}
-
-            {/* HOBBIES */}
-            {data.hobbies && (
-              <Block title="Hobbies">
-                <ul className="text-xs list-disc list-inside space-y-1">
-                  {data.hobbies.split(",").map((hobby, i) => (
-                    <li key={i}>{hobby.trim()}</li>
-                  ))}
                 </ul>
               </Block>
             )}

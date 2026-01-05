@@ -1,309 +1,274 @@
 "use client";
 
+import { Mail, Phone, MapPin } from "lucide-react";
 import { fontMap } from "@/app/config/fontConfig";
-import { useResume } from "@/app/context/ResumeContext";
 import type { ResumeData } from "@/app/types/resume";
+import { useResume } from "@/app/context/ResumeContext";
 
-interface ZenithTemplateProps {
+interface OrionTemplateProps {
   data: ResumeData;
   variant?: "preview" | "thumbnail";
 }
-
-const skillWidths: Record<string, string> = {
-    Beginner: "30%",
-    Intermediate: "50%",
-    Advanced: "75%",
-    Expert: "100%",
-  };
-  
-const languageWidths: Record<string, string> = {
-      Beginner: "25%",
-      Intermediate: "50%",
-      Advanced: "70%",
-      Fluent: "85%",
-      Native: "100%",
-  };
 
 function formatDate(dateStr?: string) {
   if (!dateStr) return "";
   const date = new Date(dateStr + "-01");
   return date.toLocaleString("en-US", {
-    month: "2-digit",
+    month: "short",
     year: "numeric",
   });
 }
 
-export default function ZenithTemplate({
-  data,
-  variant,
-}: ZenithTemplateProps) {
+const skillWidths: Record<string, string> = {
+  Beginner: "30%",
+  Intermediate: "50%",
+  Advanced: "75%",
+  Expert: "100%",
+};
+
+const languageWidths: Record<string, string> = {
+  Beginner: "25%",
+  Intermediate: "50%",
+  Advanced: "70%",
+  Fluent: "85%",
+  Native: "100%",
+};
+
+export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
   const { resumeData } = useResume();
   const isThumbnail = variant === "thumbnail";
 
   return (
-    <div className={fontMap[data.fontFamily] || fontMap["Lora"]}>
+    <div className={fontMap[data.fontFamily] || fontMap.Poppins}>
       <div
-        className="bg-white shadow-xl"
+        className="grid grid-cols-[260px_1fr] shadow-xl bg-white"
         style={{
           height: isThumbnail ? 1123 : "auto",
           minHeight: !isThumbnail ? 1123 : undefined,
         }}
       >
-
-      {/* ================= HEADER ================= */}
-      <header className="text-center p-12 space-y-5" style={{backgroundColor: resumeData.accentColor}}>
-        <h1 className="text-4xl text-white font-bold uppercase tracking-wide">
-          {data.firstName} {data.lastName}
-        </h1>
-
-        {data.jobTitle && (
-          <p className="text-sm text-gray-300">
-            {data.jobTitle}
-          </p>
-        )}
-
-        {/* CONTACT LINE */}
-        <p className="flex justify-center gap-8 text-xs text-gray-300">
-          {data.email && <span>{data.email}</span>}
-
-          {data.email && data.phone && <span>|</span>}
-
-          {data.phone && <span>{data.phone}</span>}
-
-          {(data.email || data.phone) && (data.address || data.city) && <span>|</span>}
-
-          {(data.address || data.city) && (
-            <span>
-              {data.address}
-              {data.address && data.city && ", "}
-              {data.city}
-            </span>
-          )}
-        </p>
-      </header>
-
-      <div className="p-10 pt-0 text-gray-900">
-          {/* ================= SUMMARY ================= */}
-          {data.about && (
-            <CenteredBlock title="Summary">
-              <p className="text-xs leading-relaxed text-gray-800 text-left">
-                {data.about}
-              </p>
-            </CenteredBlock>
-          )}
-
-          {/* ================= EXPERIENCE ================= */}
-          {data.experience?.length > 0 && (
-            <CenteredBlock title="Experience">
-              <div className="space-y-8">
-                {data.experience.map((exp) => (
-                  <div key={exp.id} className="">
-                    <div className="flex items-center justify-between">
-                    {/* LEFT */}
-                      <div>
-                        <p className="text-sm font-semibold">
-                            {exp.company}
-                        </p>
-                        <p className="text-sm">
-                            {exp.jobTitle}
-                        </p>
-                      </div>
-                      {/* RIGHT */}
-                        <div className="text-right text-xs text-gray-600">
-                            {(exp.city || exp.city) && (
-                                <p>
-                                {exp.city}
-                                </p>
-                            )}
-                            <p>
-                                {formatDate(exp.startDate)} –{" "}
-                                {exp.current ? "Present" : formatDate(exp.endDate)}
-                            </p>
-                        </div>
-                    </div>
-                      {exp.description && (
-                        <ul className="text-xs list-disc list-inside mt-2 space-y-1">
-                          {exp.description.split(".").filter(Boolean).map((d, i) => (
-                            <li key={i}>{d.trim()}.</li>
-                          ))}
-                        </ul>
-                      )}
-                  </div>
-                ))}
-              </div>
-            </CenteredBlock>
-          )}
-
-          {/* ================= EDUCATION ================= */}
-          {data.education?.length > 0 && (
-            <CenteredBlock title="Education">
-                <div className="space-y-8">
-                {data.education.map((edu) => (
-                    <div key={edu.id}>
-                    <div className="flex items-center justify-between">
-                        {/* LEFT */}
-                        <div>
-                        <p className="text-sm font-semibold">
-                            {edu.school}
-                        </p>
-                        <p className="text-sm">
-                            {edu.degree}
-                        </p>
-                        </div>
-
-                        {/* RIGHT */}
-                        <div className="text-right text-xs text-gray-600">
-                        {edu.city && (
-                            <p>{edu.city}</p>
-                        )}
-                        {edu.graduationDate && (
-                            <p>{formatDate(edu.graduationDate)}</p>
-                        )}
-                        </div>
-                    </div>
-
-                    {edu.description && (
-                        <ul className="text-xs list-disc list-inside mt-2 space-y-1">
-                        {edu.description
-                            .split(".")
-                            .filter(Boolean)
-                            .map((d, i) => (
-                            <li key={i}>{d.trim()}.</li>
-                            ))}
-                        </ul>
-                    )}
-                    </div>
-                ))}
+        {/* ================= LEFT COLUMN ================= */}
+        <aside
+          className="p-8 pt-0 text-white"
+          style={{ backgroundColor: data.accentColor }}
+        >
+          {/* CONTACT INFO */}
+          <Block title="Contact">
+            <section className="flex flex-col gap-2 text-xs text-white">
+              {data.email && (
+                <div className="flex items-center gap-2">
+                  <Mail size={13} />
+                  {data.email}
                 </div>
-            </CenteredBlock>
-          )}
-
-          {/* ================= SKILLS ================= */}
-          {data.skills?.length > 0 && (
-            <CenteredBlock title="Skills">
-                <div className={`grid grid-cols-3 ${resumeData.showSkillMeter ? 'gap-y-4' : 'gap-y-2'}`}>
-                {data.skills
-                    .filter(s => s.skillName?.trim())
-                    .map(skill => {
-                    const width = skillWidths[skill.level] || "40%";
-
-                    return (
-                        <div key={skill.id}>
-                        <span className="text-xs block mb-1">
-                          {skill.skillName}
-                        </span>
-                        {resumeData.showSkillMeter && (
-                          <div className="w-3/4 h-1 bg-gray-200">
-                            <div
-                              className="h-1 transition-all"
-                              style={{
-                                width,
-                                backgroundColor: data.accentColor,
-                              }}
-                              />
-                          </div>
-                        )}
-                      </div>
-                    );
-                    })}
+              )}
+              {data.phone && (
+                <div className="flex items-center gap-2">
+                  <Phone size={13} />
+                  {data.phone}
                 </div>
-            </CenteredBlock>
-          )}
-
-          {/* ================= LANGUAGES ================= */}
-          {data.languages?.length > 0 && (
-            <CenteredBlock title="Languages">
-                <div className={`grid grid-cols-3 ${resumeData.showLanguageMeter ? 'gap-y-4' : 'gap-y-2'}`}>
-                {data.languages
-                    .filter(l => l.name?.trim())
-                    .map(lang => {
-                    const width = languageWidths[lang.level] || "40%";
-
-                    return (
-                        <div key={lang.id}>
-                        <span className="text-xs block mb-1">
-                          {lang.name}
-                        </span>
-                        {resumeData.showLanguageMeter && (
-                          <div className="w-3/4 h-1 bg-gray-200">
-                            <div
-                              className="h-1 transition-all"
-                              style={{
-                                  width,
-                                  backgroundColor: data.accentColor,
-                              }}
-                              />
-                          </div>
-                        )}
-                      </div>
-                    );
-                    })}
-                </div>
-            </CenteredBlock>
-          )}
-
-          {/* ================= PERSONAL DETAILS ================= */}
-          {(data.nationality || data.dateOfBirth || data.maritalStatus) && (
-            <CenteredBlock title="Personal Details">
-                <div className="flex justify-center gap-6 text-xs text-gray-700">
-                {data.nationality && (
-                  <span>
-                    <span className="font-semibold">Nationality:</span>{" "}
-                    {data.nationality}
-                  </span>
-                )}
-
-                {data.dateOfBirth && (
+              )}
+              {(data.address || data.city) && (
+                <div className="flex items-center gap-2">
+                  <MapPin size={13} />
                     <span>
-                    <span className="font-semibold">Date of Birth:</span>{" "}
-                    {data.dateOfBirth}
+                      {data.address}
+                      {data.city && `, ${data.city}`}
                     </span>
-                )}
-
-                {data.maritalStatus && (
-                  <span>
-                    <span className="font-semibold">Marital Status:</span>{" "}
-                    {data.maritalStatus}
-                  </span>
-                )}
                 </div>
-            </CenteredBlock>
-          )}
+              )}
+              </section>
+          </Block>
 
-          {/* LINKS */}
-          {data?.socialLinks?.length > 0 && (
-              <CenteredBlock title="Links">
-              <div className="flex justify-center gap-6 text-xs text-gray-700">
-                {data.socialLinks.map((link) => (
+          {data.socialLinks?.length > 0 && (
+            <Block title="Links">
+              <div className="space-y-3 text-xs">
+                {data.socialLinks.map(link => (
                   <div key={link.id}>
-                    <span className="font-semibold">{link.label}: </span>
-                    <span className="text-gray-600">{link.url}</span>
+                    <p className="font-semibold">{link.label}</p>
+                    <p className="text-white/90">{link.url}</p>
                   </div>
                 ))}
               </div>
-            </CenteredBlock>            
+            </Block>
+          )}
+
+          {data.languages?.length > 0 && (
+            <Block title="Languages">
+              <div className="space-y-3">
+                {data.languages
+                  .filter(l => l.name?.trim())
+                  .map(lang => {
+                    const width =
+                      languageWidths[lang.level] || "40%";
+
+                    return (
+                      <div key={lang.id}>
+                        <p className="text-xs mb-1">{lang.name}</p>
+                        {resumeData.showLanguageMeter && (
+                          <div className="w-full h-1.5 bg-white/30">
+                            <div
+                              className="h-1.5 bg-white"
+                              style={{ width }}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+              </div>
+            </Block>
+          )}
+
+          {(data.dateOfBirth ||
+            data.nationality ||
+            data.maritalStatus) && (
+            <Block title="Personal Details">
+              <div className="text-xs text-white/90 space-y-3">
+                {data?.dateOfBirth && (
+                  <p>
+                    <span className="font-semibold block">
+                      Date of Birth
+                    </span>
+                    {data.dateOfBirth}
+                  </p>
+                )}
+
+                {data?.nationality && (
+                  <p>
+                    <span className="font-semibold block">
+                      Nationality
+                    </span>
+                    {data.nationality}
+                  </p>
+                )}
+
+                {data?.maritalStatus && (
+                  <p>
+                    <span className="font-semibold block">
+                      Marital Status
+                    </span>
+                    {data.maritalStatus}
+                  </p>
+                )}
+              </div>
+            </Block>
+          )}
+        </aside>
+
+        {/* ================= RIGHT COLUMN ================= */}
+        <main className="p-8 text-gray-700">
+          {/* HEADER */}
+          <section>
+            <h1 className="text-4xl font-bold uppercase tracking-wide">
+              {data.firstName} {data.lastName}
+            </h1>
+
+            {data.jobTitle && (
+              <p
+                className="mt-2 text-sm uppercase tracking-widest"
+              >
+                {data.jobTitle}
+              </p>
             )}
 
-          {/* ================= HOBBIES ================= */}
-          {data.hobbies && (
-            <CenteredBlock title="Hobbies">
-                <p className="text-xs text-gray-700 text-center">
-                {data.hobbies
-                    .split(",")
-                    .map(hobby => hobby.trim())
-                    .join(" • ")}
-                </p>
-            </CenteredBlock>
+            <div className="mt-4 flex flex-wrap gap-6 text-xs text-gray-600">
+              {data.about && (
+                <Block title="About Me">
+                  <p className="text-xs leading-relaxed">
+                    {data.about}
+                  </p>
+                </Block>
+              )}
+            </div>
+          </section>
+
+          {data.experience?.length > 0 && (
+            <Block title="Work Experience">
+              <div className="space-y-6">
+                {data.experience.map(exp => (
+                  <div key={exp.id}>
+                    <p className="font-semibold text-sm">
+                      {exp.jobTitle} – {exp.company}, {exp.city}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {formatDate(exp.startDate)} –{" "}
+                      {exp.current ? "Present" : formatDate(exp.endDate)}
+                    </p>
+                    {exp.description && (
+                      <p className="text-xs mt-1">{exp.description}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </Block>
           )}
-        </div>
+
+          {data.education?.length > 0 && (
+            <Block title="Education">
+              <div className="space-y-6">
+                {data.education.map(edu => (
+                  <div key={edu.id}>
+                    <p className="font-semibold text-sm">
+                      {edu.degree} – {edu.school}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {formatDate(edu.graduationDate)}
+                    </p>
+                    {edu.description && (
+                      <p className="text-xs mt-1">{edu.description}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </Block>
+          )}
+
+          {data.skills?.length > 0 && (
+            <Block title="Skills">
+              <div className={`grid grid-cols-2 ${resumeData.showSkillMeter ? "gap-4" : "gap-2"}`}>
+                {data.skills.map(skill => {
+                  const width = skillWidths[skill.level] || "40%";
+
+                  return (
+                    <div key={skill.id}>
+                      <p className="text-xs font-medium">
+                        {skill.skillName}
+                      </p>
+                      {resumeData.showSkillMeter && (
+                        <div className="w-full h-1.5 bg-gray-300 mt-1">
+                          <div
+                            className="h-1.5 bg-gray-700"
+                            style={{
+                              width,
+                            }}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </Block>
+          )}
+
+          {data.hobbies && (
+            <Block title="Hobbies">
+              <div className="flex gap-4 text-xs">
+                {data.hobbies.split(",").map((h, i) => (
+                  <span key={i}>{h.trim()}</span>
+                ))}
+              </div>
+            </Block>
+          )}
+        </main>
       </div>
     </div>
   );
 }
 
-/* ================= CENTERED BLOCK ================= */
+/* ================= SHARED BLOCK ================= */
 
-function CenteredBlock({
+function Block({
   title,
   children,
 }: {
@@ -311,11 +276,10 @@ function CenteredBlock({
   children: React.ReactNode;
 }) {
   return (
-    <section className="space-y-4">
-      <div className="text-center">
-        <h2 className="text-lg font-semibold pt-8">{title}</h2>
-        <div className="mt-2 border-t border-gray-400 w-full mx-auto" />
-      </div>
+    <section>
+      <h2 className="text-sm font-semibold uppercase tracking-widest border-b border-gray-300 pt-8 pb-2 mb-3">
+        {title}
+      </h2>
       {children}
     </section>
   );

@@ -129,7 +129,7 @@ export async function createResume(data: ResumeData) {
 }
 
 export async function updateResume(resumeId: string, data: ResumeData) {
-  const start = performance.now()
+  // const start = performance.now()
 
   const user = await getCurrentUser();
   if (!user?.id) throw new Error("User not authenticated");
@@ -214,8 +214,8 @@ export async function updateResume(resumeId: string, data: ResumeData) {
       },
     },
   });
-  const end = performance.now()
-  console.log(`Update query duration: ${end - start}ms`)
+  // const end = performance.now()
+  // console.log(`Update query duration: ${end - start}ms`)
   
   revalidateTag("resume", "default");
   return resume;
