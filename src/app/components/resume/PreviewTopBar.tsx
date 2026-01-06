@@ -21,7 +21,7 @@ export default function PreviewTopBar({
         {/* Left: Settings */}
         <button
           onClick={onSettings}
-          className="flex items-center gap-2 text-sm text-gray-200 hover:text-white transition"
+          className="flex items-center gap-2 text-sm text-gray-900 hover:text-gray-900 transition"
         >
           <SlidersHorizontal size={18} />
         </button>
