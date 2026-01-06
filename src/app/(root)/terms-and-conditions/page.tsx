@@ -135,8 +135,10 @@ export default function TermsAndConditions() {
   <h2 className="text-xl font-semibold">14. Refund Policy</h2>
 
   <p>
-    We want you to be satisfied with our services. If you are not satisfied for
-    any reason, you may be eligible for a refund subject to the terms below.
+    We want you to be satisfied with our services. If you are not satisfied,
+    you may request a refund in accordance with the terms outlined below.
+    Refunds are <strong>not automatic</strong> and must be explicitly requested
+    by the user.
   </p>
 
   <p>
@@ -146,31 +148,74 @@ export default function TermsAndConditions() {
 
   <ul className="list-disc pl-6 space-y-2">
     <li>
-      <strong>Weekly subscription:</strong> Refund requests must be made within
+      <strong>Weekly access:</strong> Refund requests must be submitted within
       7 days of the initial purchase.
     </li>
     <li>
-      <strong>Monthly subscription:</strong> Refund requests must be made within
+      <strong>Monthly access:</strong> Refund requests must be submitted within
       30 days of the initial purchase.
     </li>
   </ul>
 
   <p>
-    Refunds apply only to the first billing cycle. Renewal payments made after
-    the refund period are non-refundable.
+    Refunds apply only to the <strong>first billing cycle</strong>. Any renewal
+    or subsequent payments made after the applicable refund period are
+    non-refundable.
   </p>
 
   <p>
-    To request a refund, you must contact us through our official support
-    channels by sending us an email at <a href="mailto:wilsonnn948@gmail.com" className="text-blue-600 hover:underline">wilsonnn948@gmail.com</a> with your account details and payment information. Approved refunds
-    will be processed back to the original payment method.
+    To request a refund, please contact us via your account page after logging in. 
+    We may request additional information to verify your account before processing the refund.
   </p>
 
   <p>
-    We reserve the right to deny refund requests that involve abuse, fraud, or
-    violations of these Terms and Conditions.
+    If your refund request is approved, the refund will be issued to the
+    original payment method used for the purchase. Processing times may vary
+    depending on your payment provider.
+  </p>
+
+  <p>
+    We reserve the right to deny refund requests in cases of suspected abuse,
+    fraud, repeated refund requests, or violations of these Terms and
+    Conditions.
   </p>
 </section>
+
+<section className="space-y-4">
+  <h2 className="text-xl font-semibold">15. Cancellation Policy</h2>
+
+  <p>
+    You may cancel your subscription at any time. Cancellation will stop any
+    future recurring charges, but will not automatically result in a refund,
+    unless otherwise stated in our Refund Policy.
+  </p>
+
+  <p>
+    To cancel your subscription, log in to your account and navigate to your
+    <strong> account page</strong>, then click on <strong>“Manage Subscription”</strong>
+    and follow the on-screen instructions to complete the cancellation process.
+  </p>
+
+  <p>
+    Once your cancellation is successfully completed, your subscription will
+    remain active until the end of the current billing period. You will continue
+    to have access to the service during this time, unless otherwise specified.
+  </p>
+
+  <p>
+    It is your responsibility to ensure that the cancellation process is fully
+    completed before the next billing date. We recommend confirming that you
+    receive a cancellation confirmation after completing the process.
+  </p>
+
+  <p>
+    If you experience any issues accessing your account or completing the
+    cancellation, please contact us through the <strong>“Contact Us”</strong>
+    option available on your account page for assistance.
+  </p>
+</section>
+
+
 
     </main>
   );

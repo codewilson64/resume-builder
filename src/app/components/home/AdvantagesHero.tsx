@@ -33,7 +33,7 @@ const AdvantagesHero = () => {
               Fast & Beginner-Friendly
             </h3>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Create a polished resume in minutes — no design skills needed. Just fill in your details and export.
+              Create a polished resume in minutes — no design skills needed. Just fill in your details and download.
             </p>
           </div>
 
@@ -45,10 +45,10 @@ const AdvantagesHero = () => {
               </div>
             </div>
             <h3 className="font-semibold text-lg mb-3">
-              Import & Update Easily
+              Easy Editing & Updates
             </h3>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Already have a CV? Upload it and instantly convert it into a clean, modern layout ready to improve.
+              Update your resume anytime with a simple, guided editor. Make changes instantly and keep everything organized in one place.
             </p>
           </div>
 

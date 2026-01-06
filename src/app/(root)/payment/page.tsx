@@ -17,7 +17,7 @@ const PLAN_CONFIG = {
     renewalPeriod: "week",
     refundDays: 7,
     renewalText:
-      "After 7 days, your subscription will automatically renew and $2.95 will be charged every week. You can cancel at any time.",
+      "After 7 days, your subscription will automatically renew and $2.95 will be charged every week. You can cancel at any time from your account page under 'Manage Subscription'.",
   },
   monthly: {
     productId: "53b8125b-9fe8-4b26-8a98-c367c3048bcf",
@@ -25,9 +25,9 @@ const PLAN_CONFIG = {
     priceLabel: "$9.95",
     renewalPrice: "$9.95",
     renewalPeriod: "month",
-    refundDays: 7,
+    refundDays: 30,
     renewalText:
-      "After 7 days, your subscription will automatically renew and $9.95 will be charged every month. You can cancel at any time.",
+      "After 30 days, your subscription will automatically renew and $9.95 will be charged every month. You can cancel at any time from your account page under 'Manage Subscription'.",
   },
 };
 
@@ -119,7 +119,7 @@ export default function PaymentPage() {
         </div>
 
         {/* Features */}
-        <ul className="space-y-2 text-sm text-gray-700">
+        <ul className="space-y-3 text-sm font-semibold text-gray-700">
           <li className="flex items-start gap-2">
             <Check className="mt-0.5 h-4 w-4 text-green-500 shrink-0" />
             <span>Unlimited resume creation.</span>
