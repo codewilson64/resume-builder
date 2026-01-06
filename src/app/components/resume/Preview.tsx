@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useResume } from "@/app/context/ResumeContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useReactToPrint } from "react-to-print";
@@ -19,7 +19,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   const resumeIdFromUrl = searchParams.get("id");
   const [loading, setLoading] = useState(false)
 
-  const { resumeData: draftResume} = useResume();
+  const { resumeData: draftResume, setResumeData} = useResume();
 
   const printRef = useRef(null);
 
@@ -28,6 +28,17 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
    : null;
 
   const { resumeData } = useResumeSource({ url, draftResume });
+
+  const lastHydratedId = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (!resumeData?.resumeId) return;
+
+    if (lastHydratedId.current === resumeData.resumeId) return;
+
+    setResumeData(resumeData);
+    lastHydratedId.current = resumeData.resumeId;
+  }, [resumeData, setResumeData]);
 
   // handle print
   const handlePrintBase = useReactToPrint({

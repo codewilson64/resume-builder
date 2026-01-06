@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ResumeData } from "../types/resume";
 
 interface UseResumeSourceParams {
@@ -12,31 +12,35 @@ export function useResumeSource({ url, draftResume }: UseResumeSourceParams) {
   const [resumeData, setResumeData] = useState<ResumeData | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const draftSnapshot = useRef<ResumeData | null>(draftResume);
-
   useEffect(() => {
+    if (
+      draftResume &&
+      draftResume.resumeId &&
+      url?.includes(draftResume.resumeId)
+    ) {
+      console.log("Use resume from context");
+      setResumeData(draftResume);
+      setLoading(false);
+      return;
+    }
+
+    // If no URL → fallback to context (Preview case)
+    if (!url) {
+      console.log("No URL, fallback to context");
+      setResumeData(draftResume);
+      setLoading(false);
+      return;
+    }
+
+    // Otherwise → fetch
     const loadResume = async () => {
+      console.log("Fetch from db");
       setLoading(true);
 
-      if (
-        draftResume &&
-        draftResume.resumeId &&
-        url?.includes(draftResume.resumeId)
-      ) {
-        setResumeData(draftSnapshot.current);
-        setLoading(false);
-        console.log("No fetching...")
-        return;
-      }
-      console.log("Fetch from db!!")  
       try {
-        if (url) {
-          const res = await fetch(url);
-          const data = await res.json();
-          setResumeData(data);
-        } else {
-          setResumeData(draftSnapshot.current);
-        }
+        const res = await fetch(url);
+        const data = await res.json();
+        setResumeData(data);
       } catch (err) {
         console.error("Failed to load resume", err);
         setResumeData(null);
@@ -46,7 +50,7 @@ export function useResumeSource({ url, draftResume }: UseResumeSourceParams) {
     };
 
     loadResume();
-  }, [url]);
+  }, [url, draftResume]);
 
   return { resumeData, loading };
 }

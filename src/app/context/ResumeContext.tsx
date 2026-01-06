@@ -48,6 +48,11 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
     resumeId: null
   });
 
+  // Save changes to localStorage
+  useEffect(() => {
+    localStorage.setItem("resumeData", JSON.stringify(resumeData));
+  }, [resumeData]);
+
   // Load from localStorage on first client render
   useEffect(() => {
     const stored = localStorage.getItem("resumeData");
@@ -60,10 +65,6 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  // Save changes to localStorage
-  useEffect(() => {
-    localStorage.setItem("resumeData", JSON.stringify(resumeData));
-  }, [resumeData]);
 
   // Setter for resumeId so we prevent duplicates
   const setResumeId = (id: string | null) => {

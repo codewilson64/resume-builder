@@ -28,23 +28,25 @@ export default function FinalPage() {
   const resumeIdFromUrl = searchParams.get("id");
 
   // Context API
-  const { resumeData: draftResume, setResumeData} = useResume();
+  const { resumeData: draftResume, setResumeData } = useResume();
 
   const url = resumeIdFromUrl
     ? `/api/resume/${resumeIdFromUrl}`
     : null;
-   
-  const { resumeData } = useResumeSource({ url, draftResume });
   
-  const hasHydrated = useRef(false);
+    
+  const { resumeData } = useResumeSource({ url, draftResume });
+
+  const lastHydratedId = useRef<string | null>(null);
 
   useEffect(() => {
-    if (!resumeData) return;
-    if (hasHydrated.current) return;
+    if (!resumeData?.resumeId) return;
+
+    if (lastHydratedId.current === resumeData.resumeId) return;
 
     setResumeData(resumeData);
-    hasHydrated.current = true;
-  }, [resumeData, setResumeData]);
+    lastHydratedId.current = resumeData.resumeId;
+  }, [resumeData]);
 
 
   if (!resumeData) {

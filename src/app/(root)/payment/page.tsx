@@ -25,9 +25,9 @@ const PLAN_CONFIG = {
     priceLabel: "$9.95",
     renewalPrice: "$9.95",
     renewalPeriod: "month",
-    refundDays: 30,
+    refundDays: 7,
     renewalText:
-      "After 30 days, your subscription will automatically renew and $9.95 will be charged every month. You can cancel at any time.",
+      "After 7 days, your subscription will automatically renew and $9.95 will be charged every month. You can cancel at any time.",
   },
 };
 
