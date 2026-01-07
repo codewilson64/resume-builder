@@ -75,18 +75,13 @@ export const auth = betterAuth({
                 }), 
                 webhooks({
                     secret: process.env.POLAR_WEBHOOK_SECRET as string,
+                    onSubscriptionCreated: async (payload) => {
+                        await upsertSubscriptionFromPolar(payload.data);
+                    },
                     onSubscriptionUpdated: async (payload) => {
                         await upsertSubscriptionFromPolar(payload.data);
                     },
-                    onSubscriptionActive: async (payload) => {
-                        console.log('webhook.handler_called'), 
-                        console.log('webhook.validate_signature'),
-                        await upsertSubscriptionFromPolar(payload.data);
-                    },
                     onSubscriptionCanceled: async (payload) => {
-                        await upsertSubscriptionFromPolar(payload.data);
-                    },
-                    onSubscriptionUncanceled: async (payload) => {
                         await upsertSubscriptionFromPolar(payload.data);
                     },
                     onSubscriptionRevoked: async (payload) => {
