@@ -10,10 +10,10 @@ export default function AccentSelector({ value, onChange, template }: AccentSele
   const colors = [
     { name: "Gray", color: "#2D2D2D" },
     { name: "Blue", color: "#14213D" },
+    { name: "Cyan", color: "#06B6D4" },
     { name: "Red", color: "#991B1B" },
     { name: "Green", color: "#0F766E" },
     { name: "Purple", color: "#4C1D95" },
-    { name: "Orange", color: "#9A3412" },
   ];
 
   const hasAccent = template === "Orion" || template === "Zenith";

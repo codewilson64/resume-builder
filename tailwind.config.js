@@ -11,6 +11,15 @@ module.exports = {
   ],
   theme: {
   	extend: {
+		keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-16px)' },
+        },
+      },
+      animation: {
+        float: 'float 4s ease-in-out infinite',
+      },
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
