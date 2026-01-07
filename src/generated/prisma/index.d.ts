@@ -7557,7 +7557,6 @@ export namespace Prisma {
     intervalCount: number | null
     priceAmount: number | null
     currency: string | null
-    isTrial: boolean | null
     productId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -7576,7 +7575,6 @@ export namespace Prisma {
     intervalCount: number | null
     priceAmount: number | null
     currency: string | null
-    isTrial: boolean | null
     productId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -7595,7 +7593,6 @@ export namespace Prisma {
     intervalCount: number
     priceAmount: number
     currency: number
-    isTrial: number
     productId: number
     createdAt: number
     updatedAt: number
@@ -7626,7 +7623,6 @@ export namespace Prisma {
     intervalCount?: true
     priceAmount?: true
     currency?: true
-    isTrial?: true
     productId?: true
     createdAt?: true
     updatedAt?: true
@@ -7645,7 +7641,6 @@ export namespace Prisma {
     intervalCount?: true
     priceAmount?: true
     currency?: true
-    isTrial?: true
     productId?: true
     createdAt?: true
     updatedAt?: true
@@ -7664,7 +7659,6 @@ export namespace Prisma {
     intervalCount?: true
     priceAmount?: true
     currency?: true
-    isTrial?: true
     productId?: true
     createdAt?: true
     updatedAt?: true
@@ -7770,7 +7764,6 @@ export namespace Prisma {
     intervalCount: number
     priceAmount: number
     currency: string
-    isTrial: boolean
     productId: string
     createdAt: Date
     updatedAt: Date
@@ -7808,7 +7801,6 @@ export namespace Prisma {
     intervalCount?: boolean
     priceAmount?: boolean
     currency?: boolean
-    isTrial?: boolean
     productId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -7828,7 +7820,6 @@ export namespace Prisma {
     intervalCount?: boolean
     priceAmount?: boolean
     currency?: boolean
-    isTrial?: boolean
     productId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -7848,7 +7839,6 @@ export namespace Prisma {
     intervalCount?: boolean
     priceAmount?: boolean
     currency?: boolean
-    isTrial?: boolean
     productId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -7868,13 +7858,12 @@ export namespace Prisma {
     intervalCount?: boolean
     priceAmount?: boolean
     currency?: boolean
-    isTrial?: boolean
     productId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "polarCustomerId" | "polarSubId" | "status" | "currentPeriodEnd" | "cancelAtPeriodEnd" | "planName" | "interval" | "intervalCount" | "priceAmount" | "currency" | "isTrial" | "productId" | "createdAt" | "updatedAt", ExtArgs["result"]["subscription"]>
+  export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "polarCustomerId" | "polarSubId" | "status" | "currentPeriodEnd" | "cancelAtPeriodEnd" | "planName" | "interval" | "intervalCount" | "priceAmount" | "currency" | "productId" | "createdAt" | "updatedAt", ExtArgs["result"]["subscription"]>
   export type SubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Subscription$userArgs<ExtArgs>
   }
@@ -7903,7 +7892,6 @@ export namespace Prisma {
       intervalCount: number
       priceAmount: number
       currency: string
-      isTrial: boolean
       productId: string
       createdAt: Date
       updatedAt: Date
@@ -8343,7 +8331,6 @@ export namespace Prisma {
     readonly intervalCount: FieldRef<"Subscription", 'Int'>
     readonly priceAmount: FieldRef<"Subscription", 'Int'>
     readonly currency: FieldRef<"Subscription", 'String'>
-    readonly isTrial: FieldRef<"Subscription", 'Boolean'>
     readonly productId: FieldRef<"Subscription", 'String'>
     readonly createdAt: FieldRef<"Subscription", 'DateTime'>
     readonly updatedAt: FieldRef<"Subscription", 'DateTime'>
@@ -15710,7 +15697,6 @@ export namespace Prisma {
     intervalCount: 'intervalCount',
     priceAmount: 'priceAmount',
     currency: 'currency',
-    isTrial: 'isTrial',
     productId: 'productId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -16265,7 +16251,6 @@ export namespace Prisma {
     intervalCount?: IntFilter<"Subscription"> | number
     priceAmount?: IntFilter<"Subscription"> | number
     currency?: StringFilter<"Subscription"> | string
-    isTrial?: BoolFilter<"Subscription"> | boolean
     productId?: StringFilter<"Subscription"> | string
     createdAt?: DateTimeFilter<"Subscription"> | Date | string
     updatedAt?: DateTimeFilter<"Subscription"> | Date | string
@@ -16285,7 +16270,6 @@ export namespace Prisma {
     intervalCount?: SortOrder
     priceAmount?: SortOrder
     currency?: SortOrder
-    isTrial?: SortOrder
     productId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16308,7 +16292,6 @@ export namespace Prisma {
     intervalCount?: IntFilter<"Subscription"> | number
     priceAmount?: IntFilter<"Subscription"> | number
     currency?: StringFilter<"Subscription"> | string
-    isTrial?: BoolFilter<"Subscription"> | boolean
     productId?: StringFilter<"Subscription"> | string
     createdAt?: DateTimeFilter<"Subscription"> | Date | string
     updatedAt?: DateTimeFilter<"Subscription"> | Date | string
@@ -16328,7 +16311,6 @@ export namespace Prisma {
     intervalCount?: SortOrder
     priceAmount?: SortOrder
     currency?: SortOrder
-    isTrial?: SortOrder
     productId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16355,7 +16337,6 @@ export namespace Prisma {
     intervalCount?: IntWithAggregatesFilter<"Subscription"> | number
     priceAmount?: IntWithAggregatesFilter<"Subscription"> | number
     currency?: StringWithAggregatesFilter<"Subscription"> | string
-    isTrial?: BoolWithAggregatesFilter<"Subscription"> | boolean
     productId?: StringWithAggregatesFilter<"Subscription"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
@@ -17225,7 +17206,6 @@ export namespace Prisma {
     intervalCount: number
     priceAmount: number
     currency: string
-    isTrial: boolean
     productId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17245,7 +17225,6 @@ export namespace Prisma {
     intervalCount: number
     priceAmount: number
     currency: string
-    isTrial: boolean
     productId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17263,7 +17242,6 @@ export namespace Prisma {
     intervalCount?: IntFieldUpdateOperationsInput | number
     priceAmount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    isTrial?: BoolFieldUpdateOperationsInput | boolean
     productId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17283,7 +17261,6 @@ export namespace Prisma {
     intervalCount?: IntFieldUpdateOperationsInput | number
     priceAmount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    isTrial?: BoolFieldUpdateOperationsInput | boolean
     productId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17302,7 +17279,6 @@ export namespace Prisma {
     intervalCount: number
     priceAmount: number
     currency: string
-    isTrial: boolean
     productId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17320,7 +17296,6 @@ export namespace Prisma {
     intervalCount?: IntFieldUpdateOperationsInput | number
     priceAmount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    isTrial?: BoolFieldUpdateOperationsInput | boolean
     productId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17339,7 +17314,6 @@ export namespace Prisma {
     intervalCount?: IntFieldUpdateOperationsInput | number
     priceAmount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    isTrial?: BoolFieldUpdateOperationsInput | boolean
     productId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18249,7 +18223,6 @@ export namespace Prisma {
     intervalCount?: SortOrder
     priceAmount?: SortOrder
     currency?: SortOrder
-    isTrial?: SortOrder
     productId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -18273,7 +18246,6 @@ export namespace Prisma {
     intervalCount?: SortOrder
     priceAmount?: SortOrder
     currency?: SortOrder
-    isTrial?: SortOrder
     productId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -18292,7 +18264,6 @@ export namespace Prisma {
     intervalCount?: SortOrder
     priceAmount?: SortOrder
     currency?: SortOrder
-    isTrial?: SortOrder
     productId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -19709,7 +19680,6 @@ export namespace Prisma {
     intervalCount: number
     priceAmount: number
     currency: string
-    isTrial: boolean
     productId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19727,7 +19697,6 @@ export namespace Prisma {
     intervalCount: number
     priceAmount: number
     currency: string
-    isTrial: boolean
     productId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19856,7 +19825,6 @@ export namespace Prisma {
     intervalCount?: IntFilter<"Subscription"> | number
     priceAmount?: IntFilter<"Subscription"> | number
     currency?: StringFilter<"Subscription"> | string
-    isTrial?: BoolFilter<"Subscription"> | boolean
     productId?: StringFilter<"Subscription"> | string
     createdAt?: DateTimeFilter<"Subscription"> | Date | string
     updatedAt?: DateTimeFilter<"Subscription"> | Date | string
@@ -21322,7 +21290,6 @@ export namespace Prisma {
     intervalCount: number
     priceAmount: number
     currency: string
-    isTrial: boolean
     productId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21503,7 +21470,6 @@ export namespace Prisma {
     intervalCount?: IntFieldUpdateOperationsInput | number
     priceAmount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    isTrial?: BoolFieldUpdateOperationsInput | boolean
     productId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21521,7 +21487,6 @@ export namespace Prisma {
     intervalCount?: IntFieldUpdateOperationsInput | number
     priceAmount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    isTrial?: BoolFieldUpdateOperationsInput | boolean
     productId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21539,7 +21504,6 @@ export namespace Prisma {
     intervalCount?: IntFieldUpdateOperationsInput | number
     priceAmount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
-    isTrial?: BoolFieldUpdateOperationsInput | boolean
     productId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

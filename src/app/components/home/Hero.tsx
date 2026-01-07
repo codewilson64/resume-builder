@@ -4,6 +4,8 @@ import { useResume } from '@/app/context/ResumeContext';
 import { createResumeForGuest } from '@/lib/actions/resume-action';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from "next/navigation";
+import hero_image from "../../../assets/HeroImage.jpg";
+import Image from 'next/image';
 
 const Hero = () => {
   const { setResumeId } = useResume();
@@ -40,6 +42,17 @@ const Hero = () => {
           Build My Resume
           <ArrowRight size={22} />
         </button>
+
+        {/* <div className="mt-12 w-full max-w-sm">
+          <Image
+            src={hero_image}
+            alt="Resume preview"
+            width={400}
+            height={200}
+            className="rounded-xl shadow-xl"
+            priority
+          />
+        </div> */}
       </div>
 
     </section>

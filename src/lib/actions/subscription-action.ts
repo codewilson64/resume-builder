@@ -17,11 +17,11 @@ export async function getCurrentSubscription() {
       status: true,
       planName: true,
       currentPeriodEnd: true,
+      cancelAtPeriodEnd: true,
       interval: true,
       intervalCount: true,
       priceAmount: true,
       currency: true,
-      isTrial: true,
     },
   });
 
@@ -35,8 +35,8 @@ export async function getCurrentSubscription() {
     hasAccess,
     status: subscription.status,
     planName: subscription.planName,
-    isTrial: subscription.isTrial,
     expiresAt: subscription.currentPeriodEnd,
+    hasCanceled: subscription.cancelAtPeriodEnd,
     interval: subscription.interval,
     intervalCount: subscription.intervalCount,
     priceAmount: subscription.priceAmount,

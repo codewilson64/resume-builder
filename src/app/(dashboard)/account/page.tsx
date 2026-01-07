@@ -3,7 +3,7 @@
 import { signOut } from "@/lib/actions/auth-action";
 import { createCustomerPortalSession, getCurrentSubscription } from "@/lib/actions/subscription-action";
 import { useRouter } from "next/navigation";
-import { LogOut, LoaderCircle, Phone } from "lucide-react";
+import { LogOut, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 import PlanSkeleton from "@/app/components/skeletons/PlanSkeleton";
 
@@ -66,6 +66,32 @@ export default function AccountPage() {
     }
   };
 
+  const getStatusLabel = (status: string) => {
+    switch (status) {
+      case "trialing":
+        return "Trial";
+      case "active":
+        return "Active";
+      case "canceled":
+        return "Canceled";
+      default:
+        return "Inactive";
+    }
+  };
+
+  const getDateLabel = (
+    status: string,
+    hasCanceled: boolean
+  ) => {
+    if (status === "trialing" || status === "active") {
+      return hasCanceled ? "Expires at" : "Renews at";
+    }
+    if (status === "canceled") {
+      return "Ended on";
+    }
+    return "";
+  };
+
   return (
     <div className="w-full max-w-3xl px-6 py-28">
       <h1 className="text-2xl font-bold mb-12">My Account</h1>
@@ -90,18 +116,17 @@ export default function AccountPage() {
               </p>
 
               <p className="text-sm text-gray-600">
-                {subscription.isTrial
-                  ? "Trial"
-                  : "Active"}{" "}
-                · Expires at{" "}
+                {getStatusLabel(subscription.status)} ·{" "}
+                {getDateLabel(subscription.status, subscription.hasCanceled)}{" "}
                 {subscription.expiresAt
-                ? new Intl.DateTimeFormat("en-GB", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
+                  ? new Intl.DateTimeFormat("en-GB", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
                     }).format(new Date(subscription.expiresAt))
-                : "—"}
+                  : "—"}
               </p>
+
             </div>
 
             <button

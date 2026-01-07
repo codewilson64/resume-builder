@@ -56,8 +56,7 @@ export default function NordicSlateTemplate({
           {/* NAME */}
           <div>
             <h1
-              className="text-3xl font-bold tracking-wide"
-              style={{ color: data.accentColor }}
+              className="text-3xl text-gray-800 font-bold tracking-wide"
             >
               {data.firstName} {data.lastName}
             </h1>
@@ -70,7 +69,7 @@ export default function NordicSlateTemplate({
           <div className="flex flex-col gap-1 text-gray-600 text-xs">
               {(data?.address || data?.city || data?.postalCode) && (
                 <div className="flex items-center gap-3">                 
-                  <MapPin size={13} color={data.accentColor} />                 
+                  <MapPin size={13} />                 
                   <span className="leading-snug">
                     {data.address}, {data.city}, {data.postalCode}
                   </span>
@@ -79,14 +78,14 @@ export default function NordicSlateTemplate({
 
               {data?.phone && (
                 <div className="flex items-center gap-3">                 
-                  <Phone size={13} color={data.accentColor} />
+                  <Phone size={13} />
                   <span>{data.phone}</span>
                 </div>
               )}
 
               {data?.email && (
                 <div className="flex items-center gap-3">                  
-                  <Mail size={13} color={data.accentColor} />
+                  <Mail size={13} />
                   <span>{data.email}</span>
                 </div>
               )}
@@ -126,10 +125,9 @@ export default function NordicSlateTemplate({
                         {resumeData.showSkillMeter && (
                         <div className="w-3/4 h-1 bg-gray-200">
                           <div
-                            className="h-1 transition-all"
+                            className="h-1 bg-gray-700 transition-all"
                             style={{
                               width,
-                              backgroundColor: data.accentColor,
                             }}
                           />
                         </div>
@@ -161,10 +159,9 @@ export default function NordicSlateTemplate({
                         {resumeData.showLanguageMeter && (
                           <div className="w-3/4 h-1 bg-gray-200">
                             <div
-                              className="h-1 transition-all"
+                              className="h-1 bg-gray-700 transition-all"
                               style={{
                                   width,
-                                  backgroundColor: data.accentColor,
                               }}
                             />
                           </div>

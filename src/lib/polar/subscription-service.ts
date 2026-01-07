@@ -31,8 +31,6 @@ export async function upsertSubscriptionFromPolar(sub: PolarSubscription) {
 
         priceAmount: price?.priceAmount ?? 0,
         currency: price?.priceCurrency ?? "usd",
-
-        isTrial: sub.status === "trialing",
     },
     create: {
         userId,
@@ -54,8 +52,6 @@ export async function upsertSubscriptionFromPolar(sub: PolarSubscription) {
 
         priceAmount: price?.priceAmount ?? 0,
         currency: price?.priceCurrency ?? "usd",
-
-        isTrial: sub.status === "trialing",
     },
   });
 }

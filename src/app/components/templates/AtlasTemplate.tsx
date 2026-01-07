@@ -204,10 +204,9 @@ export default function AtlasTemplate({
                         {resumeData.showSkillMeter && (
                           <div className="w-full h-1 bg-gray-200 mt-1">
                             <div
-                              className="h-1 transition-all"
+                              className="h-1 bg-gray-700 transition-all"
                               style={{
                                 width,
-                                backgroundColor: data.accentColor,
                               }}
                             />
                           </div>
@@ -234,10 +233,9 @@ export default function AtlasTemplate({
                         {resumeData.showLanguageMeter && (
                           <div className="w-full h-1 bg-gray-200 mt-1">
                             <div
-                              className="h-1 transition-all"
+                              className="h-1 bg-gray-700 transition-all"
                               style={{
                                 width,
-                                backgroundColor: data.accentColor,
                               }}
                             />
                           </div>

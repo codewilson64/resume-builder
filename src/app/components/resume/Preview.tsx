@@ -44,6 +44,7 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
   const handlePrintBase = useReactToPrint({
     contentRef: printRef,
     documentTitle: `${resumeData?.firstName || "resume"}`,
+    // preserveAfterPrint: true,
   });
 
   // Download

@@ -186,7 +186,6 @@ exports.Prisma.SubscriptionScalarFieldEnum = {
   intervalCount: 'intervalCount',
   priceAmount: 'priceAmount',
   currency: 'currency',
-  isTrial: 'isTrial',
   productId: 'productId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

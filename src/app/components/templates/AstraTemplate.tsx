@@ -104,10 +104,9 @@ export default function AstraTemplate({
                           {resumeData.showSkillMeter && (
                             <div className="w-3/4 h-1 bg-gray-200">
                               <div
-                                className="h-1 transition-all"
+                                className="h-1 bg-gray-700 transition-all"
                                 style={{
                                   width,
-                                  backgroundColor: data.accentColor,
                                 }}
                               />
                             </div>
@@ -190,10 +189,9 @@ export default function AstraTemplate({
                           {resumeData.showLanguageMeter && (
                             <div className="w-3/4 h-1 bg-gray-200">
                               <div
-                                className="h-1 transition-all"
+                                className="h-1 bg-gray-700 transition-all"
                                 style={{
                                   width,
-                                  backgroundColor: data.accentColor,
                                 }}
                               />
                             </div>

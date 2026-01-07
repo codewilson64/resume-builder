@@ -105,7 +105,6 @@ model Subscription {
   intervalCount      Int
   priceAmount        Int
   currency           String
-  isTrial            Boolean
   productId          String
 
   createdAt          DateTime @default(now())
