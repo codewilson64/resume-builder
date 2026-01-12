@@ -298,30 +298,42 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
               <div
                 className={`mt-5 grid grid-cols-2 ${
                   resumeData.showSkillMeter ? "gap-5" : "gap-2"
-                } text-xs uppercase text-gray-700`}
+                } text-xs text-gray-700`}
               >
                 {data.skills.map(skill => {
-                  const width = skillWidths[skill.level] || "40%"
+                  const width = skillWidths[skill.level] || "40%";
 
-                  return (
+                  return resumeData.showSkillMeter ? (
+                    /* ===== Meter ON ===== */
                     <div key={skill.id}>
                       <span className="block mb-1">
                         {skill.skillName}
                       </span>
 
-                      {resumeData.showSkillMeter && (
-                        <div className="w-full h-1.5 bg-gray-200">
-                          <div
-                            className="h-1.5"
-                            style={{
-                              width,
-                              backgroundColor: data.accentColor,
-                            }}
-                          />
-                        </div>
-                      )}
+                      <div className="w-full h-1.5 bg-gray-200">
+                        <div
+                          className="h-1.5"
+                          style={{
+                            width,
+                            backgroundColor: data.accentColor,
+                          }}
+                        />
+                      </div>
                     </div>
-                  )
+                  ) : (
+                    /* ===== Meter OFF (bullets, still 2 cols) ===== */
+                    <div key={skill.id} className="flex items-start gap-2">
+                      <span
+                        className="text-lg leading-none"
+                        style={{ color: data.accentColor }}
+                      >
+                        •
+                      </span>
+                      <span>
+                        {skill.skillName}
+                      </span>
+                    </div>
+                  );
                 })}
               </div>
             </MainBlock>
@@ -330,7 +342,7 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
           {/* HOBBIES */}
           {data?.hobbies && (
             <MainBlock title="Hobbies" color={data.accentColor}>
-              <div className="flex flex-wrap gap-3 mt-4 text-xs uppercase text-gray-600">
+              <div className="flex flex-wrap gap-3 mt-4 text-xs text-gray-600">
                 {data.hobbies.split(",").map((hobby, i) => (
                   <span key={i}>{hobby.trim()}</span>
                 ))}

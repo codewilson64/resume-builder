@@ -109,34 +109,44 @@ export default function NordicSlateTemplate({
             {/* LANGUAGES */}
             {data.languages?.length > 0 && (
               <Block title="Languages" color={data.accentColor}>
-                <div className="space-y-3 text-xs">
-                {data.languages
-                    .filter((lang) => lang.name?.trim())
-                    .map((lang) => {
-                    const width = languageWidths[lang.level] || "40%";
+                <div
+                  className={`text-xs ${
+                    resumeData.showLanguageMeter ? "space-y-3" : "space-y-2"
+                  }`}
+                >
+                  {data.languages
+                    .filter(lang => lang.name?.trim())
+                    .map(lang => {
+                      const width = languageWidths[lang.level] || "40%";
 
-                    return (
-                      <div key={lang.id}>
-                        {/* Skill Name */}
-                        <span className="block mb-1 text-black">
-                          {lang.name}
-                        </span>
+                      return (
+                        <div key={lang.id} className="flex items-start gap-2">
+                          {!resumeData.showLanguageMeter && (
+                            <span className="text-black text-lg leading-none">
+                              •
+                            </span>
+                          )}
 
-                        {/* Skill Meter */}
-                        {resumeData.showLanguageMeter && (
-                          <div className="w-3/4 h-1 bg-gray-200">
-                            <div
-                              className="h-1 bg-gray-700 transition-all"
-                              style={{
-                                  width,
-                              }}
-                            />
+                          <div className="w-full">
+                            {/* Language name */}
+                            <span className="block text-gray-700">
+                              {lang.name}
+                            </span>
+
+                            {/* Language meter when enabled */}
+                            {resumeData.showLanguageMeter && (
+                              <div className="mt-1 w-3/4 h-1 bg-gray-200">
+                                <div
+                                  className="h-1 bg-gray-800 transition-all"
+                                  style={{ width }}
+                                />
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </div>
-                    );
-                })}
-              </div>
+                        </div>
+                      );
+                    })}
+                </div>
               </Block>
             )}
 
@@ -261,36 +271,44 @@ export default function NordicSlateTemplate({
 
             {/* SKILLS */}
             {data.skills?.length > 0 && (
-            <Block title="Skills" color={data.accentColor}>
-              <div className={`grid grid-cols-2 text-xs ${resumeData.showSkillMeter ? 'gap-y-4' : 'gap-y-2'}`}>
-                {data.skills
-                    .filter((skill) => skill.skillName?.trim())
-                    .map((skill) => {
-                    const width = skillWidths[skill.level] || "40%";
+              <Block title="Skills" color={data.accentColor}>
+                <div
+                  className={`grid grid-cols-2 text-xs ${
+                    resumeData.showSkillMeter ? "gap-y-4" : "gap-y-2"
+                  }`}
+                >
+                  {data.skills
+                    .filter(skill => skill.skillName?.trim())
+                    .map(skill => {
+                      const width = skillWidths[skill.level] || "40%";
 
-                    return (
-                      <div key={skill.id}>
-                        {/* Skill Name */}
-                        <span className="block mb-1 text-black">
-                            {skill.skillName}
-                        </span>
+                      return (
+                        <div key={skill.id} className="flex items-start gap-2">
+                          {!resumeData.showSkillMeter && (
+                            <span className="text-lg text-black leading-none">•</span>
+                          )}
 
-                        {/* Skill Meter */}
-                        {resumeData.showSkillMeter && (
-                        <div className="w-3/4 h-1 bg-gray-200">
-                          <div
-                            className="h-1 bg-gray-700 transition-all"
-                            style={{
-                              width,
-                            }}
-                          />
+                          <div className="w-full">
+                            {/* Skill name */}
+                            <span className="block text-gray-700">
+                              {skill.skillName}
+                            </span>
+
+                            {/* Skill meter when enabled */}
+                            {resumeData.showSkillMeter && (
+                              <div className="w-3/4 mt-1 h-1 bg-gray-200">
+                                <div
+                                  className="h-1 bg-gray-800 transition-all"
+                                  style={{ width }}
+                                />
+                              </div>
+                            )}
+                          </div>
                         </div>
-                        )}
-                      </div>
-                    );
-                })}
-              </div>
-            </Block>
+                      );
+                    })}
+                </div>
+              </Block>
             )}
 
             {/* HOBBIES */}

@@ -192,28 +192,36 @@ export default function AtlasTemplate({
             )}
 
             {/* SKILLS */}
-            {data.skills?.length > 0 && (
+           {data.skills?.length > 0 && (
               <Block title="Skills">
                 {data.skills
                   .filter(skill => skill.skillName?.trim())
                   .map(skill => {
                     const width = skillWidths[skill.level] || "40%";
 
-                    return (
-                      <div key={skill.id} className={`${resumeData.showSkillMeter ? 'mb-3' : 'mb-1'}`}>
-                        <span className="text-xs">
+                    return resumeData.showSkillMeter ? (
+                      /* ===== Meter ON ===== */
+                      <div key={skill.id} className="mb-3">
+                        <span className="text-xs text-black">
                           {skill.skillName}
                         </span>
-                        {resumeData.showSkillMeter && (
-                          <div className="w-2/3 h-1 bg-gray-200 mt-1">
-                            <div
-                              className="h-1 bg-gray-700 transition-all"
-                              style={{
-                                width,
-                              }}
-                            />
-                          </div>
-                        )}
+
+                        <div className="w-2/3 h-1 bg-gray-200 mt-1">
+                          <div
+                            className="h-1 bg-gray-700 transition-all"
+                            style={{ width }}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      /* ===== Meter OFF (bullets) ===== */
+                      <div key={skill.id} className="mb-1 flex items-start gap-2">
+                        <span className="text-black text-lg leading-none">
+                          •
+                        </span>
+                        <span className="text-xs text-black">
+                          {skill.skillName}
+                        </span>
                       </div>
                     );
                   })}
@@ -228,21 +236,29 @@ export default function AtlasTemplate({
                   .map(lang => {
                     const width = languageWidths[lang.level] || "40%";
 
-                    return (
-                      <div key={lang.id} className={`${resumeData.showLanguageMeter ? 'mb-3' : 'mb-1'}`}>
-                        <span className="text-xs">
+                    return resumeData.showLanguageMeter ? (
+                      /* ===== Meter ON ===== */
+                      <div key={lang.id} className="mb-3">
+                        <span className="text-xs text-black">
                           {lang.name}
                         </span>
-                        {resumeData.showLanguageMeter && (
-                          <div className="w-2/3 h-1 bg-gray-200 mt-1">
-                            <div
-                              className="h-1 bg-gray-700 transition-all"
-                              style={{
-                                width,
-                              }}
-                            />
-                          </div>
-                        )}
+
+                        <div className="w-2/3 h-1 bg-gray-200 mt-1">
+                          <div
+                            className="h-1 bg-gray-700 transition-all"
+                            style={{ width }}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      /* ===== Meter OFF (bullets) ===== */
+                      <div key={lang.id} className="mb-1 flex items-start gap-2">
+                        <span className="text-black text-lg leading-none">
+                          •
+                        </span>
+                        <span className="text-xs text-black">
+                          {lang.name}
+                        </span>
                       </div>
                     );
                   })}

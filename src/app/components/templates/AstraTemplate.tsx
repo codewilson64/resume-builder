@@ -91,33 +91,46 @@ export default function AstraTemplate({
             {/* ================= SKILLS ================= */}
             {data.skills?.length > 0 && (
               <Block title="Skills">
-                <div className={`grid grid-cols-2 ${resumeData.showSkillMeter ? 'gap-y-4' : 'gap-y-2'}`}>
+                <div
+                  className={`grid grid-cols-2 ${
+                    resumeData.showSkillMeter ? "gap-y-4" : "gap-y-2"
+                  }`}
+                >
                   {data.skills
                     .filter(s => s.skillName?.trim())
                     .map(skill => {
                       const width = skillWidths[skill.level] || "40%";
-  
-                      return (
+
+                      return resumeData.showSkillMeter ? (
+                        /* ===== Meter ON ===== */
                         <div key={skill.id}>
-                          <span className="text-xs block mb-1">
+                          <span className="text-xs block mb-1 text-black">
                             {skill.skillName}
                           </span>
-                          {resumeData.showSkillMeter && (
-                            <div className="w-3/4 h-1 bg-gray-200">
-                              <div
-                                className="h-1 bg-gray-700 transition-all"
-                                style={{
-                                  width,
-                                }}
-                              />
-                            </div>
-                          )}
+
+                          <div className="w-3/4 h-1 bg-gray-200">
+                            <div
+                              className="h-1 bg-gray-700 transition-all"
+                              style={{ width }}
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        /* ===== Meter OFF (bullets) ===== */
+                        <div key={skill.id} className="flex items-start gap-2">
+                          <span className="text-black text-lg leading-none">
+                            •
+                          </span>
+                          <span className="text-xs text-black">
+                            {skill.skillName}
+                          </span>
                         </div>
                       );
                     })}
                 </div>
               </Block>
             )}
+
   
             {/* ================= EXPERIENCE ================= */}
             {data.experience?.length > 0 && (
@@ -178,33 +191,48 @@ export default function AstraTemplate({
             {/* ================= LANGUAGES (BOTTOM) ================= */}
             {data.languages?.length > 0 && (
               <Block title="Languages">
-                <div className={`grid grid-cols-2 ${resumeData.showLanguageMeter ? 'gap-y-4' : 'gap-y-2'}`}>
+                <div
+                  className={
+                    resumeData.showLanguageMeter
+                      ? "grid grid-cols-2 gap-y-4"
+                      : "space-y-2"
+                  }
+                >
                   {data.languages
                     .filter(l => l.name?.trim())
                     .map(lang => {
                       const width = languageWidths[lang.level] || "40%";
-  
-                      return (
+
+                      return resumeData.showLanguageMeter ? (
+                        /* ===== Meter ON (2-column grid) ===== */
                         <div key={lang.id}>
-                          <span className="text-xs block mb-1">
+                          <span className="text-xs block mb-1 text-black">
                             {lang.name}
                           </span>
-                          {resumeData.showLanguageMeter && (
-                            <div className="w-3/4 h-1 bg-gray-200">
-                              <div
-                                className="h-1 bg-gray-700 transition-all"
-                                style={{
-                                  width,
-                                }}
-                              />
-                            </div>
-                          )}
+
+                          <div className="w-3/4 h-1 bg-gray-200">
+                            <div
+                              className="h-1 bg-gray-700 transition-all"
+                              style={{ width }}
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        /* ===== Meter OFF (block list with bullets) ===== */
+                        <div key={lang.id} className="flex items-start gap-2">
+                          <span className="text-black text-lg leading-none">
+                            •
+                          </span>
+                          <span className="text-xs text-black">
+                            {lang.name}
+                          </span>
                         </div>
                       );
                     })}
                 </div>
               </Block>
             )}
+
 
             {/* ================= SOCIAL LINKS (TOP) ================= */}
             {data.socialLinks?.length > 0 && (
@@ -226,6 +254,7 @@ export default function AstraTemplate({
               </Block>
             )}
 
+            {/* ================= PERSONAL DETAILS ================= */}
             {(data.nationality || data.dateOfBirth || data.maritalStatus) && (
             <Block title="Personal Details">
                 <div className="flex flex-col space-y-2 text-xs">

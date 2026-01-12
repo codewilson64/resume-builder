@@ -159,30 +159,40 @@ export default function AuroraTemplate({
           {/* ================= SKILLS ================= */}
           {data.skills?.length > 0 && (
             <Block title="Skills">
-              <div className={`grid grid-cols-3 ${resumeData.showSkillMeter ? 'gap-y-4' : 'gap-y-2'}`}>
+              <div
+                className={`grid grid-cols-3 ${
+                  resumeData.showSkillMeter ? "gap-y-4" : "gap-y-2"
+                }`}
+              >
                 {data.skills
                   .filter(skill => skill.skillName?.trim())
                   .map(skill => {
                     const width = skillWidths[skill.level] || "40%";
 
                     return (
-                      <div key={skill.id}>
-                        {/* Skill Name */}
-                        <span className="block mb-1 text-black text-sm">
-                            {skill.skillName}
-                        </span>
-
-                        {/* Skill Meter */}
-                        {resumeData.showSkillMeter && (
-                          <div className="w-3/4 h-1 bg-gray-200">
-                            <div
-                            className="h-1 bg-gray-700 transition-all"
-                            style={{
-                                width,
-                            }}
-                            />
-                          </div>
+                      <div key={skill.id} className="flex items-start gap-2">
+                        {!resumeData.showSkillMeter && (
+                          <span className="text-black text-lg leading-none">
+                            •
+                          </span>
                         )}
+
+                        <div className="w-full">
+                          {/* Skill name */}
+                          <span className="block text-black text-sm">
+                            {skill.skillName}
+                          </span>
+
+                          {/* Skill meter when enabled */}
+                          {resumeData.showSkillMeter && (
+                            <div className="mt-1 w-3/4 h-1 bg-gray-200">
+                              <div
+                                className="h-1 bg-gray-700 transition-all"
+                                style={{ width }}
+                              />
+                            </div>
+                          )}
+                        </div>
                       </div>
                     );
                   })}
@@ -190,39 +200,52 @@ export default function AuroraTemplate({
             </Block>
           )}
 
+
           {/* ================= LANGUAGES ================= */}
           {data.languages?.length > 0 && (
             <Block title="Languages">
-              <div className={`grid grid-cols-3 ${resumeData.showLanguageMeter ? 'gap-y-4' : 'gap-y-2'}`}>
+              <div
+                className={
+                  resumeData.showLanguageMeter
+                    ? "grid grid-cols-3 gap-y-4"
+                    : "space-y-2"
+                }
+              >
                 {data.languages
                   .filter(lang => lang.name?.trim())
                   .map(lang => {
                     const width = languageWidths[lang.level] || "40%";
 
-                    return (
+                    return resumeData.showLanguageMeter ? (
+                      /* ===== Meter ON (grid) ===== */
                       <div key={lang.id}>
-                        {/* Skill Name */}
                         <span className="block mb-1 text-black text-sm">
-                            {lang.name}
+                          {lang.name}
                         </span>
 
-                        {/* Skill Meter */}
-                        {resumeData.showLanguageMeter && (
-                          <div className="w-3/4 h-1 bg-gray-200">
-                            <div
+                        <div className="w-3/4 h-1 bg-gray-200">
+                          <div
                             className="h-1 bg-gray-700 transition-all"
-                            style={{
-                                width,
-                            }}
-                            />
-                          </div>
-                        )}
+                            style={{ width }}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      /* ===== Meter OFF (block list with bullets) ===== */
+                      <div key={lang.id} className="flex items-start gap-2">
+                        <span className="mt-[1px] text-black text-lg leading-none">
+                          •
+                        </span>
+                        <span className="text-black text-sm">
+                          {lang.name}
+                        </span>
                       </div>
                     );
                   })}
               </div>
             </Block>
           )}
+
 
           {/* ================= PERSONAL DETAILS ================= */}
           {(data.dateOfBirth || data.nationality || data.maritalStatus) && (
