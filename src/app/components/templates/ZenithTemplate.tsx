@@ -164,9 +164,7 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
             </h1>
 
             {data.jobTitle && (
-              <p
-                className="mt-2 text-sm uppercase tracking-widest"
-              >
+              <p className="mt-2 text-sm uppercase tracking-widest">
                 {data.jobTitle}
               </p>
             )}
@@ -174,9 +172,10 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
             <div className="mt-4 flex flex-wrap gap-6 text-xs text-gray-600">
               {data.about && (
                 <Block title="About Me">
-                  <p className="text-xs leading-relaxed">
-                    {data.about}
-                  </p>
+                  <div
+                    className="prose prose-sm max-w-none text-xs leading-relaxed prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                    dangerouslySetInnerHTML={{ __html: data.about }}
+                  />
                 </Block>
               )}
             </div>
@@ -195,7 +194,10 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
                       {exp.current ? "Present" : formatDate(exp.endDate)}
                     </p>
                     {exp.description && (
-                      <p className="text-xs mt-1">{exp.description}</p>
+                      <div
+                        className="prose prose-sm max-w-none text-xs leading-relaxed mt-1 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                        dangerouslySetInnerHTML={{ __html: exp.description }}
+                      />
                     )}
                   </div>
                 ))}
@@ -215,7 +217,10 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
                       {formatDate(edu.graduationDate)}
                     </p>
                     {edu.description && (
-                      <p className="text-xs mt-1">{edu.description}</p>
+                      <div
+                        className="prose prose-sm max-w-none text-xs leading-relaxed mt-1 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                        dangerouslySetInnerHTML={{ __html: edu.description }}
+                      />
                     )}
                   </div>
                 ))}

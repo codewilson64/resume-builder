@@ -81,9 +81,10 @@ export default function AuroraTemplate({
           {/* ================= PROFILE ================= */}
           {data.about && (
             <Block title="Summary">
-              <p className="text-sm leading-relaxed">
-                {data.about}
-              </p>
+              <div
+                className="prose prose-sm max-w-none text-gray-900 text-sm mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                dangerouslySetInnerHTML={{ __html: data.about }}
+              />
             </Block>
           )}
 
@@ -108,9 +109,10 @@ export default function AuroraTemplate({
                       </div>
 
                       {exp.description && (
-                        <p className="text-sm mt-2">
-                          {exp.description}
-                        </p>
+                        <div
+                          className="prose prose-sm max-w-none text-gray-900 text-sm mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                          dangerouslySetInnerHTML={{ __html: exp.description }}
+                        />
                       )}
                     </div>
                   ))}
@@ -143,9 +145,10 @@ export default function AuroraTemplate({
                       </div>
 
                       {edu.description && (
-                        <p className="text-sm mt-2">
-                          {edu.description}
-                        </p>
+                        <div
+                          className="prose prose-sm max-w-none text-gray-900 text-sm mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                          dangerouslySetInnerHTML={{ __html: edu.description }}
+                        />
                       )}
                     </div>
                   ))}

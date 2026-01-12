@@ -3,6 +3,7 @@
 import { ChevronDown, ChevronUp, Trash } from "lucide-react";
 import { useResume } from "../../context/ResumeContext";
 import { EducationItem } from "@/app/types/resume";
+import TextEditor from "../TextEditor";
 
 export default function EducationForm() {
   const { resumeData, setResumeData } = useResume();
@@ -143,18 +144,14 @@ export default function EducationForm() {
 
               {/* Description */}
               <div>
-                <label className="text-sm font-medium text-gray-700">
-                  Description 
-                </label>
-                <textarea
-                  rows={4}
-                  className="input resize-none"
-                  placeholder="Key coursework, projects, or academic achievements..."
+                <TextEditor
+                  label="Description"
                   value={edu.description}
-                  onChange={(e) =>
-                    updateField(edu.id, "description", e.target.value)
+                  placeholder="Key coursework, projects, or academic achievements..."
+                  onChange={(html) =>
+                    updateField(edu.id, "description", html)
                   }
-                ></textarea>
+                />
               </div>
             </div>
           )}

@@ -79,44 +79,41 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
             {/* CONTACTS */}
             {(data.phone || data.email || data.address || data.city) && (
               <Block title="Contacts" color={data.accentColor}>
-              {data?.phone && (
-                <div className="grid grid-cols-[20px_1fr] gap-3 text-xs">
-                  <Phone size={14} className="mt-1" />
-                  <span className="break-all">{data.phone}</span>
-                </div>
-              )}
-            
-              {data?.email && (
-                <div className="grid grid-cols-[20px_1fr] gap-3 text-xs">
-                  <Mail size={14} className="mt-1" />
-                  <span className="break-all">{data.email}</span>
-                </div>
-              )}
-            
-              {(data?.address || data?.city || data?.postalCode) && (
-                <div className="grid grid-cols-[20px_1fr] gap-3 text-xs border-b border-black pb-6">
-                  <MapPin size={14} className="mt-1" />
-                  <span className="break-all">
-                    {data.address}
-                    {data.city ? `, ${data.city}` : ""}
-                    {data.postalCode ? `, ${data.postalCode}` : ""}
-                  </span>
-                </div>
-              )}
+                <div className="space-y-1 border-b border-black pb-6">
+                  {(data?.address || data?.city || data?.postalCode) && (
+                    <div className="text-xs ">
+                      <span className="break-all">
+                        {data.address}
+                        {data.city ? `, ${data.city}` : ""}
+                        {data.postalCode ? `, ${data.postalCode}` : ""}
+                      </span>
+                    </div>
+                  )}
+                  {data?.email && (
+                    <div className="text-xs">
+                      <span className="break-all">{data.email}</span>
+                    </div>
+                  )}
+                  {data?.phone && (
+                    <div className="text-xs">
+                      <span className="break-all">{data.phone}</span>
+                    </div>
+                  )}               
+              </div>
             </Block>        
             )}
 
             {/* LINKS */}
             {data?.socialLinks?.length > 0 && (
               <Block title="Links" color={data.accentColor}>
-              <ul className="space-y-2 text-xs border-b border-black pb-6">
+              <div className="space-y-3 text-xs border-b border-black pb-6">
                 {data.socialLinks.map((link) => (
-                  <li key={link.id}>
-                    <span className="font-semibold">{link.label}: </span>
+                  <p key={link.id}>
+                    <span className="font-semibold block">{link.label}: </span>
                     <span className="text-gray-600">{link.url}</span>
-                  </li>
+                  </p>
                 ))}
-              </ul>
+              </div>
             </Block>            
             )}
 
@@ -185,9 +182,10 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
             {/* ABOUT */}
             {data?.about && (
               <Block title="About Me" color={data.accentColor}>
-                <p className="text-xs leading-relaxed border-b border-black pb-6">
-                  {data.about}
-                </p>
+                <div
+                  className="prose prose-sm max-w-none text-gray-600 text-xs leading-relaxed border-b border-black pb-6 mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                  dangerouslySetInnerHTML={{ __html: data.about }}
+                />
               </Block>            
             )}
 
@@ -218,7 +216,10 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
                           )}
 
                           {exp.description && (
-                            <p className="text-xs mt-1">{exp.description}</p>
+                            <div
+                              className="prose prose-sm max-w-none text-gray-700 text-xs mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-1"
+                              dangerouslySetInnerHTML={{ __html: exp.description }}
+                            />
                           )}
                         </div>
                       );
@@ -253,7 +254,10 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
                           )}
 
                           {edu.description && (
-                            <p className="text-xs mt-1">{edu.description}</p>
+                            <div
+                              className="prose prose-sm max-w-none text-gray-700 text-xs mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-1"
+                              dangerouslySetInnerHTML={{ __html: edu.description }}
+                            />
                           )}
                         </div>
                       );

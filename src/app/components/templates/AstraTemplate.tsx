@@ -81,9 +81,10 @@ export default function AstraTemplate({
             {/* ================= SUMMARY ================= */}
             {data.about && (
               <Block title="Summary">
-                <p className="text-xs leading-relaxed text-gray-800">
-                  {data.about}
-                </p>
+                <div
+                  className="prose prose-sm max-w-none text-gray-800 text-xs leading-relaxed prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                  dangerouslySetInnerHTML={{ __html: data.about }}
+                />
               </Block>
             )}
   
@@ -135,9 +136,10 @@ export default function AstraTemplate({
                       </p>
   
                       {exp.description && (
-                        <p className="text-xs mt-2 text-gray-700 leading-relaxed">
-                          {exp.description}
-                        </p>
+                        <div
+                          className="prose prose-sm max-w-none text-gray-700 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                          dangerouslySetInnerHTML={{ __html: exp.description }}
+                        />
                       )}
                     </div>
                   ))}
@@ -162,9 +164,10 @@ export default function AstraTemplate({
                       </p>
   
                       {edu.description && (
-                        <p className="text-xs mt-2 text-gray-700 leading-relaxed">
-                          {edu.description}
-                        </p>
+                        <div
+                          className="prose prose-sm max-w-none text-gray-700 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                          dangerouslySetInnerHTML={{ __html: edu.description }}
+                        />
                       )}
                     </div>
                   ))}

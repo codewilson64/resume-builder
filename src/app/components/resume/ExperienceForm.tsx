@@ -2,6 +2,7 @@
 import { ChevronDown, ChevronUp, Trash } from "lucide-react";
 import { useResume } from "../../context/ResumeContext";
 import { ExperienceItem } from "@/app/types/resume";
+import TextEditor from "../TextEditor";
 
 export default function ExperienceForm() {
   const { resumeData, setResumeData } = useResume();
@@ -185,7 +186,7 @@ export default function ExperienceForm() {
                 <input
                   type="text"
                   className="input"
-                  placeholder="Jakarta"
+                  placeholder="New York"
                   value={experience.city}
                   onChange={(e) =>
                     updateField(experience.id, "city", e.target.value)
@@ -195,18 +196,14 @@ export default function ExperienceForm() {
 
               {/* Description */}
               <div>
-                <label className="text-sm font-medium text-gray-700">
-                  Job Description 
-                </label>
-                  <textarea
-                    rows={4}
-                    className="input resize-none"
-                    placeholder="Describe your role and achievements..."
-                    value={experience.description}
-                    onChange={(e) =>
-                      updateField(experience.id, "description", e.target.value)
-                    }
-                  ></textarea>
+                <TextEditor
+                  label="Job Description"
+                  value={experience.description}
+                  placeholder="Describe your role and achievements..."
+                  onChange={(html) =>
+                    updateField(experience.id, "description", html)
+                  }
+                />
               </div>
             </div>
           )}

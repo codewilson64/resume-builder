@@ -99,44 +99,11 @@ export default function NordicSlateTemplate({
             {/* PROFILE */}
             {data.about && (
               <Block title="Profile" color={data.accentColor}>
-                <p className="text-xs text-gray-700 leading-relaxed">
-                  {data.about}
-                </p>
+                <div
+                  className="prose prose-sm max-w-none text-gray-700 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                  dangerouslySetInnerHTML={{ __html: data.about }}
+                />
               </Block>
-            )}
-
-            {/* SKILLS */}
-            {data.skills?.length > 0 && (
-            <Block title="Skills" color={data.accentColor}>
-              <div className="space-y-3 text-xs">
-                {data.skills
-                    .filter((skill) => skill.skillName?.trim())
-                    .map((skill) => {
-                    const width = skillWidths[skill.level] || "40%";
-
-                    return (
-                      <div key={skill.id}>
-                        {/* Skill Name */}
-                        <span className="block mb-1 text-black">
-                            {skill.skillName}
-                        </span>
-
-                        {/* Skill Meter */}
-                        {resumeData.showSkillMeter && (
-                        <div className="w-3/4 h-1 bg-gray-200">
-                          <div
-                            className="h-1 bg-gray-700 transition-all"
-                            style={{
-                              width,
-                            }}
-                          />
-                        </div>
-                        )}
-                      </div>
-                    );
-                })}
-              </div>
-            </Block>
             )}
 
             {/* LANGUAGES */}
@@ -242,18 +209,19 @@ export default function NordicSlateTemplate({
                           </p>
                         )}
                         <p className="text-xs text-gray-600">
-                          {exp.company}
+                          {exp.company}, {exp.city}
                           {exp.startDate &&
-                            ` · ${formatDate(exp.startDate)} – ${
+                            ` | ${formatDate(exp.startDate)} – ${
                               exp.current
                                 ? "Present"
                                 : formatDate(exp.endDate)
                             }`}
                         </p>
                         {exp.description && (
-                          <p className="text-xs text-gray-700 mt-2 leading-relaxed">
-                            {exp.description}
-                          </p>
+                          <div
+                            className="prose prose-sm max-w-none text-gray-700 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                            dangerouslySetInnerHTML={{ __html: exp.description }}
+                          />
                         )}
                       </div>
                     ))}
@@ -274,20 +242,55 @@ export default function NordicSlateTemplate({
                         )}
                         {edu.school && (
                             <p className="text-xs text-gray-600">
-                            {edu.school}
+                            {edu.school}, {edu.city}
                             {edu.graduationDate &&
-                                ` · ${formatDate(edu.graduationDate)}`}
+                                ` | ${formatDate(edu.graduationDate)}`}
                             </p>
                         )}
                         {edu.description && (
-                            <p className="text-xs text-gray-700 mt-2 leading-relaxed">
-                            {edu.description}
-                            </p>
+                          <div
+                            className="prose prose-sm max-w-none text-gray-700 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                            dangerouslySetInnerHTML={{ __html: edu.description }}
+                          />
                         )}
                         </div>
                     ))}
                   </div>
               </Block>
+            )}
+
+            {/* SKILLS */}
+            {data.skills?.length > 0 && (
+            <Block title="Skills" color={data.accentColor}>
+              <div className={`grid grid-cols-2 text-xs ${resumeData.showSkillMeter ? 'gap-y-4' : 'gap-y-2'}`}>
+                {data.skills
+                    .filter((skill) => skill.skillName?.trim())
+                    .map((skill) => {
+                    const width = skillWidths[skill.level] || "40%";
+
+                    return (
+                      <div key={skill.id}>
+                        {/* Skill Name */}
+                        <span className="block mb-1 text-black">
+                            {skill.skillName}
+                        </span>
+
+                        {/* Skill Meter */}
+                        {resumeData.showSkillMeter && (
+                        <div className="w-3/4 h-1 bg-gray-200">
+                          <div
+                            className="h-1 bg-gray-700 transition-all"
+                            style={{
+                              width,
+                            }}
+                          />
+                        </div>
+                        )}
+                      </div>
+                    );
+                })}
+              </div>
+            </Block>
             )}
 
             {/* HOBBIES */}

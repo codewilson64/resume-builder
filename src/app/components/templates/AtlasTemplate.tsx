@@ -66,9 +66,10 @@ export default function AtlasTemplate({
             {/* SUMMARY */}
             {data.about && (
               <Block title="Summary">
-                <p className="text-xs leading-relaxed">
-                  {data.about}
-                </p>
+                <div
+                  className="prose prose-sm max-w-none text-gray-900 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                  dangerouslySetInnerHTML={{ __html: data.about }}
+                />
               </Block>
             )}
 
@@ -80,13 +81,13 @@ export default function AtlasTemplate({
                     .filter(e => e.jobTitle || e.company)
                     .map(exp => (
                       <div key={exp.id}>
-                        <div className="flex justify-between items-center">
+                        <div className="flex flex-col">
                           <p className="text-sm font-semibold">
                             {exp.jobTitle}
                             {exp.company && `, ${exp.company}`}
                           </p>
 
-                          <p className="text-xs font-semibold">
+                          <p className="text-xs font-normal">
                             {exp.startDate && formatDate(exp.startDate)}
                             {exp.endDate || exp.current ? " – " : ""}
                             {exp.current ? "Present" : formatDate(exp.endDate)}
@@ -94,9 +95,10 @@ export default function AtlasTemplate({
                         </div>
 
                         {exp.description && (
-                          <p className="text-xs mt-2">
-                            {exp.description}
-                          </p>
+                          <div
+                            className="prose prose-sm max-w-none text-gray-900 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                            dangerouslySetInnerHTML={{ __html: exp.description }}
+                          />
                         )}
                       </div>
                     ))}
@@ -112,23 +114,24 @@ export default function AtlasTemplate({
                     .filter(e => e.degree || e.school)
                     .map(edu => (
                       <div key={edu.id}>
-                        <div className="flex justify-between items-center">
+                        <div className="flex flex-col">
                           <p className="text-sm font-semibold">
                             {edu.degree}
                             {edu.school && `, ${edu.school}`}
                           </p>
 
                           {edu.graduationDate && (
-                            <p className="text-xs font-semibold">
+                            <p className="text-xs font-normal">
                               {formatDate(edu.graduationDate)}
                             </p>
                           )}
                         </div>
 
                         {edu.description && (
-                          <p className="text-xs mt-2">
-                            {edu.description}
-                          </p>
+                          <div
+                            className="prose prose-sm max-w-none text-gray-900 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                            dangerouslySetInnerHTML={{ __html: edu.description }}
+                          />
                         )}
                       </div>
                     ))}
@@ -202,7 +205,7 @@ export default function AtlasTemplate({
                           {skill.skillName}
                         </span>
                         {resumeData.showSkillMeter && (
-                          <div className="w-full h-1 bg-gray-200 mt-1">
+                          <div className="w-2/3 h-1 bg-gray-200 mt-1">
                             <div
                               className="h-1 bg-gray-700 transition-all"
                               style={{
@@ -231,7 +234,7 @@ export default function AtlasTemplate({
                           {lang.name}
                         </span>
                         {resumeData.showLanguageMeter && (
-                          <div className="w-full h-1 bg-gray-200 mt-1">
+                          <div className="w-2/3 h-1 bg-gray-200 mt-1">
                             <div
                               className="h-1 bg-gray-700 transition-all"
                               style={{

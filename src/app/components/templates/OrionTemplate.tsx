@@ -101,10 +101,11 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
 
           {/* ABOUT */}
           {data?.about && (
-            <Block title="About Me" color={data.accentColor}>
-              <p className="text-xs leading-relaxed text-gray-600">
-                {data.about}
-              </p>
+            <Block title="About Me" color={data.accentColor}>          
+              <div
+                className="prose prose-sm max-w-none text-xs leading-relaxed text-gray-600 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                dangerouslySetInnerHTML={{ __html: data.about }}
+              />
             </Block>
           )}
 
@@ -231,9 +232,12 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
                           <p className="text-gray-700 font-semibold text-sm">
                             {e.jobTitle}
                           </p>
-                          <p className="text-xs text-gray-600 mt-1">
-                            {e.description}
-                          </p>
+                          {e.description && (
+                            <div
+                              className="prose prose-sm max-w-none text-gray-600 text-xs mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-1"
+                              dangerouslySetInnerHTML={{ __html: e.description }}
+                            />
+                          )}
                         </div>
                       </div>
                     ))}
@@ -274,9 +278,12 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
                         <p className="text-gray-700 font-semibold text-sm">
                           {edu.degree}
                         </p>
-                        <p className="text-xs text-gray-600 mt-1">
-                          {edu.description}
-                        </p>
+                        {edu.description && (
+                          <div
+                            className="prose prose-sm max-w-none text-gray-600 text-xs mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-1"
+                            dangerouslySetInnerHTML={{ __html: edu.description }}
+                          />
+                        )}
                       </div>
                     </div>
                   ))}
