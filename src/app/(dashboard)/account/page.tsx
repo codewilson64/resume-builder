@@ -111,32 +111,33 @@ export default function AccountPage() {
         ) : (
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-base font-medium">
-                {subscription.planName}
-              </p>
+              <div className="block sm:flex gap-2 items-center mb-5">
+                <p className="text-base font-medium">
+                  {subscription.planName}
+                </p>
 
-              <p className="text-sm text-gray-600">
-                {getStatusLabel(subscription.status)} ·{" "}
-                {getDateLabel(subscription.status, subscription.hasCanceled)}{" "}
-                {subscription.expiresAt
-                  ? new Intl.DateTimeFormat("en-GB", {
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    }).format(new Date(subscription.expiresAt))
-                  : "—"}
-              </p>
+                <p className="text-sm text-gray-600">
+                  {getStatusLabel(subscription.status)} ·{" "}
+                  {getDateLabel(subscription.status, subscription.hasCanceled)}{" "}
+                  {subscription.expiresAt
+                    ? new Intl.DateTimeFormat("en-GB", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      }).format(new Date(subscription.expiresAt))
+                    : "—"}
+                </p>
+              </div>
+
+              <button
+                onClick={handleCancelPlan}
+                disabled={subscription.status === "canceled" || canceling}
+                className="flex items-center gap-2 text-sm font-medium text-red-500 hover:text-red-600 disabled:opacity-50"
+              >
+                {subscription.status === "canceled" ? "Plan canceled" : "Manage subscription"}
+              </button>
 
             </div>
-
-            <button
-              onClick={handleCancelPlan}
-              disabled={subscription.status === "canceled" || canceling}
-              className="flex items-center gap-2 text-sm font-medium text-red-500 disabled:opacity-50"
-            >
-              {subscription.status === "canceled" ? "Plan canceled" : "Manage subscription"}
-            </button>
-
           </div>
         )}
       </div>
