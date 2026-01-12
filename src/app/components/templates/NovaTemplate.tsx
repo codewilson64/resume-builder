@@ -269,16 +269,23 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
             {/* SKILLS (WITH METER BARS) */}
             {data?.skills?.length > 0 && (
               <Block title="Skills" color={data.accentColor}>
-              <div className={`grid grid-cols-2 ${resumeData.showSkillMeter ? 'gap-4' : 'gap-2'} border-b border-black pb-6`}>
-                {data.skills
-                  .filter(skill => skill.skillName?.trim())
-                  .map((skill) => {
-                    const width = skillWidths[skill.level] || "40%";
-            
-                    return (
-                      <div key={skill.id}>
-                        <p className="text-xs font-medium">{skill.skillName}</p>
-                        {resumeData.showSkillMeter && (
+                <div
+                  className={`grid grid-cols-2 ${
+                    resumeData.showSkillMeter ? "gap-4" : "gap-2"
+                  } border-b border-black pb-6`}
+                >
+                  {data.skills
+                    .filter(skill => skill.skillName?.trim())
+                    .map(skill => {
+                      const width = skillWidths[skill.level] || "40%";
+
+                      return resumeData.showSkillMeter ? (
+                        /* ===== Meter ON ===== */
+                        <div key={skill.id}>
+                          <p className="text-xs font-medium">
+                            {skill.skillName}
+                          </p>
+
                           <div className="w-full h-1.5 bg-gray-300 mt-1">
                             <div
                               className="h-1.5"
@@ -288,12 +295,21 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
                               }}
                             />
                           </div>
-                        )}
-                      </div>
-                    );
-                  })}
+                        </div>
+                      ) : (
+                        /* ===== Meter OFF (bullets, still grid-cols-2) ===== */
+                        <div key={skill.id} className="flex items-start gap-2">
+                          <span className="text-lg leading-none text-black">
+                            •
+                          </span>
+                          <p className="text-xs font-medium">
+                            {skill.skillName}
+                          </p>
+                        </div>
+                      );
+                    })}
                 </div>
-            </Block>            
+              </Block>
             )}
 
             {/* HOBBIES */}

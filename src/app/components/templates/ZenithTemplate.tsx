@@ -54,21 +54,21 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
         >
           {/* CONTACT INFO */}
           <Block title="Contact">
-            <section className="flex flex-col gap-2 text-xs text-white">
+            <section className="flex flex-col gap-2 items-start text-xs text-white">
               {data.email && (
-                <div className="flex items-center gap-2">
+                <div className="flex gap-2">
                   <Mail size={13} />
                   {data.email}
                 </div>
               )}
               {data.phone && (
-                <div className="flex items-center gap-2">
+                <div className="flex gap-2">
                   <Phone size={13} />
                   {data.phone}
                 </div>
               )}
               {(data.address || data.city) && (
-                <div className="flex items-center gap-2">
+                <div className="flex gap-2">
                   <MapPin size={13} />
                     <span>
                       {data.address}
@@ -230,25 +230,37 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
 
           {data.skills?.length > 0 && (
             <Block title="Skills">
-              <div className={`grid grid-cols-2 ${resumeData.showSkillMeter ? "gap-4" : "gap-2"}`}>
+              <div
+                className={`grid grid-cols-2 ${
+                  resumeData.showSkillMeter ? "gap-4" : "gap-1"
+                }`}
+              >
                 {data.skills.map(skill => {
                   const width = skillWidths[skill.level] || "40%";
 
-                  return (
+                  return resumeData.showSkillMeter ? (
+                    /* ===== Meter ON ===== */
                     <div key={skill.id}>
                       <p className="text-xs font-medium">
                         {skill.skillName}
                       </p>
-                      {resumeData.showSkillMeter && (
-                        <div className="w-full h-1.5 bg-gray-300 mt-1">
-                          <div
-                            className="h-1.5 bg-gray-700"
-                            style={{
-                              width,
-                            }}
-                          />
-                        </div>
-                      )}
+
+                      <div className="w-full h-1.5 bg-gray-300 mt-1">
+                        <div
+                          className="h-1.5 bg-gray-700"
+                          style={{ width }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    /* ===== Meter OFF (bullets, still grid-cols-2) ===== */
+                    <div key={skill.id} className="flex items-start gap-2">
+                      <span className="text-lg leading-none text-black">
+                        •
+                      </span>
+                      <p className="text-xs font-medium">
+                        {skill.skillName}
+                      </p>
                     </div>
                   );
                 })}
