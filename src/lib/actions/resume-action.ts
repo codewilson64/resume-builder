@@ -75,6 +75,7 @@ export async function createResume(data: ResumeData) {
       fontFamily: data.fontFamily,
       showSkillMeter: data.showSkillMeter,
       showLanguageMeter: data.showLanguageMeter,
+      hideReferences: data.hideReferences,
 
       // EXPERIENCES
       experiences: {
@@ -122,6 +123,16 @@ export async function createResume(data: ResumeData) {
           url: social.url,
         })),
       },
+
+      // REFERENCES 
+      references: {
+        create: data.references.map((ref) => ({
+          fullName: ref.fullName,
+          companyName: ref.companyName,
+          phone: ref.phone,
+          email: ref.email,
+        })),
+      },
     },
   });
 
@@ -157,6 +168,7 @@ export async function updateResume(resumeId: string, data: ResumeData) {
       fontFamily: data.fontFamily,
       showSkillMeter: data.showSkillMeter,
       showLanguageMeter: data.showLanguageMeter,
+      hideReferences: data.hideReferences,
 
       // EXPERIENCES
       experiences: {
@@ -210,6 +222,17 @@ export async function updateResume(resumeId: string, data: ResumeData) {
           url: social.url,
         })),
       },
+
+      // ================= REFERENCES =================
+      references: {
+        deleteMany: {},
+        create: data.references.map((ref) => ({
+          fullName: ref.fullName,
+          companyName: ref.companyName,
+          phone: ref.phone,
+          email: ref.email,
+        })),
+      },
     },
   });
   
@@ -230,6 +253,7 @@ export async function getUserResumes(): Promise<ResumeData[]> {
       skills: true,
       languages: true,
       socialLinks: true,
+      references: true,
     },
   });
   return resumes.map(mapPrismaResumeToResumeData)
@@ -250,6 +274,7 @@ export async function getResumeById(resumeId: string){
         skills: true,
         languages: true,
         socialLinks: true,
+        references: true,
       },
     });
 

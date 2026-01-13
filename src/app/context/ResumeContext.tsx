@@ -38,6 +38,7 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
     skills: [],
     languages: [],
     socialLinks: [],
+    references: [],
     about: "",
     hobbies: "",
     template: "Orion",
@@ -45,6 +46,7 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
     fontFamily: "Poppins",
     showSkillMeter: true,
     showLanguageMeter: true,
+    hideReferences: false,
     resumeId: null
   });
 

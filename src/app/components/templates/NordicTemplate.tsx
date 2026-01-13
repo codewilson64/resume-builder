@@ -150,6 +150,43 @@ export default function NordicSlateTemplate({
               </Block>
             )}
 
+            {/* REFERENCES */}
+            {data?.references.length > 0 && (
+              <Block title="References" color={data.accentColor}>
+                {resumeData.hideReferences ? (
+                  <p className="text-xs text-gray-700">
+                    References available upon request
+                  </p>
+                ) : (
+                  <div className="space-y-3">
+                    {data.references.map((ref) => (
+                      <div key={ref.id} className="text-xs text-gray-700 space-y-1">
+                        <p className="font-semibold">
+                          {ref.fullName}
+                        </p>
+
+                        {ref.companyName && (
+                          <p>{ref.companyName}</p>
+                        )}
+
+                        {(ref.phone) && (
+                          <p className="text-[11px]">
+                            {ref.phone}
+                          </p>
+                        )}
+
+                        {(ref.email) && (
+                          <p className="text-[11px]">
+                            {ref.email}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </Block>
+            )}
+
             {/* SOCIAL LINKS */}
             {data.socialLinks?.length > 0 && (
               <Block title="Social Links" color={data.accentColor}>

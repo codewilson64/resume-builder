@@ -131,7 +131,6 @@ export default function AstraTemplate({
               </Block>
             )}
 
-  
             {/* ================= EXPERIENCE ================= */}
             {data.experience?.length > 0 && (
               <Block title="Experience">
@@ -233,7 +232,6 @@ export default function AstraTemplate({
               </Block>
             )}
 
-
             {/* ================= SOCIAL LINKS (TOP) ================= */}
             {data.socialLinks?.length > 0 && (
               <Block title="Social Links">
@@ -280,6 +278,43 @@ export default function AstraTemplate({
                 )}
                 </div>
             </Block>
+            )}
+
+            {/* REFERENCES */}
+            {data?.references.length > 0 && (
+              <Block title="References">
+                {resumeData.hideReferences ? (
+                  <p className="text-xs">
+                    References available upon request
+                  </p>
+                ) : (
+                  <div className="space-y-3">
+                    {data.references.map((ref) => (
+                      <div key={ref.id} className="text-xs space-y-1">
+                        <p className="font-semibold">
+                          {ref.fullName}
+                        </p>
+
+                        {ref.companyName && (
+                          <p>{ref.companyName}</p>
+                        )}
+
+                        {(ref.phone) && (
+                          <p className="text-[11px]">
+                            {ref.phone}
+                          </p>
+                        )}
+
+                        {(ref.email) && (
+                          <p className="text-[11px]">
+                            {ref.email}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </Block>
             )}
 
             {/* ================= HOBBIES (BOTTOM) ================= */}

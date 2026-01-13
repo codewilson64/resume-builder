@@ -73,6 +73,11 @@ export type Language = $Result.DefaultSelection<Prisma.$LanguagePayload>
  * 
  */
 export type SocialLink = $Result.DefaultSelection<Prisma.$SocialLinkPayload>
+/**
+ * Model Reference
+ * 
+ */
+export type Reference = $Result.DefaultSelection<Prisma.$ReferencePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -310,6 +315,16 @@ export class PrismaClient<
     * ```
     */
   get socialLink(): Prisma.SocialLinkDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.reference`: Exposes CRUD operations for the **Reference** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more References
+    * const references = await prisma.reference.findMany()
+    * ```
+    */
+  get reference(): Prisma.ReferenceDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -360,8 +375,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 7.1.0
-   * Query Engine version: ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba
+   * Prisma Client JS version: 7.2.0
+   * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
    */
   export type PrismaVersion = {
     client: string
@@ -755,7 +770,8 @@ export namespace Prisma {
     Education: 'Education',
     Skill: 'Skill',
     Language: 'Language',
-    SocialLink: 'SocialLink'
+    SocialLink: 'SocialLink',
+    Reference: 'Reference'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -771,7 +787,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "guest" | "user" | "session" | "account" | "verification" | "subscription" | "resume" | "experience" | "education" | "skill" | "language" | "socialLink"
+      modelProps: "guest" | "user" | "session" | "account" | "verification" | "subscription" | "resume" | "experience" | "education" | "skill" | "language" | "socialLink" | "reference"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1663,6 +1679,80 @@ export namespace Prisma {
           }
         }
       }
+      Reference: {
+        payload: Prisma.$ReferencePayload<ExtArgs>
+        fields: Prisma.ReferenceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReferenceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReferenceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>
+          }
+          findFirst: {
+            args: Prisma.ReferenceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReferenceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>
+          }
+          findMany: {
+            args: Prisma.ReferenceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>[]
+          }
+          create: {
+            args: Prisma.ReferenceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>
+          }
+          createMany: {
+            args: Prisma.ReferenceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReferenceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>[]
+          }
+          delete: {
+            args: Prisma.ReferenceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>
+          }
+          update: {
+            args: Prisma.ReferenceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>
+          }
+          deleteMany: {
+            args: Prisma.ReferenceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReferenceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReferenceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>[]
+          }
+          upsert: {
+            args: Prisma.ReferenceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReferencePayload>
+          }
+          aggregate: {
+            args: Prisma.ReferenceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReference>
+          }
+          groupBy: {
+            args: Prisma.ReferenceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReferenceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReferenceCountArgs<ExtArgs>
+            result: $Utils.Optional<ReferenceCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1783,6 +1873,7 @@ export namespace Prisma {
     skill?: SkillOmit
     language?: LanguageOmit
     socialLink?: SocialLinkOmit
+    reference?: ReferenceOmit
   }
 
   /* Types for Logging */
@@ -1957,6 +2048,7 @@ export namespace Prisma {
     skills: number
     languages: number
     socialLinks: number
+    references: number
   }
 
   export type ResumeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1965,6 +2057,7 @@ export namespace Prisma {
     skills?: boolean | ResumeCountOutputTypeCountSkillsArgs
     languages?: boolean | ResumeCountOutputTypeCountLanguagesArgs
     socialLinks?: boolean | ResumeCountOutputTypeCountSocialLinksArgs
+    references?: boolean | ResumeCountOutputTypeCountReferencesArgs
   }
 
   // Custom InputTypes
@@ -2011,6 +2104,13 @@ export namespace Prisma {
    */
   export type ResumeCountOutputTypeCountSocialLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SocialLinkWhereInput
+  }
+
+  /**
+   * ResumeCountOutputType without action
+   */
+  export type ResumeCountOutputTypeCountReferencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReferenceWhereInput
   }
 
 
@@ -8802,6 +8902,7 @@ export namespace Prisma {
     hobbies: string | null
     showSkillMeter: boolean | null
     showLanguageMeter: boolean | null
+    hideReferences: boolean | null
   }
 
   export type ResumeMaxAggregateOutputType = {
@@ -8829,6 +8930,7 @@ export namespace Prisma {
     hobbies: string | null
     showSkillMeter: boolean | null
     showLanguageMeter: boolean | null
+    hideReferences: boolean | null
   }
 
   export type ResumeCountAggregateOutputType = {
@@ -8856,6 +8958,7 @@ export namespace Prisma {
     hobbies: number
     showSkillMeter: number
     showLanguageMeter: number
+    hideReferences: number
     _all: number
   }
 
@@ -8885,6 +8988,7 @@ export namespace Prisma {
     hobbies?: true
     showSkillMeter?: true
     showLanguageMeter?: true
+    hideReferences?: true
   }
 
   export type ResumeMaxAggregateInputType = {
@@ -8912,6 +9016,7 @@ export namespace Prisma {
     hobbies?: true
     showSkillMeter?: true
     showLanguageMeter?: true
+    hideReferences?: true
   }
 
   export type ResumeCountAggregateInputType = {
@@ -8939,6 +9044,7 @@ export namespace Prisma {
     hobbies?: true
     showSkillMeter?: true
     showLanguageMeter?: true
+    hideReferences?: true
     _all?: true
   }
 
@@ -9039,6 +9145,7 @@ export namespace Prisma {
     hobbies: string | null
     showSkillMeter: boolean
     showLanguageMeter: boolean
+    hideReferences: boolean
     _count: ResumeCountAggregateOutputType | null
     _min: ResumeMinAggregateOutputType | null
     _max: ResumeMaxAggregateOutputType | null
@@ -9083,6 +9190,7 @@ export namespace Prisma {
     hobbies?: boolean
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     guest?: boolean | Resume$guestArgs<ExtArgs>
     user?: boolean | Resume$userArgs<ExtArgs>
     experiences?: boolean | Resume$experiencesArgs<ExtArgs>
@@ -9090,6 +9198,7 @@ export namespace Prisma {
     skills?: boolean | Resume$skillsArgs<ExtArgs>
     languages?: boolean | Resume$languagesArgs<ExtArgs>
     socialLinks?: boolean | Resume$socialLinksArgs<ExtArgs>
+    references?: boolean | Resume$referencesArgs<ExtArgs>
     _count?: boolean | ResumeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
 
@@ -9118,6 +9227,7 @@ export namespace Prisma {
     hobbies?: boolean
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     guest?: boolean | Resume$guestArgs<ExtArgs>
     user?: boolean | Resume$userArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
@@ -9147,6 +9257,7 @@ export namespace Prisma {
     hobbies?: boolean
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     guest?: boolean | Resume$guestArgs<ExtArgs>
     user?: boolean | Resume$userArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
@@ -9176,9 +9287,10 @@ export namespace Prisma {
     hobbies?: boolean
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
   }
 
-  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "guestId" | "userId" | "title" | "firstName" | "lastName" | "email" | "phone" | "address" | "city" | "postalCode" | "dateOfBirth" | "nationality" | "maritalStatus" | "about" | "jobTitle" | "template" | "accentColor" | "fontFamily" | "hobbies" | "showSkillMeter" | "showLanguageMeter", ExtArgs["result"]["resume"]>
+  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "guestId" | "userId" | "title" | "firstName" | "lastName" | "email" | "phone" | "address" | "city" | "postalCode" | "dateOfBirth" | "nationality" | "maritalStatus" | "about" | "jobTitle" | "template" | "accentColor" | "fontFamily" | "hobbies" | "showSkillMeter" | "showLanguageMeter" | "hideReferences", ExtArgs["result"]["resume"]>
   export type ResumeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     guest?: boolean | Resume$guestArgs<ExtArgs>
     user?: boolean | Resume$userArgs<ExtArgs>
@@ -9187,6 +9299,7 @@ export namespace Prisma {
     skills?: boolean | Resume$skillsArgs<ExtArgs>
     languages?: boolean | Resume$languagesArgs<ExtArgs>
     socialLinks?: boolean | Resume$socialLinksArgs<ExtArgs>
+    references?: boolean | Resume$referencesArgs<ExtArgs>
     _count?: boolean | ResumeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ResumeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9208,6 +9321,7 @@ export namespace Prisma {
       skills: Prisma.$SkillPayload<ExtArgs>[]
       languages: Prisma.$LanguagePayload<ExtArgs>[]
       socialLinks: Prisma.$SocialLinkPayload<ExtArgs>[]
+      references: Prisma.$ReferencePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9234,6 +9348,7 @@ export namespace Prisma {
       hobbies: string | null
       showSkillMeter: boolean
       showLanguageMeter: boolean
+      hideReferences: boolean
     }, ExtArgs["result"]["resume"]>
     composites: {}
   }
@@ -9635,6 +9750,7 @@ export namespace Prisma {
     skills<T extends Resume$skillsArgs<ExtArgs> = {}>(args?: Subset<T, Resume$skillsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     languages<T extends Resume$languagesArgs<ExtArgs> = {}>(args?: Subset<T, Resume$languagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     socialLinks<T extends Resume$socialLinksArgs<ExtArgs> = {}>(args?: Subset<T, Resume$socialLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SocialLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    references<T extends Resume$referencesArgs<ExtArgs> = {}>(args?: Subset<T, Resume$referencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9688,6 +9804,7 @@ export namespace Prisma {
     readonly hobbies: FieldRef<"Resume", 'String'>
     readonly showSkillMeter: FieldRef<"Resume", 'Boolean'>
     readonly showLanguageMeter: FieldRef<"Resume", 'Boolean'>
+    readonly hideReferences: FieldRef<"Resume", 'Boolean'>
   }
     
 
@@ -10239,6 +10356,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SocialLinkScalarFieldEnum | SocialLinkScalarFieldEnum[]
+  }
+
+  /**
+   * Resume.references
+   */
+  export type Resume$referencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferenceInclude<ExtArgs> | null
+    where?: ReferenceWhereInput
+    orderBy?: ReferenceOrderByWithRelationInput | ReferenceOrderByWithRelationInput[]
+    cursor?: ReferenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReferenceScalarFieldEnum | ReferenceScalarFieldEnum[]
   }
 
   /**
@@ -15603,6 +15744,1103 @@ export namespace Prisma {
 
 
   /**
+   * Model Reference
+   */
+
+  export type AggregateReference = {
+    _count: ReferenceCountAggregateOutputType | null
+    _min: ReferenceMinAggregateOutputType | null
+    _max: ReferenceMaxAggregateOutputType | null
+  }
+
+  export type ReferenceMinAggregateOutputType = {
+    id: string | null
+    resumeId: string | null
+    fullName: string | null
+    companyName: string | null
+    phone: string | null
+    email: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ReferenceMaxAggregateOutputType = {
+    id: string | null
+    resumeId: string | null
+    fullName: string | null
+    companyName: string | null
+    phone: string | null
+    email: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ReferenceCountAggregateOutputType = {
+    id: number
+    resumeId: number
+    fullName: number
+    companyName: number
+    phone: number
+    email: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ReferenceMinAggregateInputType = {
+    id?: true
+    resumeId?: true
+    fullName?: true
+    companyName?: true
+    phone?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ReferenceMaxAggregateInputType = {
+    id?: true
+    resumeId?: true
+    fullName?: true
+    companyName?: true
+    phone?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ReferenceCountAggregateInputType = {
+    id?: true
+    resumeId?: true
+    fullName?: true
+    companyName?: true
+    phone?: true
+    email?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ReferenceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Reference to aggregate.
+     */
+    where?: ReferenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of References to fetch.
+     */
+    orderBy?: ReferenceOrderByWithRelationInput | ReferenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReferenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` References from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` References.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned References
+    **/
+    _count?: true | ReferenceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReferenceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReferenceMaxAggregateInputType
+  }
+
+  export type GetReferenceAggregateType<T extends ReferenceAggregateArgs> = {
+        [P in keyof T & keyof AggregateReference]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReference[P]>
+      : GetScalarType<T[P], AggregateReference[P]>
+  }
+
+
+
+
+  export type ReferenceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReferenceWhereInput
+    orderBy?: ReferenceOrderByWithAggregationInput | ReferenceOrderByWithAggregationInput[]
+    by: ReferenceScalarFieldEnum[] | ReferenceScalarFieldEnum
+    having?: ReferenceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReferenceCountAggregateInputType | true
+    _min?: ReferenceMinAggregateInputType
+    _max?: ReferenceMaxAggregateInputType
+  }
+
+  export type ReferenceGroupByOutputType = {
+    id: string
+    resumeId: string
+    fullName: string | null
+    companyName: string | null
+    phone: string | null
+    email: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ReferenceCountAggregateOutputType | null
+    _min: ReferenceMinAggregateOutputType | null
+    _max: ReferenceMaxAggregateOutputType | null
+  }
+
+  type GetReferenceGroupByPayload<T extends ReferenceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReferenceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReferenceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReferenceGroupByOutputType[P]>
+            : GetScalarType<T[P], ReferenceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReferenceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    resumeId?: boolean
+    fullName?: boolean
+    companyName?: boolean
+    phone?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reference"]>
+
+  export type ReferenceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    resumeId?: boolean
+    fullName?: boolean
+    companyName?: boolean
+    phone?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reference"]>
+
+  export type ReferenceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    resumeId?: boolean
+    fullName?: boolean
+    companyName?: boolean
+    phone?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reference"]>
+
+  export type ReferenceSelectScalar = {
+    id?: boolean
+    resumeId?: boolean
+    fullName?: boolean
+    companyName?: boolean
+    phone?: boolean
+    email?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ReferenceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "resumeId" | "fullName" | "companyName" | "phone" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["reference"]>
+  export type ReferenceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }
+  export type ReferenceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }
+  export type ReferenceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }
+
+  export type $ReferencePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Reference"
+    objects: {
+      resume: Prisma.$ResumePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      resumeId: string
+      fullName: string | null
+      companyName: string | null
+      phone: string | null
+      email: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["reference"]>
+    composites: {}
+  }
+
+  type ReferenceGetPayload<S extends boolean | null | undefined | ReferenceDefaultArgs> = $Result.GetResult<Prisma.$ReferencePayload, S>
+
+  type ReferenceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReferenceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReferenceCountAggregateInputType | true
+    }
+
+  export interface ReferenceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Reference'], meta: { name: 'Reference' } }
+    /**
+     * Find zero or one Reference that matches the filter.
+     * @param {ReferenceFindUniqueArgs} args - Arguments to find a Reference
+     * @example
+     * // Get one Reference
+     * const reference = await prisma.reference.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReferenceFindUniqueArgs>(args: SelectSubset<T, ReferenceFindUniqueArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Reference that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReferenceFindUniqueOrThrowArgs} args - Arguments to find a Reference
+     * @example
+     * // Get one Reference
+     * const reference = await prisma.reference.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReferenceFindUniqueOrThrowArgs>(args: SelectSubset<T, ReferenceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Reference that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceFindFirstArgs} args - Arguments to find a Reference
+     * @example
+     * // Get one Reference
+     * const reference = await prisma.reference.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReferenceFindFirstArgs>(args?: SelectSubset<T, ReferenceFindFirstArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Reference that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceFindFirstOrThrowArgs} args - Arguments to find a Reference
+     * @example
+     * // Get one Reference
+     * const reference = await prisma.reference.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReferenceFindFirstOrThrowArgs>(args?: SelectSubset<T, ReferenceFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more References that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all References
+     * const references = await prisma.reference.findMany()
+     * 
+     * // Get first 10 References
+     * const references = await prisma.reference.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const referenceWithIdOnly = await prisma.reference.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReferenceFindManyArgs>(args?: SelectSubset<T, ReferenceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Reference.
+     * @param {ReferenceCreateArgs} args - Arguments to create a Reference.
+     * @example
+     * // Create one Reference
+     * const Reference = await prisma.reference.create({
+     *   data: {
+     *     // ... data to create a Reference
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReferenceCreateArgs>(args: SelectSubset<T, ReferenceCreateArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many References.
+     * @param {ReferenceCreateManyArgs} args - Arguments to create many References.
+     * @example
+     * // Create many References
+     * const reference = await prisma.reference.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReferenceCreateManyArgs>(args?: SelectSubset<T, ReferenceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many References and returns the data saved in the database.
+     * @param {ReferenceCreateManyAndReturnArgs} args - Arguments to create many References.
+     * @example
+     * // Create many References
+     * const reference = await prisma.reference.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many References and only return the `id`
+     * const referenceWithIdOnly = await prisma.reference.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReferenceCreateManyAndReturnArgs>(args?: SelectSubset<T, ReferenceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Reference.
+     * @param {ReferenceDeleteArgs} args - Arguments to delete one Reference.
+     * @example
+     * // Delete one Reference
+     * const Reference = await prisma.reference.delete({
+     *   where: {
+     *     // ... filter to delete one Reference
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReferenceDeleteArgs>(args: SelectSubset<T, ReferenceDeleteArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Reference.
+     * @param {ReferenceUpdateArgs} args - Arguments to update one Reference.
+     * @example
+     * // Update one Reference
+     * const reference = await prisma.reference.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReferenceUpdateArgs>(args: SelectSubset<T, ReferenceUpdateArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more References.
+     * @param {ReferenceDeleteManyArgs} args - Arguments to filter References to delete.
+     * @example
+     * // Delete a few References
+     * const { count } = await prisma.reference.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReferenceDeleteManyArgs>(args?: SelectSubset<T, ReferenceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more References.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many References
+     * const reference = await prisma.reference.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReferenceUpdateManyArgs>(args: SelectSubset<T, ReferenceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more References and returns the data updated in the database.
+     * @param {ReferenceUpdateManyAndReturnArgs} args - Arguments to update many References.
+     * @example
+     * // Update many References
+     * const reference = await prisma.reference.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more References and only return the `id`
+     * const referenceWithIdOnly = await prisma.reference.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReferenceUpdateManyAndReturnArgs>(args: SelectSubset<T, ReferenceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Reference.
+     * @param {ReferenceUpsertArgs} args - Arguments to update or create a Reference.
+     * @example
+     * // Update or create a Reference
+     * const reference = await prisma.reference.upsert({
+     *   create: {
+     *     // ... data to create a Reference
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Reference we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReferenceUpsertArgs>(args: SelectSubset<T, ReferenceUpsertArgs<ExtArgs>>): Prisma__ReferenceClient<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of References.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceCountArgs} args - Arguments to filter References to count.
+     * @example
+     * // Count the number of References
+     * const count = await prisma.reference.count({
+     *   where: {
+     *     // ... the filter for the References we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReferenceCountArgs>(
+      args?: Subset<T, ReferenceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReferenceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Reference.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReferenceAggregateArgs>(args: Subset<T, ReferenceAggregateArgs>): Prisma.PrismaPromise<GetReferenceAggregateType<T>>
+
+    /**
+     * Group by Reference.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReferenceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReferenceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReferenceGroupByArgs['orderBy'] }
+        : { orderBy?: ReferenceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReferenceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReferenceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Reference model
+   */
+  readonly fields: ReferenceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Reference.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReferenceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    resume<T extends ResumeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ResumeDefaultArgs<ExtArgs>>): Prisma__ResumeClient<$Result.GetResult<Prisma.$ResumePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Reference model
+   */
+  interface ReferenceFieldRefs {
+    readonly id: FieldRef<"Reference", 'String'>
+    readonly resumeId: FieldRef<"Reference", 'String'>
+    readonly fullName: FieldRef<"Reference", 'String'>
+    readonly companyName: FieldRef<"Reference", 'String'>
+    readonly phone: FieldRef<"Reference", 'String'>
+    readonly email: FieldRef<"Reference", 'String'>
+    readonly createdAt: FieldRef<"Reference", 'DateTime'>
+    readonly updatedAt: FieldRef<"Reference", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Reference findUnique
+   */
+  export type ReferenceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Reference to fetch.
+     */
+    where: ReferenceWhereUniqueInput
+  }
+
+  /**
+   * Reference findUniqueOrThrow
+   */
+  export type ReferenceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Reference to fetch.
+     */
+    where: ReferenceWhereUniqueInput
+  }
+
+  /**
+   * Reference findFirst
+   */
+  export type ReferenceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Reference to fetch.
+     */
+    where?: ReferenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of References to fetch.
+     */
+    orderBy?: ReferenceOrderByWithRelationInput | ReferenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for References.
+     */
+    cursor?: ReferenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` References from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` References.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of References.
+     */
+    distinct?: ReferenceScalarFieldEnum | ReferenceScalarFieldEnum[]
+  }
+
+  /**
+   * Reference findFirstOrThrow
+   */
+  export type ReferenceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Reference to fetch.
+     */
+    where?: ReferenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of References to fetch.
+     */
+    orderBy?: ReferenceOrderByWithRelationInput | ReferenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for References.
+     */
+    cursor?: ReferenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` References from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` References.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of References.
+     */
+    distinct?: ReferenceScalarFieldEnum | ReferenceScalarFieldEnum[]
+  }
+
+  /**
+   * Reference findMany
+   */
+  export type ReferenceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferenceInclude<ExtArgs> | null
+    /**
+     * Filter, which References to fetch.
+     */
+    where?: ReferenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of References to fetch.
+     */
+    orderBy?: ReferenceOrderByWithRelationInput | ReferenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing References.
+     */
+    cursor?: ReferenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` References from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` References.
+     */
+    skip?: number
+    distinct?: ReferenceScalarFieldEnum | ReferenceScalarFieldEnum[]
+  }
+
+  /**
+   * Reference create
+   */
+  export type ReferenceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferenceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Reference.
+     */
+    data: XOR<ReferenceCreateInput, ReferenceUncheckedCreateInput>
+  }
+
+  /**
+   * Reference createMany
+   */
+  export type ReferenceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many References.
+     */
+    data: ReferenceCreateManyInput | ReferenceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Reference createManyAndReturn
+   */
+  export type ReferenceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * The data used to create many References.
+     */
+    data: ReferenceCreateManyInput | ReferenceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferenceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Reference update
+   */
+  export type ReferenceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferenceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Reference.
+     */
+    data: XOR<ReferenceUpdateInput, ReferenceUncheckedUpdateInput>
+    /**
+     * Choose, which Reference to update.
+     */
+    where: ReferenceWhereUniqueInput
+  }
+
+  /**
+   * Reference updateMany
+   */
+  export type ReferenceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update References.
+     */
+    data: XOR<ReferenceUpdateManyMutationInput, ReferenceUncheckedUpdateManyInput>
+    /**
+     * Filter which References to update
+     */
+    where?: ReferenceWhereInput
+    /**
+     * Limit how many References to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Reference updateManyAndReturn
+   */
+  export type ReferenceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * The data used to update References.
+     */
+    data: XOR<ReferenceUpdateManyMutationInput, ReferenceUncheckedUpdateManyInput>
+    /**
+     * Filter which References to update
+     */
+    where?: ReferenceWhereInput
+    /**
+     * Limit how many References to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferenceIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Reference upsert
+   */
+  export type ReferenceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferenceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Reference to update in case it exists.
+     */
+    where: ReferenceWhereUniqueInput
+    /**
+     * In case the Reference found by the `where` argument doesn't exist, create a new Reference with this data.
+     */
+    create: XOR<ReferenceCreateInput, ReferenceUncheckedCreateInput>
+    /**
+     * In case the Reference was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReferenceUpdateInput, ReferenceUncheckedUpdateInput>
+  }
+
+  /**
+   * Reference delete
+   */
+  export type ReferenceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferenceInclude<ExtArgs> | null
+    /**
+     * Filter which Reference to delete.
+     */
+    where: ReferenceWhereUniqueInput
+  }
+
+  /**
+   * Reference deleteMany
+   */
+  export type ReferenceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which References to delete
+     */
+    where?: ReferenceWhereInput
+    /**
+     * Limit how many References to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Reference without action
+   */
+  export type ReferenceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reference
+     */
+    select?: ReferenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reference
+     */
+    omit?: ReferenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReferenceInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -15729,7 +16967,8 @@ export namespace Prisma {
     fontFamily: 'fontFamily',
     hobbies: 'hobbies',
     showSkillMeter: 'showSkillMeter',
-    showLanguageMeter: 'showLanguageMeter'
+    showLanguageMeter: 'showLanguageMeter',
+    hideReferences: 'hideReferences'
   };
 
   export type ResumeScalarFieldEnum = (typeof ResumeScalarFieldEnum)[keyof typeof ResumeScalarFieldEnum]
@@ -15792,6 +17031,20 @@ export namespace Prisma {
   };
 
   export type SocialLinkScalarFieldEnum = (typeof SocialLinkScalarFieldEnum)[keyof typeof SocialLinkScalarFieldEnum]
+
+
+  export const ReferenceScalarFieldEnum: {
+    id: 'id',
+    resumeId: 'resumeId',
+    fullName: 'fullName',
+    companyName: 'companyName',
+    phone: 'phone',
+    email: 'email',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ReferenceScalarFieldEnum = (typeof ReferenceScalarFieldEnum)[keyof typeof ReferenceScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -16370,6 +17623,7 @@ export namespace Prisma {
     hobbies?: StringNullableFilter<"Resume"> | string | null
     showSkillMeter?: BoolFilter<"Resume"> | boolean
     showLanguageMeter?: BoolFilter<"Resume"> | boolean
+    hideReferences?: BoolFilter<"Resume"> | boolean
     guest?: XOR<GuestNullableScalarRelationFilter, GuestWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     experiences?: ExperienceListRelationFilter
@@ -16377,6 +17631,7 @@ export namespace Prisma {
     skills?: SkillListRelationFilter
     languages?: LanguageListRelationFilter
     socialLinks?: SocialLinkListRelationFilter
+    references?: ReferenceListRelationFilter
   }
 
   export type ResumeOrderByWithRelationInput = {
@@ -16404,6 +17659,7 @@ export namespace Prisma {
     hobbies?: SortOrderInput | SortOrder
     showSkillMeter?: SortOrder
     showLanguageMeter?: SortOrder
+    hideReferences?: SortOrder
     guest?: GuestOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     experiences?: ExperienceOrderByRelationAggregateInput
@@ -16411,6 +17667,7 @@ export namespace Prisma {
     skills?: SkillOrderByRelationAggregateInput
     languages?: LanguageOrderByRelationAggregateInput
     socialLinks?: SocialLinkOrderByRelationAggregateInput
+    references?: ReferenceOrderByRelationAggregateInput
   }
 
   export type ResumeWhereUniqueInput = Prisma.AtLeast<{
@@ -16441,6 +17698,7 @@ export namespace Prisma {
     hobbies?: StringNullableFilter<"Resume"> | string | null
     showSkillMeter?: BoolFilter<"Resume"> | boolean
     showLanguageMeter?: BoolFilter<"Resume"> | boolean
+    hideReferences?: BoolFilter<"Resume"> | boolean
     guest?: XOR<GuestNullableScalarRelationFilter, GuestWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     experiences?: ExperienceListRelationFilter
@@ -16448,6 +17706,7 @@ export namespace Prisma {
     skills?: SkillListRelationFilter
     languages?: LanguageListRelationFilter
     socialLinks?: SocialLinkListRelationFilter
+    references?: ReferenceListRelationFilter
   }, "id">
 
   export type ResumeOrderByWithAggregationInput = {
@@ -16475,6 +17734,7 @@ export namespace Prisma {
     hobbies?: SortOrderInput | SortOrder
     showSkillMeter?: SortOrder
     showLanguageMeter?: SortOrder
+    hideReferences?: SortOrder
     _count?: ResumeCountOrderByAggregateInput
     _max?: ResumeMaxOrderByAggregateInput
     _min?: ResumeMinOrderByAggregateInput
@@ -16508,6 +17768,7 @@ export namespace Prisma {
     hobbies?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     showSkillMeter?: BoolWithAggregatesFilter<"Resume"> | boolean
     showLanguageMeter?: BoolWithAggregatesFilter<"Resume"> | boolean
+    hideReferences?: BoolWithAggregatesFilter<"Resume"> | boolean
   }
 
   export type ExperienceWhereInput = {
@@ -16803,6 +18064,76 @@ export namespace Prisma {
     resumeId?: UuidWithAggregatesFilter<"SocialLink"> | string
     label?: StringNullableWithAggregatesFilter<"SocialLink"> | string | null
     url?: StringNullableWithAggregatesFilter<"SocialLink"> | string | null
+  }
+
+  export type ReferenceWhereInput = {
+    AND?: ReferenceWhereInput | ReferenceWhereInput[]
+    OR?: ReferenceWhereInput[]
+    NOT?: ReferenceWhereInput | ReferenceWhereInput[]
+    id?: UuidFilter<"Reference"> | string
+    resumeId?: UuidFilter<"Reference"> | string
+    fullName?: StringNullableFilter<"Reference"> | string | null
+    companyName?: StringNullableFilter<"Reference"> | string | null
+    phone?: StringNullableFilter<"Reference"> | string | null
+    email?: StringNullableFilter<"Reference"> | string | null
+    createdAt?: DateTimeFilter<"Reference"> | Date | string
+    updatedAt?: DateTimeFilter<"Reference"> | Date | string
+    resume?: XOR<ResumeScalarRelationFilter, ResumeWhereInput>
+  }
+
+  export type ReferenceOrderByWithRelationInput = {
+    id?: SortOrder
+    resumeId?: SortOrder
+    fullName?: SortOrderInput | SortOrder
+    companyName?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    resume?: ResumeOrderByWithRelationInput
+  }
+
+  export type ReferenceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ReferenceWhereInput | ReferenceWhereInput[]
+    OR?: ReferenceWhereInput[]
+    NOT?: ReferenceWhereInput | ReferenceWhereInput[]
+    resumeId?: UuidFilter<"Reference"> | string
+    fullName?: StringNullableFilter<"Reference"> | string | null
+    companyName?: StringNullableFilter<"Reference"> | string | null
+    phone?: StringNullableFilter<"Reference"> | string | null
+    email?: StringNullableFilter<"Reference"> | string | null
+    createdAt?: DateTimeFilter<"Reference"> | Date | string
+    updatedAt?: DateTimeFilter<"Reference"> | Date | string
+    resume?: XOR<ResumeScalarRelationFilter, ResumeWhereInput>
+  }, "id">
+
+  export type ReferenceOrderByWithAggregationInput = {
+    id?: SortOrder
+    resumeId?: SortOrder
+    fullName?: SortOrderInput | SortOrder
+    companyName?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ReferenceCountOrderByAggregateInput
+    _max?: ReferenceMaxOrderByAggregateInput
+    _min?: ReferenceMinOrderByAggregateInput
+  }
+
+  export type ReferenceScalarWhereWithAggregatesInput = {
+    AND?: ReferenceScalarWhereWithAggregatesInput | ReferenceScalarWhereWithAggregatesInput[]
+    OR?: ReferenceScalarWhereWithAggregatesInput[]
+    NOT?: ReferenceScalarWhereWithAggregatesInput | ReferenceScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"Reference"> | string
+    resumeId?: UuidWithAggregatesFilter<"Reference"> | string
+    fullName?: StringNullableWithAggregatesFilter<"Reference"> | string | null
+    companyName?: StringNullableWithAggregatesFilter<"Reference"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"Reference"> | string | null
+    email?: StringNullableWithAggregatesFilter<"Reference"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Reference"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Reference"> | Date | string
   }
 
   export type GuestCreateInput = {
@@ -17342,6 +18673,7 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
@@ -17349,6 +18681,7 @@ export namespace Prisma {
     skills?: SkillCreateNestedManyWithoutResumeInput
     languages?: LanguageCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
+    references?: ReferenceCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateInput = {
@@ -17376,11 +18709,13 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
+    references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUpdateInput = {
@@ -17406,6 +18741,7 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
@@ -17413,6 +18749,7 @@ export namespace Prisma {
     skills?: SkillUpdateManyWithoutResumeNestedInput
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateInput = {
@@ -17440,11 +18777,13 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateManyInput = {
@@ -17472,6 +18811,7 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
   }
 
   export type ResumeUpdateManyMutationInput = {
@@ -17497,6 +18837,7 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ResumeUncheckedUpdateManyInput = {
@@ -17524,6 +18865,7 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ExperienceCreateInput = {
@@ -17827,6 +19169,82 @@ export namespace Prisma {
     resumeId?: StringFieldUpdateOperationsInput | string
     label?: NullableStringFieldUpdateOperationsInput | string | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ReferenceCreateInput = {
+    id?: string
+    fullName?: string | null
+    companyName?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resume: ResumeCreateNestedOneWithoutReferencesInput
+  }
+
+  export type ReferenceUncheckedCreateInput = {
+    id?: string
+    resumeId: string
+    fullName?: string | null
+    companyName?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReferenceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resume?: ResumeUpdateOneRequiredWithoutReferencesNestedInput
+  }
+
+  export type ReferenceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    resumeId?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReferenceCreateManyInput = {
+    id?: string
+    resumeId: string
+    fullName?: string | null
+    companyName?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReferenceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReferenceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    resumeId?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -18337,6 +19755,12 @@ export namespace Prisma {
     none?: SocialLinkWhereInput
   }
 
+  export type ReferenceListRelationFilter = {
+    every?: ReferenceWhereInput
+    some?: ReferenceWhereInput
+    none?: ReferenceWhereInput
+  }
+
   export type ExperienceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -18354,6 +19778,10 @@ export namespace Prisma {
   }
 
   export type SocialLinkOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ReferenceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18382,6 +19810,7 @@ export namespace Prisma {
     hobbies?: SortOrder
     showSkillMeter?: SortOrder
     showLanguageMeter?: SortOrder
+    hideReferences?: SortOrder
   }
 
   export type ResumeMaxOrderByAggregateInput = {
@@ -18409,6 +19838,7 @@ export namespace Prisma {
     hobbies?: SortOrder
     showSkillMeter?: SortOrder
     showLanguageMeter?: SortOrder
+    hideReferences?: SortOrder
   }
 
   export type ResumeMinOrderByAggregateInput = {
@@ -18436,6 +19866,7 @@ export namespace Prisma {
     hobbies?: SortOrder
     showSkillMeter?: SortOrder
     showLanguageMeter?: SortOrder
+    hideReferences?: SortOrder
   }
 
   export type UuidNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -18588,6 +20019,39 @@ export namespace Prisma {
     resumeId?: SortOrder
     label?: SortOrder
     url?: SortOrder
+  }
+
+  export type ReferenceCountOrderByAggregateInput = {
+    id?: SortOrder
+    resumeId?: SortOrder
+    fullName?: SortOrder
+    companyName?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReferenceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    resumeId?: SortOrder
+    fullName?: SortOrder
+    companyName?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ReferenceMinOrderByAggregateInput = {
+    id?: SortOrder
+    resumeId?: SortOrder
+    fullName?: SortOrder
+    companyName?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ResumeCreateNestedManyWithoutGuestInput = {
@@ -18919,6 +20383,13 @@ export namespace Prisma {
     connect?: SocialLinkWhereUniqueInput | SocialLinkWhereUniqueInput[]
   }
 
+  export type ReferenceCreateNestedManyWithoutResumeInput = {
+    create?: XOR<ReferenceCreateWithoutResumeInput, ReferenceUncheckedCreateWithoutResumeInput> | ReferenceCreateWithoutResumeInput[] | ReferenceUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: ReferenceCreateOrConnectWithoutResumeInput | ReferenceCreateOrConnectWithoutResumeInput[]
+    createMany?: ReferenceCreateManyResumeInputEnvelope
+    connect?: ReferenceWhereUniqueInput | ReferenceWhereUniqueInput[]
+  }
+
   export type ExperienceUncheckedCreateNestedManyWithoutResumeInput = {
     create?: XOR<ExperienceCreateWithoutResumeInput, ExperienceUncheckedCreateWithoutResumeInput> | ExperienceCreateWithoutResumeInput[] | ExperienceUncheckedCreateWithoutResumeInput[]
     connectOrCreate?: ExperienceCreateOrConnectWithoutResumeInput | ExperienceCreateOrConnectWithoutResumeInput[]
@@ -18952,6 +20423,13 @@ export namespace Prisma {
     connectOrCreate?: SocialLinkCreateOrConnectWithoutResumeInput | SocialLinkCreateOrConnectWithoutResumeInput[]
     createMany?: SocialLinkCreateManyResumeInputEnvelope
     connect?: SocialLinkWhereUniqueInput | SocialLinkWhereUniqueInput[]
+  }
+
+  export type ReferenceUncheckedCreateNestedManyWithoutResumeInput = {
+    create?: XOR<ReferenceCreateWithoutResumeInput, ReferenceUncheckedCreateWithoutResumeInput> | ReferenceCreateWithoutResumeInput[] | ReferenceUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: ReferenceCreateOrConnectWithoutResumeInput | ReferenceCreateOrConnectWithoutResumeInput[]
+    createMany?: ReferenceCreateManyResumeInputEnvelope
+    connect?: ReferenceWhereUniqueInput | ReferenceWhereUniqueInput[]
   }
 
   export type GuestUpdateOneWithoutResumesNestedInput = {
@@ -19044,6 +20522,20 @@ export namespace Prisma {
     deleteMany?: SocialLinkScalarWhereInput | SocialLinkScalarWhereInput[]
   }
 
+  export type ReferenceUpdateManyWithoutResumeNestedInput = {
+    create?: XOR<ReferenceCreateWithoutResumeInput, ReferenceUncheckedCreateWithoutResumeInput> | ReferenceCreateWithoutResumeInput[] | ReferenceUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: ReferenceCreateOrConnectWithoutResumeInput | ReferenceCreateOrConnectWithoutResumeInput[]
+    upsert?: ReferenceUpsertWithWhereUniqueWithoutResumeInput | ReferenceUpsertWithWhereUniqueWithoutResumeInput[]
+    createMany?: ReferenceCreateManyResumeInputEnvelope
+    set?: ReferenceWhereUniqueInput | ReferenceWhereUniqueInput[]
+    disconnect?: ReferenceWhereUniqueInput | ReferenceWhereUniqueInput[]
+    delete?: ReferenceWhereUniqueInput | ReferenceWhereUniqueInput[]
+    connect?: ReferenceWhereUniqueInput | ReferenceWhereUniqueInput[]
+    update?: ReferenceUpdateWithWhereUniqueWithoutResumeInput | ReferenceUpdateWithWhereUniqueWithoutResumeInput[]
+    updateMany?: ReferenceUpdateManyWithWhereWithoutResumeInput | ReferenceUpdateManyWithWhereWithoutResumeInput[]
+    deleteMany?: ReferenceScalarWhereInput | ReferenceScalarWhereInput[]
+  }
+
   export type ExperienceUncheckedUpdateManyWithoutResumeNestedInput = {
     create?: XOR<ExperienceCreateWithoutResumeInput, ExperienceUncheckedCreateWithoutResumeInput> | ExperienceCreateWithoutResumeInput[] | ExperienceUncheckedCreateWithoutResumeInput[]
     connectOrCreate?: ExperienceCreateOrConnectWithoutResumeInput | ExperienceCreateOrConnectWithoutResumeInput[]
@@ -19114,6 +20606,20 @@ export namespace Prisma {
     deleteMany?: SocialLinkScalarWhereInput | SocialLinkScalarWhereInput[]
   }
 
+  export type ReferenceUncheckedUpdateManyWithoutResumeNestedInput = {
+    create?: XOR<ReferenceCreateWithoutResumeInput, ReferenceUncheckedCreateWithoutResumeInput> | ReferenceCreateWithoutResumeInput[] | ReferenceUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: ReferenceCreateOrConnectWithoutResumeInput | ReferenceCreateOrConnectWithoutResumeInput[]
+    upsert?: ReferenceUpsertWithWhereUniqueWithoutResumeInput | ReferenceUpsertWithWhereUniqueWithoutResumeInput[]
+    createMany?: ReferenceCreateManyResumeInputEnvelope
+    set?: ReferenceWhereUniqueInput | ReferenceWhereUniqueInput[]
+    disconnect?: ReferenceWhereUniqueInput | ReferenceWhereUniqueInput[]
+    delete?: ReferenceWhereUniqueInput | ReferenceWhereUniqueInput[]
+    connect?: ReferenceWhereUniqueInput | ReferenceWhereUniqueInput[]
+    update?: ReferenceUpdateWithWhereUniqueWithoutResumeInput | ReferenceUpdateWithWhereUniqueWithoutResumeInput[]
+    updateMany?: ReferenceUpdateManyWithWhereWithoutResumeInput | ReferenceUpdateManyWithWhereWithoutResumeInput[]
+    deleteMany?: ReferenceScalarWhereInput | ReferenceScalarWhereInput[]
+  }
+
   export type ResumeCreateNestedOneWithoutExperiencesInput = {
     create?: XOR<ResumeCreateWithoutExperiencesInput, ResumeUncheckedCreateWithoutExperiencesInput>
     connectOrCreate?: ResumeCreateOrConnectWithoutExperiencesInput
@@ -19182,6 +20688,20 @@ export namespace Prisma {
     upsert?: ResumeUpsertWithoutSocialLinksInput
     connect?: ResumeWhereUniqueInput
     update?: XOR<XOR<ResumeUpdateToOneWithWhereWithoutSocialLinksInput, ResumeUpdateWithoutSocialLinksInput>, ResumeUncheckedUpdateWithoutSocialLinksInput>
+  }
+
+  export type ResumeCreateNestedOneWithoutReferencesInput = {
+    create?: XOR<ResumeCreateWithoutReferencesInput, ResumeUncheckedCreateWithoutReferencesInput>
+    connectOrCreate?: ResumeCreateOrConnectWithoutReferencesInput
+    connect?: ResumeWhereUniqueInput
+  }
+
+  export type ResumeUpdateOneRequiredWithoutReferencesNestedInput = {
+    create?: XOR<ResumeCreateWithoutReferencesInput, ResumeUncheckedCreateWithoutReferencesInput>
+    connectOrCreate?: ResumeCreateOrConnectWithoutReferencesInput
+    upsert?: ResumeUpsertWithoutReferencesInput
+    connect?: ResumeWhereUniqueInput
+    update?: XOR<XOR<ResumeUpdateToOneWithWhereWithoutReferencesInput, ResumeUpdateWithoutReferencesInput>, ResumeUncheckedUpdateWithoutReferencesInput>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -19431,12 +20951,14 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
     educations?: EducationCreateNestedManyWithoutResumeInput
     skills?: SkillCreateNestedManyWithoutResumeInput
     languages?: LanguageCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
+    references?: ReferenceCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutGuestInput = {
@@ -19463,11 +20985,13 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
+    references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutGuestInput = {
@@ -19524,6 +21048,7 @@ export namespace Prisma {
     hobbies?: StringNullableFilter<"Resume"> | string | null
     showSkillMeter?: BoolFilter<"Resume"> | boolean
     showLanguageMeter?: BoolFilter<"Resume"> | boolean
+    hideReferences?: BoolFilter<"Resume"> | boolean
   }
 
   export type SessionCreateWithoutUserInput = {
@@ -19619,12 +21144,14 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
     educations?: EducationCreateNestedManyWithoutResumeInput
     skills?: SkillCreateNestedManyWithoutResumeInput
     languages?: LanguageCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
+    references?: ReferenceCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutUserInput = {
@@ -19651,11 +21178,13 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
+    references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutUserInput = {
@@ -20212,6 +21741,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ReferenceCreateWithoutResumeInput = {
+    id?: string
+    fullName?: string | null
+    companyName?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReferenceUncheckedCreateWithoutResumeInput = {
+    id?: string
+    fullName?: string | null
+    companyName?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReferenceCreateOrConnectWithoutResumeInput = {
+    where: ReferenceWhereUniqueInput
+    create: XOR<ReferenceCreateWithoutResumeInput, ReferenceUncheckedCreateWithoutResumeInput>
+  }
+
+  export type ReferenceCreateManyResumeInputEnvelope = {
+    data: ReferenceCreateManyResumeInput | ReferenceCreateManyResumeInput[]
+    skipDuplicates?: boolean
+  }
+
   export type GuestUpsertWithoutResumesInput = {
     update: XOR<GuestUpdateWithoutResumesInput, GuestUncheckedUpdateWithoutResumesInput>
     create: XOR<GuestCreateWithoutResumesInput, GuestUncheckedCreateWithoutResumesInput>
@@ -20413,6 +21972,36 @@ export namespace Prisma {
     url?: StringNullableFilter<"SocialLink"> | string | null
   }
 
+  export type ReferenceUpsertWithWhereUniqueWithoutResumeInput = {
+    where: ReferenceWhereUniqueInput
+    update: XOR<ReferenceUpdateWithoutResumeInput, ReferenceUncheckedUpdateWithoutResumeInput>
+    create: XOR<ReferenceCreateWithoutResumeInput, ReferenceUncheckedCreateWithoutResumeInput>
+  }
+
+  export type ReferenceUpdateWithWhereUniqueWithoutResumeInput = {
+    where: ReferenceWhereUniqueInput
+    data: XOR<ReferenceUpdateWithoutResumeInput, ReferenceUncheckedUpdateWithoutResumeInput>
+  }
+
+  export type ReferenceUpdateManyWithWhereWithoutResumeInput = {
+    where: ReferenceScalarWhereInput
+    data: XOR<ReferenceUpdateManyMutationInput, ReferenceUncheckedUpdateManyWithoutResumeInput>
+  }
+
+  export type ReferenceScalarWhereInput = {
+    AND?: ReferenceScalarWhereInput | ReferenceScalarWhereInput[]
+    OR?: ReferenceScalarWhereInput[]
+    NOT?: ReferenceScalarWhereInput | ReferenceScalarWhereInput[]
+    id?: UuidFilter<"Reference"> | string
+    resumeId?: UuidFilter<"Reference"> | string
+    fullName?: StringNullableFilter<"Reference"> | string | null
+    companyName?: StringNullableFilter<"Reference"> | string | null
+    phone?: StringNullableFilter<"Reference"> | string | null
+    email?: StringNullableFilter<"Reference"> | string | null
+    createdAt?: DateTimeFilter<"Reference"> | Date | string
+    updatedAt?: DateTimeFilter<"Reference"> | Date | string
+  }
+
   export type ResumeCreateWithoutExperiencesInput = {
     id?: string
     createdAt?: Date | string
@@ -20436,12 +22025,14 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     educations?: EducationCreateNestedManyWithoutResumeInput
     skills?: SkillCreateNestedManyWithoutResumeInput
     languages?: LanguageCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
+    references?: ReferenceCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutExperiencesInput = {
@@ -20469,10 +22060,12 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
+    references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutExperiencesInput = {
@@ -20514,12 +22107,14 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     educations?: EducationUpdateManyWithoutResumeNestedInput
     skills?: SkillUpdateManyWithoutResumeNestedInput
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutExperiencesInput = {
@@ -20547,10 +22142,12 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateWithoutEducationsInput = {
@@ -20576,12 +22173,14 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
     skills?: SkillCreateNestedManyWithoutResumeInput
     languages?: LanguageCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
+    references?: ReferenceCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutEducationsInput = {
@@ -20609,10 +22208,12 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
+    references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutEducationsInput = {
@@ -20654,12 +22255,14 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
     skills?: SkillUpdateManyWithoutResumeNestedInput
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutEducationsInput = {
@@ -20687,10 +22290,12 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateWithoutSkillsInput = {
@@ -20716,12 +22321,14 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
     educations?: EducationCreateNestedManyWithoutResumeInput
     languages?: LanguageCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
+    references?: ReferenceCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutSkillsInput = {
@@ -20749,10 +22356,12 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
+    references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutSkillsInput = {
@@ -20794,12 +22403,14 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
     educations?: EducationUpdateManyWithoutResumeNestedInput
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutSkillsInput = {
@@ -20827,10 +22438,12 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateWithoutLanguagesInput = {
@@ -20856,12 +22469,14 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
     educations?: EducationCreateNestedManyWithoutResumeInput
     skills?: SkillCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
+    references?: ReferenceCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutLanguagesInput = {
@@ -20889,10 +22504,12 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
+    references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutLanguagesInput = {
@@ -20934,12 +22551,14 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
     educations?: EducationUpdateManyWithoutResumeNestedInput
     skills?: SkillUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutLanguagesInput = {
@@ -20967,10 +22586,12 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateWithoutSocialLinksInput = {
@@ -20996,12 +22617,14 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     guest?: GuestCreateNestedOneWithoutResumesInput
     user?: UserCreateNestedOneWithoutResumesInput
     experiences?: ExperienceCreateNestedManyWithoutResumeInput
     educations?: EducationCreateNestedManyWithoutResumeInput
     skills?: SkillCreateNestedManyWithoutResumeInput
     languages?: LanguageCreateNestedManyWithoutResumeInput
+    references?: ReferenceCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutSocialLinksInput = {
@@ -21029,10 +22652,12 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
     experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
+    references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutSocialLinksInput = {
@@ -21074,12 +22699,14 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
     educations?: EducationUpdateManyWithoutResumeNestedInput
     skills?: SkillUpdateManyWithoutResumeNestedInput
     languages?: LanguageUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutSocialLinksInput = {
@@ -21107,10 +22734,160 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
+  }
+
+  export type ResumeCreateWithoutReferencesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    title?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    email?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    dateOfBirth?: string | null
+    nationality?: string | null
+    maritalStatus?: string | null
+    about?: string | null
+    jobTitle?: string | null
+    template: string
+    accentColor: string
+    fontFamily: string
+    hobbies?: string | null
+    showSkillMeter?: boolean
+    showLanguageMeter?: boolean
+    hideReferences?: boolean
+    guest?: GuestCreateNestedOneWithoutResumesInput
+    user?: UserCreateNestedOneWithoutResumesInput
+    experiences?: ExperienceCreateNestedManyWithoutResumeInput
+    educations?: EducationCreateNestedManyWithoutResumeInput
+    skills?: SkillCreateNestedManyWithoutResumeInput
+    languages?: LanguageCreateNestedManyWithoutResumeInput
+    socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
+  }
+
+  export type ResumeUncheckedCreateWithoutReferencesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guestId?: string | null
+    userId?: string | null
+    title?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    email?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    dateOfBirth?: string | null
+    nationality?: string | null
+    maritalStatus?: string | null
+    about?: string | null
+    jobTitle?: string | null
+    template: string
+    accentColor: string
+    fontFamily: string
+    hobbies?: string | null
+    showSkillMeter?: boolean
+    showLanguageMeter?: boolean
+    hideReferences?: boolean
+    experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
+    educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
+    skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
+    languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
+    socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
+  }
+
+  export type ResumeCreateOrConnectWithoutReferencesInput = {
+    where: ResumeWhereUniqueInput
+    create: XOR<ResumeCreateWithoutReferencesInput, ResumeUncheckedCreateWithoutReferencesInput>
+  }
+
+  export type ResumeUpsertWithoutReferencesInput = {
+    update: XOR<ResumeUpdateWithoutReferencesInput, ResumeUncheckedUpdateWithoutReferencesInput>
+    create: XOR<ResumeCreateWithoutReferencesInput, ResumeUncheckedCreateWithoutReferencesInput>
+    where?: ResumeWhereInput
+  }
+
+  export type ResumeUpdateToOneWithWhereWithoutReferencesInput = {
+    where?: ResumeWhereInput
+    data: XOR<ResumeUpdateWithoutReferencesInput, ResumeUncheckedUpdateWithoutReferencesInput>
+  }
+
+  export type ResumeUpdateWithoutReferencesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    maritalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    jobTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    accentColor?: StringFieldUpdateOperationsInput | string
+    fontFamily?: StringFieldUpdateOperationsInput | string
+    hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
+    guest?: GuestUpdateOneWithoutResumesNestedInput
+    user?: UserUpdateOneWithoutResumesNestedInput
+    experiences?: ExperienceUpdateManyWithoutResumeNestedInput
+    educations?: EducationUpdateManyWithoutResumeNestedInput
+    skills?: SkillUpdateManyWithoutResumeNestedInput
+    languages?: LanguageUpdateManyWithoutResumeNestedInput
+    socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
+  }
+
+  export type ResumeUncheckedUpdateWithoutReferencesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    maritalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    jobTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    accentColor?: StringFieldUpdateOperationsInput | string
+    fontFamily?: StringFieldUpdateOperationsInput | string
+    hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
+    experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
+    educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
+    skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
+    languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
+    socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateManyGuestInput = {
@@ -21137,6 +22914,7 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
   }
 
   export type ResumeUpdateWithoutGuestInput = {
@@ -21162,12 +22940,14 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
     educations?: EducationUpdateManyWithoutResumeNestedInput
     skills?: SkillUpdateManyWithoutResumeNestedInput
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutGuestInput = {
@@ -21194,11 +22974,13 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateManyWithoutGuestInput = {
@@ -21225,6 +23007,7 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SessionCreateManyUserInput = {
@@ -21276,6 +23059,7 @@ export namespace Prisma {
     hobbies?: string | null
     showSkillMeter?: boolean
     showLanguageMeter?: boolean
+    hideReferences?: boolean
   }
 
   export type SubscriptionCreateManyUserInput = {
@@ -21393,12 +23177,14 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     guest?: GuestUpdateOneWithoutResumesNestedInput
     experiences?: ExperienceUpdateManyWithoutResumeNestedInput
     educations?: EducationUpdateManyWithoutResumeNestedInput
     skills?: SkillUpdateManyWithoutResumeNestedInput
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutUserInput = {
@@ -21425,11 +23211,13 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
     experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateManyWithoutUserInput = {
@@ -21456,6 +23244,7 @@ export namespace Prisma {
     hobbies?: NullableStringFieldUpdateOperationsInput | string | null
     showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
     showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SubscriptionUpdateWithoutUserInput = {
@@ -21546,6 +23335,16 @@ export namespace Prisma {
     id?: string
     label?: string | null
     url?: string | null
+  }
+
+  export type ReferenceCreateManyResumeInput = {
+    id?: string
+    fullName?: string | null
+    companyName?: string | null
+    phone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ExperienceUpdateWithoutResumeInput = {
@@ -21663,6 +23462,36 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     label?: NullableStringFieldUpdateOperationsInput | string | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ReferenceUpdateWithoutResumeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReferenceUncheckedUpdateWithoutResumeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReferenceUncheckedUpdateManyWithoutResumeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

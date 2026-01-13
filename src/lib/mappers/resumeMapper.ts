@@ -34,6 +34,7 @@ export function mapPrismaResumeToResumeData(resume: ResumeWithRelations): Resume
     fontFamily: isFontName(resume.fontFamily) ? resume.fontFamily : "Poppins",
     showSkillMeter: resume.showSkillMeter ?? true,
     showLanguageMeter: resume.showLanguageMeter ?? true,
+    hideReferences: resume.hideReferences ?? false,
 
     nationality: resume.nationality ?? undefined,
     dateOfBirth: resume.dateOfBirth ?? undefined,
@@ -80,6 +81,15 @@ export function mapPrismaResumeToResumeData(resume: ResumeWithRelations): Resume
       collapsed: true,
       label: social.label ?? undefined,
       url: social.url ?? undefined,
+    })),
+
+    references: resume.references.map((reference) => ({
+      id: reference.id,
+      collapsed: true,
+      fullName: reference.fullName ?? undefined,
+      companyName: reference.companyName ?? undefined,
+      phone: reference.phone ?? undefined,
+      email: reference.email ?? undefined,
     })),
   };
 }

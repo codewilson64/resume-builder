@@ -145,7 +145,46 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
                   })}
               </div>
             </Block>          
-          )}
+            )}
+
+            {/* REFERENCES */}
+            {data?.references.length > 0 && (
+              <Block title="References" color={data.accentColor}>
+                <div className="border-b border-black pb-6">
+                {resumeData.hideReferences ? (
+                  <p className="text-xs text-gray-600">
+                    References available upon request
+                  </p>
+                ) : (
+                  <div className="space-y-3">
+                    {data.references.map((ref) => (
+                      <div key={ref.id} className="text-xs space-y-1">
+                        <p className="font-semibold">
+                          {ref.fullName}
+                        </p>
+
+                        {ref.companyName && (
+                          <p>{ref.companyName}</p>
+                        )}
+
+                        {(ref.phone) && (
+                          <p className="text-[11px]">
+                            {ref.phone}
+                          </p>
+                        )}
+
+                        {(ref.email) && (
+                          <p className="text-[11px]">
+                            {ref.email}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                </div>
+              </Block>
+            )}
 
             {/* PERSONAL DETAILS */}
             {(data?.dateOfBirth || data?.nationality || data?.maritalStatus) && (

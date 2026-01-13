@@ -21,6 +21,7 @@ import SocialLinksForm from "@/app/components/resume/SocialLinksForm";
 import TemplateSelector from "@/app/components/resume/TemplateSelector";
 import TitleInput from "@/app/components/resume/TitleInput";
 import FinalPageSkeleton from "../skeletons/FinalPageSkeleton";
+import ReferenceForm from "./ReferenceForm";
 
 export default function FinalPage() {
   const router = useRouter();
@@ -137,6 +138,11 @@ export default function FinalPage() {
         <section className="space-y-5">
           <h2 className="font-semibold text-xl">Social Links</h2>
           <SocialLinksForm />
+        </section>
+
+        <section className="space-y-5">
+          <h2 className="font-semibold text-xl">References</h2>
+          <ReferenceForm />
         </section>
 
         {/* Export or Continue */}

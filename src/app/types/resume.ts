@@ -45,6 +45,15 @@ export interface LanguageItem {
   level: string; 
 }
 
+export interface ReferenceItem {
+  id: string;
+  collapsed: boolean;
+  fullName?: string;
+  companyName?: string;
+  phone?: string;
+  email?: string;
+}
+
 export interface ResumeData {
   resumeId: string | null;
   title?: string;
@@ -62,8 +71,10 @@ export interface ResumeData {
   skills: SkillItem[];
   languages: LanguageItem[];
   socialLinks: SocialLinkItem[];
+  references: ReferenceItem[];
   showSkillMeter: boolean;
   showLanguageMeter: boolean;
+  hideReferences: boolean;
 
   about?: string;
   hobbies?: string;
@@ -86,6 +97,7 @@ export type ResumeWithRelations = Prisma.ResumeGetPayload<{
     skills: true;
     languages: true;
     socialLinks: true;
+    references: true;
   };
 }>;
 

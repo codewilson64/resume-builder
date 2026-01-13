@@ -119,9 +119,7 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
             </Block>
           )}
 
-          {(data.dateOfBirth ||
-            data.nationality ||
-            data.maritalStatus) && (
+          {(data.dateOfBirth || data.nationality || data.maritalStatus) && (
             <Block title="Personal Details">
               <div className="text-xs text-white/90 space-y-3">
                 {data?.dateOfBirth && (
@@ -151,6 +149,43 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
                   </p>
                 )}
               </div>
+            </Block>
+          )}
+
+          {/* REFERENCES */}
+          {data?.references.length > 0 && (
+            <Block title="References">
+              {resumeData.hideReferences ? (
+                <p className="text-xs">
+                  References available upon request
+                </p>
+              ) : (
+                <div className="space-y-3">
+                  {data.references.map((ref) => (
+                    <div key={ref.id} className="text-xs space-y-1">
+                      <p className="font-semibold">
+                        {ref.fullName}
+                      </p>
+
+                      {ref.companyName && (
+                        <p>{ref.companyName}</p>
+                      )}
+
+                      {(ref.phone) && (
+                        <p>
+                          {ref.phone}
+                        </p>
+                      )}
+
+                      {(ref.email) && (
+                        <p>
+                          {ref.email}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
             </Block>
           )}
         </aside>

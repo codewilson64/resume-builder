@@ -15,6 +15,7 @@ export const createEmptyResume = (): ResumeData => ({
   skills: [],
   languages: [],
   socialLinks: [],
+  references: [],
   about: "",
   hobbies: "",
   template: "Orion",
@@ -22,5 +23,6 @@ export const createEmptyResume = (): ResumeData => ({
   fontFamily: "Poppins",
   showSkillMeter: true,
   showLanguageMeter: true,
+  hideReferences: false,
   resumeId: null,
 });

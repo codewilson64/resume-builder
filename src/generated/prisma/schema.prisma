@@ -145,6 +145,7 @@ model Resume {
   hobbies           String?
   showSkillMeter    Boolean @default(true)
   showLanguageMeter Boolean @default(true)
+  hideReferences    Boolean @default(false)
 
   // Relations (lists)
   experiences Experience[]
@@ -152,6 +153,7 @@ model Resume {
   skills      Skill[]
   languages   Language[]
   socialLinks SocialLink[]
+  references  Reference[]
 }
 
 model Experience {
@@ -206,4 +208,18 @@ model SocialLink {
 
   label String?
   url   String?
+}
+
+model Reference {
+  id       String @id @default(uuid()) @db.Uuid
+  resumeId String @db.Uuid
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  fullName    String?
+  companyName String?
+  phone       String?
+  email       String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

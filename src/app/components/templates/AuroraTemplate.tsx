@@ -67,14 +67,14 @@ export default function AuroraTemplate({
 
             {/* CONTACT */}
             <div className="text-xs text-right space-y-2">
-              {data.phone && <p>{data.phone}</p>}
-              {data.email && <p>{data.email}</p>}
               {(data.address || data.city) && (
                 <p>
                   {data.address}
                   {data.city ? `, ${data.city}` : ""}
                 </p>
               )}
+              {data.email && <p>{data.email}</p>}
+              {data.phone && <p>{data.phone}</p>}
             </div>
           </header>
 
@@ -82,7 +82,7 @@ export default function AuroraTemplate({
           {data.about && (
             <Block title="Summary">
               <div
-                className="prose prose-sm max-w-none text-gray-900 text-sm mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                className="prose prose-sm max-w-none text-gray-900 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                 dangerouslySetInnerHTML={{ __html: data.about }}
               />
             </Block>
@@ -101,7 +101,7 @@ export default function AuroraTemplate({
                             <p className="text-sm font-semibold">{exp.jobTitle}, {exp.company}, {exp.city}</p>
                           )}
 
-                        <p className="text-sm font-semibold">
+                        <p className="text-xs font-semibold">
                           {exp.startDate && formatDate(exp.startDate)}
                           {exp.endDate || exp.current ? " – " : ""}
                           {exp.current ? "Present" : formatDate(exp.endDate)}
@@ -110,7 +110,7 @@ export default function AuroraTemplate({
 
                       {exp.description && (
                         <div
-                          className="prose prose-sm max-w-none text-gray-900 text-sm mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                          className="prose prose-sm max-w-none text-gray-900 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                           dangerouslySetInnerHTML={{ __html: exp.description }}
                         />
                       )}
@@ -136,7 +136,7 @@ export default function AuroraTemplate({
                       )}
 
                       {edu.school && (
-                        <p className="text-sm font-semibold">
+                        <p className="text-xs font-semibold">
                           
                           {edu.graduationDate &&
                             `${formatDate(edu.graduationDate)}`}
@@ -146,7 +146,7 @@ export default function AuroraTemplate({
 
                       {edu.description && (
                         <div
-                          className="prose prose-sm max-w-none text-gray-900 text-sm mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                          className="prose prose-sm max-w-none text-gray-900 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                           dangerouslySetInnerHTML={{ __html: edu.description }}
                         />
                       )}
@@ -179,7 +179,7 @@ export default function AuroraTemplate({
 
                         <div className="w-full">
                           {/* Skill name */}
-                          <span className="block text-black text-sm">
+                          <span className="block text-black text-xs">
                             {skill.skillName}
                           </span>
 
@@ -200,7 +200,6 @@ export default function AuroraTemplate({
             </Block>
           )}
 
-
           {/* ================= LANGUAGES ================= */}
           {data.languages?.length > 0 && (
             <Block title="Languages">
@@ -219,7 +218,7 @@ export default function AuroraTemplate({
                     return resumeData.showLanguageMeter ? (
                       /* ===== Meter ON (grid) ===== */
                       <div key={lang.id}>
-                        <span className="block mb-1 text-black text-sm">
+                        <span className="block mb-1 text-black text-xs">
                           {lang.name}
                         </span>
 
@@ -236,7 +235,7 @@ export default function AuroraTemplate({
                         <span className="mt-[1px] text-black text-lg leading-none">
                           •
                         </span>
-                        <span className="text-black text-sm">
+                        <span className="text-black text-xs">
                           {lang.name}
                         </span>
                       </div>
@@ -246,11 +245,10 @@ export default function AuroraTemplate({
             </Block>
           )}
 
-
           {/* ================= PERSONAL DETAILS ================= */}
           {(data.dateOfBirth || data.nationality || data.maritalStatus) && (
             <Block title="Personal Details">
-              <ul className="text-sm space-y-2 text-gray-700">
+              <ul className="text-xs space-y-2 text-gray-700">
                 {data.dateOfBirth && (
                   <li>
                     <span className="font-semibold">Date of Birth:</span>{" "}
@@ -273,10 +271,47 @@ export default function AuroraTemplate({
             </Block>
           )}
 
+          {/* REFERENCES */}
+          {data?.references.length > 0 && (
+            <Block title="References">
+              {resumeData.hideReferences ? (
+                <p className="text-xs">
+                  References available upon request
+                </p>
+              ) : (
+                <div className="space-y-3 text-xs">
+                  {data.references.map((ref) => (
+                    <div key={ref.id} className="space-y-1">
+                      <p className="font-semibold text-gray-800">
+                        {ref.fullName}
+                      </p>
+
+                      {ref.companyName && (
+                        <p>{ref.companyName}</p>
+                      )}
+
+                      {(ref.phone) && (
+                        <p className="">
+                          {ref.phone}
+                        </p>
+                      )}
+
+                      {(ref.email) && (
+                        <p className="">
+                          {ref.email}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </Block>
+          )}
+
           {/* ================= SOCIAL LINKS ================= */}
           {data.socialLinks?.length > 0 && (
             <Block title="Social Links">
-              <ul className="space-y-2 text-sm">
+              <ul className="space-y-2 text-xs">
                 {data.socialLinks
                   .filter(s => s.label || s.url)
                   .map(link => (
@@ -300,7 +335,7 @@ export default function AuroraTemplate({
           {/* ================= HOBBIES ================= */}
           {data.hobbies && (
             <Block title="Hobbies and Interests">
-              <ul className="text-sm list-disc list-inside space-y-1">
+              <ul className="text-xs list-disc list-inside space-y-1">
                 {data.hobbies.split(",").map((hobby, i) => (
                   <li key={i}>{hobby.trim()}</li>
                 ))}
