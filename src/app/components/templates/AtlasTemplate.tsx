@@ -268,7 +268,7 @@ export default function AtlasTemplate({
             {/* PERSONAL DETAILS */}
             {(data.dateOfBirth || data.nationality || data.maritalStatus) && (
               <Block title="Personal Details">
-                <ul className="text-xs space-y-2 text-gray-700">
+                <ul className="text-xs space-y-2 text-black">
                   {data.dateOfBirth && (
                     <li>
                       <span className="font-semibold">Date of Birth:</span>{" "}
@@ -329,6 +329,32 @@ export default function AtlasTemplate({
                 )}
               </Block>
             )}
+
+            {/* CUSTOM SECTIONS */}
+            {data?.customSections?.length > 0 &&
+              data.customSections
+                .filter(
+                  (section) =>
+                    section.sectionName?.trim() || section.description?.trim()
+                )
+                .map((section) => (
+                  <Block
+                    key={section.id}
+                    title={section.sectionName || "Custom Section"}
+                  >
+                    {section.description && (
+                      <div
+                        className="prose prose-sm max-w-none text-xs leading-relaxed text-black
+                                  prose-li:marker:text-gray-900
+                                  prose-p:my-0
+                                  prose-ul:my-1
+                                  prose-ol:my-1
+                                  prose-li:my-0"
+                        dangerouslySetInnerHTML={{ __html: section.description }}
+                      />
+                    )}
+                  </Block>
+            ))}
           </aside>
         </div>
       </div>

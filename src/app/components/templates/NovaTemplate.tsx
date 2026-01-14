@@ -52,7 +52,7 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
       >
 
         {/* HEADER */}
-        <header className="text-center p-6">
+        <header className="text-center p-8">
           {/* LEFT — NAME & JOB */}
           <div>
             <h1 className="text-[38px] font-light tracking-wide leading-none">
@@ -60,7 +60,7 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
             </h1>
 
             {data?.jobTitle && (
-              <p className="uppercase text-gray-500 tracking-[0.25em] text-sm mt-2">
+              <p className="uppercase text-gray-500 tracking-[0.25em] text-sm mt-3">
                 {data.jobTitle}
               </p>
             )}
@@ -189,7 +189,7 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
             {/* PERSONAL DETAILS */}
             {(data?.dateOfBirth || data?.nationality || data?.maritalStatus) && (
               <Block title="Personal Details" color={data.accentColor}>
-                <div className="text-xs space-y-3">
+                <div className="text-xs space-y-3 border-b border-black pb-6">
                   {data?.dateOfBirth && (
                     <p>
                       <span className="font-semibold block">Date of Birth</span>
@@ -213,6 +213,35 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
                 </div>
               </Block>          
             )}
+
+            {/* CUSTOM SECTIONS */}
+            {data?.customSections?.length > 0 &&
+              data.customSections
+                .filter(
+                  (section) =>
+                    section.sectionName?.trim() || section.description?.trim()
+                )
+                .map((section) => (
+                  <Block
+                    key={section.id}
+                    title={section.sectionName || "Custom Section"}
+                    color={data.accentColor}
+                  >
+                    <div className="border-b border-black pb-6">
+                      {section.description && (
+                        <div
+                          className="prose prose-sm max-w-none text-xs leading-relaxed
+                                    prose-li:marker:text-gray-900
+                                    prose-p:my-0
+                                    prose-ul:my-1
+                                    prose-ol:my-1
+                                    prose-li:my-0"
+                          dangerouslySetInnerHTML={{ __html: section.description }}
+                        />
+                      )}
+                    </div>
+                  </Block>
+            ))}
           </aside>
 
           {/* ===== RIGHT COLUMN ===== */}
@@ -354,7 +383,7 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
             {/* HOBBIES */}
             {data?.hobbies && (
               <Block title="Hobbies" color={data.accentColor}>
-              <div className="flex gap-4 text-xs">
+              <div className="flex gap-4 text-xs border-b border-black pb-6">
                 {data.hobbies.split(",").map((hobby, i) => (
                   <span key={i}>{hobby.trim()}</span>
                 ))}

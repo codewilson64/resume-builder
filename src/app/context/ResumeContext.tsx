@@ -39,6 +39,7 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
     languages: [],
     socialLinks: [],
     references: [],
+    customSections: [],
     about: "",
     hobbies: "",
     template: "Orion",

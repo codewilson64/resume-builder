@@ -317,7 +317,7 @@ export default function AstraTemplate({
               </Block>
             )}
 
-            {/* ================= HOBBIES (BOTTOM) ================= */}
+            {/* HOBBIES */}
             {data.hobbies && (
               <Block title="Hobbies">
                 <ul className="text-xs list-disc list-inside space-y-1">
@@ -327,6 +327,32 @@ export default function AstraTemplate({
                 </ul>
               </Block>
             )}
+
+            {/* CUSTOM SECTIONS */}
+            {data?.customSections?.length > 0 &&
+              data.customSections
+                .filter(
+                  (section) =>
+                    section.sectionName?.trim() || section.description?.trim()
+                )
+                .map((section) => (
+                  <Block
+                    key={section.id}
+                    title={section.sectionName || "Custom Section"}
+                  >
+                    {section.description && (
+                      <div
+                        className="prose prose-sm max-w-none text-xs leading-relaxed
+                                  prose-li:marker:text-gray-900
+                                  prose-p:my-0
+                                  prose-ul:my-1
+                                  prose-ol:my-1
+                                  prose-li:my-0"
+                        dangerouslySetInnerHTML={{ __html: section.description }}
+                      />
+                    )}
+                  </Block>
+            ))}
           </div>
         </div>
       </div>

@@ -78,6 +78,11 @@ export type SocialLink = $Result.DefaultSelection<Prisma.$SocialLinkPayload>
  * 
  */
 export type Reference = $Result.DefaultSelection<Prisma.$ReferencePayload>
+/**
+ * Model CustomSection
+ * 
+ */
+export type CustomSection = $Result.DefaultSelection<Prisma.$CustomSectionPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -325,6 +330,16 @@ export class PrismaClient<
     * ```
     */
   get reference(): Prisma.ReferenceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.customSection`: Exposes CRUD operations for the **CustomSection** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CustomSections
+    * const customSections = await prisma.customSection.findMany()
+    * ```
+    */
+  get customSection(): Prisma.CustomSectionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -771,7 +786,8 @@ export namespace Prisma {
     Skill: 'Skill',
     Language: 'Language',
     SocialLink: 'SocialLink',
-    Reference: 'Reference'
+    Reference: 'Reference',
+    CustomSection: 'CustomSection'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -787,7 +803,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "guest" | "user" | "session" | "account" | "verification" | "subscription" | "resume" | "experience" | "education" | "skill" | "language" | "socialLink" | "reference"
+      modelProps: "guest" | "user" | "session" | "account" | "verification" | "subscription" | "resume" | "experience" | "education" | "skill" | "language" | "socialLink" | "reference" | "customSection"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1753,6 +1769,80 @@ export namespace Prisma {
           }
         }
       }
+      CustomSection: {
+        payload: Prisma.$CustomSectionPayload<ExtArgs>
+        fields: Prisma.CustomSectionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CustomSectionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomSectionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CustomSectionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomSectionPayload>
+          }
+          findFirst: {
+            args: Prisma.CustomSectionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomSectionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CustomSectionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomSectionPayload>
+          }
+          findMany: {
+            args: Prisma.CustomSectionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomSectionPayload>[]
+          }
+          create: {
+            args: Prisma.CustomSectionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomSectionPayload>
+          }
+          createMany: {
+            args: Prisma.CustomSectionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CustomSectionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomSectionPayload>[]
+          }
+          delete: {
+            args: Prisma.CustomSectionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomSectionPayload>
+          }
+          update: {
+            args: Prisma.CustomSectionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomSectionPayload>
+          }
+          deleteMany: {
+            args: Prisma.CustomSectionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CustomSectionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CustomSectionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomSectionPayload>[]
+          }
+          upsert: {
+            args: Prisma.CustomSectionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomSectionPayload>
+          }
+          aggregate: {
+            args: Prisma.CustomSectionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCustomSection>
+          }
+          groupBy: {
+            args: Prisma.CustomSectionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CustomSectionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CustomSectionCountArgs<ExtArgs>
+            result: $Utils.Optional<CustomSectionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1874,6 +1964,7 @@ export namespace Prisma {
     language?: LanguageOmit
     socialLink?: SocialLinkOmit
     reference?: ReferenceOmit
+    customSection?: CustomSectionOmit
   }
 
   /* Types for Logging */
@@ -2049,6 +2140,7 @@ export namespace Prisma {
     languages: number
     socialLinks: number
     references: number
+    customSections: number
   }
 
   export type ResumeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2058,6 +2150,7 @@ export namespace Prisma {
     languages?: boolean | ResumeCountOutputTypeCountLanguagesArgs
     socialLinks?: boolean | ResumeCountOutputTypeCountSocialLinksArgs
     references?: boolean | ResumeCountOutputTypeCountReferencesArgs
+    customSections?: boolean | ResumeCountOutputTypeCountCustomSectionsArgs
   }
 
   // Custom InputTypes
@@ -2111,6 +2204,13 @@ export namespace Prisma {
    */
   export type ResumeCountOutputTypeCountReferencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReferenceWhereInput
+  }
+
+  /**
+   * ResumeCountOutputType without action
+   */
+  export type ResumeCountOutputTypeCountCustomSectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CustomSectionWhereInput
   }
 
 
@@ -9199,6 +9299,7 @@ export namespace Prisma {
     languages?: boolean | Resume$languagesArgs<ExtArgs>
     socialLinks?: boolean | Resume$socialLinksArgs<ExtArgs>
     references?: boolean | Resume$referencesArgs<ExtArgs>
+    customSections?: boolean | Resume$customSectionsArgs<ExtArgs>
     _count?: boolean | ResumeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
 
@@ -9300,6 +9401,7 @@ export namespace Prisma {
     languages?: boolean | Resume$languagesArgs<ExtArgs>
     socialLinks?: boolean | Resume$socialLinksArgs<ExtArgs>
     references?: boolean | Resume$referencesArgs<ExtArgs>
+    customSections?: boolean | Resume$customSectionsArgs<ExtArgs>
     _count?: boolean | ResumeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ResumeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9322,6 +9424,7 @@ export namespace Prisma {
       languages: Prisma.$LanguagePayload<ExtArgs>[]
       socialLinks: Prisma.$SocialLinkPayload<ExtArgs>[]
       references: Prisma.$ReferencePayload<ExtArgs>[]
+      customSections: Prisma.$CustomSectionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9751,6 +9854,7 @@ export namespace Prisma {
     languages<T extends Resume$languagesArgs<ExtArgs> = {}>(args?: Subset<T, Resume$languagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     socialLinks<T extends Resume$socialLinksArgs<ExtArgs> = {}>(args?: Subset<T, Resume$socialLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SocialLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     references<T extends Resume$referencesArgs<ExtArgs> = {}>(args?: Subset<T, Resume$referencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    customSections<T extends Resume$customSectionsArgs<ExtArgs> = {}>(args?: Subset<T, Resume$customSectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomSectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10380,6 +10484,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReferenceScalarFieldEnum | ReferenceScalarFieldEnum[]
+  }
+
+  /**
+   * Resume.customSections
+   */
+  export type Resume$customSectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomSection
+     */
+    select?: CustomSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomSection
+     */
+    omit?: CustomSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomSectionInclude<ExtArgs> | null
+    where?: CustomSectionWhereInput
+    orderBy?: CustomSectionOrderByWithRelationInput | CustomSectionOrderByWithRelationInput[]
+    cursor?: CustomSectionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CustomSectionScalarFieldEnum | CustomSectionScalarFieldEnum[]
   }
 
   /**
@@ -16841,6 +16969,1077 @@ export namespace Prisma {
 
 
   /**
+   * Model CustomSection
+   */
+
+  export type AggregateCustomSection = {
+    _count: CustomSectionCountAggregateOutputType | null
+    _min: CustomSectionMinAggregateOutputType | null
+    _max: CustomSectionMaxAggregateOutputType | null
+  }
+
+  export type CustomSectionMinAggregateOutputType = {
+    id: string | null
+    resumeId: string | null
+    sectionName: string | null
+    description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CustomSectionMaxAggregateOutputType = {
+    id: string | null
+    resumeId: string | null
+    sectionName: string | null
+    description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CustomSectionCountAggregateOutputType = {
+    id: number
+    resumeId: number
+    sectionName: number
+    description: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CustomSectionMinAggregateInputType = {
+    id?: true
+    resumeId?: true
+    sectionName?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CustomSectionMaxAggregateInputType = {
+    id?: true
+    resumeId?: true
+    sectionName?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CustomSectionCountAggregateInputType = {
+    id?: true
+    resumeId?: true
+    sectionName?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CustomSectionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CustomSection to aggregate.
+     */
+    where?: CustomSectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomSections to fetch.
+     */
+    orderBy?: CustomSectionOrderByWithRelationInput | CustomSectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CustomSectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomSections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomSections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CustomSections
+    **/
+    _count?: true | CustomSectionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CustomSectionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CustomSectionMaxAggregateInputType
+  }
+
+  export type GetCustomSectionAggregateType<T extends CustomSectionAggregateArgs> = {
+        [P in keyof T & keyof AggregateCustomSection]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCustomSection[P]>
+      : GetScalarType<T[P], AggregateCustomSection[P]>
+  }
+
+
+
+
+  export type CustomSectionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CustomSectionWhereInput
+    orderBy?: CustomSectionOrderByWithAggregationInput | CustomSectionOrderByWithAggregationInput[]
+    by: CustomSectionScalarFieldEnum[] | CustomSectionScalarFieldEnum
+    having?: CustomSectionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CustomSectionCountAggregateInputType | true
+    _min?: CustomSectionMinAggregateInputType
+    _max?: CustomSectionMaxAggregateInputType
+  }
+
+  export type CustomSectionGroupByOutputType = {
+    id: string
+    resumeId: string
+    sectionName: string | null
+    description: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: CustomSectionCountAggregateOutputType | null
+    _min: CustomSectionMinAggregateOutputType | null
+    _max: CustomSectionMaxAggregateOutputType | null
+  }
+
+  type GetCustomSectionGroupByPayload<T extends CustomSectionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CustomSectionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CustomSectionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CustomSectionGroupByOutputType[P]>
+            : GetScalarType<T[P], CustomSectionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CustomSectionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    resumeId?: boolean
+    sectionName?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customSection"]>
+
+  export type CustomSectionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    resumeId?: boolean
+    sectionName?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customSection"]>
+
+  export type CustomSectionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    resumeId?: boolean
+    sectionName?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["customSection"]>
+
+  export type CustomSectionSelectScalar = {
+    id?: boolean
+    resumeId?: boolean
+    sectionName?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CustomSectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "resumeId" | "sectionName" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["customSection"]>
+  export type CustomSectionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }
+  export type CustomSectionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }
+  export type CustomSectionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }
+
+  export type $CustomSectionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CustomSection"
+    objects: {
+      resume: Prisma.$ResumePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      resumeId: string
+      sectionName: string | null
+      description: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["customSection"]>
+    composites: {}
+  }
+
+  type CustomSectionGetPayload<S extends boolean | null | undefined | CustomSectionDefaultArgs> = $Result.GetResult<Prisma.$CustomSectionPayload, S>
+
+  type CustomSectionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CustomSectionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CustomSectionCountAggregateInputType | true
+    }
+
+  export interface CustomSectionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CustomSection'], meta: { name: 'CustomSection' } }
+    /**
+     * Find zero or one CustomSection that matches the filter.
+     * @param {CustomSectionFindUniqueArgs} args - Arguments to find a CustomSection
+     * @example
+     * // Get one CustomSection
+     * const customSection = await prisma.customSection.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CustomSectionFindUniqueArgs>(args: SelectSubset<T, CustomSectionFindUniqueArgs<ExtArgs>>): Prisma__CustomSectionClient<$Result.GetResult<Prisma.$CustomSectionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CustomSection that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CustomSectionFindUniqueOrThrowArgs} args - Arguments to find a CustomSection
+     * @example
+     * // Get one CustomSection
+     * const customSection = await prisma.customSection.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CustomSectionFindUniqueOrThrowArgs>(args: SelectSubset<T, CustomSectionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CustomSectionClient<$Result.GetResult<Prisma.$CustomSectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CustomSection that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomSectionFindFirstArgs} args - Arguments to find a CustomSection
+     * @example
+     * // Get one CustomSection
+     * const customSection = await prisma.customSection.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CustomSectionFindFirstArgs>(args?: SelectSubset<T, CustomSectionFindFirstArgs<ExtArgs>>): Prisma__CustomSectionClient<$Result.GetResult<Prisma.$CustomSectionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CustomSection that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomSectionFindFirstOrThrowArgs} args - Arguments to find a CustomSection
+     * @example
+     * // Get one CustomSection
+     * const customSection = await prisma.customSection.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CustomSectionFindFirstOrThrowArgs>(args?: SelectSubset<T, CustomSectionFindFirstOrThrowArgs<ExtArgs>>): Prisma__CustomSectionClient<$Result.GetResult<Prisma.$CustomSectionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CustomSections that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomSectionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CustomSections
+     * const customSections = await prisma.customSection.findMany()
+     * 
+     * // Get first 10 CustomSections
+     * const customSections = await prisma.customSection.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const customSectionWithIdOnly = await prisma.customSection.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CustomSectionFindManyArgs>(args?: SelectSubset<T, CustomSectionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomSectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CustomSection.
+     * @param {CustomSectionCreateArgs} args - Arguments to create a CustomSection.
+     * @example
+     * // Create one CustomSection
+     * const CustomSection = await prisma.customSection.create({
+     *   data: {
+     *     // ... data to create a CustomSection
+     *   }
+     * })
+     * 
+     */
+    create<T extends CustomSectionCreateArgs>(args: SelectSubset<T, CustomSectionCreateArgs<ExtArgs>>): Prisma__CustomSectionClient<$Result.GetResult<Prisma.$CustomSectionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CustomSections.
+     * @param {CustomSectionCreateManyArgs} args - Arguments to create many CustomSections.
+     * @example
+     * // Create many CustomSections
+     * const customSection = await prisma.customSection.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CustomSectionCreateManyArgs>(args?: SelectSubset<T, CustomSectionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CustomSections and returns the data saved in the database.
+     * @param {CustomSectionCreateManyAndReturnArgs} args - Arguments to create many CustomSections.
+     * @example
+     * // Create many CustomSections
+     * const customSection = await prisma.customSection.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CustomSections and only return the `id`
+     * const customSectionWithIdOnly = await prisma.customSection.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CustomSectionCreateManyAndReturnArgs>(args?: SelectSubset<T, CustomSectionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomSectionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CustomSection.
+     * @param {CustomSectionDeleteArgs} args - Arguments to delete one CustomSection.
+     * @example
+     * // Delete one CustomSection
+     * const CustomSection = await prisma.customSection.delete({
+     *   where: {
+     *     // ... filter to delete one CustomSection
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CustomSectionDeleteArgs>(args: SelectSubset<T, CustomSectionDeleteArgs<ExtArgs>>): Prisma__CustomSectionClient<$Result.GetResult<Prisma.$CustomSectionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CustomSection.
+     * @param {CustomSectionUpdateArgs} args - Arguments to update one CustomSection.
+     * @example
+     * // Update one CustomSection
+     * const customSection = await prisma.customSection.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CustomSectionUpdateArgs>(args: SelectSubset<T, CustomSectionUpdateArgs<ExtArgs>>): Prisma__CustomSectionClient<$Result.GetResult<Prisma.$CustomSectionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CustomSections.
+     * @param {CustomSectionDeleteManyArgs} args - Arguments to filter CustomSections to delete.
+     * @example
+     * // Delete a few CustomSections
+     * const { count } = await prisma.customSection.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CustomSectionDeleteManyArgs>(args?: SelectSubset<T, CustomSectionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CustomSections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomSectionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CustomSections
+     * const customSection = await prisma.customSection.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CustomSectionUpdateManyArgs>(args: SelectSubset<T, CustomSectionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CustomSections and returns the data updated in the database.
+     * @param {CustomSectionUpdateManyAndReturnArgs} args - Arguments to update many CustomSections.
+     * @example
+     * // Update many CustomSections
+     * const customSection = await prisma.customSection.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CustomSections and only return the `id`
+     * const customSectionWithIdOnly = await prisma.customSection.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CustomSectionUpdateManyAndReturnArgs>(args: SelectSubset<T, CustomSectionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomSectionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CustomSection.
+     * @param {CustomSectionUpsertArgs} args - Arguments to update or create a CustomSection.
+     * @example
+     * // Update or create a CustomSection
+     * const customSection = await prisma.customSection.upsert({
+     *   create: {
+     *     // ... data to create a CustomSection
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CustomSection we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CustomSectionUpsertArgs>(args: SelectSubset<T, CustomSectionUpsertArgs<ExtArgs>>): Prisma__CustomSectionClient<$Result.GetResult<Prisma.$CustomSectionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CustomSections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomSectionCountArgs} args - Arguments to filter CustomSections to count.
+     * @example
+     * // Count the number of CustomSections
+     * const count = await prisma.customSection.count({
+     *   where: {
+     *     // ... the filter for the CustomSections we want to count
+     *   }
+     * })
+    **/
+    count<T extends CustomSectionCountArgs>(
+      args?: Subset<T, CustomSectionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CustomSectionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CustomSection.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomSectionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CustomSectionAggregateArgs>(args: Subset<T, CustomSectionAggregateArgs>): Prisma.PrismaPromise<GetCustomSectionAggregateType<T>>
+
+    /**
+     * Group by CustomSection.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomSectionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CustomSectionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CustomSectionGroupByArgs['orderBy'] }
+        : { orderBy?: CustomSectionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CustomSectionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCustomSectionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CustomSection model
+   */
+  readonly fields: CustomSectionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CustomSection.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CustomSectionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    resume<T extends ResumeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ResumeDefaultArgs<ExtArgs>>): Prisma__ResumeClient<$Result.GetResult<Prisma.$ResumePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CustomSection model
+   */
+  interface CustomSectionFieldRefs {
+    readonly id: FieldRef<"CustomSection", 'String'>
+    readonly resumeId: FieldRef<"CustomSection", 'String'>
+    readonly sectionName: FieldRef<"CustomSection", 'String'>
+    readonly description: FieldRef<"CustomSection", 'String'>
+    readonly createdAt: FieldRef<"CustomSection", 'DateTime'>
+    readonly updatedAt: FieldRef<"CustomSection", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CustomSection findUnique
+   */
+  export type CustomSectionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomSection
+     */
+    select?: CustomSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomSection
+     */
+    omit?: CustomSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomSectionInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomSection to fetch.
+     */
+    where: CustomSectionWhereUniqueInput
+  }
+
+  /**
+   * CustomSection findUniqueOrThrow
+   */
+  export type CustomSectionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomSection
+     */
+    select?: CustomSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomSection
+     */
+    omit?: CustomSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomSectionInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomSection to fetch.
+     */
+    where: CustomSectionWhereUniqueInput
+  }
+
+  /**
+   * CustomSection findFirst
+   */
+  export type CustomSectionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomSection
+     */
+    select?: CustomSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomSection
+     */
+    omit?: CustomSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomSectionInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomSection to fetch.
+     */
+    where?: CustomSectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomSections to fetch.
+     */
+    orderBy?: CustomSectionOrderByWithRelationInput | CustomSectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CustomSections.
+     */
+    cursor?: CustomSectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomSections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomSections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CustomSections.
+     */
+    distinct?: CustomSectionScalarFieldEnum | CustomSectionScalarFieldEnum[]
+  }
+
+  /**
+   * CustomSection findFirstOrThrow
+   */
+  export type CustomSectionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomSection
+     */
+    select?: CustomSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomSection
+     */
+    omit?: CustomSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomSectionInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomSection to fetch.
+     */
+    where?: CustomSectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomSections to fetch.
+     */
+    orderBy?: CustomSectionOrderByWithRelationInput | CustomSectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CustomSections.
+     */
+    cursor?: CustomSectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomSections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomSections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CustomSections.
+     */
+    distinct?: CustomSectionScalarFieldEnum | CustomSectionScalarFieldEnum[]
+  }
+
+  /**
+   * CustomSection findMany
+   */
+  export type CustomSectionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomSection
+     */
+    select?: CustomSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomSection
+     */
+    omit?: CustomSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomSectionInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomSections to fetch.
+     */
+    where?: CustomSectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomSections to fetch.
+     */
+    orderBy?: CustomSectionOrderByWithRelationInput | CustomSectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CustomSections.
+     */
+    cursor?: CustomSectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomSections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomSections.
+     */
+    skip?: number
+    distinct?: CustomSectionScalarFieldEnum | CustomSectionScalarFieldEnum[]
+  }
+
+  /**
+   * CustomSection create
+   */
+  export type CustomSectionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomSection
+     */
+    select?: CustomSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomSection
+     */
+    omit?: CustomSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomSectionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CustomSection.
+     */
+    data: XOR<CustomSectionCreateInput, CustomSectionUncheckedCreateInput>
+  }
+
+  /**
+   * CustomSection createMany
+   */
+  export type CustomSectionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CustomSections.
+     */
+    data: CustomSectionCreateManyInput | CustomSectionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CustomSection createManyAndReturn
+   */
+  export type CustomSectionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomSection
+     */
+    select?: CustomSectionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomSection
+     */
+    omit?: CustomSectionOmit<ExtArgs> | null
+    /**
+     * The data used to create many CustomSections.
+     */
+    data: CustomSectionCreateManyInput | CustomSectionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomSectionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CustomSection update
+   */
+  export type CustomSectionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomSection
+     */
+    select?: CustomSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomSection
+     */
+    omit?: CustomSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomSectionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CustomSection.
+     */
+    data: XOR<CustomSectionUpdateInput, CustomSectionUncheckedUpdateInput>
+    /**
+     * Choose, which CustomSection to update.
+     */
+    where: CustomSectionWhereUniqueInput
+  }
+
+  /**
+   * CustomSection updateMany
+   */
+  export type CustomSectionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CustomSections.
+     */
+    data: XOR<CustomSectionUpdateManyMutationInput, CustomSectionUncheckedUpdateManyInput>
+    /**
+     * Filter which CustomSections to update
+     */
+    where?: CustomSectionWhereInput
+    /**
+     * Limit how many CustomSections to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CustomSection updateManyAndReturn
+   */
+  export type CustomSectionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomSection
+     */
+    select?: CustomSectionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomSection
+     */
+    omit?: CustomSectionOmit<ExtArgs> | null
+    /**
+     * The data used to update CustomSections.
+     */
+    data: XOR<CustomSectionUpdateManyMutationInput, CustomSectionUncheckedUpdateManyInput>
+    /**
+     * Filter which CustomSections to update
+     */
+    where?: CustomSectionWhereInput
+    /**
+     * Limit how many CustomSections to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomSectionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CustomSection upsert
+   */
+  export type CustomSectionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomSection
+     */
+    select?: CustomSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomSection
+     */
+    omit?: CustomSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomSectionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CustomSection to update in case it exists.
+     */
+    where: CustomSectionWhereUniqueInput
+    /**
+     * In case the CustomSection found by the `where` argument doesn't exist, create a new CustomSection with this data.
+     */
+    create: XOR<CustomSectionCreateInput, CustomSectionUncheckedCreateInput>
+    /**
+     * In case the CustomSection was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CustomSectionUpdateInput, CustomSectionUncheckedUpdateInput>
+  }
+
+  /**
+   * CustomSection delete
+   */
+  export type CustomSectionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomSection
+     */
+    select?: CustomSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomSection
+     */
+    omit?: CustomSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomSectionInclude<ExtArgs> | null
+    /**
+     * Filter which CustomSection to delete.
+     */
+    where: CustomSectionWhereUniqueInput
+  }
+
+  /**
+   * CustomSection deleteMany
+   */
+  export type CustomSectionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CustomSections to delete
+     */
+    where?: CustomSectionWhereInput
+    /**
+     * Limit how many CustomSections to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CustomSection without action
+   */
+  export type CustomSectionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomSection
+     */
+    select?: CustomSectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomSection
+     */
+    omit?: CustomSectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomSectionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -17045,6 +18244,18 @@ export namespace Prisma {
   };
 
   export type ReferenceScalarFieldEnum = (typeof ReferenceScalarFieldEnum)[keyof typeof ReferenceScalarFieldEnum]
+
+
+  export const CustomSectionScalarFieldEnum: {
+    id: 'id',
+    resumeId: 'resumeId',
+    sectionName: 'sectionName',
+    description: 'description',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CustomSectionScalarFieldEnum = (typeof CustomSectionScalarFieldEnum)[keyof typeof CustomSectionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -17632,6 +18843,7 @@ export namespace Prisma {
     languages?: LanguageListRelationFilter
     socialLinks?: SocialLinkListRelationFilter
     references?: ReferenceListRelationFilter
+    customSections?: CustomSectionListRelationFilter
   }
 
   export type ResumeOrderByWithRelationInput = {
@@ -17668,6 +18880,7 @@ export namespace Prisma {
     languages?: LanguageOrderByRelationAggregateInput
     socialLinks?: SocialLinkOrderByRelationAggregateInput
     references?: ReferenceOrderByRelationAggregateInput
+    customSections?: CustomSectionOrderByRelationAggregateInput
   }
 
   export type ResumeWhereUniqueInput = Prisma.AtLeast<{
@@ -17707,6 +18920,7 @@ export namespace Prisma {
     languages?: LanguageListRelationFilter
     socialLinks?: SocialLinkListRelationFilter
     references?: ReferenceListRelationFilter
+    customSections?: CustomSectionListRelationFilter
   }, "id">
 
   export type ResumeOrderByWithAggregationInput = {
@@ -18134,6 +19348,66 @@ export namespace Prisma {
     email?: StringNullableWithAggregatesFilter<"Reference"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Reference"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Reference"> | Date | string
+  }
+
+  export type CustomSectionWhereInput = {
+    AND?: CustomSectionWhereInput | CustomSectionWhereInput[]
+    OR?: CustomSectionWhereInput[]
+    NOT?: CustomSectionWhereInput | CustomSectionWhereInput[]
+    id?: UuidFilter<"CustomSection"> | string
+    resumeId?: UuidFilter<"CustomSection"> | string
+    sectionName?: StringNullableFilter<"CustomSection"> | string | null
+    description?: StringNullableFilter<"CustomSection"> | string | null
+    createdAt?: DateTimeFilter<"CustomSection"> | Date | string
+    updatedAt?: DateTimeFilter<"CustomSection"> | Date | string
+    resume?: XOR<ResumeScalarRelationFilter, ResumeWhereInput>
+  }
+
+  export type CustomSectionOrderByWithRelationInput = {
+    id?: SortOrder
+    resumeId?: SortOrder
+    sectionName?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    resume?: ResumeOrderByWithRelationInput
+  }
+
+  export type CustomSectionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CustomSectionWhereInput | CustomSectionWhereInput[]
+    OR?: CustomSectionWhereInput[]
+    NOT?: CustomSectionWhereInput | CustomSectionWhereInput[]
+    resumeId?: UuidFilter<"CustomSection"> | string
+    sectionName?: StringNullableFilter<"CustomSection"> | string | null
+    description?: StringNullableFilter<"CustomSection"> | string | null
+    createdAt?: DateTimeFilter<"CustomSection"> | Date | string
+    updatedAt?: DateTimeFilter<"CustomSection"> | Date | string
+    resume?: XOR<ResumeScalarRelationFilter, ResumeWhereInput>
+  }, "id">
+
+  export type CustomSectionOrderByWithAggregationInput = {
+    id?: SortOrder
+    resumeId?: SortOrder
+    sectionName?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CustomSectionCountOrderByAggregateInput
+    _max?: CustomSectionMaxOrderByAggregateInput
+    _min?: CustomSectionMinOrderByAggregateInput
+  }
+
+  export type CustomSectionScalarWhereWithAggregatesInput = {
+    AND?: CustomSectionScalarWhereWithAggregatesInput | CustomSectionScalarWhereWithAggregatesInput[]
+    OR?: CustomSectionScalarWhereWithAggregatesInput[]
+    NOT?: CustomSectionScalarWhereWithAggregatesInput | CustomSectionScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"CustomSection"> | string
+    resumeId?: UuidWithAggregatesFilter<"CustomSection"> | string
+    sectionName?: StringNullableWithAggregatesFilter<"CustomSection"> | string | null
+    description?: StringNullableWithAggregatesFilter<"CustomSection"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"CustomSection"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"CustomSection"> | Date | string
   }
 
   export type GuestCreateInput = {
@@ -18682,6 +19956,7 @@ export namespace Prisma {
     languages?: LanguageCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
     references?: ReferenceCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateInput = {
@@ -18716,6 +19991,7 @@ export namespace Prisma {
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
     references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUpdateInput = {
@@ -18750,6 +20026,7 @@ export namespace Prisma {
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
     references?: ReferenceUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateInput = {
@@ -18784,6 +20061,7 @@ export namespace Prisma {
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
     references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateManyInput = {
@@ -19243,6 +20521,68 @@ export namespace Prisma {
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomSectionCreateInput = {
+    id?: string
+    sectionName?: string | null
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resume: ResumeCreateNestedOneWithoutCustomSectionsInput
+  }
+
+  export type CustomSectionUncheckedCreateInput = {
+    id?: string
+    resumeId: string
+    sectionName?: string | null
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomSectionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resume?: ResumeUpdateOneRequiredWithoutCustomSectionsNestedInput
+  }
+
+  export type CustomSectionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    resumeId?: StringFieldUpdateOperationsInput | string
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomSectionCreateManyInput = {
+    id?: string
+    resumeId: string
+    sectionName?: string | null
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomSectionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomSectionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    resumeId?: StringFieldUpdateOperationsInput | string
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19761,6 +21101,12 @@ export namespace Prisma {
     none?: ReferenceWhereInput
   }
 
+  export type CustomSectionListRelationFilter = {
+    every?: CustomSectionWhereInput
+    some?: CustomSectionWhereInput
+    none?: CustomSectionWhereInput
+  }
+
   export type ExperienceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -19782,6 +21128,10 @@ export namespace Prisma {
   }
 
   export type ReferenceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CustomSectionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -20050,6 +21400,33 @@ export namespace Prisma {
     companyName?: SortOrder
     phone?: SortOrder
     email?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CustomSectionCountOrderByAggregateInput = {
+    id?: SortOrder
+    resumeId?: SortOrder
+    sectionName?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CustomSectionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    resumeId?: SortOrder
+    sectionName?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CustomSectionMinOrderByAggregateInput = {
+    id?: SortOrder
+    resumeId?: SortOrder
+    sectionName?: SortOrder
+    description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -20390,6 +21767,13 @@ export namespace Prisma {
     connect?: ReferenceWhereUniqueInput | ReferenceWhereUniqueInput[]
   }
 
+  export type CustomSectionCreateNestedManyWithoutResumeInput = {
+    create?: XOR<CustomSectionCreateWithoutResumeInput, CustomSectionUncheckedCreateWithoutResumeInput> | CustomSectionCreateWithoutResumeInput[] | CustomSectionUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: CustomSectionCreateOrConnectWithoutResumeInput | CustomSectionCreateOrConnectWithoutResumeInput[]
+    createMany?: CustomSectionCreateManyResumeInputEnvelope
+    connect?: CustomSectionWhereUniqueInput | CustomSectionWhereUniqueInput[]
+  }
+
   export type ExperienceUncheckedCreateNestedManyWithoutResumeInput = {
     create?: XOR<ExperienceCreateWithoutResumeInput, ExperienceUncheckedCreateWithoutResumeInput> | ExperienceCreateWithoutResumeInput[] | ExperienceUncheckedCreateWithoutResumeInput[]
     connectOrCreate?: ExperienceCreateOrConnectWithoutResumeInput | ExperienceCreateOrConnectWithoutResumeInput[]
@@ -20430,6 +21814,13 @@ export namespace Prisma {
     connectOrCreate?: ReferenceCreateOrConnectWithoutResumeInput | ReferenceCreateOrConnectWithoutResumeInput[]
     createMany?: ReferenceCreateManyResumeInputEnvelope
     connect?: ReferenceWhereUniqueInput | ReferenceWhereUniqueInput[]
+  }
+
+  export type CustomSectionUncheckedCreateNestedManyWithoutResumeInput = {
+    create?: XOR<CustomSectionCreateWithoutResumeInput, CustomSectionUncheckedCreateWithoutResumeInput> | CustomSectionCreateWithoutResumeInput[] | CustomSectionUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: CustomSectionCreateOrConnectWithoutResumeInput | CustomSectionCreateOrConnectWithoutResumeInput[]
+    createMany?: CustomSectionCreateManyResumeInputEnvelope
+    connect?: CustomSectionWhereUniqueInput | CustomSectionWhereUniqueInput[]
   }
 
   export type GuestUpdateOneWithoutResumesNestedInput = {
@@ -20536,6 +21927,20 @@ export namespace Prisma {
     deleteMany?: ReferenceScalarWhereInput | ReferenceScalarWhereInput[]
   }
 
+  export type CustomSectionUpdateManyWithoutResumeNestedInput = {
+    create?: XOR<CustomSectionCreateWithoutResumeInput, CustomSectionUncheckedCreateWithoutResumeInput> | CustomSectionCreateWithoutResumeInput[] | CustomSectionUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: CustomSectionCreateOrConnectWithoutResumeInput | CustomSectionCreateOrConnectWithoutResumeInput[]
+    upsert?: CustomSectionUpsertWithWhereUniqueWithoutResumeInput | CustomSectionUpsertWithWhereUniqueWithoutResumeInput[]
+    createMany?: CustomSectionCreateManyResumeInputEnvelope
+    set?: CustomSectionWhereUniqueInput | CustomSectionWhereUniqueInput[]
+    disconnect?: CustomSectionWhereUniqueInput | CustomSectionWhereUniqueInput[]
+    delete?: CustomSectionWhereUniqueInput | CustomSectionWhereUniqueInput[]
+    connect?: CustomSectionWhereUniqueInput | CustomSectionWhereUniqueInput[]
+    update?: CustomSectionUpdateWithWhereUniqueWithoutResumeInput | CustomSectionUpdateWithWhereUniqueWithoutResumeInput[]
+    updateMany?: CustomSectionUpdateManyWithWhereWithoutResumeInput | CustomSectionUpdateManyWithWhereWithoutResumeInput[]
+    deleteMany?: CustomSectionScalarWhereInput | CustomSectionScalarWhereInput[]
+  }
+
   export type ExperienceUncheckedUpdateManyWithoutResumeNestedInput = {
     create?: XOR<ExperienceCreateWithoutResumeInput, ExperienceUncheckedCreateWithoutResumeInput> | ExperienceCreateWithoutResumeInput[] | ExperienceUncheckedCreateWithoutResumeInput[]
     connectOrCreate?: ExperienceCreateOrConnectWithoutResumeInput | ExperienceCreateOrConnectWithoutResumeInput[]
@@ -20620,6 +22025,20 @@ export namespace Prisma {
     deleteMany?: ReferenceScalarWhereInput | ReferenceScalarWhereInput[]
   }
 
+  export type CustomSectionUncheckedUpdateManyWithoutResumeNestedInput = {
+    create?: XOR<CustomSectionCreateWithoutResumeInput, CustomSectionUncheckedCreateWithoutResumeInput> | CustomSectionCreateWithoutResumeInput[] | CustomSectionUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: CustomSectionCreateOrConnectWithoutResumeInput | CustomSectionCreateOrConnectWithoutResumeInput[]
+    upsert?: CustomSectionUpsertWithWhereUniqueWithoutResumeInput | CustomSectionUpsertWithWhereUniqueWithoutResumeInput[]
+    createMany?: CustomSectionCreateManyResumeInputEnvelope
+    set?: CustomSectionWhereUniqueInput | CustomSectionWhereUniqueInput[]
+    disconnect?: CustomSectionWhereUniqueInput | CustomSectionWhereUniqueInput[]
+    delete?: CustomSectionWhereUniqueInput | CustomSectionWhereUniqueInput[]
+    connect?: CustomSectionWhereUniqueInput | CustomSectionWhereUniqueInput[]
+    update?: CustomSectionUpdateWithWhereUniqueWithoutResumeInput | CustomSectionUpdateWithWhereUniqueWithoutResumeInput[]
+    updateMany?: CustomSectionUpdateManyWithWhereWithoutResumeInput | CustomSectionUpdateManyWithWhereWithoutResumeInput[]
+    deleteMany?: CustomSectionScalarWhereInput | CustomSectionScalarWhereInput[]
+  }
+
   export type ResumeCreateNestedOneWithoutExperiencesInput = {
     create?: XOR<ResumeCreateWithoutExperiencesInput, ResumeUncheckedCreateWithoutExperiencesInput>
     connectOrCreate?: ResumeCreateOrConnectWithoutExperiencesInput
@@ -20702,6 +22121,20 @@ export namespace Prisma {
     upsert?: ResumeUpsertWithoutReferencesInput
     connect?: ResumeWhereUniqueInput
     update?: XOR<XOR<ResumeUpdateToOneWithWhereWithoutReferencesInput, ResumeUpdateWithoutReferencesInput>, ResumeUncheckedUpdateWithoutReferencesInput>
+  }
+
+  export type ResumeCreateNestedOneWithoutCustomSectionsInput = {
+    create?: XOR<ResumeCreateWithoutCustomSectionsInput, ResumeUncheckedCreateWithoutCustomSectionsInput>
+    connectOrCreate?: ResumeCreateOrConnectWithoutCustomSectionsInput
+    connect?: ResumeWhereUniqueInput
+  }
+
+  export type ResumeUpdateOneRequiredWithoutCustomSectionsNestedInput = {
+    create?: XOR<ResumeCreateWithoutCustomSectionsInput, ResumeUncheckedCreateWithoutCustomSectionsInput>
+    connectOrCreate?: ResumeCreateOrConnectWithoutCustomSectionsInput
+    upsert?: ResumeUpsertWithoutCustomSectionsInput
+    connect?: ResumeWhereUniqueInput
+    update?: XOR<XOR<ResumeUpdateToOneWithWhereWithoutCustomSectionsInput, ResumeUpdateWithoutCustomSectionsInput>, ResumeUncheckedUpdateWithoutCustomSectionsInput>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -20959,6 +22392,7 @@ export namespace Prisma {
     languages?: LanguageCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
     references?: ReferenceCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutGuestInput = {
@@ -20992,6 +22426,7 @@ export namespace Prisma {
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
     references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutGuestInput = {
@@ -21152,6 +22587,7 @@ export namespace Prisma {
     languages?: LanguageCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
     references?: ReferenceCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutUserInput = {
@@ -21185,6 +22621,7 @@ export namespace Prisma {
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
     references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutUserInput = {
@@ -21771,6 +23208,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CustomSectionCreateWithoutResumeInput = {
+    id?: string
+    sectionName?: string | null
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomSectionUncheckedCreateWithoutResumeInput = {
+    id?: string
+    sectionName?: string | null
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomSectionCreateOrConnectWithoutResumeInput = {
+    where: CustomSectionWhereUniqueInput
+    create: XOR<CustomSectionCreateWithoutResumeInput, CustomSectionUncheckedCreateWithoutResumeInput>
+  }
+
+  export type CustomSectionCreateManyResumeInputEnvelope = {
+    data: CustomSectionCreateManyResumeInput | CustomSectionCreateManyResumeInput[]
+    skipDuplicates?: boolean
+  }
+
   export type GuestUpsertWithoutResumesInput = {
     update: XOR<GuestUpdateWithoutResumesInput, GuestUncheckedUpdateWithoutResumesInput>
     create: XOR<GuestCreateWithoutResumesInput, GuestUncheckedCreateWithoutResumesInput>
@@ -22002,6 +23465,34 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Reference"> | Date | string
   }
 
+  export type CustomSectionUpsertWithWhereUniqueWithoutResumeInput = {
+    where: CustomSectionWhereUniqueInput
+    update: XOR<CustomSectionUpdateWithoutResumeInput, CustomSectionUncheckedUpdateWithoutResumeInput>
+    create: XOR<CustomSectionCreateWithoutResumeInput, CustomSectionUncheckedCreateWithoutResumeInput>
+  }
+
+  export type CustomSectionUpdateWithWhereUniqueWithoutResumeInput = {
+    where: CustomSectionWhereUniqueInput
+    data: XOR<CustomSectionUpdateWithoutResumeInput, CustomSectionUncheckedUpdateWithoutResumeInput>
+  }
+
+  export type CustomSectionUpdateManyWithWhereWithoutResumeInput = {
+    where: CustomSectionScalarWhereInput
+    data: XOR<CustomSectionUpdateManyMutationInput, CustomSectionUncheckedUpdateManyWithoutResumeInput>
+  }
+
+  export type CustomSectionScalarWhereInput = {
+    AND?: CustomSectionScalarWhereInput | CustomSectionScalarWhereInput[]
+    OR?: CustomSectionScalarWhereInput[]
+    NOT?: CustomSectionScalarWhereInput | CustomSectionScalarWhereInput[]
+    id?: UuidFilter<"CustomSection"> | string
+    resumeId?: UuidFilter<"CustomSection"> | string
+    sectionName?: StringNullableFilter<"CustomSection"> | string | null
+    description?: StringNullableFilter<"CustomSection"> | string | null
+    createdAt?: DateTimeFilter<"CustomSection"> | Date | string
+    updatedAt?: DateTimeFilter<"CustomSection"> | Date | string
+  }
+
   export type ResumeCreateWithoutExperiencesInput = {
     id?: string
     createdAt?: Date | string
@@ -22033,6 +23524,7 @@ export namespace Prisma {
     languages?: LanguageCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
     references?: ReferenceCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutExperiencesInput = {
@@ -22066,6 +23558,7 @@ export namespace Prisma {
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
     references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutExperiencesInput = {
@@ -22115,6 +23608,7 @@ export namespace Prisma {
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
     references?: ReferenceUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutExperiencesInput = {
@@ -22148,6 +23642,7 @@ export namespace Prisma {
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
     references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateWithoutEducationsInput = {
@@ -22181,6 +23676,7 @@ export namespace Prisma {
     languages?: LanguageCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
     references?: ReferenceCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutEducationsInput = {
@@ -22214,6 +23710,7 @@ export namespace Prisma {
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
     references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutEducationsInput = {
@@ -22263,6 +23760,7 @@ export namespace Prisma {
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
     references?: ReferenceUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutEducationsInput = {
@@ -22296,6 +23794,7 @@ export namespace Prisma {
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
     references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateWithoutSkillsInput = {
@@ -22329,6 +23828,7 @@ export namespace Prisma {
     languages?: LanguageCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
     references?: ReferenceCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutSkillsInput = {
@@ -22362,6 +23862,7 @@ export namespace Prisma {
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
     references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutSkillsInput = {
@@ -22411,6 +23912,7 @@ export namespace Prisma {
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
     references?: ReferenceUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutSkillsInput = {
@@ -22444,6 +23946,7 @@ export namespace Prisma {
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
     references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateWithoutLanguagesInput = {
@@ -22477,6 +23980,7 @@ export namespace Prisma {
     skills?: SkillCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
     references?: ReferenceCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutLanguagesInput = {
@@ -22510,6 +24014,7 @@ export namespace Prisma {
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
     references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutLanguagesInput = {
@@ -22559,6 +24064,7 @@ export namespace Prisma {
     skills?: SkillUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
     references?: ReferenceUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutLanguagesInput = {
@@ -22592,6 +24098,7 @@ export namespace Prisma {
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
     references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateWithoutSocialLinksInput = {
@@ -22625,6 +24132,7 @@ export namespace Prisma {
     skills?: SkillCreateNestedManyWithoutResumeInput
     languages?: LanguageCreateNestedManyWithoutResumeInput
     references?: ReferenceCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutSocialLinksInput = {
@@ -22658,6 +24166,7 @@ export namespace Prisma {
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutSocialLinksInput = {
@@ -22707,6 +24216,7 @@ export namespace Prisma {
     skills?: SkillUpdateManyWithoutResumeNestedInput
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     references?: ReferenceUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutSocialLinksInput = {
@@ -22740,6 +24250,7 @@ export namespace Prisma {
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateWithoutReferencesInput = {
@@ -22773,6 +24284,7 @@ export namespace Prisma {
     skills?: SkillCreateNestedManyWithoutResumeInput
     languages?: LanguageCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutReferencesInput = {
@@ -22806,6 +24318,7 @@ export namespace Prisma {
     skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
     languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
     socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
+    customSections?: CustomSectionUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutReferencesInput = {
@@ -22855,6 +24368,7 @@ export namespace Prisma {
     skills?: SkillUpdateManyWithoutResumeNestedInput
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutReferencesInput = {
@@ -22888,6 +24402,159 @@ export namespace Prisma {
     skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUncheckedUpdateManyWithoutResumeNestedInput
+  }
+
+  export type ResumeCreateWithoutCustomSectionsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    title?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    email?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    dateOfBirth?: string | null
+    nationality?: string | null
+    maritalStatus?: string | null
+    about?: string | null
+    jobTitle?: string | null
+    template: string
+    accentColor: string
+    fontFamily: string
+    hobbies?: string | null
+    showSkillMeter?: boolean
+    showLanguageMeter?: boolean
+    hideReferences?: boolean
+    guest?: GuestCreateNestedOneWithoutResumesInput
+    user?: UserCreateNestedOneWithoutResumesInput
+    experiences?: ExperienceCreateNestedManyWithoutResumeInput
+    educations?: EducationCreateNestedManyWithoutResumeInput
+    skills?: SkillCreateNestedManyWithoutResumeInput
+    languages?: LanguageCreateNestedManyWithoutResumeInput
+    socialLinks?: SocialLinkCreateNestedManyWithoutResumeInput
+    references?: ReferenceCreateNestedManyWithoutResumeInput
+  }
+
+  export type ResumeUncheckedCreateWithoutCustomSectionsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guestId?: string | null
+    userId?: string | null
+    title?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    email?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    dateOfBirth?: string | null
+    nationality?: string | null
+    maritalStatus?: string | null
+    about?: string | null
+    jobTitle?: string | null
+    template: string
+    accentColor: string
+    fontFamily: string
+    hobbies?: string | null
+    showSkillMeter?: boolean
+    showLanguageMeter?: boolean
+    hideReferences?: boolean
+    experiences?: ExperienceUncheckedCreateNestedManyWithoutResumeInput
+    educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
+    skills?: SkillUncheckedCreateNestedManyWithoutResumeInput
+    languages?: LanguageUncheckedCreateNestedManyWithoutResumeInput
+    socialLinks?: SocialLinkUncheckedCreateNestedManyWithoutResumeInput
+    references?: ReferenceUncheckedCreateNestedManyWithoutResumeInput
+  }
+
+  export type ResumeCreateOrConnectWithoutCustomSectionsInput = {
+    where: ResumeWhereUniqueInput
+    create: XOR<ResumeCreateWithoutCustomSectionsInput, ResumeUncheckedCreateWithoutCustomSectionsInput>
+  }
+
+  export type ResumeUpsertWithoutCustomSectionsInput = {
+    update: XOR<ResumeUpdateWithoutCustomSectionsInput, ResumeUncheckedUpdateWithoutCustomSectionsInput>
+    create: XOR<ResumeCreateWithoutCustomSectionsInput, ResumeUncheckedCreateWithoutCustomSectionsInput>
+    where?: ResumeWhereInput
+  }
+
+  export type ResumeUpdateToOneWithWhereWithoutCustomSectionsInput = {
+    where?: ResumeWhereInput
+    data: XOR<ResumeUpdateWithoutCustomSectionsInput, ResumeUncheckedUpdateWithoutCustomSectionsInput>
+  }
+
+  export type ResumeUpdateWithoutCustomSectionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    maritalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    jobTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    accentColor?: StringFieldUpdateOperationsInput | string
+    fontFamily?: StringFieldUpdateOperationsInput | string
+    hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
+    guest?: GuestUpdateOneWithoutResumesNestedInput
+    user?: UserUpdateOneWithoutResumesNestedInput
+    experiences?: ExperienceUpdateManyWithoutResumeNestedInput
+    educations?: EducationUpdateManyWithoutResumeNestedInput
+    skills?: SkillUpdateManyWithoutResumeNestedInput
+    languages?: LanguageUpdateManyWithoutResumeNestedInput
+    socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUpdateManyWithoutResumeNestedInput
+  }
+
+  export type ResumeUncheckedUpdateWithoutCustomSectionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableStringFieldUpdateOperationsInput | string | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    maritalStatus?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    jobTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    accentColor?: StringFieldUpdateOperationsInput | string
+    fontFamily?: StringFieldUpdateOperationsInput | string
+    hobbies?: NullableStringFieldUpdateOperationsInput | string | null
+    showSkillMeter?: BoolFieldUpdateOperationsInput | boolean
+    showLanguageMeter?: BoolFieldUpdateOperationsInput | boolean
+    hideReferences?: BoolFieldUpdateOperationsInput | boolean
+    experiences?: ExperienceUncheckedUpdateManyWithoutResumeNestedInput
+    educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
+    skills?: SkillUncheckedUpdateManyWithoutResumeNestedInput
+    languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
+    socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
+    references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateManyGuestInput = {
@@ -22948,6 +24615,7 @@ export namespace Prisma {
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
     references?: ReferenceUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutGuestInput = {
@@ -22981,6 +24649,7 @@ export namespace Prisma {
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
     references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateManyWithoutGuestInput = {
@@ -23185,6 +24854,7 @@ export namespace Prisma {
     languages?: LanguageUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUpdateManyWithoutResumeNestedInput
     references?: ReferenceUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutUserInput = {
@@ -23218,6 +24888,7 @@ export namespace Prisma {
     languages?: LanguageUncheckedUpdateManyWithoutResumeNestedInput
     socialLinks?: SocialLinkUncheckedUpdateManyWithoutResumeNestedInput
     references?: ReferenceUncheckedUpdateManyWithoutResumeNestedInput
+    customSections?: CustomSectionUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateManyWithoutUserInput = {
@@ -23343,6 +25014,14 @@ export namespace Prisma {
     companyName?: string | null
     phone?: string | null
     email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomSectionCreateManyResumeInput = {
+    id?: string
+    sectionName?: string | null
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -23490,6 +25169,30 @@ export namespace Prisma {
     companyName?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomSectionUpdateWithoutResumeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomSectionUncheckedUpdateWithoutResumeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomSectionUncheckedUpdateManyWithoutResumeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sectionName?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

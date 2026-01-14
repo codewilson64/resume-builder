@@ -274,6 +274,15 @@ exports.Prisma.ReferenceScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CustomSectionScalarFieldEnum = {
+  id: 'id',
+  resumeId: 'resumeId',
+  sectionName: 'sectionName',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -303,7 +312,8 @@ exports.Prisma.ModelName = {
   Skill: 'Skill',
   Language: 'Language',
   SocialLink: 'SocialLink',
-  Reference: 'Reference'
+  Reference: 'Reference',
+  CustomSection: 'CustomSection'
 };
 
 /**

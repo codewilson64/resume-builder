@@ -133,6 +133,14 @@ export async function createResume(data: ResumeData) {
           email: ref.email,
         })),
       },
+      
+      // CUSTOM SECTIONS
+      customSections: {
+        create: data.customSections.map((customSection) => ({
+          sectionName: customSection.sectionName,
+          description: customSection.description,
+        })),
+      },
     },
   });
 
@@ -223,7 +231,7 @@ export async function updateResume(resumeId: string, data: ResumeData) {
         })),
       },
 
-      // ================= REFERENCES =================
+      // REFERENCES
       references: {
         deleteMany: {},
         create: data.references.map((ref) => ({
@@ -231,6 +239,15 @@ export async function updateResume(resumeId: string, data: ResumeData) {
           companyName: ref.companyName,
           phone: ref.phone,
           email: ref.email,
+        })),
+      },
+
+      // CUSTOM SECTIONS
+      customSections: {
+        deleteMany: {},
+        create: data.customSections.map((customSection) => ({
+          sectionName: customSection.sectionName,
+          description: customSection.description,
         })),
       },
     },
@@ -254,8 +271,10 @@ export async function getUserResumes(): Promise<ResumeData[]> {
       languages: true,
       socialLinks: true,
       references: true,
+      customSections: true,
     },
   });
+
   return resumes.map(mapPrismaResumeToResumeData)
 }
 
@@ -275,6 +294,7 @@ export async function getResumeById(resumeId: string){
         languages: true,
         socialLinks: true,
         references: true,
+        customSections: true,
       },
     });
 
@@ -298,9 +318,7 @@ export async function deleteResumeById(resumeId: string): Promise<void> {
   if (!resume) throw new Error("Resume not found or access denied")
 
   await prisma.resume.delete({
-    where: {
-      id: resumeId,
-    },
+    where: { id: resumeId },
   });
 
   revalidatePath('/profile')

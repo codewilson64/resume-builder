@@ -91,5 +91,12 @@ export function mapPrismaResumeToResumeData(resume: ResumeWithRelations): Resume
       phone: reference.phone ?? undefined,
       email: reference.email ?? undefined,
     })),
+
+    customSections: resume.customSections.map((customSection) => ({
+      id: customSection.id,
+      collapsed: true,
+      sectionName: customSection.sectionName ?? undefined,
+      description: customSection.description ?? undefined,
+    })),
   };
 }

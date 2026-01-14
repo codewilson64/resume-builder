@@ -54,6 +54,13 @@ export interface ReferenceItem {
   email?: string;
 }
 
+export interface CustomSectionItem {
+  id: string;
+  collapsed: boolean;
+  sectionName?: string;
+  description?: string;
+}
+
 export interface ResumeData {
   resumeId: string | null;
   title?: string;
@@ -72,6 +79,8 @@ export interface ResumeData {
   languages: LanguageItem[];
   socialLinks: SocialLinkItem[];
   references: ReferenceItem[];
+  customSections: CustomSectionItem[]
+  
   showSkillMeter: boolean;
   showLanguageMeter: boolean;
   hideReferences: boolean;
@@ -98,6 +107,7 @@ export type ResumeWithRelations = Prisma.ResumeGetPayload<{
     languages: true;
     socialLinks: true;
     references: true;
+    customSections: true;
   };
 }>;
 

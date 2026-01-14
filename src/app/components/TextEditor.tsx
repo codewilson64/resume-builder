@@ -35,7 +35,7 @@ export default function TextEditor({
     editorProps: {
       attributes: {
         class:
-          "min-h-[120px] rounded-md text-sm focus:outline-none",
+          `min-h-[120px] rounded-md text-sm focus:outline-none`,
       },
     },
   });

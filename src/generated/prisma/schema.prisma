@@ -148,12 +148,13 @@ model Resume {
   hideReferences    Boolean @default(false)
 
   // Relations (lists)
-  experiences Experience[]
-  educations  Education[]
-  skills      Skill[]
-  languages   Language[]
-  socialLinks SocialLink[]
-  references  Reference[]
+  experiences    Experience[]
+  educations     Education[]
+  skills         Skill[]
+  languages      Language[]
+  socialLinks    SocialLink[]
+  references     Reference[]
+  customSections CustomSection[]
 }
 
 model Experience {
@@ -219,6 +220,18 @@ model Reference {
   companyName String?
   phone       String?
   email       String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CustomSection {
+  id       String @id @default(uuid()) @db.Uuid
+  resumeId String @db.Uuid
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  sectionName String?
+  description String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

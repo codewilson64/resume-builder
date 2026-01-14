@@ -156,7 +156,7 @@ model Resume {
   languages     Language[]
   socialLinks   SocialLink[]
   references    Reference[]
-
+  customSections CustomSection[]
 }
 
 model Experience {
@@ -226,6 +226,19 @@ model Reference {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+model CustomSection {
+  id          String   @id @default(uuid()) @db.Uuid
+  resumeId    String   @db.Uuid
+  resume      Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+
+  sectionName String?
+  description String? 
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 
 
 
