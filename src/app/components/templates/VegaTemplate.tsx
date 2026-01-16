@@ -5,7 +5,7 @@ import { useResume } from "@/app/context/ResumeContext";
 import { Mail, Phone, MapPin } from "lucide-react";
 import type { ResumeData } from "@/app/types/resume";
 
-interface LineaTemplateProps {
+interface VegaTemplateProps {
   data: ResumeData;
   variant?: "preview" | "thumbnail";
 }
@@ -68,7 +68,7 @@ function tl(text: string) {
     : text;
 }
 
-export default function LineaTemplate({ data, variant }: LineaTemplateProps) {
+export default function VegaTemplate({ data, variant }: VegaTemplateProps) {
   const { resumeData } = useResume();
   const isThumbnail = variant === "thumbnail";
 
@@ -271,7 +271,7 @@ export default function LineaTemplate({ data, variant }: LineaTemplateProps) {
           </aside>
 
           {/* RIGHT */}
-          <main className="px-10 py-6 pt-0 text-gray-800">
+          <main className="px-8 py-6 pt-0 text-gray-800">
             {/* LINKS */}
             {data?.socialLinks?.length > 0 && (
               <Block title="Links">

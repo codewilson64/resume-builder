@@ -6,7 +6,7 @@ export const templates = [
   "Atlas",
   "Astra",
   "Zenith",
-  "Linea"
+  "Vega"
 ] as const;
 
 export type TemplateName = (typeof templates)[number];
