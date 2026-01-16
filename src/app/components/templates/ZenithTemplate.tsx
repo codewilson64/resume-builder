@@ -34,6 +34,43 @@ const languageWidths: Record<string, string> = {
   Native: "100%",
 };
 
+const DEV_USE_BAHASA = true; 
+
+const TITLE_TRANSLATIONS: Record<string, string> = {
+  "About Me": "Tentang Saya",
+  "Summary": "Tentang Saya",
+  "Contacts": "Kontak",
+  "Social Links": "Media Sosial",
+  "Links": "Media Sosial",
+  "Languages": "Bahasa",
+  "References": "Referensi",
+  "Personal Details": "Data Pribadi",
+  "Work Experience": "Pengalaman Kerja",
+  "Education": "Pendidikan",
+  "Skills": "Keahlian",
+  "Hobbies": "Hobi",
+};
+
+function t(title: string) {
+  return DEV_USE_BAHASA
+    ? TITLE_TRANSLATIONS[title] || title
+    : title;
+}
+
+const LABEL_TRANSLATIONS: Record<string, string> = {
+  "Date of Birth": "Tanggal Lahir",
+  "Nationality": "Kewarganegaraan",
+  "Marital Status": "Status Pernikahan",
+};
+
+function tl(text: string) {
+  return DEV_USE_BAHASA
+    ? TITLE_TRANSLATIONS[text] ||
+        LABEL_TRANSLATIONS[text] ||
+        text
+    : text;
+}
+
 export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
   const { resumeData } = useResume();
   const isThumbnail = variant === "thumbnail";
@@ -53,7 +90,7 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
           style={{ backgroundColor: data.accentColor }}
         >
           {/* CONTACT INFO */}
-          <Block title="Contact">
+          <Block title="Contacts">
             <section className="flex flex-col gap-2 items-start text-xs text-white">
               {data.email && (
                 <div className="flex gap-2">
@@ -125,7 +162,7 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
                 {data?.dateOfBirth && (
                   <p>
                     <span className="font-semibold block">
-                      Date of Birth
+                      {tl("Date of Birth")}
                     </span>
                     {data.dateOfBirth}
                   </p>
@@ -134,7 +171,7 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
                 {data?.nationality && (
                   <p>
                     <span className="font-semibold block">
-                      Nationality
+                      {tl("Nationality")}
                     </span>
                     {data.nationality}
                   </p>
@@ -143,7 +180,7 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
                 {data?.maritalStatus && (
                   <p>
                     <span className="font-semibold block">
-                      Marital Status
+                      {tl("Marital Status")}
                     </span>
                     {data.maritalStatus}
                   </p>
@@ -230,7 +267,7 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
               </p>
             )}
 
-            <div className="mt-4 flex flex-wrap gap-6 text-xs text-gray-600">
+            <div className="mt-4 flex flex-wrap gap-6 text-xs">
               {data.about && (
                 <Block title="About Me">
                   <div
@@ -272,7 +309,7 @@ export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
                 {data.education.map(edu => (
                   <div key={edu.id}>
                     <p className="font-semibold text-sm">
-                      {edu.degree} – {edu.school}
+                      {edu.degree} – {edu.school}, {edu.city}
                     </p>
                     <p className="text-xs text-gray-500 mt-1">
                       {formatDate(edu.graduationDate)}
@@ -356,7 +393,7 @@ function Block({
   return (
     <section>
       <h2 className="text-sm font-semibold uppercase tracking-widest border-b border-gray-300 pt-8 pb-2 mb-3">
-        {title}
+        {t(title)}
       </h2>
       {children}
     </section>

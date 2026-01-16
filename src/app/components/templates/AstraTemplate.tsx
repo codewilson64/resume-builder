@@ -33,6 +33,44 @@ function formatDate(dateStr?: string) {
   }).toUpperCase();
 }
 
+const DEV_USE_BAHASA = true; 
+
+const TITLE_TRANSLATIONS: Record<string, string> = {
+  "About Me": "Tentang Saya",
+  "Summary": "Tentang Saya",
+  "Contacts": "Kontak",
+  "Social Links": "Media Sosial",
+  "Links": "Media Sosial",
+  "Languages": "Bahasa",
+  "References": "Referensi",
+  "Personal Details": "Data Pribadi",
+  "Work Experience": "Pengalaman Kerja",
+  "Experience": "Pengalaman Kerja",
+  "Education": "Pendidikan",
+  "Skills": "Keahlian",
+  "Hobbies": "Hobi",
+};
+
+function t(title: string) {
+  return DEV_USE_BAHASA
+    ? TITLE_TRANSLATIONS[title] || title
+    : title;
+}
+
+const LABEL_TRANSLATIONS: Record<string, string> = {
+  "Date of Birth": "Tanggal Lahir",
+  "Nationality": "Kewarganegaraan",
+  "Marital Status": "Status Pernikahan",
+};
+
+function tl(text: string) {
+  return DEV_USE_BAHASA
+    ? TITLE_TRANSLATIONS[text] ||
+        LABEL_TRANSLATIONS[text] ||
+        text
+    : text;
+}
+
 export default function AstraTemplate({
     data,
     variant,
@@ -258,21 +296,21 @@ export default function AstraTemplate({
                 <div className="flex flex-col space-y-2 text-xs">
                 {data.nationality && (
                     <span>
-                    <span className="font-semibold">Nationality:</span>{" "}
+                    <span className="font-semibold">{tl("Nationality")}:</span>{" "}
                     {data.nationality}
                     </span>
                 )}
 
                 {data.dateOfBirth && (
                     <span>
-                    <span className="font-semibold">Date of Birth:</span>{" "}
+                    <span className="font-semibold">{tl("Date of Birth")}:</span>{" "}
                     {data.dateOfBirth}
                     </span>
                 )}
 
                 {data.maritalStatus && (
                     <span>
-                    <span className="font-semibold">Marital Status:</span>{" "}
+                    <span className="font-semibold">{tl("Marital Status")}:</span>{" "}
                     {data.maritalStatus}
                     </span>
                 )}
@@ -369,7 +407,7 @@ function Block({
     return (
       <section className="grid grid-cols-[150px_1fr] gap-8 pt-10">
         <h2 className="text-sm font-bold uppercase tracking-widest">
-          {title}
+          {t(title)}
         </h2>
         <div>{children}</div>
       </section>

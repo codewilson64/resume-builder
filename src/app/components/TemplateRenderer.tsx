@@ -6,6 +6,7 @@ import AtlasTemplate from "./templates/AtlasTemplate";
 import AstraTemplate from "./templates/AstraTemplate";
 import ResumePage from "./ResumePage";
 import ZenithTemplate from "./templates/ZenithTemplate";
+import LineaTemplate from "./templates/LineaTemplate";
 import type { ResumeData } from "@/app/types/resume";
 
 interface TemplateRendererProps {
@@ -47,6 +48,10 @@ export default function TemplateRenderer({
     case "Zenith":
       Template = ZenithTemplate;
       break;
+    
+    case "Linea":
+      Template = LineaTemplate;
+      break; 
 
     default:
       Template = OrionTemplate;

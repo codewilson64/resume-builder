@@ -34,6 +34,43 @@ function formatDate(dateStr?: string) {
   });
 }
 
+const DEV_USE_BAHASA = true; 
+
+const TITLE_TRANSLATIONS: Record<string, string> = {
+  "About Me": "Tentang Saya",
+  "Profile": "Profil",
+  "Contacts": "Kontak",
+  "Social Links": "Media Sosial",
+  "Links": "Media Sosial",
+  "Languages": "Bahasa",
+  "References": "Referensi",
+  "Personal Details": "Data Pribadi",
+  "Work Experience": "Pengalaman Kerja",
+  "Education": "Pendidikan",
+  "Skills": "Keahlian",
+  "Hobbies": "Hobi",
+};
+
+function t(title: string) {
+  return DEV_USE_BAHASA
+    ? TITLE_TRANSLATIONS[title] || title
+    : title;
+}
+
+const LABEL_TRANSLATIONS: Record<string, string> = {
+  "Date of Birth": "Tanggal Lahir",
+  "Nationality": "Kewarganegaraan",
+  "Marital Status": "Status Pernikahan",
+};
+
+function tl(text: string) {
+  return DEV_USE_BAHASA
+    ? TITLE_TRANSLATIONS[text] ||
+        LABEL_TRANSLATIONS[text] ||
+        text
+    : text;
+}
+
 export default function NordicSlateTemplate({
   data,
   variant,
@@ -215,26 +252,26 @@ export default function NordicSlateTemplate({
             {(data.dateOfBirth || data.nationality || data.maritalStatus) && (
                 <section>
                   <Block title="Personal Details" color={data.accentColor}>
-                    <ul className="text-xs space-y-2 text-gray-700">
+                    <div className="text-xs space-y-2 text-gray-700">
                       {data.dateOfBirth && (
-                        <li>
-                          <span className="font-semibold">Date of Birth:</span>{" "}
-                          {data.dateOfBirth}
-                        </li>
+                        <p>
+                          <span className="font-semibold block">{tl("Date of Birth")}:</span>{" "}
+                          <span>{data.dateOfBirth}</span>
+                        </p>
                       )}
                       {data.nationality && (
-                        <li>
-                          <span className="font-semibold">Nationality:</span>{" "}
-                          {data.nationality}
-                        </li>
+                        <p>
+                          <span className="font-semibold block">{tl("Nationality")}:</span>{" "}
+                          <span>{data.nationality}</span>
+                        </p>
                       )}
                       {data.maritalStatus && (
-                        <li>
-                          <span className="font-semibold">Marital Status:</span>{" "}
-                          {data.maritalStatus}
-                        </li>
+                        <p>
+                          <span className="font-semibold block">{tl("Marital Status")}:</span>{" "}
+                          <span>{data.maritalStatus}</span>
+                        </p>
                       )}
-                    </ul>
+                    </div>
                   </Block>
                 </section>
             )}
@@ -408,7 +445,7 @@ function Block({
       <div className="flex items-center gap-2 mb-4 pt-9">
         <span className="h-4 w-1 bg-[#2D2D2D]" />
         <h2 className="text-sm font-semibold uppercase tracking-widest">
-          {title}
+          {t(title)}
         </h2>
       </div>
       {children}

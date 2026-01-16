@@ -33,6 +33,43 @@ function formatDate(dateStr?: string) {
   });
 }
 
+const DEV_USE_BAHASA = true; 
+
+const TITLE_TRANSLATIONS: Record<string, string> = {
+  "About Me": "Tentang Saya",
+  "Summary": "Tentang Saya",
+  "Contacts": "Kontak",
+  "Social Links": "Media Sosial",
+  "Links": "Media Sosial",
+  "Languages": "Bahasa",
+  "References": "Referensi",
+  "Personal Details": "Data Pribadi",
+  "Work Experience": "Pengalaman Kerja",
+  "Education": "Pendidikan",
+  "Skills": "Keahlian",
+  "Hobbies": "Hobi",
+};
+
+function t(title: string) {
+  return DEV_USE_BAHASA
+    ? TITLE_TRANSLATIONS[title] || title
+    : title;
+}
+
+const LABEL_TRANSLATIONS: Record<string, string> = {
+  "Date of Birth": "Tanggal Lahir",
+  "Nationality": "Kewarganegaraan",
+  "Marital Status": "Status Pernikahan",
+};
+
+function tl(text: string) {
+  return DEV_USE_BAHASA
+    ? TITLE_TRANSLATIONS[text] ||
+        LABEL_TRANSLATIONS[text] ||
+        text
+    : text;
+}
+
 export default function AuroraTemplate({
   data,
   variant,
@@ -90,7 +127,7 @@ export default function AuroraTemplate({
 
           {/* ================= EXPERIENCE ================= */}
           {data.experience?.length > 0 && (
-            <Block title="Experience">
+            <Block title="Work Experience">
               <div className="space-y-6">
                 {data.experience
                   .filter(e => e.jobTitle || e.company)
@@ -251,19 +288,19 @@ export default function AuroraTemplate({
               <ul className="text-xs space-y-2 text-gray-700">
                 {data.dateOfBirth && (
                   <li>
-                    <span className="font-semibold">Date of Birth:</span>{" "}
+                    <span className="font-semibold">{tl("Date of Birth")}:</span>{" "}
                     {data.dateOfBirth}
                   </li>
                 )}
                 {data.nationality && (
                   <li>
-                    <span className="font-semibold">Nationality:</span>{" "}
+                    <span className="font-semibold">{tl("Nationality")}:</span>{" "}
                     {data.nationality}
                   </li>
                 )}
                 {data.maritalStatus && (
                   <li>
-                    <span className="font-semibold">Marital Status:</span>{" "}
+                    <span className="font-semibold">{tl("Marital Status")}:</span>{" "}
                     {data.maritalStatus}
                   </li>
                 )}
@@ -334,7 +371,7 @@ export default function AuroraTemplate({
 
           {/* ================= HOBBIES ================= */}
           {data.hobbies && (
-            <Block title="Hobbies and Interests">
+            <Block title="Hobbies">
               <ul className="text-xs list-disc list-inside space-y-1">
                 {data.hobbies.split(",").map((hobby, i) => (
                   <li key={i}>{hobby.trim()}</li>
@@ -386,7 +423,7 @@ function Block({
   return (
     <section>
       <h2 className="text-lg font-bold border-b border-black pb-1 mb-3 pt-8">
-        {title}
+        {t(title)}
       </h2>
       {children}
     </section>

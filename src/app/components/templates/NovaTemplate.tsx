@@ -34,6 +34,42 @@ const languageWidths: Record<string, string> = {
   Native: "100%",
 };
 
+const DEV_USE_BAHASA = true; 
+
+const TITLE_TRANSLATIONS: Record<string, string> = {
+  "About Me": "Tentang Saya",
+  "Contacts": "Kontak",
+  "Social Links": "Media Sosial",
+  "Links": "Media Sosial",
+  "Languages": "Bahasa",
+  "References": "Referensi",
+  "Personal Details": "Data Pribadi",
+  "Work Experience": "Pengalaman Kerja",
+  "Education": "Pendidikan",
+  "Skills": "Keahlian",
+  "Hobbies": "Hobi",
+};
+
+function t(title: string) {
+  return DEV_USE_BAHASA
+    ? TITLE_TRANSLATIONS[title] || title
+    : title;
+}
+
+const LABEL_TRANSLATIONS: Record<string, string> = {
+  "Date of Birth": "Tanggal Lahir",
+  "Nationality": "Kewarganegaraan",
+  "Marital Status": "Status Pernikahan",
+};
+
+function tl(text: string) {
+  return DEV_USE_BAHASA
+    ? TITLE_TRANSLATIONS[text] ||
+        LABEL_TRANSLATIONS[text] ||
+        text
+    : text;
+}
+
 export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
   const { resumeData } = useResume();
   const fullName = `${data?.firstName || ""} ${data?.lastName || ""}`.trim();
@@ -81,8 +117,9 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
               <Block title="Contacts" color={data.accentColor}>
                 <div className="space-y-1 border-b border-black pb-6">
                   {(data?.address || data?.city || data?.postalCode) && (
-                    <div className="text-xs ">
-                      <span className="break-all">
+                    <div className="text-xs flex items-start gap-2">
+                      <MapPin size={13}/>
+                      <span className="">
                         {data.address}
                         {data.city ? `, ${data.city}` : ""}
                         {data.postalCode ? `, ${data.postalCode}` : ""}
@@ -90,13 +127,15 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
                     </div>
                   )}
                   {data?.email && (
-                    <div className="text-xs">
-                      <span className="break-all">{data.email}</span>
+                    <div className="text-xs flex items-start gap-2">
+                      <Mail size={13} />
+                      <span className="">{data.email}</span>
                     </div>
                   )}
                   {data?.phone && (
-                    <div className="text-xs">
-                      <span className="break-all">{data.phone}</span>
+                    <div className="text-xs flex items-start gap-2">
+                      <Phone size={13} />
+                      <span className="">{data.phone}</span>
                     </div>
                   )}               
               </div>
@@ -192,21 +231,21 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
                 <div className="text-xs space-y-3 border-b border-black pb-6">
                   {data?.dateOfBirth && (
                     <p>
-                      <span className="font-semibold block">Date of Birth</span>
+                      <span className="font-semibold block">{tl("Date of Birth")}</span>
                       <span>{data.dateOfBirth}</span>
                     </p>
                   )}
               
                   {data?.nationality && (
                     <p>
-                      <span className="font-semibold block">Nationality</span>
+                      <span className="font-semibold block">{tl("Nationality")}</span>
                       <span>{data.nationality}</span>
                     </p>
                   )}
               
                   {data?.maritalStatus && (
                     <p>
-                      <span className="font-semibold block">Marital Status</span>
+                      <span className="font-semibold block">{tl("Marital Status")}</span>
                       <span>{data.maritalStatus}</span>
                     </p>
                   )}
@@ -382,13 +421,13 @@ export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
 
             {/* HOBBIES */}
             {data?.hobbies && (
-              <Block title="Hobbies" color={data.accentColor}>
-              <div className="flex gap-4 text-xs border-b border-black pb-6">
+            <Block title="Hobbies" color={data.accentColor}>
+              <ul className="list-disc pl-4 text-xs border-b border-black pb-6 space-y-1">
                 {data.hobbies.split(",").map((hobby, i) => (
-                  <span key={i}>{hobby.trim()}</span>
+                  <li key={i}>{hobby.trim()}</li>
                 ))}
-              </div>
-            </Block>            
+              </ul>
+            </Block>
             )}
           </main>
 
@@ -413,7 +452,7 @@ function Block({
     <section>
       <div className="mb-3 pt-6">
         <h2 className="text-sm font-bold uppercase tracking-widest">
-          {title}
+          {t(title)}
         </h2>
       </div>
       {children}

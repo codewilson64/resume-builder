@@ -33,6 +33,43 @@ function formatDate(dateStr?: string) {
   });
 }
 
+const DEV_USE_BAHASA = true; 
+
+const TITLE_TRANSLATIONS: Record<string, string> = {
+  "About Me": "Tentang Saya",
+  "Summary": "Tentang Saya",
+  "Contacts": "Kontak",
+  "Social Links": "Media Sosial",
+  "Links": "Media Sosial",
+  "Languages": "Bahasa",
+  "References": "Referensi",
+  "Personal Details": "Data Pribadi",
+  "Work Experience": "Pengalaman Kerja",
+  "Education": "Pendidikan",
+  "Skills": "Keahlian",
+  "Hobbies": "Hobi",
+};
+
+function t(title: string) {
+  return DEV_USE_BAHASA
+    ? TITLE_TRANSLATIONS[title] || title
+    : title;
+}
+
+const LABEL_TRANSLATIONS: Record<string, string> = {
+  "Date of Birth": "Tanggal Lahir",
+  "Nationality": "Kewarganegaraan",
+  "Marital Status": "Status Pernikahan",
+};
+
+function tl(text: string) {
+  return DEV_USE_BAHASA
+    ? TITLE_TRANSLATIONS[text] ||
+        LABEL_TRANSLATIONS[text] ||
+        text
+    : text;
+}
+
 export default function AtlasTemplate({
   data,
   variant,
@@ -75,7 +112,7 @@ export default function AtlasTemplate({
 
             {/* EXPERIENCE */}
             {data.experience?.length > 0 && (
-              <Block title="Experience">
+              <Block title="Work Experience">
                 <div className="space-y-6">
                   {data.experience
                     .filter(e => e.jobTitle || e.company)
@@ -192,7 +229,7 @@ export default function AtlasTemplate({
             )}
 
             {/* SKILLS */}
-           {data.skills?.length > 0 && (
+            {data.skills?.length > 0 && (
               <Block title="Skills">
                 {data.skills
                   .filter(skill => skill.skillName?.trim())
@@ -271,21 +308,21 @@ export default function AtlasTemplate({
                 <ul className="text-xs space-y-2 text-black">
                   {data.dateOfBirth && (
                     <li>
-                      <span className="font-semibold">Date of Birth:</span>{" "}
+                      <span className="font-semibold">{tl("Date of Birth")}:</span>{" "}
                       {data.dateOfBirth}
                     </li>
                   )}
 
                   {data.nationality && (
                     <li>
-                      <span className="font-semibold">Nationality:</span>{" "}
+                      <span className="font-semibold">{tl("Nationality")}:</span>{" "}
                       {data.nationality}
                     </li>
                   )}
 
                   {data.maritalStatus && (
                     <li>
-                      <span className="font-semibold">Marital Status:</span>{" "}
+                      <span className="font-semibold">{tl("Marital Status")}:</span>{" "}
                       {data.maritalStatus}
                     </li>
                   )}
@@ -374,7 +411,7 @@ function Block({
   return (
     <section>
       <h2 className="text-lg font-bold border-b border-black pt-6 pb-1 mb-3">
-        {title}
+        {t(title)}
       </h2>
       {children}
     </section>
