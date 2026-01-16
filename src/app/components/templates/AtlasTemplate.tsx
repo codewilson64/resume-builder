@@ -33,7 +33,7 @@ function formatDate(dateStr?: string) {
   });
 }
 
-const DEV_USE_BAHASA = true; 
+const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
 
 const TITLE_TRANSLATIONS: Record<string, string> = {
   "About Me": "Tentang Saya",
