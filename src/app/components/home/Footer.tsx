@@ -12,8 +12,8 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <Image
               src={logo}
-              width={40}
-              height={40}
+              width={35}
+              height={35}
               alt="ConfidenCV logo"
             />
             <span className="text-lg font-bold text-gray-900">

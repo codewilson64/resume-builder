@@ -4,14 +4,14 @@ import { Clock, Upload, Search, Palette } from "lucide-react";
 
 const AdvantagesHero = () => {
   return (
-     <section className="bg-gray-50 py-20 px-6">
+     <section className="bg-gray-50 py-20 px-5">
       <div className="max-w-7xl mx-auto text-center">
         
         {/* Heading */}
         <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight md:leading-snug">
-          Everything You Need to
+          Everything You Need to Build a 
           <span className="block text-cyan-400">
-            Build a Winning Resume
+            Winning Resume
           </span>
         </h2>
 

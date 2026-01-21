@@ -20,7 +20,7 @@ const MarketingHero = () => {
   return (
     <>
       {/* Section 1 */}
-      <section className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+      <section className="max-w-7xl mx-auto text-center px-5 py-20 grid md:grid-cols-2 gap-12 items-center">
 
         {/* Image */}
         <div className="order-2 md:order-1 flex justify-center">
@@ -36,9 +36,9 @@ const MarketingHero = () => {
         {/* Text */}
         <div className="order-1 md:order-2">
           <h1 className="text-3xl md:text-5xl font-bold leading-tight md:leading-snug">
-            Stand Out in Your Career{" "}
+            Stand Out in Your Career With a Resume {" "}
             <span className="block text-cyan-400">
-              With a Resume That Impresses.
+              That Impresses.
             </span>
           </h1>
 
@@ -60,14 +60,14 @@ const MarketingHero = () => {
 
 
       {/* Section 2 */}
-      <section className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+      <section className="max-w-7xl mx-auto px-5 py-20 text-center grid md:grid-cols-2 gap-12 items-center">
 
         {/* Text */}
         <div className="order-2 md:order-1">
           <h2 className="text-3xl md:text-5xl font-bold leading-tight md:leading-snug">
-            Create a professional CV{" "}
+            Create a professional CV in minutes and get{" "}
             <span className="block text-cyan-400">
-              in minutes and get hired faster.
+              hired faster.
             </span>
           </h2>
 

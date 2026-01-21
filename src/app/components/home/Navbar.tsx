@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <nav className="w-full font-poppins absolute top-0 left-0 z-20">
-      <div className="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-0 py-5 flex justify-center sm:justify-between items-center">
         
         {/* Logo */}
         <div
@@ -26,8 +26,8 @@ const Navbar = () => {
           <Image
             src={logo}
             alt="ConfidenCV logo"
-            width={40}
-            height={40}
+            width={35}
+            height={35}
             priority
           />
 

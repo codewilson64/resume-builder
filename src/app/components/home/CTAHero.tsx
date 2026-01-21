@@ -16,13 +16,13 @@ const CTA = () => {
   };
 
   return (
-    <section className="relative overflow-hidden py-40 px-6 bg-gradient-to-br from-cyan-100 via-white to-blue-100">
+    <section className="relative overflow-hidden py-40 px-5 bg-gradient-to-br from-cyan-100 via-white to-blue-100">
       <div className="max-w-4xl mx-auto text-center relative z-10">
 
         {/* Main Heading */}
         <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight md:leading-snug">
-          You're closer than you think.
-          <span className="block text-cyan-400">Create a resume that gets noticed.</span>
+          You're closer than you think. Create a resume that {" "}
+          <span className="text-cyan-400">gets noticed.</span>
         </h2>
 
         {/* Sub text */}
