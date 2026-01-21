@@ -42,7 +42,7 @@ const MarketingHero = () => {
             </span>
           </h1>
 
-          <p className="text-gray-600 mt-5 text-lg">
+          <p className="text-cyan-700 mt-5 text-lg">
             Want to land more interviews? A polished resume can set you apart 
             from other applicants. ConfidenCV gives you access to modern, 
             employer-approved templates you can customize in minutes — 
@@ -71,7 +71,7 @@ const MarketingHero = () => {
             </span>
           </h2>
 
-          <p className="text-gray-600 mt-6 text-lg leading-relaxed">
+          <p className="text-cyan-700 mt-6 text-lg leading-relaxed">
             Skip the confusing formatting and start with a proven template. 
             Our builder makes it effortless to enter your experience, customize 
             your design, and export a polished CV ready for employers — all in one place.

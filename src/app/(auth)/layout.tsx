@@ -12,7 +12,7 @@ export default function AuthLayout({
   const router = useRouter();
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-cyan-100 via-white to-blue-50 relative">
+    <section className="min-h-screen font-poppins bg-gradient-to-br from-cyan-100 via-white to-blue-50 relative">
 
       {/* Logo positioned exactly like main navbar */}
       <div className="w-full absolute top-0 left-0 z-20">

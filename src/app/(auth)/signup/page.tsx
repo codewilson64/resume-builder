@@ -67,53 +67,62 @@ export default function Signup() {
         {/* Title */}
         <h2 className="text-3xl font-bold text-center">Create an Account</h2>
         <p className="text-gray-500 text-center mt-2 text-sm">
-          Start building your professional resume
+          Sign up to continue building your resume.
         </p>
 
         {/* Form */}
         <form onSubmit={handleSignup} className="mt-8 space-y-5">
 
           {/* Name */}
-          <div className="flex items-center gap-3 border rounded-lg px-4 py-3 bg-gray-50 focus-within:bg-white focus-within:ring-2 ring-orange-500 transition">
-            <User className="text-gray-400" size={20} />
-            <input
-              type="text"
-              placeholder="Full Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full bg-transparent outline-none"
-            />
+          <div className="mb-5">
+            <label className="text-gray-700 font-semibold text-sm">Username</label>
+            <div className="flex items-center gap-2 border rounded-lg px-3 py-3 mt-1">
+              <User className="text-gray-400" size={20} />
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full bg-transparent outline-none"
+              />
+            </div>
           </div>
 
           {/* Email */}
-          <div className="flex items-center gap-3 border rounded-lg px-4 py-3 bg-gray-50 focus-within:bg-white focus-within:ring-2 ring-orange-500 transition">
-            <Mail className="text-gray-400" size={20} />
-            <input
-              type="text"
-              placeholder="Email Address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-transparent outline-none"
-            />
+          <div className="mb-5">
+            <label className="text-gray-700 font-semibold text-sm">Email</label>
+            <div className="flex items-center gap-2 border rounded-lg px-3 py-3 mt-1">
+              <Mail className="text-gray-400" size={20} />
+              <input
+                type="text"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full bg-transparent outline-none"
+              />
+            </div>
           </div>
 
           {/* Password */}
-          <div className="flex items-center gap-3 border rounded-lg px-4 py-3 bg-gray-50 focus-within:bg-white focus-within:ring-2 ring-orange-500 transition">
-            <Lock className="text-gray-400" size={20} />
-            <input
-              type="password"
-              placeholder="Password (8+ characters)"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-transparent outline-none"
-            />
+          <div className="mb-5">
+            <label className="text-gray-700 font-semibold text-sm">Password</label>
+            <div className="flex items-center gap-2 border rounded-lg px-3 py-3 mt-1">
+              <Lock className="text-gray-400" size={20} />
+              <input
+                type="password"
+                placeholder="Password (8+ characters)"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full bg-transparent outline-none"
+              />
+            </div>
           </div>
 
           {/* Button */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-cyan-400 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition shadow-sm hover:shadow-lg disabled:opacity-50"
+            className="w-full bg-cyan-400 text-white py-3 rounded-lg text-base font-semibold hover:opacity-90 transition shadow-sm hover:shadow-lg disabled:opacity-50"
           >
             {loading ? "Signing up..." : "Sign up"}
           </button>

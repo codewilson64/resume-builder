@@ -11,6 +11,9 @@ module.exports = {
   ],
   theme: {
   	extend: {
+		fontFamily: {
+        poppins: ["var(--font-poppins)"],
+      },
 		keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },

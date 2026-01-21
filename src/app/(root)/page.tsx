@@ -12,7 +12,7 @@ export default async function Home() {
   if(user) redirect('/profile')
 
   return (
-    <main>
+    <main className="font-poppins">
       <Hero />
       <MarketingHero />
       <AdvantagesHero />

@@ -56,7 +56,7 @@ export default function FinalPage() {
   }
 
   return (
-    <div className="min-h-screen px-5 sm:px-0 py-12 flex justify-center bg-gray-50 relative">
+    <div className="min-h-screen px-5 sm:px-0 py-12 font-poppins flex justify-center bg-gray-50 relative">
       <div className="max-w-2xl w-full space-y-12 pb-32">
 
         {/* Header */}

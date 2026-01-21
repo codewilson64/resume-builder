@@ -15,7 +15,7 @@ const Navbar = () => {
   if (hideNavbar) return null;
 
   return (
-    <nav className="w-full absolute top-0 left-0 z-20">
+    <nav className="w-full font-poppins absolute top-0 left-0 z-20">
       <div className="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
         
         {/* Logo */}
@@ -41,7 +41,7 @@ const Navbar = () => {
           <>
             <button
               onClick={() => router.push("/login")}
-              className="text-sm text-white bg-cyan-400 rounded-full px-6 py-3"
+              className="hidden text-sm text-white bg-cyan-400 hover:bg-cyan-500 rounded-full px-6 py-3"
             >
               Login
             </button>

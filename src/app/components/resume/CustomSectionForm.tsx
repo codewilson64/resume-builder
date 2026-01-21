@@ -95,7 +95,7 @@ export default function CustomSectionForm() {
             <div className="space-y-5 border-t p-5">
               {/* Section Name */}
               <div>
-                <label className="text-sm font-medium text-gray-700">
+                <label className="text-sm text-gray-700">
                   Section Title
                 </label>
                 <input

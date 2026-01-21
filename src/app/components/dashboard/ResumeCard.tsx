@@ -34,9 +34,16 @@ export default function ResumeCard({
     }
   };
 
-
   return (
-    <div className="flex flex-col sm:flex-row items-start gap-3">
+    <div className="font-poppins flex flex-col sm:flex-row items-start gap-3">
+      <div className="sm:hidden">
+          <p className="font-semibold text-sm break-words sm:truncate sm:whitespace-nowrap">
+            {resume.title || "Untitled"}
+          </p>
+          <p className="text-xs font-semibold text-gray-500">
+            Updated {new Date(resume.updatedAt!).toLocaleDateString()}
+          </p>
+        </div>
       {/* Preview */}
       <div
         className="w-64 h-[360px] border rounded-md bg-gray-200 shadow-lg hover:shadow-xl transition cursor-pointer overflow-hidden"
@@ -47,22 +54,20 @@ export default function ResumeCard({
 
     {/* Meta + Actions */}
       <div className="flex flex-row sm:flex-col justify-between gap-3">
-        {/* Meta */}
-        <div>
-          <p className="font-medium text-sm break-words sm:truncate sm:whitespace-nowrap">
+        <div className="hidden sm:flex flex-col">
+          <p className="font-semibold text-sm break-words sm:truncate sm:whitespace-nowrap">
             {resume.title || "Untitled"}
           </p>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs font-semibold text-gray-500">
             Updated {new Date(resume.updatedAt!).toLocaleDateString()}
           </p>
         </div>
-
         {/* Actions */}
         <div className="flex sm:flex-col gap-2">
           {/* Edit */}
           <button
             onClick={() => router.push(`/resume/finishing?id=${resume.resumeId}`)}
-            className="flex items-center gap-2 text-sm hover:text-orange-500"
+            className="flex items-center gap-2 text-sm font-semibold text-cyan-400 hover:text-cyan-500"
             aria-label="Edit resume"
           >
             <Pencil className="w-4 h-4" />
@@ -72,7 +77,7 @@ export default function ResumeCard({
           {/* Download */}
           <button
             onClick={() => router.push(`/resume/preview?id=${resume.resumeId}`)}
-            className="flex items-center gap-2 text-sm hover:text-orange-500"
+            className="flex items-center gap-2 text-sm font-semibold text-cyan-400 hover:text-cyan-500"
             aria-label="Edit resume"
           >
             <Download className="w-4 h-4" />
@@ -82,7 +87,7 @@ export default function ResumeCard({
           {/* Delete */}
           <button
             onClick={() => setShowDeleteModal(true)}
-            className="flex items-center gap-2 text-sm hover:text-red-600"
+            className="flex items-center gap-2 text-sm font-semibold text-cyan-400 hover:text-cyan-500"
             aria-label="Delete resume"
           >
             <Trash2 className="w-4 h-4" />

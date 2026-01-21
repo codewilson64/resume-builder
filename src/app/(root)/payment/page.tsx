@@ -61,7 +61,7 @@ export default function PaymentPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-24">
+    <div className="min-h-screen font-poppins bg-gray-50 flex items-center justify-center px-4 py-24">
       <div className="w-full max-w-md bg-white rounded-xl shadow-sm border p-6 space-y-6">
 
         {/* Header */}
@@ -108,7 +108,7 @@ export default function PaymentPage() {
                   </div>
 
                   <p className="mt-1 text-gray-700">
-                    <span className="text-3xl font-bold">
+                    <span className="text-3xl font-semibold">
                       {p.priceLabel}
                     </span>
                   </p>
@@ -144,7 +144,7 @@ export default function PaymentPage() {
             <Check className="mt-0.5 h-4 w-4 text-green-500 shrink-0" />
             <span>
               If you are not satisfied for any reason within the first{" "}
-              <span className="font-medium">{meta.refundDays} days</span>,{" "}
+              <span className="font-semibold">{meta.refundDays} days</span>,{" "}
               contact us and we will refund your money.
             </span>
           </li>

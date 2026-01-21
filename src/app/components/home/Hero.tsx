@@ -39,7 +39,7 @@ const Hero = () => {
           <span className="text-cyan-400">in Minutes</span>
         </h1>
 
-        <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-xl mx-auto md:mx-0">
+        <p className="mt-6 text-lg md:text-xl text-cyan-700 max-w-xl mx-auto md:mx-0">
           Create a modern, professional resume that stands out — fast, simple,
           and built for recruiters.
         </p>

@@ -13,7 +13,7 @@ export default function DashboardLayout({
   const router = useRouter();
 
   return (
-    <section className="min-h-screen relative bg-slate-50">
+    <section className="min-h-screen relative bg-slate-50 font-poppins">
 
       <div className="w-full absolute top-0 left-0 z-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">

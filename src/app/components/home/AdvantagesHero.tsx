@@ -15,7 +15,7 @@ const AdvantagesHero = () => {
           </span>
         </h2>
 
-        <p className="text-gray-600 max-w-2xl mx-auto mt-4 text-lg">
+        <p className="text-cyan-700 max-w-2xl mx-auto mt-4 text-lg">
           Stop wasting time formatting. Our tools simplify resume building so you can apply faster and stand out instantly.
         </p>
 

@@ -93,7 +93,7 @@ export default function AccountPage() {
   };
 
   return (
-    <div className="w-full max-w-3xl px-6 py-28">
+    <div className="w-full max-w-3xl px-6 py-28 font-poppins">
       <h1 className="text-2xl font-bold mb-12">My Account</h1>
 
       <div className="mb-3">
@@ -132,7 +132,7 @@ export default function AccountPage() {
               <button
                 onClick={handleCancelPlan}
                 disabled={subscription.status === "canceled" || canceling}
-                className="flex items-center gap-2 text-sm font-medium text-red-500 hover:text-red-600 disabled:opacity-50"
+                className="flex items-center gap-2 text-sm font-semibold text-red-500 hover:text-red-600 disabled:opacity-50"
               >
                 {subscription.status === "canceled" ? "Plan canceled" : "Manage subscription"}
               </button>
@@ -146,7 +146,7 @@ export default function AccountPage() {
       <div className="bg-white rounded-xl border p-6 mb-6">
         <a
           href="mailto:wilsonnn948@gmail.com"
-          className="w-fit flex items-center gap-2 text-sm text-cyan-600 hover:text-cyan-700 disabled:opacity-50"
+          className="w-fit flex items-center gap-2 text-sm font-semibold text-cyan-600 hover:text-cyan-700 disabled:opacity-50"
         >
           <Phone className="w-4 h-4" />
           Contact us
@@ -158,7 +158,7 @@ export default function AccountPage() {
         <button
           onClick={handleLogout}
           disabled={loggingOut}
-          className="flex items-center gap-2 text-sm text-red-600 hover:text-red-700 disabled:opacity-50"
+          className="flex items-center gap-2 text-sm font-semibold text-red-600 hover:text-red-700 disabled:opacity-50"
         >
           <LogOut className="w-4 h-4" />
           {loggingOut ? "Logging out..." : "Log out"}
