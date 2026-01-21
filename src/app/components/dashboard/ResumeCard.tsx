@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { ResumeData } from "@/app/types/resume";
 import { Pencil, Trash2, Download } from "lucide-react";
 import { deleteResumeById } from "@/lib/actions/resume-action";
-import TemplateRendererServer from "../TemplateRendererServer";
 import TemplateRenderer from "../TemplateRenderer";
 
 export default function ResumeCard({ 
