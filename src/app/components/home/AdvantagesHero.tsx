@@ -15,7 +15,7 @@ const AdvantagesHero = () => {
           </span>
         </h2>
 
-        <p className="text-cyan-700 max-w-2xl mx-auto mt-4 text-lg">
+        <p className="text-cyan-800 max-w-2xl mx-auto mt-4 text-lg">
           Stop wasting time formatting. Our tools simplify resume building so you can apply faster and stand out instantly.
         </p>
 
@@ -32,7 +32,7 @@ const AdvantagesHero = () => {
             <h3 className="font-semibold text-lg mb-3">
               Fast & Beginner-Friendly
             </h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <p className="text-cyan-800 text-sm leading-relaxed">
               Create a polished resume in minutes — no design skills needed. Just fill in your details and download.
             </p>
           </div>
@@ -47,7 +47,7 @@ const AdvantagesHero = () => {
             <h3 className="font-semibold text-lg mb-3">
               Easy Editing & Updates
             </h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <p className="text-cyan-800 text-sm leading-relaxed">
               Update your resume anytime with a simple, guided editor. Make changes instantly and keep everything organized in one place.
             </p>
           </div>
@@ -62,7 +62,7 @@ const AdvantagesHero = () => {
             <h3 className="font-semibold text-lg mb-3">
               Showcase Your Strengths
             </h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <p className="text-cyan-800 text-sm leading-relaxed">
               Highlight your expertise with structured, recruiter-approved formatting built to impress employers.
             </p>
           </div>
@@ -77,7 +77,7 @@ const AdvantagesHero = () => {
             <h3 className="font-semibold text-lg mb-3">
               Modern Design Templates
             </h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <p className="text-cyan-800 text-sm leading-relaxed">
               Choose from beautifully crafted templates created by professional designers to make your CV stand out.
             </p>
           </div>

@@ -26,7 +26,7 @@ const CTA = () => {
         </h2>
 
         {/* Sub text */}
-        <p className="text-cyan-700 text-lg mt-4 max-w-xl mx-auto">
+        <p className="text-cyan-800 text-lg mt-4 max-w-xl mx-auto">
           Give recruiters a reason to call back. Build a polished, high-impact resume in minutes.
         </p>
 

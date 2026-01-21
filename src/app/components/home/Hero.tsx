@@ -18,7 +18,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative overflow-hidden px-6 pt-28 pb-32">
+    <section className="relative overflow-hidden px-5 pt-28 pb-32">
   
     {/* Gradient background */}
     <div className="absolute inset-0 bg-gradient-to-br from-cyan-100 via-white to-blue-100" />
@@ -39,7 +39,7 @@ const Hero = () => {
           <span className="text-cyan-400">in Minutes</span>
         </h1>
 
-        <p className="mt-6 text-lg md:text-xl text-cyan-700 max-w-xl mx-auto md:mx-0">
+        <p className="mt-6 text-lg md:text-xl text-cyan-800 max-w-xl mx-auto md:mx-0">
           Create a modern, professional resume that stands out — fast, simple,
           and built for recruiters.
         </p>
