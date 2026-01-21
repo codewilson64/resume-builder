@@ -4,10 +4,12 @@ import { fontMap } from "@/app/config/fontConfig";
 import { Mail, Phone, MapPin } from "lucide-react";
 import type { ResumeData } from "@/app/types/resume";
 import { useResume } from "@/app/context/ResumeContext";
+import Watermark from "../Watermark";
 
 interface NordicSlateTemplateProps {
   data: ResumeData;
   variant?: "preview" | "thumbnail";
+  isPremium: Boolean | null;
 }
 
 const skillWidths: Record<string, string> = {
@@ -74,12 +76,14 @@ function tl(text: string) {
 export default function NordicSlateTemplate({
   data,
   variant,
+  isPremium
 }: NordicSlateTemplateProps) {
   const { resumeData } = useResume();
   const isThumbnail = variant === "thumbnail";
 
   return (
-    <div className={`${fontMap[data.fontFamily] || fontMap["Poppins"]}`}>
+    <div className={`relative ${fontMap[data.fontFamily] || fontMap["Poppins"]}`}>
+      {!isPremium && <Watermark />}
       {/* PAGE */}
       <div
         className="bg-white shadow-xl"

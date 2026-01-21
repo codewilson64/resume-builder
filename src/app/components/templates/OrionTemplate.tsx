@@ -1,12 +1,15 @@
 "use client";
+
 import { fontMap } from "@/app/config/fontConfig";
 import { useResume } from "@/app/context/ResumeContext";
 import { Mail, Phone, MapPin } from "lucide-react";
 import type { ResumeData } from "@/app/types/resume";
+import Watermark from "../Watermark";
 
 interface OrionTemplateProps {
   data: ResumeData;
   variant?: "preview" | "thumbnail";
+  isPremium: Boolean | null;
 }
 
 function formatDate(dateStr: string | undefined): string {
@@ -68,12 +71,14 @@ function tl(text: string) {
 }
 
 
-export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
+export default function OrionTemplate({ data, variant, isPremium }: OrionTemplateProps) {
   const { resumeData } = useResume();
   const isThumbnail = variant === "thumbnail";
 
   return (
-    <div className={`${fontMap[resumeData.fontFamily] || fontMap["Poppins"]}`}>
+    <div className={`relative ${fontMap[resumeData.fontFamily] || fontMap["Poppins"]}`}>
+
+      {!isPremium && <Watermark />}
 
       {/* ================= HEADER ================= */}
       <header

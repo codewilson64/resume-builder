@@ -55,3 +55,24 @@ export async function createCustomerPortalSession() {
 
   return session.customerPortalUrl;
 }
+
+export async function hasPremiumAccess() {
+  const user = await getCurrentUser();
+  if (!user?.id) return false;
+
+  const subscription = await prisma.subscription.findFirst({
+    where: { userId: user.id },
+    orderBy: { createdAt: "desc" },
+    select: { status: true },
+  });
+
+  if (!subscription) return null;
+  
+  const hasAccess =
+    subscription.status === "active" ||
+    subscription.status === "trialing";
+
+  return (
+    hasAccess
+  );
+}

@@ -9,11 +9,17 @@ import { updateResume } from "@/lib/actions/resume-action";
 import { useResumeSource } from "@/app/hooks/useResumeSource";
 
 import PreviewTopBar from "./PreviewTopBar";
-import TemplateRenderer from "../TemplateRenderer";
 import ResumeSkeleton from "../skeletons/ResumeSkeleton";
+import TemplateRenderer from "../TemplateRenderer";
 
 
-export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
+export default function PreviewPage({ 
+  isLoggedIn,
+  isPremium,
+}: {
+  isLoggedIn: boolean;
+  isPremium: boolean | null;
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const resumeIdFromUrl = searchParams.get("id");
@@ -109,11 +115,11 @@ export default function PreviewPage({ isLoggedIn }: { isLoggedIn: boolean }) {
             }}
           >
             <div ref={printRef} className="resume-print">
-            {resumeData ? (
-              <TemplateRenderer resume={resumeData} />
-            ) : (
-              <ResumeSkeleton />
-            )}
+              {resumeData ? (
+                <TemplateRenderer resume={resumeData} isPremium={isPremium}/>
+              ) : (
+                <ResumeSkeleton />
+              )}
             </div>
           </div>
         </div>

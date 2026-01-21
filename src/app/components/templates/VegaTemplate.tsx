@@ -4,10 +4,12 @@ import { fontMap } from "@/app/config/fontConfig";
 import { useResume } from "@/app/context/ResumeContext";
 import { Mail, Phone, MapPin } from "lucide-react";
 import type { ResumeData } from "@/app/types/resume";
+import Watermark from "../Watermark";
 
 interface VegaTemplateProps {
   data: ResumeData;
   variant?: "preview" | "thumbnail";
+  isPremium: Boolean | null;
 }
 
 function formatDate(dateStr?: string) {
@@ -68,12 +70,13 @@ function tl(text: string) {
     : text;
 }
 
-export default function VegaTemplate({ data, variant }: VegaTemplateProps) {
+export default function VegaTemplate({ data, variant, isPremium }: VegaTemplateProps) {
   const { resumeData } = useResume();
   const isThumbnail = variant === "thumbnail";
 
   return (
-    <div className={`${fontMap[resumeData.fontFamily] || fontMap.Poppins}`}>
+    <div className={`relative ${fontMap[resumeData.fontFamily] || fontMap.Poppins}`}>
+      {!isPremium && <Watermark />}
       <div
         className="bg-white shadow-xl"
         style={{

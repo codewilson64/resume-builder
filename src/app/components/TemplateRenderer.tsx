@@ -1,3 +1,5 @@
+'use client'
+
 import OrionTemplate from "@/app/components/templates/OrionTemplate";
 import NovaTemplate from "@/app/components/templates/NovaTemplate";
 import NordicTemplate from "./templates/NordicTemplate";
@@ -12,11 +14,13 @@ import type { ResumeData } from "@/app/types/resume";
 interface TemplateRendererProps {
   resume: ResumeData;
   variant?: "preview" | "thumbnail";
+  isPremium: Boolean | null;
 }
 
 export default function TemplateRenderer({
   resume,
   variant = "preview",
+  isPremium
 }: TemplateRendererProps) {
   let Template;
 
@@ -59,7 +63,7 @@ export default function TemplateRenderer({
 
   return (
     <ResumePage variant={variant}>
-      <Template data={resume} variant={variant} />
+      <Template data={resume} variant={variant} isPremium={isPremium}/>
     </ResumePage>
   );
 }

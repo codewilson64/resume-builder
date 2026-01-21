@@ -4,10 +4,12 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { fontMap } from "@/app/config/fontConfig";
 import type { ResumeData } from "@/app/types/resume";
 import { useResume } from "@/app/context/ResumeContext";
+import Watermark from "../Watermark";
 
 interface OrionTemplateProps {
   data: ResumeData;
   variant?: "preview" | "thumbnail";
+  isPremium: Boolean | null;
 }
 
 function formatDate(dateStr?: string) {
@@ -71,12 +73,13 @@ function tl(text: string) {
     : text;
 }
 
-export default function OrionTemplate({ data, variant }: OrionTemplateProps) {
+export default function OrionTemplate({ data, variant, isPremium }: OrionTemplateProps) {
   const { resumeData } = useResume();
   const isThumbnail = variant === "thumbnail";
 
   return (
-    <div className={fontMap[data.fontFamily] || fontMap.Poppins}>
+    <div className={`relative ${fontMap[resumeData.fontFamily] || fontMap.Poppins}`}>
+      {!isPremium && <Watermark />}
       <div
         className="grid grid-cols-[260px_1fr] shadow-xl bg-white"
         style={{

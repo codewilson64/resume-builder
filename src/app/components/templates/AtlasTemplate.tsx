@@ -3,10 +3,12 @@
 import { fontMap } from "@/app/config/fontConfig";
 import { useResume } from "@/app/context/ResumeContext";
 import type { ResumeData } from "@/app/types/resume";
+import Watermark from "../Watermark";
 
 interface AtlasTemplateProps {
   data: ResumeData;
   variant?: "preview" | "thumbnail";
+  isPremium: Boolean | null;
 }
 
 const skillWidths: Record<string, string> = {
@@ -73,12 +75,14 @@ function tl(text: string) {
 export default function AtlasTemplate({
   data,
   variant,
+  isPremium
 }: AtlasTemplateProps) {
   const { resumeData } = useResume();
   const isThumbnail = variant === "thumbnail";
 
   return (
-    <div className={fontMap[data.fontFamily] || fontMap["Poppins"]}>
+    <div className={`relative ${fontMap[data.fontFamily] || fontMap["Poppins"]}`}>
+      {!isPremium && <Watermark />}
       {/* PAGE */}
       <div
         className="bg-white shadow-xl"

@@ -4,11 +4,17 @@ import CreateResumeCard from "@/app/components/dashboard/CreateResumeCard";
 import ResumeCard from "@/app/components/dashboard/ResumeCard";
 import type { ResumeData } from "@/app/types/resume";
 
-export default function ResumeList({ resumes }: { resumes: ResumeData[] }) {
+export default function ResumeList({ 
+  resumes,
+  isPremium,
+}: {
+  resumes: ResumeData[];
+  isPremium: boolean | null;
+}) {
   return (
     <div className="flex flex-wrap gap-8">
       {resumes.map((resume) => (
-        <ResumeCard key={resume.resumeId} resume={resume} />
+        <ResumeCard key={resume.resumeId} resume={resume} isPremium={isPremium}/>
       ))}
 
       <CreateResumeCard />

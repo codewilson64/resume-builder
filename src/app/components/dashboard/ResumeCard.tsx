@@ -5,9 +5,16 @@ import { useRouter } from "next/navigation";
 import { ResumeData } from "@/app/types/resume";
 import { Pencil, Trash2, Download } from "lucide-react";
 import { deleteResumeById } from "@/lib/actions/resume-action";
-import TemplateRenderer from "@/app/components/TemplateRenderer";
+import TemplateRendererServer from "../TemplateRendererServer";
+import TemplateRenderer from "../TemplateRenderer";
 
-export default function ResumeCard({ resume }: { resume: ResumeData }) {
+export default function ResumeCard({ 
+  resume,
+  isPremium,
+}: {
+  resume: ResumeData;
+  isPremium: boolean | null;
+}) {
   const router = useRouter();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -36,7 +43,7 @@ export default function ResumeCard({ resume }: { resume: ResumeData }) {
         className="w-64 h-[360px] border rounded-md bg-gray-200 shadow-lg hover:shadow-xl transition cursor-pointer overflow-hidden"
         onClick={() => router.push(`/resume/preview?id=${resume.resumeId}`)}
       >
-        <TemplateRenderer resume={resume} variant="thumbnail" />
+        <TemplateRenderer resume={resume} variant="thumbnail" isPremium={isPremium}/>
       </div>
 
     {/* Meta + Actions */}

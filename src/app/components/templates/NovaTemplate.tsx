@@ -4,10 +4,12 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { fontMap } from "@/app/config/fontConfig";
 import type { ResumeData } from "@/app/types/resume";
 import { useResume } from "@/app/context/ResumeContext";
+import Watermark from "../Watermark";
 
 interface NovaTemplateProps {
   data: ResumeData;
   variant?: "preview" | "thumbnail";
+  isPremium: Boolean | null;
 }
 
 function formatDate(dateStr: string | undefined): string {
@@ -70,13 +72,14 @@ function tl(text: string) {
     : text;
 }
 
-export default function NovaTemplate({ data, variant }: NovaTemplateProps) {
+export default function NovaTemplate({ data, variant, isPremium }: NovaTemplateProps) {
   const { resumeData } = useResume();
   const fullName = `${data?.firstName || ""} ${data?.lastName || ""}`.trim();
   const isThumbnail = variant === "thumbnail";
 
   return (
-    <div className={`${fontMap[data.fontFamily] || fontMap["Poppins"]} relative`}>
+    <div className={`relative ${fontMap[data.fontFamily] || fontMap["Poppins"]}`}>
+      {!isPremium && <Watermark />}
 
       {/* PAGE */}
       <div

@@ -2,6 +2,7 @@ import CreateResumeButton from "@/app/components/dashboard/CreateResumeButton";
 import ResumeList from "@/app/components/dashboard/ResumeList";
 import { getCurrentUser } from "@/lib/actions/auth-action";
 import { getUserResumes } from "@/lib/actions/resume-action";
+import { hasPremiumAccess } from "@/lib/actions/subscription-action";
 import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -12,6 +13,7 @@ export default async function ProfilePage() {
   if (!session) redirect('/login')
 
   const resumes = await getUserResumes()
+  const isPremium = await hasPremiumAccess();
   
   return (
     <div className="w-full min-h-screen flex justify-center py-12">
@@ -27,7 +29,7 @@ export default async function ProfilePage() {
         </div>
 
           {/* Resume Card */}
-          <ResumeList resumes={resumes}/>
+          <ResumeList resumes={resumes} isPremium={isPremium}/>
         </div>
       </div>
     </div>
