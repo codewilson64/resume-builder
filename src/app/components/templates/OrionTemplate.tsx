@@ -36,7 +36,8 @@ const languageWidths: Record<string, string> = {
   Native: "100%",
 };
 
-const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
+// const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
+const DEV_USE_BAHASA = false; 
 
 const TITLE_TRANSLATIONS: Record<string, string> = {
   "About Me": "Tentang Saya",
@@ -82,7 +83,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
 
       {/* ================= HEADER ================= */}
       <header
-        className="flex items-center justify-between p-8"
+        className="h-32 flex items-center justify-between px-8"
         style={{ backgroundColor: data.accentColor }}
       >
         <div>
@@ -98,14 +99,15 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
         </div>
 
         {/* CONTACT INFO */}
-        <section className="flex flex-col gap-2 text-xs text-white">
-          {(data?.address || data?.city) && (
+        <section className="flex flex-col gap-2 text-[11px] text-white">
+          {(data?.address || data?.city || data?.postalCode) && (
             <div className="flex items-center gap-3">
               <MapPin size={13} />
               <span>
                 {data.address}
                 {data.address && data.city && ", "}
                 {data.city}
+                {data.postalCode && `, ${data.postalCode}`}
               </span>
             </div>
           )}
@@ -140,9 +142,9 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
 
           {/* ABOUT */}
           {data?.about && (
-            <Block title="About Me" color={data.accentColor}>          
+            <Block title="About Me">          
               <div
-                className="prose prose-sm max-w-none text-xs leading-relaxed text-gray-600 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                className="prose prose-sm max-w-none text-[11px] leading-relaxed text-gray-600 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                 dangerouslySetInnerHTML={{ __html: data.about }}
               />
             </Block>
@@ -150,10 +152,10 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
 
           {/* SOCIAL LINKS */}
           {data?.socialLinks?.length > 0 && (
-            <Block title="Social Links" color={data.accentColor}>
+            <Block title="Social Links">
               <div className="space-y-3">
                 {data.socialLinks.map(link => (
-                  <p key={link.id} className="text-xs text-gray-600">
+                  <p key={link.id} className="text-[11px] text-gray-600">
                     <span className="font-semibold block">{link.label}</span>
                     <span>{link.url}</span>
                   </p>
@@ -164,7 +166,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
 
           {/* LANGUAGES */}
           {data?.languages?.length > 0 && (
-            <Block title="Languages" color={data.accentColor}>
+            <Block title="Languages">
               <div className="space-y-3">
                 {data.languages
                   .filter(lang => lang.name?.trim())
@@ -173,7 +175,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
 
                     return (
                       <div key={lang.id}>
-                        <p className="text-xs text-gray-600 mb-1">
+                        <p className="text-[11px] text-gray-600 mb-1">
                           {lang.name}
                         </p>
 
@@ -183,7 +185,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                               className="h-1.5"
                               style={{
                                 width,
-                                backgroundColor: data.accentColor,
+                                backgroundColor: "#2b2b2b",
                               }}
                             />
                           </div>
@@ -197,7 +199,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
 
           {/* REFERENCES */}
           {data?.references.length > 0 && (
-            <Block title="References" color={data.accentColor}>
+            <Block title="References">
               {resumeData.hideReferences ? (
                 <p className="text-xs text-gray-600">
                   References available upon request
@@ -211,7 +213,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                       </p>
 
                       {ref.companyName && (
-                        <p>{ref.companyName}</p>
+                        <p className="text-[11px] text-gray-600">{ref.companyName}</p>
                       )}
 
                       {(ref.phone) && (
@@ -236,10 +238,9 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
           {(data?.dateOfBirth || data?.nationality || data?.maritalStatus) && (
             <Block
               title="Personal Details"
-              color={data.accentColor}
               withDivider={false}
             >
-              <div className="text-xs text-gray-600 space-y-3">
+              <div className="text-[11px] text-gray-600 space-y-3">
                 {data?.dateOfBirth && (
                   <p>
                     <span className="font-semibold block">
@@ -281,11 +282,10 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                 <Block
                   key={section.id}
                   title={section.sectionName || "Custom Section"}
-                  color={data.accentColor}
                 >
                   {section.description && (
                     <div
-                      className="prose prose-sm max-w-none text-xs leading-relaxed text-gray-600
+                      className="prose prose-sm max-w-none text-[11px] leading-relaxed text-gray-600
                                 prose-li:marker:text-gray-900
                                 prose-p:my-0
                                 prose-ul:my-1
@@ -302,7 +302,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
         <main className="p-8 pt-0">
           {/* WORK EXPERIENCE */}
           {data?.experience?.length > 0 && (
-            <MainBlock title="Work Experience" color={data.accentColor}>
+            <MainBlock title="Work Experience">
               <div className="mt-6 relative">
                 <div className="absolute left-[170px] top-0 bottom-0 w-[1px] bg-gray-400" />
 
@@ -337,7 +337,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                           </p>
                           {e.description && (
                             <div
-                              className="prose prose-sm max-w-none text-gray-600 text-xs mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-1"
+                              className="prose prose-sm max-w-none text-gray-600 text-[11px] mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                               dangerouslySetInnerHTML={{ __html: e.description }}
                             />
                           )}
@@ -351,7 +351,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
 
           {/* EDUCATION */}
           {data?.education?.length > 0 && (
-            <MainBlock title="Education" color={data.accentColor}>
+            <MainBlock title="Education">
               <div className="mt-6 relative">
                 <div className="absolute left-[170px] top-0 bottom-0 w-[1px] bg-gray-400" />
 
@@ -383,7 +383,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                         </p>
                         {edu.description && (
                           <div
-                            className="prose prose-sm max-w-none text-gray-600 text-xs mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-1"
+                            className="prose prose-sm max-w-none text-gray-600 text-[11px] mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-1"
                             dangerouslySetInnerHTML={{ __html: edu.description }}
                           />
                         )}
@@ -397,11 +397,11 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
 
           {/* SKILLS */}
           {data?.skills?.length > 0 && (
-            <MainBlock title="Skills" color={data.accentColor}>
+            <MainBlock title="Skills">
               <div
                 className={`mt-5 grid grid-cols-2 ${
                   resumeData.showSkillMeter ? "gap-5" : "gap-2"
-                } text-xs uppercase text-gray-700`}
+                } text-[11px] uppercase text-gray-700`}
               >
                 {data.skills.map(skill => {
                   const width = skillWidths[skill.level] || "40%";
@@ -409,7 +409,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                   return resumeData.showSkillMeter ? (
                     /* ===== Meter ON ===== */
                     <div key={skill.id}>
-                      <span className="block mb-1">
+                      <span className="block text-[11px] mb-1">
                         {skill.skillName}
                       </span>
 
@@ -418,7 +418,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                           className="h-1.5"
                           style={{
                             width,
-                            backgroundColor: data.accentColor,
+                            backgroundColor: "#2b2b2b",
                           }}
                         />
                       </div>
@@ -444,8 +444,8 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
 
           {/* HOBBIES */}
           {data?.hobbies && (
-            <MainBlock title="Hobbies" color={data.accentColor}>
-              <div className="flex flex-wrap gap-3 mt-4 text-xs uppercase text-gray-600">
+            <MainBlock title="Hobbies">
+              <div className="flex flex-wrap gap-3 mt-4 text-[11px] uppercase text-gray-600">
                 {data.hobbies.split(",").map((hobby, i) => (
                   <span key={i}>{hobby.trim()}</span>
                 ))}
@@ -463,12 +463,10 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
 
 function Block({
   title,
-  color,
   children,
   withDivider = true,
 }: {
   title: string
-  color: string
   children: React.ReactNode
   withDivider?: boolean
 }) {
@@ -476,7 +474,6 @@ function Block({
     <section className={withDivider ? "border-b border-white/30" : ""}>
       <h2
         className="text-sm font-semibold uppercase tracking-widest border-b border-gray-300 pt-8 pb-2 mb-3"
-        style={{ color }}
       >
         {t(title)}
       </h2>
@@ -487,18 +484,15 @@ function Block({
 
 function MainBlock({
   title,
-  color,
   children,
 }: {
   title: string
-  color: string
   children: React.ReactNode
 }) {
   return (
     <section>
       <h2
         className="text-sm font-semibold uppercase tracking-widest border-b border-gray-300 pt-8 pb-2"
-        style={{ color }}
       >
         {t(title)}
       </h2>

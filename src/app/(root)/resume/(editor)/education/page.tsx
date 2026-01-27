@@ -2,13 +2,13 @@
 
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import SkillsForm from "@/app/components/resume/SkillsForm";
+import EducationForm from "@/app/components/resume/EducationForm";
 
-export default function SkillsPage() {
+export default function EducationPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen flex justify-center px-5 lg:px-0 py-12 bg-slate-50 relative">
+    <div className="min-h-screen flex justify-center font-poppins px-5 lg:px-0 py-12 bg-slate-50 relative">
       <div className="w-full max-w-2xl space-y-5 pb-28">
 
         {/* Header */}
@@ -21,25 +21,22 @@ export default function SkillsPage() {
           </button>
 
           <h1 className="text-2xl font-semibold text-gray-900 text-center">
-            Skills
+            Education
           </h1>
         </div>
 
-        <p className="text-lg text-gray-600">
-          Add your skills and proficiency level
-        </p>
+        <p className="text-lg text-gray-600">Add your academic background</p>
 
-        {/* Skills Form */}
-        <SkillsForm />
-        
+        {/* MOUNTED COMPONENT */}
+        <EducationForm />
       </div>
 
       <div className="max-w-2xl mx-auto absolute bottom-0 left-0 right-0 bg-gray-50 px-5 lg:px-0 py-4">
         <button
-          onClick={() => router.push("/resume/about")}
+          onClick={() => router.push("/resume/skills")}
           className="w-full bg-cyan-400 hover:bg-cyan-500 text-white py-4 rounded-lg font-medium transition"
         >
-          Continue to About →
+          Continue to Skills →
         </button>
       </div>
     </div>

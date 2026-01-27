@@ -96,7 +96,7 @@ export default function ExperienceForm() {
 
           {/* Fields */}
           {!experience.collapsed && (
-            <div className="spase-y-6 border-t p-5">
+            <div className="space-y-6 border-t p-5">
 
               {/* Job Title / Company */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">

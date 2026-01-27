@@ -44,6 +44,7 @@ export default function PaymentPage() {
       const user = await getCurrentUser()
       if(!user) {
         router.push('/login')
+        return
       } 
 
       await authClient.checkout({

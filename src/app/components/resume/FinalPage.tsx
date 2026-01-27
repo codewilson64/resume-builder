@@ -56,8 +56,8 @@ export default function FinalPage() {
   }
 
   return (
-    <div className="min-h-screen px-5 sm:px-0 py-12 font-poppins flex justify-center bg-gray-50 relative">
-      <div className="max-w-2xl w-full space-y-12 pb-32">
+    <div className="px-5 sm:px-0 pt-12 font-poppins flex justify-center bg-slate-50 relative">
+      <div className="max-w-2xl w-full space-y-12">
 
         {/* Header */}
         <div className="relative flex items-center justify-center">
@@ -152,13 +152,13 @@ export default function FinalPage() {
         </section>
 
         {/* Export or Continue */}
-        <div className="max-w-2xl mx-auto fixed bottom-0 left-0 right-0 bg-transparent px-5 lg:px-0 py-4">
-        <button
-          onClick={() => router.push("/resume/preview")}
-          className="w-full bg-cyan-400 hover:bg-cyan-500 text-white py-4 rounded-lg font-medium transition"
-        >
-          Continue to Download →
-        </button>
+        <div className="sticky bottom-0 bg-slate-50 pb-4">
+          <button
+            onClick={() => router.push("/resume/preview")}
+            className="w-full bg-cyan-400 hover:bg-cyan-500 text-white py-4 rounded-lg font-medium transition"
+          >
+            Continue to Download →
+          </button>
         </div>
       </div>
     </div>

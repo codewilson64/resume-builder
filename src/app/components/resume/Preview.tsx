@@ -12,7 +12,6 @@ import PreviewTopBar from "./PreviewTopBar";
 import ResumeSkeleton from "../skeletons/ResumeSkeleton";
 import TemplateRenderer from "../TemplateRenderer";
 
-
 export default function PreviewPage({ 
   isLoggedIn,
   isPremium,
@@ -104,9 +103,7 @@ export default function PreviewPage({
         <div className="h-20" />
       </div>
         
-        <div
-          className='w-full h-screen md:h-full max-w-[900px] mx-auto flex justify-center'
-        >
+        <div className='w-full h-screen md:h-full max-w-[900px] mx-auto flex justify-center'>
           <div
             className="resume-print bg-white scale-50 scale-small-mobile scale-desktop origin-top"
             style={{

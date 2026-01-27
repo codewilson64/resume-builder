@@ -57,7 +57,9 @@ export default function Signup() {
         setError(err.message);
         setLoading(false)
       }
-    } 
+    } finally {
+        setLoading(false)
+    }
   }
 
   return (

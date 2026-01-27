@@ -2,14 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import AboutForm from "@/app/components/resume/AboutForm";
+import SkillsForm from "@/app/components/resume/SkillsForm";
 
-export default function AboutPage() {
+export default function SkillsPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen flex justify-center px-5 lg:px-0 py-12 bg-slate-50 relative">
-      <div className="w-full max-w-2xl space-y-6 pb-28">
+    <div className="min-h-screen flex justify-center font-poppins px-5 lg:px-0 py-12 bg-slate-50 relative">
+      <div className="w-full max-w-2xl space-y-5 pb-28">
 
         {/* Header */}
         <div className="relative flex items-center justify-center">
@@ -21,25 +21,25 @@ export default function AboutPage() {
           </button>
 
           <h1 className="text-2xl font-semibold text-gray-900 text-center">
-            About You
+            Skills
           </h1>
         </div>
 
         <p className="text-lg text-gray-600">
-          Write a short summary that highlights your skills, experience, and career goals.
+          Add your skills and proficiency level
         </p>
 
-        {/* About Form Component */}
-        <AboutForm />
+        {/* Skills Form */}
+        <SkillsForm />
+        
       </div>
 
-      {/* Bottom button */}
-      <div className="max-w-2xl mx-auto absolute bottom-0 left-0 right-0 bg-gray-50 px-5 lg:px-0 py-5">
+      <div className="max-w-2xl mx-auto absolute bottom-0 left-0 right-0 bg-gray-50 px-5 lg:px-0 py-4">
         <button
-          onClick={() => router.push("/resume/finishing")}
+          onClick={() => router.push("/resume/about")}
           className="w-full bg-cyan-400 hover:bg-cyan-500 text-white py-4 rounded-lg font-medium transition"
         >
-          Continue to Finish it →
+          Continue to About →
         </button>
       </div>
     </div>
