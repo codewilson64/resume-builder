@@ -35,7 +35,8 @@ function formatDate(dateStr?: string) {
   });
 }
 
-const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
+// const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
+const DEV_USE_BAHASA = false; 
 
 const TITLE_TRANSLATIONS: Record<string, string> = {
   "About Me": "Tentang Saya",
@@ -107,7 +108,7 @@ export default function AuroraTemplate({
             </div>
 
             {/* CONTACT */}
-            <div className="text-xs text-right space-y-2">
+            <div className="text-[11px] text-right space-y-2">
               {(data.address || data.city) && (
                 <p>
                   {data.address}
@@ -123,11 +124,81 @@ export default function AuroraTemplate({
           {data.about && (
             <Block title="Summary">
               <div
-                className="prose prose-sm max-w-none text-gray-900 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                className="prose prose-sm max-w-none text-gray-900 text-[11px] leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                 dangerouslySetInnerHTML={{ __html: data.about }}
               />
             </Block>
           )}
+
+          {/* ================= SKILLS ================= */}
+          {data.skills?.length > 0 && (
+            <Block title="Skills">
+              <div
+                className={`grid grid-cols-3 ${
+                  resumeData.showSkillMeter ? "gap-y-4" : "gap-y-2"
+                }`}
+              >
+                {data.skills
+                  .filter(skill => skill.skillName?.trim())
+                  .map(skill => {
+                    const width = skillWidths[skill.level] || "40%";
+
+                    return (
+                      <div key={skill.id} className="flex items-start gap-2">
+                        {!resumeData.showSkillMeter && (
+                          <span className="text-black text-lg leading-none">
+                            •
+                          </span>
+                        )}
+
+                        <div className="w-full">
+                          {/* Skill name */}
+                          <span className="block text-black text-[11px]">
+                            {skill.skillName}
+                          </span>
+
+                          {/* Skill meter when enabled */}
+                          {resumeData.showSkillMeter && (
+                            <div className="mt-1 w-3/4 h-1 bg-gray-200">
+                              <div
+                                className="h-1 bg-gray-700 transition-all"
+                                style={{ width }}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
+            </Block>
+          )}
+
+          {/* CUSTOM SECTIONS */}
+          {data?.customSections?.length > 0 &&
+            data.customSections
+              .filter(
+                (section) =>
+                  section.sectionName?.trim() || section.description?.trim()
+              )
+              .map((section) => (
+                <Block
+                  key={section.id}
+                  title={section.sectionName || "Custom Section"}
+                >
+                  {section.description && (
+                    <div
+                      className="prose prose-sm max-w-none text-gray-900 text-[11px] leading-relaxed
+                                prose-li:marker:text-gray-900
+                                prose-p:my-0
+                                prose-ul:my-1
+                                prose-ol:my-1
+                                prose-li:my-0"
+                      dangerouslySetInnerHTML={{ __html: section.description }}
+                    />
+                  )}
+                </Block>
+          ))}
 
           {/* ================= EXPERIENCE ================= */}
           {data.experience?.length > 0 && (
@@ -151,7 +222,7 @@ export default function AuroraTemplate({
 
                       {exp.description && (
                         <div
-                          className="prose prose-sm max-w-none text-gray-900 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                          className="prose prose-sm max-w-none text-gray-900 text-[11px] leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                           dangerouslySetInnerHTML={{ __html: exp.description }}
                         />
                       )}
@@ -187,56 +258,12 @@ export default function AuroraTemplate({
 
                       {edu.description && (
                         <div
-                          className="prose prose-sm max-w-none text-gray-900 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                          className="prose prose-sm max-w-none text-gray-900 text-[11px] leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                           dangerouslySetInnerHTML={{ __html: edu.description }}
                         />
                       )}
                     </div>
                   ))}
-              </div>
-            </Block>
-          )}
-
-          {/* ================= SKILLS ================= */}
-          {data.skills?.length > 0 && (
-            <Block title="Skills">
-              <div
-                className={`grid grid-cols-3 ${
-                  resumeData.showSkillMeter ? "gap-y-4" : "gap-y-2"
-                }`}
-              >
-                {data.skills
-                  .filter(skill => skill.skillName?.trim())
-                  .map(skill => {
-                    const width = skillWidths[skill.level] || "40%";
-
-                    return (
-                      <div key={skill.id} className="flex items-start gap-2">
-                        {!resumeData.showSkillMeter && (
-                          <span className="text-black text-lg leading-none">
-                            •
-                          </span>
-                        )}
-
-                        <div className="w-full">
-                          {/* Skill name */}
-                          <span className="block text-black text-xs">
-                            {skill.skillName}
-                          </span>
-
-                          {/* Skill meter when enabled */}
-                          {resumeData.showSkillMeter && (
-                            <div className="mt-1 w-3/4 h-1 bg-gray-200">
-                              <div
-                                className="h-1 bg-gray-700 transition-all"
-                                style={{ width }}
-                              />
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
               </div>
             </Block>
           )}
@@ -276,7 +303,7 @@ export default function AuroraTemplate({
                         <span className="mt-[1px] text-black text-lg leading-none">
                           •
                         </span>
-                        <span className="text-black text-xs">
+                        <span className="text-black text-[11px]">
                           {lang.name}
                         </span>
                       </div>
@@ -289,7 +316,7 @@ export default function AuroraTemplate({
           {/* ================= PERSONAL DETAILS ================= */}
           {(data.dateOfBirth || data.nationality || data.maritalStatus) && (
             <Block title="Personal Details">
-              <ul className="text-xs space-y-2 text-gray-700">
+              <ul className="text-[11px] space-y-2 text-gray-700">
                 {data.dateOfBirth && (
                   <li>
                     <span className="font-semibold">{tl("Date of Birth")}:</span>{" "}
@@ -320,7 +347,7 @@ export default function AuroraTemplate({
                   References available upon request
                 </p>
               ) : (
-                <div className="space-y-3 text-xs">
+                <div className="space-y-3 text-[11px]">
                   {data.references.map((ref) => (
                     <div key={ref.id} className="space-y-1">
                       <p className="font-semibold text-gray-800">
@@ -352,7 +379,7 @@ export default function AuroraTemplate({
           {/* ================= SOCIAL LINKS ================= */}
           {data.socialLinks?.length > 0 && (
             <Block title="Social Links">
-              <ul className="space-y-2 text-xs">
+              <ul className="space-y-2 text-[11px]">
                 {data.socialLinks
                   .filter(s => s.label || s.url)
                   .map(link => (
@@ -374,41 +401,17 @@ export default function AuroraTemplate({
           )}
 
           {/* ================= HOBBIES ================= */}
-          {data.hobbies && (
+          {data?.hobbies && (
             <Block title="Hobbies">
-              <ul className="text-xs list-disc list-inside space-y-1">
+              <div className="flex flex-wrap gap-3 mt-4 text-[11px]">
                 {data.hobbies.split(",").map((hobby, i) => (
-                  <li key={i}>{hobby.trim()}</li>
+                  <span key={i}>{hobby.trim()}</span>
                 ))}
-              </ul>
+              </div>
             </Block>
           )}
 
-          {/* CUSTOM SECTIONS */}
-          {data?.customSections?.length > 0 &&
-            data.customSections
-              .filter(
-                (section) =>
-                  section.sectionName?.trim() || section.description?.trim()
-              )
-              .map((section) => (
-                <Block
-                  key={section.id}
-                  title={section.sectionName || "Custom Section"}
-                >
-                  {section.description && (
-                    <div
-                      className="prose prose-sm max-w-none text-xs leading-relaxed
-                                prose-li:marker:text-gray-900
-                                prose-p:my-0
-                                prose-ul:my-1
-                                prose-ol:my-1
-                                prose-li:my-0"
-                      dangerouslySetInnerHTML={{ __html: section.description }}
-                    />
-                  )}
-                </Block>
-          ))}
+
         </div>
       </div>
     </div>
@@ -426,7 +429,7 @@ function Block({
 }) {
   return (
     <section>
-      <h2 className="text-lg font-bold border-b border-black pb-1 mb-3 pt-8">
+      <h2 className="text-lg font-bold border-b border-black pb-1 mb-3 pt-5">
         {t(title)}
       </h2>
       {children}

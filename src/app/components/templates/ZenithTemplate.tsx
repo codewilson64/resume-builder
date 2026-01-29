@@ -36,7 +36,8 @@ const languageWidths: Record<string, string> = {
   Native: "100%",
 };
 
-const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
+// const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
+const DEV_USE_BAHASA = false; 
 
 const TITLE_TRANSLATIONS: Record<string, string> = {
   "About Me": "Tentang Saya",
@@ -94,7 +95,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
         >
           {/* CONTACT INFO */}
           <Block title="Contacts">
-            <section className="flex flex-col gap-2 items-start text-xs text-white">
+            <section className="flex flex-col gap-2 items-start text-[11px] text-white">
               {data.email && (
                 <div className="flex gap-2">
                   <Mail size={13} />
@@ -121,7 +122,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
 
           {data.socialLinks?.length > 0 && (
             <Block title="Links">
-              <div className="space-y-3 text-xs">
+              <div className="space-y-3 text-[11px]">
                 {data.socialLinks.map(link => (
                   <div key={link.id}>
                     <p className="font-semibold">{link.label}</p>
@@ -143,7 +144,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
 
                     return (
                       <div key={lang.id}>
-                        <p className="text-xs mb-1">{lang.name}</p>
+                        <p className="text-[11px] mb-1">{lang.name}</p>
                         {resumeData.showLanguageMeter && (
                           <div className="w-full h-1.5 bg-white/30">
                             <div
@@ -161,7 +162,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
 
           {(data.dateOfBirth || data.nationality || data.maritalStatus) && (
             <Block title="Personal Details">
-              <div className="text-xs text-white/90 space-y-3">
+              <div className="text-[11px] text-white/90 space-y-3">
                 {data?.dateOfBirth && (
                   <p>
                     <span className="font-semibold block">
@@ -202,7 +203,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
               ) : (
                 <div className="space-y-3">
                   {data.references.map((ref) => (
-                    <div key={ref.id} className="text-xs space-y-1">
+                    <div key={ref.id} className="text-[11px] space-y-1">
                       <p className="font-semibold">
                         {ref.fullName}
                       </p>
@@ -243,8 +244,9 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                 >
                   {section.description && (
                     <div
-                      className="prose prose-sm max-w-none text-xs leading-relaxed text-white
+                      className="prose prose-sm max-w-none text-[11px] leading-relaxed text-white
                                 prose-li:marker:text-white
+                                prose-strong:text-white
                                 prose-p:my-0
                                 prose-ul:my-1
                                 prose-ol:my-1
@@ -274,13 +276,53 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
               {data.about && (
                 <Block title="About Me">
                   <div
-                    className="prose prose-sm max-w-none text-xs leading-relaxed prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                    className="prose prose-sm max-w-none text-[11px] leading-relaxed prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                     dangerouslySetInnerHTML={{ __html: data.about }}
                   />
                 </Block>
               )}
             </div>
           </section>
+
+          {data.skills?.length > 0 && (
+            <Block title="Skills">
+              <div
+                className={`grid grid-cols-2 ${
+                  resumeData.showSkillMeter ? "gap-4" : "gap-1"
+                }`}
+              >
+                {data.skills.map(skill => {
+                  const width = skillWidths[skill.level] || "40%";
+
+                  return resumeData.showSkillMeter ? (
+                    /* ===== Meter ON ===== */
+                    <div key={skill.id}>
+                      <p className="text-[11px]">
+                        {skill.skillName}
+                      </p>
+
+                      <div className="w-full h-1.5 bg-gray-300 mt-1">
+                        <div
+                          className="h-1.5 bg-gray-700"
+                          style={{ width }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    /* ===== Meter OFF (bullets, still grid-cols-2) ===== */
+                    <div key={skill.id} className="flex items-start gap-2">
+                      <span className="text-lg leading-none text-black">
+                        •
+                      </span>
+                      <p className="text-[11px]">
+                        {skill.skillName}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </Block>
+          )}
 
           {data.experience?.length > 0 && (
             <Block title="Work Experience">
@@ -296,7 +338,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                     </p>
                     {exp.description && (
                       <div
-                        className="prose prose-sm max-w-none text-xs leading-relaxed mt-1 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                        className="prose prose-sm max-w-none text-[11px] leading-relaxed mt-1 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                         dangerouslySetInnerHTML={{ __html: exp.description }}
                       />
                     )}
@@ -319,7 +361,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                     </p>
                     {edu.description && (
                       <div
-                        className="prose prose-sm max-w-none text-xs leading-relaxed mt-1 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                        className="prose prose-sm max-w-none text-[11px] leading-relaxed mt-1 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                         dangerouslySetInnerHTML={{ __html: edu.description }}
                       />
                     )}
@@ -329,49 +371,9 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
             </Block>
           )}
 
-          {data.skills?.length > 0 && (
-            <Block title="Skills">
-              <div
-                className={`grid grid-cols-2 ${
-                  resumeData.showSkillMeter ? "gap-4" : "gap-1"
-                }`}
-              >
-                {data.skills.map(skill => {
-                  const width = skillWidths[skill.level] || "40%";
-
-                  return resumeData.showSkillMeter ? (
-                    /* ===== Meter ON ===== */
-                    <div key={skill.id}>
-                      <p className="text-xs font-medium">
-                        {skill.skillName}
-                      </p>
-
-                      <div className="w-full h-1.5 bg-gray-300 mt-1">
-                        <div
-                          className="h-1.5 bg-gray-700"
-                          style={{ width }}
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    /* ===== Meter OFF (bullets, still grid-cols-2) ===== */
-                    <div key={skill.id} className="flex items-start gap-2">
-                      <span className="text-lg leading-none text-black">
-                        •
-                      </span>
-                      <p className="text-xs font-medium">
-                        {skill.skillName}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </Block>
-          )}
-
           {data.hobbies && (
             <Block title="Hobbies">
-              <div className="flex gap-4 text-xs">
+              <div className="flex gap-4 text-[11px]">
                 {data.hobbies.split(",").map((h, i) => (
                   <span key={i}>{h.trim()}</span>
                 ))}
