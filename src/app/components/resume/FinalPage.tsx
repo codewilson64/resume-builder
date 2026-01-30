@@ -152,7 +152,7 @@ export default function FinalPage() {
         </section>
 
         {/* Export or Continue */}
-        <div className="sticky bottom-0 bg-slate-50 pb-4">
+        <div className="xl:max-w-2xl xl:mx-auto xl:sticky fixed left-0 right-0 bottom-0 bg-slate-50 px-5 lg:px-0 py-5">
           <button
             onClick={() => router.push("/resume/preview")}
             className="w-full bg-cyan-400 hover:bg-cyan-500 text-white py-4 rounded-lg font-medium transition"

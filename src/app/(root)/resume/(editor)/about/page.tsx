@@ -34,7 +34,7 @@ export default function AboutPage() {
       </div>
 
       {/* Bottom button */}
-      <div className="max-w-2xl mx-auto absolute bottom-0 left-0 right-0 bg-gray-50 px-5 lg:px-0 py-5">
+      <div className="xl:max-w-2xl xl:mx-auto xl:absolute fixed bottom-0 left-0 right-0 bg-gray-50 px-5 lg:px-0 py-5">
         <button
           onClick={() => router.push("/resume/finishing")}
           className="w-full bg-cyan-400 hover:bg-cyan-500 text-white py-4 rounded-lg font-medium transition"

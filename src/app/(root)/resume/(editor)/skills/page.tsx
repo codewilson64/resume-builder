@@ -34,7 +34,7 @@ export default function SkillsPage() {
         
       </div>
 
-      <div className="max-w-2xl mx-auto absolute bottom-0 left-0 right-0 bg-gray-50 px-5 lg:px-0 py-4">
+      <div className="xl:max-w-2xl xl:mx-auto xl:absolute fixed bottom-0 left-0 right-0 bg-gray-50 px-5 lg:px-0 py-4">
         <button
           onClick={() => router.push("/resume/about")}
           className="w-full bg-cyan-400 hover:bg-cyan-500 text-white py-4 rounded-lg font-medium transition"
