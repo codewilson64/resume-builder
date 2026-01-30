@@ -9,5 +9,5 @@ export default async function Preview() {
   const user = await getCurrentUser();
   const isPremium = await hasPremiumAccess();
 
-  return <PreviewPage isLoggedIn={!!user} isPremium={isPremium}/>;
+  return <PreviewPage isLoggedIn={user !== null} isPremium={isPremium}/>;
 }

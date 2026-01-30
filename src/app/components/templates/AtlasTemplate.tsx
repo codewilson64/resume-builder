@@ -8,7 +8,7 @@ import Watermark from "../Watermark";
 interface AtlasTemplateProps {
   data: ResumeData;
   variant?: "preview" | "thumbnail";
-  isPremium: Boolean | null;
+  isPremium: boolean;
 }
 
 const skillWidths: Record<string, string> = {

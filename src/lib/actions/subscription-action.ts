@@ -56,7 +56,7 @@ export async function createCustomerPortalSession() {
   return session.customerPortalUrl;
 }
 
-export async function hasPremiumAccess() {
+export async function hasPremiumAccess(): Promise<boolean> {
   const user = await getCurrentUser();
   if (!user?.id) return false;
 
@@ -66,13 +66,11 @@ export async function hasPremiumAccess() {
     select: { status: true },
   });
 
-  if (!subscription) return null;
-  
-  const hasAccess =
-    subscription.status === "active" ||
-    subscription.status === "trialing";
+  if (!subscription) return false;
 
   return (
-    hasAccess
+    subscription.status === "active" ||
+    subscription.status === "trialing"
   );
 }
+

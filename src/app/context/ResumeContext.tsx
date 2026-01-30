@@ -12,7 +12,6 @@ import {
 import { ResumeData } from "../types/resume";
 import { createEmptyResume } from "@/utils/resumeDefaults";
 
-
 interface ResumeContextType {
   resumeData: ResumeData;
   setResumeData: Dispatch<SetStateAction<ResumeData>>;
@@ -23,40 +22,10 @@ interface ResumeContextType {
 const ResumeContext = createContext<ResumeContextType | null>(null);
 
 export const ResumeProvider = ({ children }: { children: ReactNode }) => {
-  const [resumeData, setResumeData] = useState<ResumeData>({
-    title: "Untitled",
-    firstName: "",
-    lastName: "",
-    email: "",
-    address: "",
-    city: "",
-    postalCode: "",
-    phone: "",
-    jobTitle: "",
-    experience: [],
-    education: [],
-    skills: [],
-    languages: [],
-    socialLinks: [],
-    references: [],
-    customSections: [],
-    about: "",
-    hobbies: "",
-    template: "Orion",
-    accentColor: "#2D2D2D",
-    fontFamily: "Poppins",
-    showSkillMeter: true,
-    showLanguageMeter: true,
-    hideReferences: false,
-    resumeId: null
-  });
+  const [resumeData, setResumeData] = useState<ResumeData>(createEmptyResume);
+  const [hydrated, setHydrated] = useState(false);
 
-  // Save changes to localStorage
-  useEffect(() => {
-    localStorage.setItem("resumeData", JSON.stringify(resumeData));
-  }, [resumeData]);
-
-  // Load from localStorage on first client render
+  // LOAD from localStorage FIRST
   useEffect(() => {
     const stored = localStorage.getItem("resumeData");
     if (stored) {
@@ -66,9 +35,15 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
         console.error("Failed to parse stored resume:", err);
       }
     }
+    setHydrated(true);
   }, []);
 
-
+  // SAVE only AFTER hydration
+  useEffect(() => {
+    if (!hydrated) return;
+    localStorage.setItem("resumeData", JSON.stringify(resumeData));
+  }, [resumeData, hydrated]);
+  
   // Setter for resumeId so we prevent duplicates
   const setResumeId = (id: string | null) => {
     setResumeData((prev) => ({
@@ -76,14 +51,13 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
       resumeId: id,
     }));
   };
-
-  // Reset local storage
+  
+  // Reset local storage and context
   const resetResumeContext = () => {
     const empty = createEmptyResume();
     setResumeData(empty);
     localStorage.setItem("resumeData", JSON.stringify(empty));
   };
-
 
   return (
     <ResumeContext.Provider value={{ resumeData, setResumeData, setResumeId, resetResumeContext }}>

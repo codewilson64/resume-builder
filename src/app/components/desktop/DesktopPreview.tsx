@@ -1,15 +1,17 @@
 "use client";
 
-import { useResume } from "@/app/context/ResumeContext";
 import ResumeSkeleton from "../skeletons/ResumeSkeleton";
 import TemplateRenderer from "../TemplateRenderer";
+import { useResume } from "@/app/context/ResumeContext";
+import { useSubscription } from "@/app/context/SubscriptionContext";
 
-export default function DesktopPreview({
-  isPremium,
-}: {
-  isPremium: boolean | null;
-}) {
+export default function DesktopPreview() {
   const { resumeData } = useResume(); 
+  const { isPremium, isLoading } = useSubscription();
+
+  if (isLoading) {
+    return <div className="p-4 text-gray-400">Loading preview…</div>;
+  }
 
   return (
     <div className="w-full flex justify-center pt-12">

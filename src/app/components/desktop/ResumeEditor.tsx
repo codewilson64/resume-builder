@@ -2,10 +2,8 @@ import DesktopPreview from "./DesktopPreview";
 
 export default function ResumeEditor({
   children,
-  isPremium,
 }: {
   children: React.ReactNode;
-  isPremium: boolean | null;
 }) {
   return (
     <div className="h-screen w-full flex flex-col xl:flex-row overflow-auto">
@@ -17,7 +15,7 @@ export default function ResumeEditor({
 
       {/* RIGHT: Preview */}
       <div className="hidden xl:block xl:w-1/2 xl:overflow-y-auto">
-        <DesktopPreview isPremium={isPremium} />
+        <DesktopPreview />
       </div>
 
     </div>

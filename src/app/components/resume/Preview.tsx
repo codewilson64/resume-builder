@@ -17,7 +17,7 @@ export default function PreviewPage({
   isPremium,
 }: {
   isLoggedIn: boolean;
-  isPremium: boolean | null;
+  isPremium: boolean;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -70,13 +70,9 @@ export default function PreviewPage({
       }
 
       // check subscription status
-      const res = await fetch("/api/subscription")
-      const { status } = await res.json()
-
-      console.log(status)
-      if (status !== "active") {
-        router.replace("/payment")
-        return
+      if (!isPremium) {
+        router.replace("/payment");
+        return;
       }
 
       // update resume and download

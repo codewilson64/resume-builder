@@ -9,7 +9,7 @@ import Watermark from "../Watermark";
 interface OrionTemplateProps {
   data: ResumeData;
   variant?: "preview" | "thumbnail";
-  isPremium: Boolean | null;
+  isPremium: boolean;
 }
 
 function formatDate(dateStr?: string) {

@@ -9,7 +9,7 @@ import Watermark from "../Watermark";
 interface VegaTemplateProps {
   data: ResumeData;
   variant?: "preview" | "thumbnail";
-  isPremium: Boolean | null;
+  isPremium: boolean;
 }
 
 function formatDate(dateStr?: string) {
