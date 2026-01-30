@@ -12,7 +12,7 @@ export default function ResumeCard({
   isPremium,
 }: {
   resume: ResumeData;
-  isPremium: boolean | null;
+  isPremium: boolean;
 }) {
   const router = useRouter();
   const [showDeleteModal, setShowDeleteModal] = useState(false);

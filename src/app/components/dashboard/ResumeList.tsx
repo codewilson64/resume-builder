@@ -9,7 +9,7 @@ export default function ResumeList({
   isPremium,
 }: {
   resumes: ResumeData[];
-  isPremium: boolean | null;
+  isPremium: boolean;
 }) {
   return (
     <div className="flex flex-wrap gap-8">
