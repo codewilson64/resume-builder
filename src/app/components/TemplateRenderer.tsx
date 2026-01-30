@@ -14,7 +14,7 @@ import type { ResumeData } from "@/app/types/resume";
 interface TemplateRendererProps {
   resume: ResumeData;
   variant?: "preview" | "thumbnail";
-  isPremium: Boolean | null;
+  isPremium: boolean;
 }
 
 export default function TemplateRenderer({
