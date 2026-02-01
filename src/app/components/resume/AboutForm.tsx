@@ -17,6 +17,7 @@ export default function AboutForm() {
   return (
     <div className="bg-white shadow-md rounded-lg p-5 space-y-4">
       <TextEditor
+        key={resumeData.resumeId} 
         label="Summary"
         value={resumeData.about || ""}
         placeholder="Motivated professional with experience in software development, project leadership, and problem-solving. Passionate about building meaningful digital experiences..."
