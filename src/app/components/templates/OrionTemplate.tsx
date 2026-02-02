@@ -5,6 +5,7 @@ import { useResume } from "@/app/context/ResumeContext";
 import { Mail, Phone, MapPin } from "lucide-react";
 import type { ResumeData } from "@/app/types/resume";
 import Watermark from "../Watermark";
+import { hasValidExperience } from "@/utils/HasExperienceData";
 
 interface OrionTemplateProps {
   data: ResumeData;
@@ -151,10 +152,12 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
           )}
 
           {/* SOCIAL LINKS */}
-          {data?.socialLinks?.length > 0 && (
+          {data?.socialLinks?.filter(link => link.label?.trim() || link.url?.trim()).length > 0 && (
             <Block title="Social Links">
               <div className="space-y-3">
-                {data.socialLinks.map(link => (
+                {data.socialLinks
+                  .filter(link => link.label?.trim() || link.url?.trim())
+                  .map(link => (
                   <p key={link.id} className="text-[11px] text-gray-600">
                     <span className="font-semibold block">{link.label}</span>
                     <span>{link.url}</span>
@@ -165,7 +168,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
           )}
 
           {/* LANGUAGES */}
-          {data?.languages?.length > 0 && (
+          {data?.languages?.filter(lang => lang.name?.trim()).length > 0 && (
             <Block title="Languages">
               <div className="space-y-3">
                 {data.languages
@@ -198,7 +201,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
           )}
 
           {/* REFERENCES */}
-          {data?.references.length > 0 && (
+          {data?.references?.filter(ref => ref.fullName?.trim() || ref.companyName?.trim() || ref.phone?.trim() || ref.email?.trim()).length > 0 && (
             <Block title="References">
               {resumeData.hideReferences ? (
                 <p className="text-xs text-gray-600">
@@ -206,7 +209,9 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                 </p>
               ) : (
                 <div className="space-y-3">
-                  {data.references.map((ref) => (
+                  {data.references
+                    .filter(ref => ref.fullName?.trim() || ref.companyName?.trim() || ref.phone?.trim() || ref.email?.trim())
+                    .map((ref) => (
                     <div key={ref.id} className="text-xs text-gray-600 space-y-1">
                       <p className="font-semibold text-gray-800">
                         {ref.fullName}
@@ -272,36 +277,36 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
           )}
 
           {/* CUSTOM SECTIONS */}
-          {data?.customSections?.length > 0 &&
-            data.customSections
-              .filter(
-                (section) =>
-                  section.sectionName?.trim() || section.description?.trim()
-              )
-              .map((section) => (
-                <Block
-                  key={section.id}
-                  title={section.sectionName || "Custom Section"}
-                >
-                  {section.description && (
-                    <div
-                      className="prose prose-sm max-w-none text-[11px] leading-relaxed text-gray-600
-                                prose-li:marker:text-gray-900
-                                prose-p:my-0
-                                prose-ul:my-1
-                                prose-ol:my-1
-                                prose-li:my-0"
-                      dangerouslySetInnerHTML={{ __html: section.description }}
-                    />
-                  )}
-                </Block>
-          ))}
+          {data?.customSections?.filter(section => section.sectionName?.trim() || section.description?.trim()).length > 0 && (
+            <>
+              {data.customSections
+                .filter(section => section.sectionName?.trim() || section.description?.trim())
+                .map(section => (
+                  <Block
+                    key={section.id}
+                    title={section.sectionName || "Custom Section"}
+                  >
+                    {section.description && (
+                      <div
+                        className="prose prose-sm max-w-none text-[11px] leading-relaxed text-gray-600
+                                  prose-li:marker:text-gray-900
+                                  prose-p:my-0
+                                  prose-ul:my-1
+                                  prose-ol:my-1
+                                  prose-li:my-0"
+                        dangerouslySetInnerHTML={{ __html: section.description }}
+                      />
+                    )}
+                  </Block>
+                ))}
+            </>
+          )}
         </aside>
 
         {/* ================= RIGHT CONTENT ================= */}
         <main className="p-8 pt-0">
           {/* WORK EXPERIENCE */}
-          {data?.experience?.length > 0 && (
+          {data?.experience?.filter(exp => exp.jobTitle?.trim() || exp.company?.trim()).length > 0 && (
             <MainBlock title="Work Experience">
               <div className="mt-6 relative">
                 <div className="absolute left-[170px] top-0 bottom-0 w-[1px] bg-gray-400" />
@@ -322,7 +327,8 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                             {e.city}
                           </p>
                           <p className="text-[11px] text-gray-400">
-                            {formatDate(e.startDate)} –{" "}
+                            {formatDate(e.startDate)}
+                            {e.startDate && (e.current || e.endDate) && " – "}
                             {e.current ? "Present" : formatDate(e.endDate)}
                           </p>
                         </div>
@@ -350,13 +356,15 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
           )}
 
           {/* EDUCATION */}
-          {data?.education?.length > 0 && (
+          {data?.education?.filter(edu => edu.degree?.trim() || edu.school?.trim()).length > 0 && (
             <MainBlock title="Education">
               <div className="mt-6 relative">
                 <div className="absolute left-[170px] top-0 bottom-0 w-[1px] bg-gray-400" />
 
                 <div className="space-y-6">
-                  {data.education.map(edu => (
+                  {data.education
+                    .filter(edu => edu.degree?.trim() || edu.school?.trim())
+                    .map(edu => (
                     <div
                       key={edu.id}
                       className="grid grid-cols-[140px_30px_1fr] gap-4"
@@ -396,49 +404,51 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
           )}
 
           {/* SKILLS */}
-          {data?.skills?.length > 0 && (
+          {data?.skills?.filter(skill => skill.skillName?.trim()).length > 0 && (
             <MainBlock title="Skills">
               <div
                 className={`mt-5 grid grid-cols-2 ${
                   resumeData.showSkillMeter ? "gap-5" : "gap-2"
                 } text-[11px] uppercase text-gray-700`}
               >
-                {data.skills.map(skill => {
-                  const width = skillWidths[skill.level] || "40%";
+                {data.skills
+                  .filter(skill => skill.skillName?.trim())
+                  .map(skill => {
+                    const width = skillWidths[skill.level] || "40%";
 
-                  return resumeData.showSkillMeter ? (
-                    /* ===== Meter ON ===== */
-                    <div key={skill.id}>
-                      <span className="block text-[11px] mb-1">
-                        {skill.skillName}
-                      </span>
+                    return resumeData.showSkillMeter ? (
+                      /* ===== Meter ON ===== */
+                      <div key={skill.id}>
+                        <span className="block text-[11px] mb-1">
+                          {skill.skillName}
+                        </span>
 
-                      <div className="w-full h-1.5 bg-gray-200">
-                        <div
-                          className="h-1.5"
-                          style={{
-                            width,
-                            backgroundColor: "#2b2b2b",
-                          }}
-                        />
+                        <div className="w-full h-1.5 bg-gray-200">
+                          <div
+                            className="h-1.5"
+                            style={{
+                              width,
+                              backgroundColor: "#2b2b2b",
+                            }}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  ) : (
-                    /* ===== Meter OFF (bullets, still 2 cols) ===== */
-                    <div key={skill.id} className="flex items-start gap-2">
-                      <span
-                        className="text-lg leading-none"
-                        style={{ color: data.accentColor }}
-                      >
-                        •
-                      </span>
-                      <span>
-                        {skill.skillName}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
+                    ) : (
+                      /* ===== Meter OFF (bullets, still 2 cols) ===== */
+                      <div key={skill.id} className="flex items-start gap-2">
+                        <span
+                          className="text-lg leading-none"
+                          style={{ color: data.accentColor }}
+                        >
+                          •
+                        </span>
+                        <span>
+                          {skill.skillName}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
             </MainBlock>
           )}
 

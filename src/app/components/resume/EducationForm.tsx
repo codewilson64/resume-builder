@@ -136,7 +136,7 @@ export default function EducationForm() {
                 <input
                   type="text"
                   className="input"
-                  placeholder="Jakarta"
+                  placeholder="New York"
                   value={edu.city}
                   onChange={(e) => updateField(edu.id, "city", e.target.value)}
                 />

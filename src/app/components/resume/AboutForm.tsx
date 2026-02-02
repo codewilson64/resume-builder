@@ -1,5 +1,6 @@
 "use client";
 
+import { hasTextContent } from "@/utils/hasTextContent";
 import { useResume } from "../../context/ResumeContext";
 import TextEditor from "../TextEditor";
 
@@ -22,7 +23,9 @@ export default function AboutForm() {
         value={resumeData.about || ""}
         placeholder="Motivated professional with experience in software development, project leadership, and problem-solving. Passionate about building meaningful digital experiences..."
         onChange={(html) =>
-          updateField(html)
+          updateField(
+            hasTextContent(html) ? html : ""
+          )
         }
       />
     </div>

@@ -6,7 +6,7 @@ import { ResumeProvider } from "./context/ResumeContext";
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins", // optional but recommended
+  variable: "--font-poppins", 
   display: "swap",
 });
 
@@ -15,7 +15,10 @@ export const metadata = {
   description: "Resume Builder",
   icons: {
     icon: "/confidencv_favicon.svg"
-  }
+  },
+  alternates: {
+    canonical: "https://confidencv.com",
+  },
 };
 
 export default function RootLayout({ 
