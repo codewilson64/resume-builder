@@ -36,7 +36,8 @@ const languageWidths: Record<string, string> = {
   Native: "100%",
 };
 
-const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
+// const DEV_USE_BAHASA = process.env.NODE_ENV === "development";
+const DEV_USE_BAHASA = false;
 
 const TITLE_TRANSLATIONS: Record<string, string> = {
   "About Me": "Tentang Saya",
@@ -91,7 +92,7 @@ export default function NovaTemplate({ data, variant, isPremium }: NovaTemplateP
       >
 
         {/* HEADER */}
-        <header className="text-center p-8">
+        <header className="h-32 flex items-center justify-center text-center px-8">
           {/* LEFT — NAME & JOB */}
           <div>
             <h1 className="text-[38px] font-light tracking-wide leading-none">
@@ -146,21 +147,30 @@ export default function NovaTemplate({ data, variant, isPremium }: NovaTemplateP
             )}
 
             {/* LINKS */}
-            {data?.socialLinks?.length > 0 && (
+            {data?.socialLinks?.filter(link => link.label?.trim() || link.url?.trim()).length > 0 && (
               <Block title="Links" color={data.accentColor}>
               <div className="space-y-3 text-xs border-b border-black pb-6">
-                {data.socialLinks.map((link) => (
+                {data.socialLinks
+                .filter(link => link.label?.trim() || link.url?.trim())
+                .map((link) => (
                   <p key={link.id}>
-                    <span className="font-semibold block">{link.label}: </span>
-                    <span className="text-gray-600">{link.url}</span>
+                    <span className="font-semibold block">{link.label}</span>
+                    <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block break-all"
+                      >
+                        {link.url}
+                    </a>
                   </p>
                 ))}
               </div>
-            </Block>            
+              </Block>            
             )}
 
             {/* LANGUAGES (WITH METER BARS) */}
-            {data?.languages?.length > 0 && (
+            {data?.languages?.filter(lang => lang.name?.trim()).length > 0 && (
               <Block title="Languages" color={data.accentColor}>
               <div className="space-y-3 border-b border-black pb-6">
                 {data.languages
@@ -186,11 +196,11 @@ export default function NovaTemplate({ data, variant, isPremium }: NovaTemplateP
                     );
                   })}
               </div>
-            </Block>          
+              </Block>          
             )}
 
             {/* REFERENCES */}
-            {data?.references.length > 0 && (
+            {data?.references?.filter(ref => ref.fullName?.trim() || ref.companyName?.trim() || ref.phone?.trim() || ref.email?.trim()).length > 0 && (
               <Block title="References" color={data.accentColor}>
                 <div className="border-b border-black pb-6">
                 {resumeData.hideReferences ? (
@@ -199,7 +209,9 @@ export default function NovaTemplate({ data, variant, isPremium }: NovaTemplateP
                   </p>
                 ) : (
                   <div className="space-y-3">
-                    {data.references.map((ref) => (
+                    {data.references
+                    .filter(ref => ref.fullName?.trim() || ref.companyName?.trim() || ref.phone?.trim() || ref.email?.trim())
+                    .map((ref) => (
                       <div key={ref.id} className="text-xs space-y-1">
                         <p className="font-semibold">
                           {ref.fullName}
@@ -257,7 +269,7 @@ export default function NovaTemplate({ data, variant, isPremium }: NovaTemplateP
             )}
 
             {/* CUSTOM SECTIONS */}
-            {data?.customSections?.length > 0 &&
+            {data?.customSections?.filter(section => section.sectionName?.trim() || section.description?.trim()).length > 0 &&
               data.customSections
                 .filter(
                   (section) =>
@@ -300,9 +312,7 @@ export default function NovaTemplate({ data, variant, isPremium }: NovaTemplateP
             )}
 
             {/* EXPERIENCE */}
-            {data?.experience?.filter(exp =>
-              exp.jobTitle?.trim() || exp.company?.trim()
-            ).length > 0 && (
+            {data?.experience?.filter(exp => exp.jobTitle?.trim() || exp.company?.trim()).length > 0 && (
               <Block title="Work Experience" color={data.accentColor}>
                 <div className="space-y-6 border-b border-black pb-6">
                   {data.experience
@@ -320,7 +330,8 @@ export default function NovaTemplate({ data, variant, isPremium }: NovaTemplateP
 
                           {(exp.startDate || exp.endDate) && (
                             <p className="text-xs text-gray-500">
-                              {formatDate(exp.startDate)} -{" "}
+                              {formatDate(exp.startDate)}
+                              {exp.startDate && (exp.current || exp.endDate) && " – "}
                               {exp.current ? "Present" : formatDate(exp.endDate)}
                             </p>
                           )}
@@ -339,9 +350,7 @@ export default function NovaTemplate({ data, variant, isPremium }: NovaTemplateP
             )}
 
             {/* EDUCATION */}
-            {data?.education?.filter(edu =>
-              edu.degree?.trim() || edu.school?.trim()
-            ).length > 0 && (
+            {data?.education?.filter(edu => edu.degree?.trim() || edu.school?.trim()).length > 0 && (
               <Block title="Education" color={data.accentColor}>
                 <div className="space-y-6 border-b border-black pb-6">
                   {data.education
@@ -377,7 +386,7 @@ export default function NovaTemplate({ data, variant, isPremium }: NovaTemplateP
             )}
 
             {/* SKILLS (WITH METER BARS) */}
-            {data?.skills?.length > 0 && (
+            {data?.skills?.filter(skill => skill.skillName?.trim()).length > 0 && (
               <Block title="Skills" color={data.accentColor}>
                 <div
                   className={`grid grid-cols-2 ${

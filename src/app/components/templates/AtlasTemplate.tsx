@@ -35,7 +35,8 @@ function formatDate(dateStr?: string) {
   });
 }
 
-const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
+// const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
+const DEV_USE_BAHASA = false; 
 
 const TITLE_TRANSLATIONS: Record<string, string> = {
   "About Me": "Tentang Saya",
@@ -95,7 +96,7 @@ export default function AtlasTemplate({
           {/* ================= LEFT COLUMN ================= */}
           <div className="flex-1 flex flex-col">
             {/* HEADER */}
-            <header>
+            <header className="h-20">
               <h1 className="text-4xl font-bold leading-tight">
                 {data.firstName} {data.lastName}
               </h1>
@@ -108,14 +109,14 @@ export default function AtlasTemplate({
             {data.about && (
               <Block title="Summary">
                 <div
-                  className="prose prose-sm max-w-none text-gray-900 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                  className="prose prose-sm max-w-none text-gray-900 text-[11px] leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                   dangerouslySetInnerHTML={{ __html: data.about }}
                 />
               </Block>
             )}
 
             {/* EXPERIENCE */}
-            {data.experience?.length > 0 && (
+            {data.experience?.filter(exp => exp.jobTitle?.trim() || exp.company?.trim()).length > 0 && (
               <Block title="Work Experience">
                 <div className="space-y-6">
                   {data.experience
@@ -124,8 +125,7 @@ export default function AtlasTemplate({
                       <div key={exp.id}>
                         <div className="flex flex-col">
                           <p className="text-sm font-semibold">
-                            {exp.jobTitle}
-                            {exp.company && `, ${exp.company}`}
+                            {[exp.jobTitle, exp.company, exp.city].filter(Boolean).join(", ")}
                           </p>
 
                           <p className="text-xs font-normal">
@@ -137,7 +137,7 @@ export default function AtlasTemplate({
 
                         {exp.description && (
                           <div
-                            className="prose prose-sm max-w-none text-gray-900 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                            className="prose prose-sm max-w-none text-gray-900 text-[11px] leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                             dangerouslySetInnerHTML={{ __html: exp.description }}
                           />
                         )}
@@ -148,7 +148,7 @@ export default function AtlasTemplate({
             )}
 
             {/* EDUCATION */}
-            {data.education?.length > 0 && (
+            {data.education?.filter(edu => edu.degree?.trim() || edu.school?.trim()).length > 0 && (
               <Block title="Education">
                 <div className="space-y-6">
                   {data.education
@@ -157,8 +157,7 @@ export default function AtlasTemplate({
                       <div key={edu.id}>
                         <div className="flex flex-col">
                           <p className="text-sm font-semibold">
-                            {edu.degree}
-                            {edu.school && `, ${edu.school}`}
+                            {[edu.school, edu.degree, edu.city].filter(Boolean).join(", ")}
                           </p>
 
                           {edu.graduationDate && (
@@ -170,7 +169,7 @@ export default function AtlasTemplate({
 
                         {edu.description && (
                           <div
-                            className="prose prose-sm max-w-none text-gray-900 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                            className="prose prose-sm max-w-none text-gray-900 text-[11px] leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                             dangerouslySetInnerHTML={{ __html: edu.description }}
                           />
                         )}
@@ -183,7 +182,7 @@ export default function AtlasTemplate({
             {/* HOBBIES */}
             {data.hobbies && (
               <Block title="Hobbies">
-                <ul className="text-xs list-disc list-inside space-y-1">
+                <ul className="text-[11px] list-disc list-inside space-y-1">
                   {data.hobbies.split(",").map((hobby, i) => (
                     <li key={i}>{hobby.trim()}</li>
                   ))}
@@ -197,15 +196,15 @@ export default function AtlasTemplate({
             {/* DETAILS */}
             {(data.email || data.phone || data.address || data.city) && (
               <Block title="Contacts">
-                {data.email && <p className="text-xs">{data.email}</p>}
+                {data.email && <p className="text-[11px]">{data.email}</p>}
                 {(data.address || data.city) && (
-                  <p className="text-xs mt-1">
+                  <p className="text-[11px] mt-1">
                     {data.address}
                     {data.city ? `, ${data.city}` : ""}
                   </p>
                 )}
                 {data.phone && (
-                  <p className="text-xs mt-1">
+                  <p className="text-[11px] mt-1">
                     {data.phone}
                   </p>
                 )}
@@ -213,9 +212,9 @@ export default function AtlasTemplate({
             )}
 
             {/* SOCIAL LINKS */}
-            {data.socialLinks?.length > 0 && (
+            {data.socialLinks?.filter(link => link.label?.trim() || link.url?.trim()).length > 0 && (
               <Block title="Links">
-                <div className="space-y-2 text-xs">
+                <div className="space-y-2 text-[11px]">
                   {data.socialLinks
                     .filter(s => s.label || s.url)
                     .map(link => (
@@ -225,7 +224,16 @@ export default function AtlasTemplate({
                             {link.label}:{" "}
                           </span>
                         )}
-                        {link.url && <span>{link.url}</span>}
+                        {link.url && (
+                          <a
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block break-all"
+                          >
+                            {link.url}
+                        </a>
+                        )}
                       </div>
                     ))}
                 </div>
@@ -233,7 +241,7 @@ export default function AtlasTemplate({
             )}
 
             {/* SKILLS */}
-            {data.skills?.length > 0 && (
+            {data.skills?.filter(skill => skill.skillName?.trim()).length > 0 && (
               <Block title="Skills">
                 {data.skills
                   .filter(skill => skill.skillName?.trim())
@@ -243,7 +251,7 @@ export default function AtlasTemplate({
                     return resumeData.showSkillMeter ? (
                       /* ===== Meter ON ===== */
                       <div key={skill.id} className="mb-3">
-                        <span className="text-xs text-black">
+                        <span className="text-[11px] text-black">
                           {skill.skillName}
                         </span>
 
@@ -260,7 +268,7 @@ export default function AtlasTemplate({
                         <span className="text-black text-lg leading-none">
                           •
                         </span>
-                        <span className="text-xs text-black">
+                        <span className="text-[11px] text-black">
                           {skill.skillName}
                         </span>
                       </div>
@@ -270,7 +278,7 @@ export default function AtlasTemplate({
             )}
 
             {/* LANGUAGES */}
-            {data.languages?.length > 0 && (
+            {data.languages?.filter(lang => lang.name?.trim()).length > 0 && (
               <Block title="Languages">
                 {data.languages
                   .filter(lang => lang.name?.trim())
@@ -280,7 +288,7 @@ export default function AtlasTemplate({
                     return resumeData.showLanguageMeter ? (
                       /* ===== Meter ON ===== */
                       <div key={lang.id} className="mb-3">
-                        <span className="text-xs text-black">
+                        <span className="text-[11px] text-black">
                           {lang.name}
                         </span>
 
@@ -309,7 +317,7 @@ export default function AtlasTemplate({
             {/* PERSONAL DETAILS */}
             {(data.dateOfBirth || data.nationality || data.maritalStatus) && (
               <Block title="Personal Details">
-                <ul className="text-xs space-y-2 text-black">
+                <ul className="text-[11px] space-y-2 text-black">
                   {data.dateOfBirth && (
                     <li>
                       <span className="font-semibold">{tl("Date of Birth")}:</span>{" "}
@@ -335,16 +343,16 @@ export default function AtlasTemplate({
             )}
 
             {/* REFERENCES */}
-            {data?.references.length > 0 && (
+            {data?.references?.filter(ref => ref.fullName?.trim() || ref.companyName?.trim() || ref.phone?.trim() || ref.email?.trim()).length > 0 && (
               <Block title="References">
                 {resumeData.hideReferences ? (
-                  <p className="text-xs text-black">
+                  <p className="text-[11px] text-black">
                     References available upon request
                   </p>
                 ) : (
                   <div className="space-y-3">
                     {data.references.map((ref) => (
-                      <div key={ref.id} className="text-xs text-black space-y-1">
+                      <div key={ref.id} className="text-[11px] text-black space-y-1">
                         <p className="font-semibold">
                           {ref.fullName}
                         </p>
@@ -385,7 +393,7 @@ export default function AtlasTemplate({
                   >
                     {section.description && (
                       <div
-                        className="prose prose-sm max-w-none text-xs leading-relaxed text-black
+                        className="prose prose-sm max-w-none text-[11px] leading-relaxed text-black
                                   prose-li:marker:text-gray-900
                                   prose-p:my-0
                                   prose-ul:my-1
@@ -414,7 +422,7 @@ function Block({
 }) {
   return (
     <section>
-      <h2 className="text-lg font-bold border-b border-black pt-6 pb-1 mb-3">
+      <h2 className="text-[16px] font-bold border-b border-black pt-6 pb-1 mb-3">
         {t(title)}
       </h2>
       {children}

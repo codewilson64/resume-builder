@@ -160,7 +160,14 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                   .map(link => (
                   <p key={link.id} className="text-[11px] text-gray-600">
                     <span className="font-semibold block">{link.label}</span>
-                    <span>{link.url}</span>
+                    <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block break-all"
+                      >
+                        {link.url}
+                      </a>
                   </p>
                 ))}
               </div>

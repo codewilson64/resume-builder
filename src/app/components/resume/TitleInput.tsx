@@ -16,7 +16,7 @@ export default function TitleInput() {
         <input
           type="text"
           name="title"
-          className="w-full bg-gray-50 text-3xl font-semibold h-10 outline-none"
+          className="w-full bg-slate-50 text-3xl font-semibold h-10 outline-none"
           value={resumeData.title || ""}
           onChange={handleChange}
           placeholder="Untitled"

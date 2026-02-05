@@ -96,7 +96,7 @@ export default function AuroraTemplate({
         <div className="p-10 flex flex-col text-gray-900">
 
           {/* ================= HEADER ================= */}
-          <header className="flex justify-between items-start gap-6">
+          <header className="h-20 flex justify-between items-start gap-6">
             {/* NAME */}
             <div>
               <h1 className="text-4xl font-bold leading-tight">
@@ -131,7 +131,7 @@ export default function AuroraTemplate({
           )}
 
           {/* ================= SKILLS ================= */}
-          {data.skills?.length > 0 && (
+          {data.skills?.filter(skill => skill.skillName?.trim()).length > 0 && (
             <Block title="Skills">
               <div
                 className={`grid grid-cols-3 ${
@@ -175,7 +175,7 @@ export default function AuroraTemplate({
           )}
 
           {/* CUSTOM SECTIONS */}
-          {data?.customSections?.length > 0 &&
+          {data?.customSections?.filter(section => section.sectionName?.trim() || section.description?.trim()).length > 0 &&
             data.customSections
               .filter(
                 (section) =>
@@ -201,7 +201,7 @@ export default function AuroraTemplate({
           ))}
 
           {/* ================= EXPERIENCE ================= */}
-          {data.experience?.length > 0 && (
+          {data.experience?.filter(exp => exp.jobTitle?.trim() || exp.company?.trim()).length > 0 && (
             <Block title="Work Experience">
               <div className="space-y-6">
                 {data.experience
@@ -209,9 +209,9 @@ export default function AuroraTemplate({
                   .map(exp => (
                     <div key={exp.id}>
                       <div className="flex justify-between items-center">
-                        {exp.jobTitle && (
-                            <p className="text-sm font-semibold">{exp.jobTitle}, {exp.company}, {exp.city}</p>
-                          )}
+                        <p className="text-sm font-semibold">
+                          {[exp.jobTitle, exp.company, exp.city].filter(Boolean).join(", ")}
+                        </p>
 
                         <p className="text-xs font-semibold">
                           {exp.startDate && formatDate(exp.startDate)}
@@ -233,7 +233,7 @@ export default function AuroraTemplate({
           )}
 
           {/* ================= EDUCATION ================= */}
-          {data.education?.length > 0 && (
+          {data.education?.filter(edu => edu.degree?.trim() || edu.school?.trim()).length > 0 && (
             <Block title="Education">
               <div className="space-y-6">
                 {data.education
@@ -241,19 +241,14 @@ export default function AuroraTemplate({
                   .map(edu => (
                     <div key={edu.id}>
                       <div className="flex justify-between items-center">
-                      {edu.degree && (
                         <p className="text-sm font-semibold">
-                          {edu.degree}, {edu.school}, {edu.city}
+                          {[edu.school, edu.degree, edu.city].filter(Boolean).join(", ")}
                         </p>
-                      )}
 
-                      {edu.school && (
-                        <p className="text-xs font-semibold">
-                          
+                        <p className="text-xs font-semibold">                        
                           {edu.graduationDate &&
                             `${formatDate(edu.graduationDate)}`}
                         </p>
-                      )}
                       </div>
 
                       {edu.description && (
@@ -269,7 +264,7 @@ export default function AuroraTemplate({
           )}
 
           {/* ================= LANGUAGES ================= */}
-          {data.languages?.length > 0 && (
+          {data.languages?.filter(lang => lang.name?.trim()).length > 0 && (
             <Block title="Languages">
               <div
                 className={
@@ -340,7 +335,7 @@ export default function AuroraTemplate({
           )}
 
           {/* REFERENCES */}
-          {data?.references.length > 0 && (
+          {data?.references?.filter(ref => ref.fullName?.trim() || ref.companyName?.trim() || ref.phone?.trim() || ref.email?.trim()).length > 0 && (
             <Block title="References">
               {resumeData.hideReferences ? (
                 <p className="text-xs">
@@ -376,8 +371,8 @@ export default function AuroraTemplate({
             </Block>
           )}
 
-          {/* ================= SOCIAL LINKS ================= */}
-          {data.socialLinks?.length > 0 && (
+          {/* SOCIAL LINKS */}
+          {data.socialLinks?.filter(link => link.label?.trim() || link.url?.trim()).length > 0 && (
             <Block title="Social Links">
               <ul className="space-y-2 text-[11px]">
                 {data.socialLinks
@@ -390,9 +385,14 @@ export default function AuroraTemplate({
                         </span>
                       )}
                       {link.url && (
-                        <span className="break-all">
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block break-all"
+                        >
                           {link.url}
-                        </span>
+                      </a>
                       )}
                     </li>
                   ))}
@@ -400,18 +400,16 @@ export default function AuroraTemplate({
             </Block>
           )}
 
-          {/* ================= HOBBIES ================= */}
+          {/* HOBBIES */}
           {data?.hobbies && (
             <Block title="Hobbies">
-              <div className="flex flex-wrap gap-3 mt-4 text-[11px]">
+              <div className="list-disc list-inside space-y-1 text-[11px]">
                 {data.hobbies.split(",").map((hobby, i) => (
-                  <span key={i}>{hobby.trim()}</span>
+                  <li key={i}>{hobby.trim()}</li>
                 ))}
               </div>
             </Block>
           )}
-
-
         </div>
       </div>
     </div>
@@ -429,7 +427,7 @@ function Block({
 }) {
   return (
     <section>
-      <h2 className="text-lg font-bold border-b border-black pb-1 mb-3 pt-5">
+      <h2 className="text-[16px] font-bold border-b border-black pb-1 mb-3 pt-5">
         {t(title)}
       </h2>
       {children}

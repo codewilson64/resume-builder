@@ -35,7 +35,8 @@ function formatDate(dateStr?: string) {
   }).toUpperCase();
 }
 
-const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
+// const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
+const DEV_USE_BAHASA = false; 
 
 const TITLE_TRANSLATIONS: Record<string, string> = {
   "About Me": "Tentang Saya",
@@ -94,23 +95,24 @@ export default function AstraTemplate({
           <div className="p-12 text-gray-900">
   
             {/* ================= HEADER ================= */}
-            <header className="grid grid-cols-2 gap-8 items-start">
+            <header className="h-20 grid grid-cols-2 gap-8 items-start">
               <div>
                 {data.jobTitle && (
-                  <p className="text-xs uppercase tracking-widest mb-2">
+                  <p className="text-xs tracking-widest mb-2">
                     {data.jobTitle}
                   </p>
                 )}
-                <h1 className="text-3xl font-bold uppercase tracking-wide mb-3">
+                <h1 className="text-3xl font-bold tracking-wide mb-3">
                   {data.firstName} {data.lastName}
                 </h1>
               </div>
   
-              <div className="text-right text-xs uppercase tracking-wide space-y-2 text-gray-600">
-                {(data.address || data.city) && (
+              <div className="text-right text-[11px] tracking-wide space-y-2 text-gray-600">
+                {(data.address || data.city || data.postalCode) && (
                   <p>
                     {data.address}
                     {data.city && `, ${data.city}`}
+                    {data.postalCode && `, ${data.postalCode}`}
                   </p>
                 )}
                 {data.email && <p>{data.email}</p>}
@@ -124,14 +126,14 @@ export default function AstraTemplate({
             {data.about && (
               <Block title="Summary">
                 <div
-                  className="prose prose-sm max-w-none text-gray-800 text-xs leading-relaxed prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                  className="prose prose-sm max-w-none text-gray-800 text-[11px] leading-relaxed prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                   dangerouslySetInnerHTML={{ __html: data.about }}
                 />
               </Block>
             )}
   
             {/* ================= SKILLS ================= */}
-            {data.skills?.length > 0 && (
+            {data.skills?.filter(s => s.skillName?.trim()).length > 0 && (
               <Block title="Skills">
                 <div
                   className={`grid grid-cols-2 ${
@@ -146,7 +148,7 @@ export default function AstraTemplate({
                       return resumeData.showSkillMeter ? (
                         /* ===== Meter ON ===== */
                         <div key={skill.id}>
-                          <span className="text-xs block mb-1 text-black">
+                          <span className="text-[11px] block mb-1 text-black">
                             {skill.skillName}
                           </span>
 
@@ -163,7 +165,7 @@ export default function AstraTemplate({
                           <span className="text-black text-lg leading-none">
                             •
                           </span>
-                          <span className="text-xs text-black">
+                          <span className="text-[11px] text-black">
                             {skill.skillName}
                           </span>
                         </div>
@@ -174,10 +176,12 @@ export default function AstraTemplate({
             )}
 
             {/* ================= EXPERIENCE ================= */}
-            {data.experience?.length > 0 && (
+            {data.experience?.filter(exp => exp.jobTitle?.trim() || exp.company?.trim()).length > 0 && (
               <Block title="Experience">
                 <div className="space-y-6">
-                  {data.experience.map(exp => (
+                  {data.experience
+                  .filter(e => e.jobTitle || e.company)
+                  .map(exp => (
                     <div key={exp.id}>
                       <p className="text-xs uppercase tracking-wide text-gray-600 mb-1">
                         {formatDate(exp.startDate)}
@@ -191,7 +195,7 @@ export default function AstraTemplate({
   
                       {exp.description && (
                         <div
-                          className="prose prose-sm max-w-none text-gray-700 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                          className="prose prose-sm max-w-none text-gray-700 text-[11px] leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                           dangerouslySetInnerHTML={{ __html: exp.description }}
                         />
                       )}
@@ -202,12 +206,14 @@ export default function AstraTemplate({
             )}
   
             {/* ================= EDUCATION ================= */}
-            {data.education?.length > 0 && (
+            {data.education?.filter(edu => edu.degree?.trim() || edu.school?.trim()).length > 0 && (
               <Block title="Education">
                 <div className="space-y-6">
-                  {data.education.map(edu => (
-                    <div key={edu.id}>
-                      {edu.graduationDate && (
+                  {data.education
+                    .filter(edu => edu.degree?.trim() || edu.school?.trim())
+                    .map(edu => (
+                      <div key={edu.id}>
+                        {edu.graduationDate && (
                         <p className="text-xs uppercase tracking-wide text-gray-600 mb-1">
                           {formatDate(edu.graduationDate)}
                         </p>
@@ -219,7 +225,7 @@ export default function AstraTemplate({
   
                       {edu.description && (
                         <div
-                          className="prose prose-sm max-w-none text-gray-700 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
+                          className="prose prose-sm max-w-none text-gray-700 text-[11px] leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                           dangerouslySetInnerHTML={{ __html: edu.description }}
                         />
                       )}
@@ -230,7 +236,7 @@ export default function AstraTemplate({
             )}
   
             {/* ================= LANGUAGES (BOTTOM) ================= */}
-            {data.languages?.length > 0 && (
+            {data.languages?.filter(l => l.name?.trim()).length > 0 && (
               <Block title="Languages">
                 <div
                   className={
@@ -247,7 +253,7 @@ export default function AstraTemplate({
                       return resumeData.showLanguageMeter ? (
                         /* ===== Meter ON (2-column grid) ===== */
                         <div key={lang.id}>
-                          <span className="text-xs block mb-1 text-black">
+                          <span className="text-[11px] block mb-1 text-black">
                             {lang.name}
                           </span>
 
@@ -275,9 +281,9 @@ export default function AstraTemplate({
             )}
 
             {/* ================= SOCIAL LINKS (TOP) ================= */}
-            {data.socialLinks?.length > 0 && (
+            {data.socialLinks?.filter(s => s.label?.trim() || s.url?.trim()).length > 0 && (
               <Block title="Social Links">
-                <div className="space-y-2 text-xs">
+                <div className="space-y-2 text-[11px]">
                   {data.socialLinks
                     .filter(s => s.label || s.url)
                     .map(link => (
@@ -287,7 +293,16 @@ export default function AstraTemplate({
                             {link.label}:{" "}
                           </span>
                         )}
-                        {link.url && <span>{link.url}</span>}
+                        {link.url && (
+                          <a
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="break-all"
+                          >
+                            {link.url}
+                        </a>
+                        )}
                       </div>
                     ))}
                 </div>
@@ -297,7 +312,7 @@ export default function AstraTemplate({
             {/* ================= PERSONAL DETAILS ================= */}
             {(data.nationality || data.dateOfBirth || data.maritalStatus) && (
             <Block title="Personal Details">
-                <div className="flex flex-col space-y-2 text-xs">
+                <div className="flex flex-col space-y-2 text-[11px]">
                 {data.nationality && (
                     <span>
                     <span className="font-semibold">{tl("Nationality")}:</span>{" "}
@@ -323,16 +338,18 @@ export default function AstraTemplate({
             )}
 
             {/* REFERENCES */}
-            {data?.references.length > 0 && (
+            {data?.references?.filter(ref => ref.fullName?.trim() || ref.companyName?.trim() || ref.phone?.trim() || ref.email?.trim()).length > 0 && (
               <Block title="References">
                 {resumeData.hideReferences ? (
-                  <p className="text-xs">
+                  <p className="text-[11px]">
                     References available upon request
                   </p>
                 ) : (
                   <div className="space-y-3">
-                    {data.references.map((ref) => (
-                      <div key={ref.id} className="text-xs space-y-1">
+                    {data.references
+                      .filter(ref => ref.fullName?.trim() || ref.companyName?.trim() || ref.phone?.trim() || ref.email?.trim())  
+                      .map(ref => (
+                      <div key={ref.id} className="text-[11px] space-y-1">
                         <p className="font-semibold">
                           {ref.fullName}
                         </p>
@@ -362,7 +379,7 @@ export default function AstraTemplate({
             {/* HOBBIES */}
             {data.hobbies && (
               <Block title="Hobbies">
-                <ul className="text-xs list-disc list-inside space-y-1">
+                <ul className="text-[11px] list-disc list-inside space-y-1">
                   {data.hobbies.split(",").map((hobby, i) => (
                     <li key={i}>{hobby.trim()}</li>
                   ))}
@@ -384,7 +401,7 @@ export default function AstraTemplate({
                   >
                     {section.description && (
                       <div
-                        className="prose prose-sm max-w-none text-xs leading-relaxed
+                        className="prose prose-sm max-w-none text-[11px] leading-relaxed
                                   prose-li:marker:text-gray-900
                                   prose-p:my-0
                                   prose-ul:my-1

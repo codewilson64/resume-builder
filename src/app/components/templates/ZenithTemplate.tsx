@@ -94,46 +94,62 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
           style={{ backgroundColor: data.accentColor }}
         >
           {/* CONTACT INFO */}
-          <Block title="Contacts">
-            <section className="flex flex-col gap-2 items-start text-[11px] text-white">
-              {data.email && (
-                <div className="flex gap-2">
-                  <Mail size={13} />
-                  {data.email}
-                </div>
-              )}
-              {data.phone && (
-                <div className="flex gap-2">
-                  <Phone size={13} />
-                  {data.phone}
-                </div>
-              )}
-              {(data.address || data.city) && (
-                <div className="flex gap-2">
-                  <MapPin size={13} />
-                    <span>
-                      {data.address}
-                      {data.city && `, ${data.city}`}
-                    </span>
-                </div>
-              )}
-              </section>
-          </Block>
+          {(data?.email || data?.phone || data?.address || data?.city || data?.postalCode) && (
+            <Block title="Contacts">
+              <section className="flex flex-col gap-2 items-start text-[11px] text-white">
+                
+                {data.email && (
+                  <div className="flex gap-2">
+                    <Mail size={13} />
+                    <span>{data.email}</span>
+                  </div>
+                )}
 
-          {data.socialLinks?.length > 0 && (
+                {data.phone && (
+                  <div className="flex gap-2">
+                    <Phone size={13} />
+                    <span>{data.phone}</span>
+                  </div>
+                )}
+
+                {(data.address || data.city || data.postalCode) && (
+                  <div className="flex gap-2">
+                    <MapPin size={13} />
+                    <span>
+                      {[data.address, data.city, data.postalCode]
+                        .filter(Boolean)
+                        .join(", ")}
+                    </span>
+                  </div>
+                )}
+
+              </section>
+            </Block>
+          )}
+
+          {data?.socialLinks?.filter(link => link.label?.trim() || link.url?.trim()).length > 0 && (
             <Block title="Links">
               <div className="space-y-3 text-[11px]">
-                {data.socialLinks.map(link => (
+                {data.socialLinks
+                  .filter(link => link.label?.trim() || link.url?.trim())
+                  .map(link => (
                   <div key={link.id}>
                     <p className="font-semibold">{link.label}</p>
-                    <p className="text-white/90">{link.url}</p>
+                     <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block break-all text-white/90"
+                      >
+                        {link.url}
+                      </a>
                   </div>
                 ))}
               </div>
             </Block>
           )}
 
-          {data.languages?.length > 0 && (
+          {data.languages?.filter(l => l.name?.trim()).length > 0 && (
             <Block title="Languages">
               <div className="space-y-3">
                 {data.languages
@@ -194,7 +210,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
           )}
 
           {/* REFERENCES */}
-          {data?.references.length > 0 && (
+          {data?.references?.filter(ref => ref.fullName?.trim() || ref.companyName?.trim() || ref.phone?.trim() || ref.email?.trim()).length > 0 && (
             <Block title="References">
               {resumeData.hideReferences ? (
                 <p className="text-xs">
@@ -202,7 +218,9 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                 </p>
               ) : (
                 <div className="space-y-3">
-                  {data.references.map((ref) => (
+                  {data.references
+                  .filter(ref => ref.fullName?.trim() || ref.companyName?.trim() || ref.phone?.trim() || ref.email?.trim())
+                  .map((ref) => (
                     <div key={ref.id} className="text-[11px] space-y-1">
                       <p className="font-semibold">
                         {ref.fullName}
@@ -261,7 +279,7 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
         {/* ================= RIGHT COLUMN ================= */}
         <main className="p-8 text-gray-700">
           {/* HEADER */}
-          <section>
+          <header className="h-20">
             <h1 className="text-4xl font-bold uppercase tracking-wide">
               {data.firstName} {data.lastName}
             </h1>
@@ -271,28 +289,28 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                 {data.jobTitle}
               </p>
             )}
+          </header>
 
-            <div className="mt-4 flex flex-wrap gap-6 text-xs">
-              {data.about && (
+          {data.about && (
                 <Block title="About Me">
                   <div
                     className="prose prose-sm max-w-none text-[11px] leading-relaxed prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                     dangerouslySetInnerHTML={{ __html: data.about }}
                   />
                 </Block>
-              )}
-            </div>
-          </section>
+          )}
 
-          {data.skills?.length > 0 && (
+          {data.skills?.filter(skill => skill.skillName?.trim()).length > 0 && (
             <Block title="Skills">
               <div
                 className={`grid grid-cols-2 ${
                   resumeData.showSkillMeter ? "gap-4" : "gap-1"
                 }`}
               >
-                {data.skills.map(skill => {
-                  const width = skillWidths[skill.level] || "40%";
+                {data.skills
+                  .filter(skill => skill.skillName?.trim())
+                  .map(skill => {
+                    const width = skillWidths[skill.level] || "40%";
 
                   return resumeData.showSkillMeter ? (
                     /* ===== Meter ON ===== */
@@ -324,10 +342,12 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
             </Block>
           )}
 
-          {data.experience?.length > 0 && (
+          {data.experience?.filter(exp => exp.jobTitle?.trim() || exp.company?.trim()).length > 0 && (
             <Block title="Work Experience">
               <div className="space-y-6">
-                {data.experience.map(exp => (
+                {data.experience
+                .filter(exp => exp.jobTitle?.trim() || exp.company?.trim())
+                .map(exp => (
                   <div key={exp.id}>
                     <p className="font-semibold text-sm">
                       {exp.jobTitle} – {exp.company}, {exp.city}
@@ -348,10 +368,12 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
             </Block>
           )}
 
-          {data.education?.length > 0 && (
+          {data.education?.filter(edu => edu.degree?.trim() || edu.school?.trim()).length > 0 && (
             <Block title="Education">
               <div className="space-y-6">
-                {data.education.map(edu => (
+                {data.education
+                .filter(edu => edu.degree?.trim() || edu.school?.trim())
+                .map(edu => (
                   <div key={edu.id}>
                     <p className="font-semibold text-sm">
                       {edu.degree} – {edu.school}, {edu.city}

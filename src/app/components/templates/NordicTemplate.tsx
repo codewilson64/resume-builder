@@ -1,7 +1,7 @@
 "use client";
 
 import { fontMap } from "@/app/config/fontConfig";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Filter } from "lucide-react";
 import type { ResumeData } from "@/app/types/resume";
 import { useResume } from "@/app/context/ResumeContext";
 import Watermark from "../Watermark";
@@ -36,7 +36,8 @@ function formatDate(dateStr?: string) {
   });
 }
 
-const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
+// const DEV_USE_BAHASA = process.env.NODE_ENV === "development"; 
+const DEV_USE_BAHASA = false; 
 
 const TITLE_TRANSLATIONS: Record<string, string> = {
   "About Me": "Tentang Saya",
@@ -93,12 +94,10 @@ export default function NordicSlateTemplate({
         }}
       >
         {/* ================= HEADER ================= */}
-        <header className="px-8 pt-8 pb-6 border-b flex flex-row items-start justify-between gap-6">
+        <header className="h-28 px-8 border-b flex flex-row items-center justify-between gap-6">
           {/* NAME */}
           <div>
-            <h1
-              className="text-3xl text-gray-800 font-bold tracking-wide"
-            >
+            <h1 className="text-3xl text-gray-800 font-bold tracking-wide">
               {data.firstName} {data.lastName}
             </h1>
             <p className="mt-1 text-xs uppercase tracking-widest text-gray-500">
@@ -111,8 +110,11 @@ export default function NordicSlateTemplate({
               {(data?.address || data?.city || data?.postalCode) && (
                 <div className="flex items-center gap-3">                 
                   <MapPin size={13} />                 
-                  <span className="leading-snug">
-                    {data.address}, {data.city}, {data.postalCode}
+                  <span>
+                    {data.address}
+                    {data.address && data.city && ", "}
+                    {data.city}
+                    {data.postalCode && `, ${data.postalCode}`}
                   </span>
                 </div>
               )}
@@ -148,7 +150,7 @@ export default function NordicSlateTemplate({
             )}
 
             {/* LANGUAGES */}
-            {data.languages?.length > 0 && (
+            {data.languages?.filter(lang => lang.name?.trim()).length > 0 && (
               <Block title="Languages" color={data.accentColor}>
                 <div
                   className={`text-xs ${
@@ -192,7 +194,7 @@ export default function NordicSlateTemplate({
             )}
 
             {/* REFERENCES */}
-            {data?.references.length > 0 && (
+            {data?.references?.filter(ref => ref.fullName?.trim() || ref.companyName?.trim() || ref.phone?.trim() || ref.email?.trim()).length > 0 && (
               <Block title="References" color={data.accentColor}>
                 {resumeData.hideReferences ? (
                   <p className="text-xs text-gray-700">
@@ -200,7 +202,9 @@ export default function NordicSlateTemplate({
                   </p>
                 ) : (
                   <div className="space-y-3">
-                    {data.references.map((ref) => (
+                    {data.references
+                    .filter(ref => ref.fullName?.trim() || ref.companyName?.trim() || ref.phone?.trim() || ref.email?.trim())
+                    .map((ref) => (
                       <div key={ref.id} className="text-xs text-gray-700 space-y-1">
                         <p className="font-semibold">
                           {ref.fullName}
@@ -229,22 +233,27 @@ export default function NordicSlateTemplate({
             )}
 
             {/* SOCIAL LINKS */}
-            {data.socialLinks?.length > 0 && (
+            {data.socialLinks?.filter(link => link.label?.trim() || link.url?.trim()).length > 0 && (
               <Block title="Social Links" color={data.accentColor}>
                 <ul className="text-xs space-y-3">
                   {data.socialLinks
                     .filter((s) => s.label || s.url)
-                    .map((social) => (
-                      <li key={social.id}>
-                        {social.label && (
+                    .map((link) => (
+                      <li key={link.id}>
+                        {link.label && (
                           <span className="font-semibold block mb-1">
-                            {social.label}
+                            {link.label}
                           </span>
                         )}
-                        {social.url && (
-                          <span className="text-gray-600 break-all">
-                            {social.url}
-                          </span>
+                        {link.url && (
+                          <a
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block break-all text-gray-600"
+                          >
+                        {link.url}
+                    </a>
                         )}
                       </li>
                     ))}
@@ -311,7 +320,7 @@ export default function NordicSlateTemplate({
           {/* ===== RIGHT COLUMN ===== */}
           <main className="p-9 pt-0">
             {/* EXPERIENCE */}
-            {data.experience?.length > 0 && (
+            {data.experience?.filter(exp => exp.jobTitle?.trim() || exp.company?.trim()).length > 0 && (
               <Block title="Work Experience" color={data.accentColor}>
                 <div className="space-y-6">
                   {data.experience
@@ -324,13 +333,15 @@ export default function NordicSlateTemplate({
                           </p>
                         )}
                         <p className="text-xs text-gray-600">
-                          {exp.company}, {exp.city}
-                          {exp.startDate &&
-                            ` | ${formatDate(exp.startDate)} – ${
-                              exp.current
-                                ? "Present"
-                                : formatDate(exp.endDate)
-                            }`}
+                          {[exp.company, exp.city].filter(Boolean).join(", ")}
+                          {exp.startDate && (
+                            <>
+                              {" | "}
+                              {formatDate(exp.startDate)}
+                              {exp.startDate && (exp.current || exp.endDate) && " – "}
+                              {exp.current ? "Present" : formatDate(exp.endDate)}
+                            </>
+                          )}
                         </p>
                         {exp.description && (
                           <div
@@ -345,37 +356,46 @@ export default function NordicSlateTemplate({
             )}
 
             {/* EDUCATION */}
-            {data.education?.length > 0 && (
+            {data.education?.filter(edu => edu.degree?.trim() || edu.school?.trim()).length > 0 && (
               <Block title="Education" color={data.accentColor}>
                 <div className="space-y-6">
                     {data.education
                     .filter((e) => e.degree || e.school)
                     .map((edu) => (
-                        <div key={edu.id}>
+                      <div key={edu.id}>
                         {edu.degree && (
-                            <p className="text-sm font-semibold mb-1">{edu.degree}</p>
+                          <p className="text-sm font-semibold mb-1">
+                            {edu.degree}
+                          </p>
                         )}
-                        {edu.school && (
-                            <p className="text-xs text-gray-600">
-                            {edu.school}, {edu.city}
-                            {edu.graduationDate &&
-                                ` | ${formatDate(edu.graduationDate)}`}
-                            </p>
+
+                        {(edu.school || edu.city || edu.graduationDate) && (
+                          <p className="text-xs text-gray-600">
+                            {[edu.school, edu.city].filter(Boolean).join(", ")}
+
+                            {edu.graduationDate && (
+                              <>
+                                {" | "}
+                                {formatDate(edu.graduationDate)}
+                              </>
+                            )}
+                          </p>
                         )}
+
                         {edu.description && (
                           <div
                             className="prose prose-sm max-w-none text-gray-700 text-xs leading-relaxed mt-2 prose-li:marker:text-gray-900 prose-p:my-0 prose-ul:my-1 prose-ol:my-1 prose-li:my-0"
                             dangerouslySetInnerHTML={{ __html: edu.description }}
                           />
                         )}
-                        </div>
+                      </div>
                     ))}
                   </div>
               </Block>
             )}
 
             {/* SKILLS */}
-            {data.skills?.length > 0 && (
+            {data.skills?.filter(skill => skill.skillName?.trim()).length > 0 && (
               <Block title="Skills" color={data.accentColor}>
                 <div
                   className={`grid grid-cols-2 text-xs ${
