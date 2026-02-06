@@ -148,7 +148,7 @@ export default function AstraTemplate({
                       return resumeData.showSkillMeter ? (
                         /* ===== Meter ON ===== */
                         <div key={skill.id}>
-                          <span className="text-[11px] block mb-1 text-black">
+                          <span className="text-[11px] block mb-1 text-gray-800">
                             {skill.skillName}
                           </span>
 
@@ -165,7 +165,7 @@ export default function AstraTemplate({
                           <span className="text-black text-lg leading-none">
                             •
                           </span>
-                          <span className="text-[11px] text-black">
+                          <span className="text-[11px] text-gray-800">
                             {skill.skillName}
                           </span>
                         </div>
@@ -253,7 +253,7 @@ export default function AstraTemplate({
                       return resumeData.showLanguageMeter ? (
                         /* ===== Meter ON (2-column grid) ===== */
                         <div key={lang.id}>
-                          <span className="text-[11px] block mb-1 text-black">
+                          <span className="text-[11px] block mb-1 text-gray-800">
                             {lang.name}
                           </span>
 
@@ -270,7 +270,7 @@ export default function AstraTemplate({
                           <span className="text-black text-lg leading-none">
                             •
                           </span>
-                          <span className="text-xs text-black">
+                          <span className="text-[11px] text-gray-800">
                             {lang.name}
                           </span>
                         </div>
