@@ -350,7 +350,10 @@ export default function OrionTemplate({ data, variant, isPremium }: OrionTemplat
                 .map(exp => (
                   <div key={exp.id}>
                     <p className="font-semibold text-sm">
-                      {exp.jobTitle} – {exp.company}, {exp.city}
+                      {exp.jobTitle}
+                      {exp.jobTitle && exp.company ? " – " : ""}
+                      {exp.company}
+                      {exp.city ? `, ${exp.city}` : ""}
                     </p>
                     <p className="text-xs text-gray-500 mt-1">
                       {formatDate(exp.startDate)} –{" "}
