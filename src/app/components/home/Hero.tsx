@@ -6,15 +6,28 @@ import { ArrowRight, FileDown } from 'lucide-react';
 import { useRouter } from "next/navigation";
 import hero_image from "../../../assets/HeroImg.jpg";
 import Image from 'next/image';
+import { useState } from 'react';
 
 const Hero = () => {
+  const [loading, setLoading] = useState(false);
   const { setResumeId } = useResume();
   const router = useRouter()
 
   const handleBuildResume = async () => {
-    const resumeId = await createResumeForGuest();
-    setResumeId(resumeId)
-    router.push(`/resume/contact?id=${resumeId}`);
+    if(loading) return;
+
+    try {
+      setLoading(true);
+
+      const resumeId = await createResumeForGuest();
+      setResumeId(resumeId);
+
+      router.push(`/resume/contact?id=${resumeId}`);
+    } catch (error) {
+      console.error("Failed to build resume:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -46,6 +59,7 @@ const Hero = () => {
 
         <button
           onClick={handleBuildResume}
+          disabled={loading}
           className="mt-10 inline-flex items-center gap-2 px-10 py-4 text-lg font-semibold text-white bg-cyan-400 rounded-full shadow-lg hover:shadow-xl hover:opacity-90 transition-all duration-300 hover:-translate-y-1"
         >
           Build My Resume
