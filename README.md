@@ -27,8 +27,8 @@ The application simplifies the resume creation process by guiding users through 
 
 - Full-stack application built with Next.js
 - Server Components and Server Actions for secure backend logic
-- Database access handled via Prisma ORM
 - Multi-step resume builder with global state management using React Context API
-- Authentication and session management using Better Auth
+- Database access handled via Prisma ORM
+- Session-based authentication using Better Auth
 - Payment integration with Polar to unlock premium resume templates
 - Relational database schema separating users, resumes, and transactions
