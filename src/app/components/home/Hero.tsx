@@ -1,34 +1,12 @@
 'use client'
 
-import { useResume } from '@/app/context/ResumeContext';
-import { createResumeForGuest } from '@/lib/actions/resume-action';
 import { ArrowRight, FileDown } from 'lucide-react';
-import { useRouter } from "next/navigation";
 import hero_image from "../../../assets/HeroImg.jpg";
 import Image from 'next/image';
-import { useState } from 'react';
+import { useBuildResume } from '@/app/hooks/useBuildResume';
 
 const Hero = () => {
-  const [loading, setLoading] = useState(false);
-  const { setResumeId } = useResume();
-  const router = useRouter()
-
-  const handleBuildResume = async () => {
-    if(loading) return;
-
-    try {
-      setLoading(true);
-
-      const resumeId = await createResumeForGuest();
-      setResumeId(resumeId);
-
-      router.push(`/resume/contact?id=${resumeId}`);
-    } catch (error) {
-      console.error("Failed to build resume:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { buildResume, loading } = useBuildResume()
 
   return (
     <section className="relative overflow-hidden px-5 pt-28 pb-32">
@@ -58,7 +36,7 @@ const Hero = () => {
         </p>
 
         <button
-          onClick={handleBuildResume}
+          onClick={buildResume}
           disabled={loading}
           className="mt-10 inline-flex items-center gap-2 px-10 py-4 text-lg font-semibold text-white bg-cyan-400 rounded-full shadow-lg hover:shadow-xl hover:opacity-90 transition-all duration-300 hover:-translate-y-1"
         >

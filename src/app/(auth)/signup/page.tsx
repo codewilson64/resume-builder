@@ -41,7 +41,8 @@ export default function Signup() {
         
         if (hasResumeData(resumeData)) {
           if (!resumeData?.resumeId) {
-           return;
+            router.replace('/profile')
+            return;
           }
 
           await updateResume(resumeData.resumeId, resumeData);
