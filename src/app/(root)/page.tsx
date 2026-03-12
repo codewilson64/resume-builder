@@ -5,6 +5,7 @@ import CTA from "../components/home/CTAHero";
 import Hero from "../components/home/Hero";
 import MarketingHero from "../components/home/MarketingHero";
 import Footer from "../components/home/Footer";
+import FAQ from "../components/home/FAQ";
 
 export default async function Home() {
   const user = await getCurrentUser()
@@ -16,6 +17,7 @@ export default async function Home() {
       <Hero />
       <MarketingHero />
       <AdvantagesHero />
+      <FAQ />
       <CTA />
       <Footer />
     </main>
